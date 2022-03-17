@@ -12,24 +12,6 @@ I will use the money to take time off from my job. Furthermore as I am not a nat
 
 I imagine the following chapters as a start (TBD):
 
-## Chapters
+You can follow the progress in the `book/` folder
 
-### Part 1
-1. Motivation
-2. The history of sourdough starters
-3. What is a sourdough starter?
-4. TODO - enzymes in the flour?
-
-### Part 2
-4. Making a starter
-5. When is the starter ready?
-5. Different starter types
-6. Different flour types
-7. TODO
-
-### Part 3
-1. Starter maintenance
-2. Making your first bread
-3. TODO
-
-Thanks for your support.
+![Chapters](chapters.png)
