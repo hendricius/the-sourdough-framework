@@ -1,8 +1,15 @@
 \documentclass[a4paper, 12pt]{book}
+
 \usepackage[utf8]{inputenc}
 \usepackage{blindtext}
-
 \usepackage{graphicx}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{filecontents}
+\usepackage{longtable}
+\usepackage[T1]{fontenc}
+
+
 \graphicspath{ {./images/} }
 
 
@@ -26,23 +33,13 @@
 \tableofcontents
 
 \chapter{Foreword}
-
-Still need someone to write a foreword
+\input{intro/foreword}
 
 \chapter{Preface}
-
-If there is the one food from Germany it is probably bread. There are thousands
-of different varieties of bread in Germany. Making bread has been an integral part
-of our culture. Beginning my studies in Göttingen for the first time I was faced
-with buying bread on my own. In Germany that is no easy task
-as the varieties of bread are endless. I started to check the packaging
-of different bread types and noticed how there were surprisingly
-many ingredients in most of the breads found in a common supermarket.
-
+\input{intro/preface}
 
 \chapter{Acknowledgements}
-
-This book would not have been possible without the help of the community.
+\input{intro/acknowledgements}
 
 
 \mainmatter

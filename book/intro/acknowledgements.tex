@@ -1,0 +1,21 @@
+This book would not have been possible without the help of the community. Thank you very much for all the support. \\ \\
+
+
+\begin{filecontents}{supporters.csv}
+  \end{filecontents}
+
+  {\large All supporters sorted by name}
+
+  \pgfplotstableset{
+  begin table=\begin{longtable},
+  end table=\end{longtable},
+  }
+
+  \pgfplotstabletypeset[col sep=comma,
+  header=true,
+  columns={Name},      % display specified columns
+  columns/Name/.style={column type=l,string type},
+  % requires booktabs to place horiz rules
+  every head row/.style={before row=\toprule, after row=\midrule\endhead},
+  every last row/.style={after row=\bottomrule}
+  ]{supporters.csv}
