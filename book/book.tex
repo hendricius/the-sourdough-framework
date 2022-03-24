@@ -8,9 +8,11 @@
 \usepackage{filecontents}
 \usepackage{longtable}
 \usepackage[T1]{fontenc}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+\usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
 
-
-\graphicspath{ {./images/} }
+\graphicspath{ {./images/}{./troubleshooting/crumb-structures/} }
 
 
 \title{%
@@ -111,7 +113,9 @@
 \section{Frozen}
 
 \chapter{Troubleshooting}
+
 \section{Debugging your crumb structure}
+\input{troubleshooting/crumb-structures/crumb-structures}
 \section{Baking in the tropics}
 \section{My bread stays flat}
 \section{I want more tang in my bread}
@@ -120,5 +124,8 @@
 \section{My bread flattens out after shaping}
 \section{Liquid on top of my starter}
 \section{Why does my starter smell like acetone}
+
+\printbibliography
+
 
 \end{document}
