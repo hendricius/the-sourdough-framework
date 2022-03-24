@@ -1,5 +1,9 @@
-This book would not have been possible without the help of the community. Thank you very much for all the support. \\ \\
-
+This book would not have been possible without the help of the community.
+All the donations have made it possible that I was able to take
+some time off from my job and YouTube to write this free book.
+By providing this information free to everyone we can
+enable more people around the world to bake delicious
+sourdough bread at home. Thank you very much!\\
 
 \begin{filecontents}{supporters.csv}
   \end{filecontents}
@@ -13,9 +17,8 @@ This book would not have been possible without the help of the community. Thank 
 
   \pgfplotstabletypeset[col sep=comma,
   header=true,
-  columns={Name},      % display specified columns
+  columns={Name},
   columns/Name/.style={column type=l,string type},
-  % requires booktabs to place horiz rules
   every head row/.style={before row=\toprule, after row=\midrule\endhead},
   every last row/.style={after row=\bottomrule}
   ]{supporters.csv}
