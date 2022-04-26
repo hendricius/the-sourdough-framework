@@ -12,6 +12,12 @@
 \addbibresource{references.bib}
 \usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
 
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    linktoc=all
+    allcolors=black
+}
+
 \graphicspath{ {./images/}{./troubleshooting/crumb-structures/} }
 
 
@@ -116,14 +122,7 @@
 
 \section{Debugging your crumb structure}
 \input{troubleshooting/crumb-structures/crumb-structures}
-\section{Baking in the tropics}
-\section{My bread stays flat}
-\section{I want more tang in my bread}
-\section{My bread is too sour}
-\section{Fixing a moldy sourdough starter}
-\section{My bread flattens out after shaping}
-\section{Liquid on top of my starter}
-\section{Why does my starter smell like acetone}
+\input{troubleshooting/misc}
 
 \printbibliography
 
