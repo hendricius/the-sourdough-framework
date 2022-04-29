@@ -8,6 +8,7 @@
 \usepackage{filecontents}
 \usepackage{longtable}
 \usepackage[T1]{fontenc}
+\usepackage{tocloft}
 \usepackage[backend=biber]{biblatex}
 \addbibresource{references.bib}
 \usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
@@ -29,6 +30,9 @@
 \author{Hendrik Kleinwächter}
 \date{\today}
 
+\advance\cftsecnumwidth 0.5em\relax
+\advance\cftsubsecindent 0.5em\relax
+\advance\cftsubsecnumwidth 0.5em\relax
 \begin{document}
 
 \begin{titlepage}
