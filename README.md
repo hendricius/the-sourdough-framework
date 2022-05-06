@@ -18,11 +18,12 @@ your environment.
 and the [pizza-dough repo](https://github.com/hendricius/pizza-dough)
 I present to you The Sourdough Framework book.  When not
 working as a software engineer I teach people how to bake bread on
-[my YouTube channel.](https://youtube.com/c/thebreadcode). Several
-people have asked to have a written down version of my teachings.
+[my YouTube channel.](https://youtube.com/c/thebreadcode) Several
+people have asked me to offer a written down version of my teachings.
 I believe that knowledge like this is essential to everyone.
 That's why I decided to open source my knowledge hoping
-that it will reach more people all over the world.
+that it will reach more people all over the world without
+budget constrains.
 
 ## Status
 
