@@ -27,8 +27,21 @@ budget constrains.
 
 ## Status
 
-The book is still work in progress. History, introducing
-and troubleshooting sections have been finished so far.
+The book is a work in progress. This represents the current status:
+
+* ✅ Intro
+* ✅ Enzymes
+* ❌ Microorganisms
+* ❌ Making a starter
+* ❌ Sourdough starter types
+* ❌ Flour types
+* ❌ Bread types
+* ❌ Wheat sourdough
+* ❌ Non wheat sourdough
+* ❌ Baking
+* ❌ Storing bread
+* ✅ Troubleshooting
+
 
 ## Compiled book
 
