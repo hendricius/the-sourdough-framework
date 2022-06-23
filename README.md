@@ -32,7 +32,7 @@ The book is a work in progress. This represents the current status:
 * ✅ Intro
 * ✅ Enzymes
 * ❌ Microorganisms
-* ❌ Making a starter
+* ✅ Making a starter
 * ❌ Sourdough starter types
 * ❌ Flour types
 * ❌ Bread types
