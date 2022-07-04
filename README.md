@@ -34,7 +34,7 @@ The book is a work in progress. This represents the current status:
 * ✅ Microorganisms
 * ✅ Making a starter
 * ✅ Sourdough starter types
-* ❌ Flour types
+* ✅ Flour types
 * ❌ Bread types
 * ❌ Wheat sourdough
 * ❌ Non wheat sourdough
