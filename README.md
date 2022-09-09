@@ -38,7 +38,7 @@ The book is a work in progress. This represents the current status:
 * ✅ Bread types
 * ❌ Wheat sourdough
 * ❌ Non wheat sourdough
-* ❌ Baking
+* ✅ Baking
 * ❌ Storing bread
 * ✅ Troubleshooting
 
