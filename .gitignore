@@ -10,3 +10,4 @@
 *.blg
 *.run.xml
 book/book.out
+.vscode/
