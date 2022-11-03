@@ -131,7 +131,26 @@ use a glas and place another inverted one on top. The container shouldn't
 be airtight. You still want some gas exchange to be possible.
 
 \begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{sourdough-starter-process.jpg}
+  \begin{tikzpicture}[node distance = 3cm, auto]
+   	\node [block] (init) {\footnotesize Mix 50g flour + 50g water, stir}; 
+	\node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 24 hours};
+	\path [line] (init) -- (wait1);
+	\node [block, right of=wait1, node distance=3cm] (feed) {\footnotesize 50g of previous day + 50g water + 50g flour, stir};
+	\path [line] (wait1) -- (feed);
+	\node [block, below of=feed] (discard) {\footnotesize Discard the rest};
+	\path [line] (feed) -- (discard);
+    \node [decision, right of=feed, node distance=3.5cm] (decide) {\footnotesize Is good?};
+    \node [decision, above of=decide, node distance=3cm] (timeout) {\footnotesize Less than 10 feeds?};
+	\node [block, above of=feed, node distance=3cm] (wait2) {\footnotesize Wait 24 hours};
+    \node [block, right of=timeout, node distance=3cm] (discard2) {\footnotesize Batch failed};
+	\path [line] (timeout) -- node{no} (discard2);
+	\path [line] (timeout) -- node{yes} (wait2);
+	\path [line] (feed) -- (decide);
+    \node [block, right of=decide, node distance=3cm] (use) {\footnotesize Ready to use};
+	\path [line] (decide) -- node{no} (timeout);
+	\path [line] (wait2) -- (feed);
+	\path [line] (decide) -- node{yes} (use);
+  \end{tikzpicture}
   \caption{The process of making a sourdough starter from scratch}
   \label{fig:sourdough-starter-process}
 \end{figure}
