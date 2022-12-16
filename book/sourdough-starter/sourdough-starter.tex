@@ -135,7 +135,7 @@ be airtight. You still want some gas exchange to be possible.
    	\node [block] (init) {\footnotesize Mix 50g flour + 50g water, stir}; 
 	\node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 24 hours};
 	\path [line] (init) -- (wait1);
-	\node [block, right of=wait1, node distance=3cm] (feed) {\footnotesize 50g of previous day + 50g water + 50g flour, stir};
+	\node [block, right of=wait1, node distance=3cm] (feed) {\footnotesize 10g of previous day + 50g water + 50g flour, stir};
 	\path [line] (wait1) -- (feed);
 	\node [block, below of=feed] (discard) {\footnotesize Discard the rest};
 	\path [line] (feed) -- (discard);
