@@ -20,6 +20,11 @@
     allcolors=black
 }
 
+\definecolor{codeblue}{RGB}{69, 161, 248}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
 \graphicspath{
   {./images/}
   {./troubleshooting/}
@@ -36,6 +41,16 @@
 \advance\cftsecnumwidth 0.5em\relax
 \advance\cftsubsecindent 0.5em\relax
 \advance\cftsubsecnumwidth 0.5em\relax
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=codeblue, text=white,
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
 \begin{document}
 
 \begin{titlepage}
@@ -85,6 +100,8 @@
 \input{wheat-sourdough/wheat-sourdough}
 
 \chapter{Non wheat bread basics}
+This chapter is still pending and will be added soon.
+
 \label{chapter:non-wheat-sourdough}
 \section{Ingredients}
 \section{Managing acidity}

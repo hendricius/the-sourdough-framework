@@ -43,6 +43,16 @@ The book is a work in progress. This represents the current status:
 * ✅ Troubleshooting
 
 
+## Building the book
+
+Make sure you have `biber` installed. Refer to your system's installation
+instructions. Also make sure you have `pdflatex` installed.
+
+```bash```
+cd book/
+make
+```
+
 ## Compiled book
 
 You can follow the progress in the `book/` folder
