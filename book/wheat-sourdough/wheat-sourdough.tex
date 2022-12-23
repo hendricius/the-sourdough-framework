@@ -531,7 +531,7 @@ process. If not, wait another 15 minutes.
 
 \begin{figure}[!htb]
   \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Homogenize ingredients}; 
+    \node [block] (init) {\footnotesize Homogenize recipe ingredients}; 
     \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15 minutes};
     \path [line] (init) -- (wait1);
     \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5 minutes};
@@ -541,14 +541,14 @@ process. If not, wait another 15 minutes.
     \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {\footnotesize Window-pane?};
       \path [line] (wait2) -- (windowpane_test);
       \path [line] (windowpane_test) -- node{no} (knead1);
-    \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {\footnotesize More water?};
+    \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {\footnotesize Bassinage for more water?};
       \path [line] (windowpane_test) -- node{yes} (more_water);
     \node [block, left of=more_water, node distance=4.5cm] (add_water) {\footnotesize Add water};
       \path [line] (more_water) -- node{yes} (add_water);
       \path [line] (add_water) -- (knead1);
-    \node [block, below of=add_water, node distance=3cm] (wait3) {\footnotesize Wait 15 minutes};
+    \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait 15 minutes};
     \path [line] (add_water) -- (wait3);
-    \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Dough sample?};
+    \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot jar?};
     \path [line] (wait3) -- (dough_sample);
     \path [line] (more_water) -- node{no} (dough_sample);
     \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {\footnotesize Make round dough ball};
@@ -569,6 +569,21 @@ bonds of your dough form automatically and your dough becomes more elastic.
 So you could be kneading for 10 minutes initially just to be surprised
 that kneading 5 minutes and waiting 15 minutes has the same effect.
 
+The gluten proteins glutenin and gliadin virtually instantly bond after being
+hydrated. Disulfide bonds enable the longer portions of
+glutenin to join with one another and form sturdy, extensible molecules.
+Glutenins add strength, whilst the more compact gliadin proteins allow
+the dough to flow like a fluid. Ultimately the longer you wait, the more
+your gluten network transforms into a web like structure. This is what
+traps the gases during the fermentation process. \cite{how+does+gluten+work}.
+
+The soaking process has to be extended the more whole wheat flour is used.
+The purpose of the wheat kernel's outer bran is to soak up water as fast
+as possible. The enzymes become activated and start the sprouting process.
+Because of this less water is available for the gluten bonds to develop.
+Either wait a bit longer, or proceed and use slightly more water for
+the dough.
+
 This is the same principle that popular no-knead recipes follow. By making a less
 hydrated dough and waiting your gluten network automatically forms. You still
 have to mix and homogenize the ingredients. You wait a few minutes just to
@@ -577,23 +592,21 @@ kneading.\footnote{Give it a shot yourself. The automatic formation of gluten
 networks is an amazing phenomenon that still fascinates me every time I am
 making a dough.}
 
-
-TODO(Insert a reference here why gluten forms when mixing flour and water)
-
-When machine kneading a dough I opt for the same technique. I mix the dough on
-medium high speed. I wait 15 minutes and then check the dough like in the
-previously described list. A good sign of a well developed gluten network is
-that your dough lets go of the container. This is because the gluten is
-elastic and holds together. The elasticity is higher than the urge of the
+When machine kneading a dough opt for the same technique shown in figure \ref*{fig:wheat-sourdough-kneading-process}.
+Initially opt for a low speed. This helps the homogenization process.
+After waiting to allow the flour to soak up the water, proceed on a higher speed
+setting. A good sign of a well developed gluten network is
+that your dough lets go of the container. This is because the gluten's elasticity.
+The elasticity is higher than the urge of the
 dough to stick to the container.
 
-The more dough strength you create the less sticky your dough is going to
+Generally the more dough strength you create, the less sticky your dough is going to
 feel. As the dough holds together it will no longer stick to your hands as
 much. This is a common problem beginners face. The dough does not have enough
 dough strength. The dough is perceived as super sticky. Just kneading a few
 more minutes could have solved the problem.
 
-
+\section{Controlling fermentation}
 Kneading too much.
 Over oxidizing.
 
