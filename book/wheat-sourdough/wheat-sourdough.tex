@@ -43,8 +43,30 @@ that tastes much better than any store bought bread.
 \section{The process}
 
 \begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{sourdough-process-overview}
-  \caption{An overview of the whole sourdough process from start to finish}
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [block] (init) {\footnotesize Ready starter}; 
+    \node [block, right of=init, node distance=3cm] (mix_ingredients) {\footnotesize Mix ingredients}; 
+    \node [block, right of=mix_ingredients, node distance=3cm] (dough_strength) {\footnotesize Create dough strength}; 
+    \node [block, right of=dough_strength, node distance=3cm] (bulk) {\footnotesize Bulk ferment}; 
+    \node [decision, below of=dough_strength, node distance=3cm] (divide_test) {\footnotesize Making 1 loaf?};
+    \node [block, left of=divide_test, node distance=3cm] (divide) {\footnotesize Divide}; 
+    \node [block, left of=divide, node distance=3cm] (preshape) {\footnotesize Preshape}; 
+    \node [block, below of=preshape, node distance=3cm] (shape) {\footnotesize Shape}; 
+    \node [block, right of=shape, node distance=3cm] (proof) {\footnotesize Proof}; 
+    \node [block, right of=proof, node distance=3cm] (bake) {\footnotesize Bake}; 
+    \path [line] (init) -- (mix_ingredients);
+    \path [line] (mix_ingredients) -- (dough_strength);
+    \path [line] (dough_strength) -- (bulk);
+    \path [line] (bulk) -- (divide_test);
+    \path [line] (divide_test) -- node{yes} (shape);
+    \path [line] (divide_test) -- node{no} (divide);
+    \path [line] (divide) -- (preshape);
+    \path [line] (preshape) -- (shape);
+    \path [line] (shape) -- (proof);
+    \path [line] (proof) -- (bake);
+  \end{tikzpicture}
+  \caption{The typical process of making a wheat based sourdough bread}
+  \label{fig:wheat-sourdough-process}
 \end{figure}
 
 The whole process of making great sourdough bread starts with
@@ -249,35 +271,41 @@ oven. The loaf will be visually bigger and offer an airier more open crumb struc
 
 While this might sound great, the high hydration causes several side effects.
 
-1. Your dough becomes more difficult to handle. Your dough will be stickier
-compared to a regular dough.
-2. Your dough has to be kneaded for longer in order to build a proper gluten
-network.
-3. During the fermentation your dough might become too extensible and lose
-some of the dough strength. To circumvent this stretch and folds are applied
-requiring you to invest a lot more work.
-4. Shaping becomes much more of a hassle as the dough is very sticky.
-5. The dough can stick to the banneton a lot easier while proofing.
-6. If you wait too long during proofing the dough won't have enough strength
-left to pull upwards and stay flat.
-7. Generally the higher the water content the more bacterial fermentation you
-have. Thus a wetter dough will reduce in gluten faster than a stiffer dough.
-This is why you have to start the fermentation with a sourdough starter in
-perfect shape. Bakers use a process called autolyse to shorten the main
-fermentation time to circumvent this.
-8. The crumb in the end might be perceived as somewhat sticky. It still
-contains a lot of water. Personally I love this crumb, but this is a personal
-choice.
+\begin{enumerate}
+  \item Your dough becomes more difficult to handle. Your dough will be stickier
+  \item Your dough has to be kneaded for longer in order to build a proper gluten
+    network.
+  \item During the fermentation your dough might become too extensible and lose
+    some of the dough strength. To circumvent this stretch and folds are applied
+    compared to a regular dough.
+    requiring you to invest a lot more work.
+  \item Shaping becomes much more of a hassle as the dough is very sticky.
+  \item The dough can stick to the banneton a lot easier while proofing.
+  \item If you wait too long during proofing the dough won't have enough strength
+    left to pull upwards and stay flat.
+  \item Generally the higher the water content the more bacterial fermentation you
+    have. Thus a wetter dough will reduce in gluten faster than a stiffer dough.
+    This is why you have to start the fermentation with a sourdough starter in
+    perfect shape. Bakers use a process called autolyse to shorten the main
+    fermentation time to circumvent this.
+  \item The crumb in the end might be perceived as somewhat sticky. It still
+    contains a lot of water. Personally I love this crumb, but this is a personal
+    choice.
+\end{enumerate}
 
-To achieve such a high hydration dough it is best to slowly add the water to
+To achieve a high hydration dough it is best to slowly add the water to
 your dough. Start with 60 percent hydration, then slowly add a bit more water. Knead
 again until the water is absorbed. Repeat and add more water. As your dough
 has already formed a gluten network, new water can be absorbed much easier.
-You will be surprised by how much water your dough can soak up. By doing so I
-was easily able to push a low gluten flour to a hydration of 80 percent. This
+You will be surprised by how much water your dough can soak up. This
+method is commonly known as the bassinage method. More on that later.
+By opting for this technique I was easily able to push a low
+gluten flour to a hydration of 80 percent. This
 is also my method of choice when making a dough now. I keep adding water until
 I can feel that the dough has the right consistency. As you bake more bread
-you will develop a better look and feel for your dough.
+you will develop a better look and feel for your dough. When mixing
+by hand this can be quite cumbersome. It is a lot more easy when using a stand
+mixer.
 
 All in all increasing the hydration requires a lot of trial and error. There
 is however one option that makes things easier and causes less headache:
