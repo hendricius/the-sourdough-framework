@@ -114,11 +114,39 @@ properties are passed on to your main dough. If your starter
 doesn't have a good balance of yeast to bacteria, so will your
 main dough.
 
-\begin{figure}[!p]
-  \centering
-  \includegraphics[width=\textwidth]{1-ready-starter}
-  \caption[Readying a starter]{A flowchart showing how you can prepare your starter before baking.
-  This assumes you are using a stiff starter.}
+\begin{figure}[!htb]
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
+    \node [block, right of=init, node distance=4cm] (feed_no_branch)
+      {\footnotesize Feed starter twice. 48 hours before and 6-12 hours before}; 
+    \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
+      {\footnotesize Feed starter once 6-12 hours before making dough}; 
+    \node [block, right of=feed_no_branch, node distance=6cm] (high_ratio)
+      {\footnotesize Use a 1:10:5 ratio. 10g starter, 100g flour, 50g water}; 
+    \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
+      {\footnotesize Use a 1:5:2.5 ratio. 10g starter, 50g flour, 25g water}; 
+    \node [block, below of=high_ratio, node distance=6cm] (check_starter)
+      {\footnotesize Check if starter is ready to be used}; 
+    \node [decision, below of=init, node distance=6cm] (size_check)
+      {\footnotesize Bubbly? Increased in size?};
+    \node [decision, below of=size_check, node distance=5cm] (smell_check)
+      {\footnotesize Vinegary or yogurty smell?};
+    \node [block, right of=smell_check, node distance=6cm] (make_dough)
+      {\footnotesize Prepare dough}; 
+    \path [line] (init) -- node{no} (feed_no_branch);
+    \path [line] (init) -- node{yes} (feed_yes_branch);
+    \path [line] (feed_yes_branch) -- (low_ratio);
+    \path [line] (feed_no_branch) -- (high_ratio);
+    \path [line] (high_ratio) -- (check_starter);
+    \path [line] (low_ratio) -- (check_starter);
+    \path [line] (check_starter) -- (size_check);
+    \path [line] (size_check) -- node{no} (feed_yes_branch);
+    \path [line] (size_check) -- node{yes} (smell_check);
+    \path [line] (smell_check) -- node{no} (feed_yes_branch);
+    \path [line] (smell_check) -- node{yes} (make_dough);
+  \end{tikzpicture}
+  \caption{The process to ready and check your sourdough starter when making a wheat based dough}
+  \label{fig:process-starter-wheat-sourdough}
 \end{figure}
 
 Generally, think of the dough you are mixing as a big starter with salt.
@@ -159,7 +187,7 @@ trick too to make starter feeding work with your schedule.
 If your starter is typically ready in 6 hours but today you need it
 ready later, simply increase how much flour/water you feed your starter.
 These are all values that you need to experiment with on your own.
-Every starter is unique and might behave slightly differently.
+Every starter is unique and might behave slightly different.
 
 The second option at your disposal is the starter quantity that
 you use to make the dough. As previously stated your starter
