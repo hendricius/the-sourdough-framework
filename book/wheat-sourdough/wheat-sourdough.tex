@@ -3,7 +3,9 @@ free-standing wheat sourdough bread.
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{loaf-pan-free-standing.jpg}
-  \caption{A free-standing sourdough bread made with wheat flour}
+  \caption{A free-standing sourdough bread next to a bread made in a loaf pan.
+  The free-standing sourdough is considered the supreme discipline of sourdough bread by many bakers.
+  }
 \end{figure}
 
 A free-standing sourdough bread is my favorite
@@ -24,7 +26,7 @@ found another valuable puzzle piece. Aggregating all this
 information was one of my main motivations to start the bread code.
 My key learning was that there there is no recipe that
 you can blindly follow. You will always have to adapt the recipe
-to your local available tools and environment.
+to your local available tools and environment. 
 
 But do not worry. After reading this chapter you will know
 all the signs to look out for. You will be able to read your dough.
@@ -35,14 +37,36 @@ you will know how to scale your production from 1 bread to 100 loaves of bread.
 If you ever wanted to open up a bakery, consider this knowledge to
 be your foundation.
 
-Mastering this process will enable you to bake amazing bread without
-ever buying yeast again.
+Mastering this process will enable you to make amazing bread
+that tastes much better than any store bought bread.
 
 \section{The process}
 
 \begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{sourdough-process-overview.jpg}
-  \caption{An overview of the whole sourdough process from start to finish}
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [block] (init) {\footnotesize Ready starter}; 
+    \node [block, right of=init, node distance=3cm] (mix_ingredients) {\footnotesize Mix ingredients}; 
+    \node [block, right of=mix_ingredients, node distance=3cm] (dough_strength) {\footnotesize Create dough strength}; 
+    \node [block, right of=dough_strength, node distance=3cm] (bulk) {\footnotesize Bulk ferment}; 
+    \node [decision, below of=dough_strength, node distance=3cm] (divide_test) {\footnotesize Making 1 loaf?};
+    \node [block, left of=divide_test, node distance=3cm] (divide) {\footnotesize Divide}; 
+    \node [block, left of=divide, node distance=3cm] (preshape) {\footnotesize Preshape}; 
+    \node [block, below of=preshape, node distance=3cm] (shape) {\footnotesize Shape}; 
+    \node [block, right of=shape, node distance=3cm] (proof) {\footnotesize Proof}; 
+    \node [block, right of=proof, node distance=3cm] (bake) {\footnotesize Bake}; 
+    \path [line] (init) -- (mix_ingredients);
+    \path [line] (mix_ingredients) -- (dough_strength);
+    \path [line] (dough_strength) -- (bulk);
+    \path [line] (bulk) -- (divide_test);
+    \path [line] (divide_test) -- node{yes} (shape);
+    \path [line] (divide_test) -- node{no} (divide);
+    \path [line] (divide) -- (preshape);
+    \path [line] (preshape) -- (shape);
+    \path [line] (shape) -- (proof);
+    \path [line] (proof) -- (bake);
+  \end{tikzpicture}
+  \caption{The typical process of making a wheat based sourdough bread}
+  \label{fig:wheat-sourdough-process}
 \end{figure}
 
 The whole process of making great sourdough bread starts with
@@ -90,11 +114,39 @@ properties are passed on to your main dough. If your starter
 doesn't have a good balance of yeast to bacteria, so will your
 main dough.
 
-\begin{figure}[!p]
-  \centering
-  \includegraphics[width=\textwidth]{1-ready-starter}
-  \caption[Readying a starter]{A flowchart showing how you can prepare your starter before baking.
-  This assumes you are using a stiff starter.}
+\begin{figure}[!htb]
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
+    \node [block, right of=init, node distance=4cm] (feed_no_branch)
+      {\footnotesize Feed starter twice. 48 hours before and 6-12 hours before}; 
+    \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
+      {\footnotesize Feed starter once 6-12 hours before making dough}; 
+    \node [block, right of=feed_no_branch, node distance=6cm] (high_ratio)
+      {\footnotesize Use a 1:10:5 ratio. 10g starter, 100g flour, 50g water}; 
+    \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
+      {\footnotesize Use a 1:5:2.5 ratio. 10g starter, 50g flour, 25g water}; 
+    \node [block, below of=high_ratio, node distance=6cm] (check_starter)
+      {\footnotesize Check if starter is ready to be used}; 
+    \node [decision, below of=init, node distance=6cm] (size_check)
+      {\footnotesize Bubbly? Increased in size?};
+    \node [decision, below of=size_check, node distance=5cm] (smell_check)
+      {\footnotesize Vinegary or yogurty smell?};
+    \node [block, right of=smell_check, node distance=6cm] (make_dough)
+      {\footnotesize Prepare dough}; 
+    \path [line] (init) -- node{no} (feed_no_branch);
+    \path [line] (init) -- node{yes} (feed_yes_branch);
+    \path [line] (feed_yes_branch) -- (low_ratio);
+    \path [line] (feed_no_branch) -- (high_ratio);
+    \path [line] (high_ratio) -- (check_starter);
+    \path [line] (low_ratio) -- (check_starter);
+    \path [line] (check_starter) -- (size_check);
+    \path [line] (size_check) -- node{no} (feed_yes_branch);
+    \path [line] (size_check) -- node{yes} (smell_check);
+    \path [line] (smell_check) -- node{no} (feed_yes_branch);
+    \path [line] (smell_check) -- node{yes} (make_dough);
+  \end{tikzpicture}
+  \caption{The process to ready and check your sourdough starter when making a wheat based dough}
+  \label{fig:process-starter-wheat-sourdough}
 \end{figure}
 
 Generally, think of the dough you are mixing as a big starter with salt.
@@ -135,7 +187,7 @@ trick too to make starter feeding work with your schedule.
 If your starter is typically ready in 6 hours but today you need it
 ready later, simply increase how much flour/water you feed your starter.
 These are all values that you need to experiment with on your own.
-Every starter is unique and might behave slightly differently.
+Every starter is unique and might behave slightly different.
 
 The second option at your disposal is the starter quantity that
 you use to make the dough. As previously stated your starter
@@ -170,25 +222,499 @@ Over time you will become more accustomed to your starter
 and how it behaves. You will be able to read the signs of its
 activity and judge its state.
 
-
-
 \section{Ingredients}
 
-This chapter is still pending and will be added soon.
+All you need to make a great sourdough bread is flour water and salt. You
+can of course add additional things to your dough such as seeds. I personally
+enjoy the hearty taste of whole wheat. Thus I like to add around 20-30 percent
+of whole wheat flour to the mix. You could also make this recipe with 100 percent
+whole wheat flour directly. In this case look out for a strong whole wheat
+flour that is made from flour with higher protein. If you don't like whole
+wheat you can omit the flour from the recipe. Simply replace the listed
+quantity with bread flour. One thing to consider about whole wheat
+flour is the increased enzymatic activity. By adding some whole wheat
+flour you will speed up the whole fermentation process.
+
+Especially when getting started I recommend to use a bread flour which
+contains more gluten than all purpose or cake flour. This is essential
+when trying to bake a free standing loaf with sourdough.
+
+Find below an example recipe for 1 loaf including baker's math calculation:
+
+\begin{itemize}
+  \item 400g of bread flour
+  \item 100g of whole wheat flour
+  \item \textbf{500g of flour in total}
+  \item 300g-450g of room temperature water (60 percent up to 90 percent). More on
+this topic in the next chapter.
+  \item 50g of stiff sourdough starter (10 percent)
+  \item 10g of salt (2 percent)
+\end{itemize}
+
+In case you want to make more bread simply increase the quantities based on
+how much flour you have. Let's say you have 2000g of flour available. The
+recipe would look like this.
+
+\begin{itemize}
+  \item 1800g of bread flour
+  \item 200g of whole wheat flour
+  \item \textbf{2000g of flour, equalling 4 loaves}
+  \item 1200g up to 1800g of room temperature water (60 to 90 percent)
+  \item 200g of stiff sourdough starter (10 percent)
+  \item 40g of salt (2 percent)
+\end{itemize}
+
+This is the beauty of baker's math. Simply recalculate the percentages and you
+are good to go. If you are unsure about how this works please check out the
+full chapter \ref{section:bakers-math} which looks at the topic in detail.
 
 \section{Hydration}
-This chapter is still pending and will be added soon.
+
+Hydration refers to how much water you use for your flour. When
+beginning to make bread I always got this wrong. I followed a recipe from the
+internet and my dough never looked like a dough shown in the recipe.
+The amount of water your flour requires is not fixed. It depends on the flour
+you have.
+
+When a seed gets into contact initially the outer layers soak up the water.
+That's why when using whole wheat (still containing these layers) you have to
+use a little bit more water.
+
+By forming gluten strands water is absorbed into your dough. The higher the
+protein value the more water can be used.
+
+Some bakers like to use a highly hydrated dough to create a fluffier dough.
+\footnote{Sometimes it almost feels like a comparison of skill value between bakers. The
+more water they can handle, the more skillful the baker.} The reason for this
+is the dough's improved extensibility. The wetter the dough the easier it is
+for the dough to be stretched. When you pull it, the dough will hold its
+shape. In comparison a very stiff (low hydration) dough will maintain its
+shape for a longer period of time. To visualize this think of your extensible
+dough as a balloon. The stiff dough is a car tire. The yeast has a much harder
+time to inflate the care tire compared to the balloon. That's because the
+rubber of the car tire is much more elastic. It requires much more force to
+inflate the tire. For this reason an extensible dough will inflate more in the
+oven. The loaf will be visually bigger and offer an airier more open crumb structure.
+
+While this might sound great, the high hydration causes several side effects.
+
+\begin{enumerate}
+  \item Your dough becomes more difficult to handle. Your dough will be stickier
+  \item Your dough has to be kneaded for longer in order to build a proper gluten
+    network.
+  \item During the fermentation your dough might become too extensible and lose
+    some of the dough strength. To circumvent this stretch and folds are applied
+    compared to a regular dough.
+    requiring you to invest a lot more work.
+  \item Shaping becomes much more of a hassle as the dough is very sticky.
+  \item The dough can stick to the banneton a lot easier while proofing.
+  \item If you wait too long during proofing the dough won't have enough strength
+    left to pull upwards and stay flat.
+  \item Generally the higher the water content the more bacterial fermentation you
+    have. Thus a wetter dough will reduce in gluten faster than a stiffer dough.
+    This is why you have to start the fermentation with a sourdough starter in
+    perfect shape. Bakers use a process called autolyse to shorten the main
+    fermentation time to circumvent this.
+  \item The crumb in the end might be perceived as somewhat sticky. It still
+    contains a lot of water. Personally I love this crumb, but this is a personal
+    choice.
+\end{enumerate}
+
+To achieve a high hydration dough it is best to slowly add the water to
+your dough. Start with 60 percent hydration, then slowly add a bit more water. Knead
+again until the water is absorbed. Repeat and add more water. As your dough
+has already formed a gluten network, new water can be absorbed much easier.
+You will be surprised by how much water your dough can soak up. This
+method is commonly known as the bassinage method. More on that later.
+By opting for this technique I was easily able to push a low
+gluten flour to a hydration of 80 percent. This
+is also my method of choice when making a dough now. I keep adding water until
+I can feel that the dough has the right consistency. As you bake more bread
+you will develop a better look and feel for your dough. When mixing
+by hand this can be quite cumbersome. It is a lot more easy when using a stand
+mixer.
+
+All in all increasing the hydration requires a lot of trial and error. There
+is however one option that makes things easier and causes less headache:
+Slow fermentation. You get the same extensibility advantages the high hydration
+offers by simply letting your dough ferment for a longer period of time.
+Slowing the fermentation process is easy. Use less
+sourdough starter or ferment in a cooler environment. 
+
+There are two reasons for slow fermentation advantages.
+As explained earlier both the protease enzyme and bacteria break down your
+gluten network. So as fermentation progresses your dough will automatically
+become more extensible. This is because the rubber layers of your care tire
+are slowly converted and eaten. Ultimately your car tire turns into a balloon
+that can very easily be inflated.  When waiting too long the
+balloon will burst. You will have no gluten left anymore and your dough
+becomes very sticky. Finding the sweet spot of enough rubber eating and not
+too much is what the perfect wheat sourdough bread bread is about. But don't worry, after reading
+this chapter you will have the right tools at your disposal.
+
+The advantages of slow fermentation can be nicely observed when experimenting
+with a fast fermenting yeast dough (1 percent dry yeast based on the flour). The
+crumb of such a dough is never as
+open as a dough made with sourdough. Furthermore the protease enzyme
+can not do its job within such a short fermentation period.
+Large industrial bakeries add active malt which contains a
+lot more enzymes. This way the time required to make a dough is shortened. You
+will most likely find malt as an ingredient in supermarket bread. It is a
+great hack. The baked turbo fermentation bread will feature a relatively dense
+and not fluffy crumb. That is because only very little gluten is broken down when
+finishing the fermentation period in 1 hour. If you were to slow down things
+the dough would look completely different.
+Try this again and use way less yeast. This is the
+secret of the Neapolitan Pizza. Only a tiny bit of yeast is used to make the
+dough. In fact my default pizza recipe calls for around 150 milligrams of dry
+yeast per one kilogram of flour. Give it a shot yourself the next time you
+make a yeast based dough. Try to push the fermentation to at least 8 hours.
+The difference is incredible. You will have made a bread with a much more
+fluffy and open crumb. The flavor of the dough is drastically improved. Your
+crust becomes crisper and features a better taste. This is because amylases have
+converted your starches into simpler sugars which brown better during baking.
+If you take away one learning from this book, it is that slow fermentation is
+the key to making great bread.
+
+For this reason my default hydration is much lower than the hydration of other
+bakers. I prefer a slower fermentation for my recipes.
+The sweet spot for my default flour is at around 70 percent hydration.
+Again this is a highly subjective value that works for my flour.
+
+If you are just getting started with a new batch of flour
+I recommend to conduct the following test. This will help you to
+identify the sweet spot of your flour's hydration capabilities.
+
+Make 5 bowls with each 100g of flour. Add different slightly increasing 
+water amounts to each of the bowls.
+
+\begin{itemize}
+  \item 100g of flour, 55g of water
+  \item 100g of flour, 60g of water
+  \item 100g of flour, 65g of water
+  \item 100g of flour, 70g of water
+  \item 100g of flour, 75g of water
+\end{itemize}
+
+Proceed and mix the flour and water mixture until you see that there
+are no chunks of flour left. Wait 15 minutes and return to your doughs.
+Carefully pull the dough apart with your hands. Your dough should be elastic
+and hold together. Stretch your dough until very thin. Then hold it against a light.
+You should be able to see through it. The flour water mixture that breaks without
+seeing the windowpane is your no-go zone. Opt for a dough with
+less hydration than this value. You will know that your flour mix can go up to
+65 percent hydration for instance. Use the left overs of this experiment
+to feed your starter.
+
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{window-pane-effect}
+  \caption
+    {The window pane test allows you to see if you developed your gluten well enough}
+\end{figure}
+
+
+From an economic perspective water is the cheapest component in your bread
+dough. When running a bakery a higher hydrated dough will weigh more have
+lower production costs. The profit will be higher. This comes at the price
+of increasing labor costs and more potential failures due to the enhanced
+difficulty.
+
+\section{How much starter?}
+
+Most bakers use around 20 percent sourdough starter based on the dough mass. I
+recommend to go way lower to around 5 to 10 percent.
+
+By adjusting the amount of preferment you can influence the time your dough
+requires in the bulk fermentation stage. The more starter you use the faster
+this process is. The smaller the amount of starter the slower. With a higher
+quantity of starter you are introducing more microorganisms to your main
+dough. The higher this quantity the faster the rate of fermentation in your
+dough is.
+
+The other factor influecing the rate of fermentation is the temperature of
+your dough. The warmer the temperature the faster the process, the colder the
+slower the process.
+
+While food is available the microorganisms will reproduce and increase in
+quantity. The process is a self limiting process that stops when there is no
+more food available. This can be compared to whine making where
+the yeast ultimately dies as ethanol levels increase and turn the environment
+toxic. The ethanol creates a preservant that makes it impossible for other
+microorganisms to join the feast. The same thing happens with the acidity
+created by the bacteria. The high acidity slows the fermentation process and
+prevents new microorganisms from entering the system.
+
+Initially your starter's properties are carried over to the main dough. Then
+as time progresses the microorganisms adapt to the new environment. If your
+starter is very bacterial then so will be your main dough's fermentation. You
+end up with a dough that is not as fluffy as it could be. It will taste quite
+sour, too sour for most people.
+
+If you were to use an extreme value of around 90 percent starter based on your flour there
+would be very little room for the microorganisms to adjust in the main dough.
+If you were to just use 1 percent, your microorganisms can regrow into a
+desirable balance in the dough. Furthermore you need to consider that a high value
+of starter means a high inoculation with already fermented flour. As
+mentioned earlier enzymes break down the dough. This means the higher this
+value the more broken down fermented flour you have. A too long fermentation
+always results in a very sticky dough that can not be handled. The more
+starter you use the faster you will get to this point. If you were to use a
+very little amount of starter your flour might have naturally broken down
+before the fermentation has reached the desired stage. You can observe this
+when using a small quantity of around 1 percent sourdough starter. The small
+amount of added microorganisms will not be able to reproduce fast enough
+before the protease has broken down your dough completely.
+
+As explained earlier the key to making great bread is a slow but not too slow
+fermentation. Enzymes require time to break down your dough. Taking all this
+into consideration I try to aim for a fermentation time of around 8 to 12 hours. This seems to be
+the sweet spot for most of the flours that I have worked with. To achieve this
+I use around 5 percent of sourdough starter in summer times (temperatures are
+at around 25°C in the kitchen.). In winter times I opt for around 10 percent
+up to 20 percent sourdough starter (kitchen temperature around 20°C). This
+allows me to use a sourdough starter that's not in perfect condition. Your
+bread dough is essentially a gigantic starter. The low inoculation rate allows
+the starter to regrow inside of your main dough into a desirable balance.
+Furthermore the enzymes have enough time to break down the flour. This also
+allows me to skip the so called autolysis step completely (more in next chapter).
+ Making a dough becomes very simple.
 
 \section{Autolyse}
-This chapter is still pending and will be added soon.
+
+The autolysis describes the process of just mixing flour and water and letting
+this sit for a period of around 30 minutes up to several hours. After this
+process is completed the sourdough starter and salt is added to the
+dough.\footnote{I have tested adding the salt at the start and end of the
+autolysis process and could not notice a difference. Based ony my current
+understanding the importance of adding salt later seems to be a myth.}
+
+The overall time flour and water is in contact is extended. Thus you get the
+beneficial enzymatic reactions that improve taste and characteristics of the
+dough. I do not recommend an autolysis as it adds an additional step in the
+process. Instead I recommend the fermentolyse which will be covered in the
+next chapter of this book.
+
+The effects of the autolysis are very interesting. Try to mix just flour and
+water and letting that sit for a day. During the day check the consistency of
+your dough. Try and stretch the dough. If you dare you can also taste the
+dough throughout the day. With each hour progressing your dough will become
+more extensible. It will be easier to stretch the dough. At the same time your
+dough will start to taste sweet and sweeter. The protease and amylase enzymes
+are doing their job. The same process is used when making oat milk. By letting
+the mixture sit for some time enzymes work the oats. The taste is perceived as
+sweeter and more appreciated. This process is further accelerated the more
+whole wheat your flour is. The hull contains more enzymes. The gluten network
+will ultimately tear and your dough flattens out. For wheat sourdough this is
+your worst enemy. When this happen your dough will become leaky and release
+all that precious gas created during the fermentation. You need to find the
+right balance of your dough breaking down just enough and not too much.
+
+When you use a high inoculation rate of around 20 percent sourdough starter
+your fermentation can be very quick. At 25°C it could be finished in 5 hours
+already. If you ferment longer your dough becomes leaky. At the same time in
+these 5 hours the enzymes have not broken down the flour enough. This means
+the dough might not be as elastic as it should be. Furthermore not enough
+sugars have been released and thus the flavor after baking is not good enough.
+\footnote{I have not seen studies yet looking at enzymatic speeds depending on
+the temperature. But I assume the higher the temperature the faster these
+reactions. This goes up until to a point when the enzymes break down under
+heat.} That's why bakers opt for the autolyse. The autolyse starts the enzymatic
+reactions before the microorganism fermentation begins. This way after 2 hours
+of autolysis (an example) and 5 hours of fermentation the dough is in the
+perfect state before beginning proofing.
+
+When you try to mix your salt and starter into the flour/water dough you will
+notice how cumbersome this is. It feels like you have to knead again from scratch
+one more time. You will spend more time on mixing a dough.
+
+For that reason I am advocating to utilize the fermentolyse which simplifies
+the mixing and kneading process greatly.
 
 \section{Fermentolyse}
-This chapter is still pending and will be added soon.
+
+The fermentolyse creates you the same advantageous dough properties the
+autolysis creates without the headache of mixing your dough twice. You do this
+by extending the fermentation time of your dough. Rather than doing a 2 hour
+autolysis and 5 hour bulk fermentation you opt for an overall 7 hour
+fermentation period.
+
+To do this you use less sourdough starter. A conventional recipe including the
+autolysis step might call for 20 percent sourdough starter. Simply reduce this
+value to 5-10 percent. The other option could be to place the dough in a colder
+environment and thus reduce the speed at which your microorganisms replicate.
+
+\begin{table}[!htb]
+  \begin{tabular}{|l|l|l|l|}
+  \hline
+  \textbf{\begin{tabular}[c]{@{}l@{}}Temperature\\ in °C\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Temperature\\ in °F\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Starter\\ recently fed?\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Amount\\ of starter in\%\end{tabular}} \\ \hline
+  30                                                                   & 86                                                                   & Yes                                                                      & 5                                                                         \\ \hline
+  25                                                                   & 77                                                                   & Yes                                                                      & 10                                                                        \\ \hline
+  20                                                                   & 68                                                                   & Yes                                                                      & 15                                                                        \\ \hline
+  30                                                                   & 86                                                                   & No                                                                       & 2.5                                                                       \\ \hline
+  25                                                                   & 77                                                                   & No                                                                       & 5                                                                         \\ \hline
+  20                                                                   & 68                                                                   & No                                                                       & 10                                                                        \\ \hline
+  \end{tabular}
+  \caption{A table visualizing how much sourdough starter to use depending on temperature and the starter's activity level}
+\end{table}
+
+Based on my experience and my sourdough my ideal breads always take around 8
+to 12 hours during the bulk fermentation. Based on my availability throughout
+the day I use more or less starter. If I wanted to achieve a completed
+fermentation in 8 hours I would opt for 10 percent sourdough starter. If I
+wanted it to be ready in 12 hours I would use less starter, around 5 percent.
+Simply mix together all the ingredients and your fermentation begins. The
+enzymes and microorganisms commence their work. On a very warm summer day the
+mentioned quantities no longer work. With 10 percent starter the same dough
+would be ready in 5 hours up to a point of no return. Another additional hour
+would cause the dough to break down too much. In this case I would opt for 5
+percent sourdough starter to slow the whole process down to reach the 8 to 12
+hour window again. If it is very hot I might use as little as 1 percent
+sourdough starter.\footnote{Please take these values with a grain of salt as
+they depend on your flour and your sourdough starter. These are values that
+you have to experiment with. After baking a couple of breads you will be able
+to read your dough much better.} You have to play with the timings on your own.
+Rather than relying on timing I will show you a much better and more precise approach
+by using a fermentation sample. This will be covered later in this chapter.
+
+Even for yeasted doughs I no longer use an autolysis. I just reduce the amount
+of yeast that I am using. Opting for the fermentolysis will
+save you time and simplify your bread making. As mentioned in previous chapters,
+the secret to making great bread is a slow but not too slow fermentation.
 
 \section{Dough strength}
-This chapter is still pending and will be added soon.
+
+Dough strength is a fancy way to describe the bread kneading process. As you wait and
+knead the gluten bonds in your dough become stronger. The dough
+becomes more elastic and holds together better. This is the basis for trapping
+all the gases during the fermentation process. Without the gluten network
+the gases would just diffuse out of your dough.
+
+\begin{figure}[!htb]
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [block] (init) {\footnotesize Homogenize recipe ingredients}; 
+    \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15 minutes};
+    \path [line] (init) -- (wait1);
+    \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5 minutes};
+    \path [line] (wait1) -- (knead1);
+    \node [block, right of=knead1, node distance=3cm] (wait2) {\footnotesize Wait 15 minutes};
+    \path [line] (knead1) -- (wait2);
+    \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {\footnotesize Window-pane?};
+      \path [line] (wait2) -- (windowpane_test);
+      \path [line] (windowpane_test) -- node{no} (knead1);
+    \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {\footnotesize Bassinage for more water?};
+      \path [line] (windowpane_test) -- node{yes} (more_water);
+    \node [block, left of=more_water, node distance=4.5cm] (add_water) {\footnotesize Add water};
+      \path [line] (more_water) -- node{yes} (add_water);
+      \path [line] (add_water) -- (knead1);
+    \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait 15 minutes};
+    \path [line] (add_water) -- (wait3);
+    \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot jar?};
+    \path [line] (wait3) -- (dough_sample);
+    \path [line] (more_water) -- node{no} (dough_sample);
+    \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {\footnotesize Make round dough ball};
+    \path [line] (dough_sample) -- node{no} (dough_ball);
+    \node [block, below of=dough_sample, node distance=3cm] (extract_sample) {\footnotesize Extract sample};
+    \path [line] (dough_sample) -- node{yes} (extract_sample);
+    \path [line] (extract_sample) -- (dough_ball);
+    \node [block, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
+    \path [line] (dough_ball) -- (begin_bulk);
+  \end{tikzpicture}
+  \caption{The gluten development process for a wheat based dough}
+  \label{fig:wheat-sourdough-kneading-process}
+\end{figure}
+
+It might sound odd but the most important part of kneading is waiting. By
+waiting you are allowing your flour to soak up water. This way the gluten
+bonds of your dough form automatically and your dough becomes more elastic.
+So you could be kneading for 10 minutes initially just to be surprised
+that kneading 5 minutes and waiting 15 minutes has the same effect.
+
+The gluten proteins glutenin and gliadin virtually instantly bond after being
+hydrated. Disulfide bonds enable the longer portions of
+glutenin to join with one another and form sturdy, extensible molecules.
+Glutenins add strength, whilst the more compact gliadin proteins allow
+the dough to flow like a fluid. Ultimately the longer you wait, the more
+your gluten network transforms into a web like structure. This is what
+traps the gases during the fermentation process. \cite{how+does+gluten+work}.
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{dough-strength-sourdough-yeast}
+  \caption{A schematic visualization of
+  automatic gluten development. The doughs are not kneaded, just initially
+  mixed. Note how the dough strength
+  deteriorates over time as enzymes break down the flour. The effect
+  is accelerated for sourdough due to the bacteria's gluten proteolysis.
+  }
+\end{figure}
+
+The soaking process has to be extended the more whole wheat flour is used.
+The purpose of the wheat kernel's outer bran is to soak up water as fast
+as possible. The enzymes become activated and start the sprouting process.
+Because of this less water is available for the gluten bonds to develop.
+Either wait a bit longer, or proceed and use slightly more water for
+the dough.
+
+This is the same principle that popular no-knead recipes follow. By making a less
+hydrated dough and waiting your gluten network automatically forms. You still
+have to mix and homogenize the ingredients. You wait a few minutes just to
+find your dough having developed incredible dough strength with no additional
+kneading.\footnote{Give it a shot yourself. The automatic formation of gluten
+networks is an amazing phenomenon that still fascinates me every time I am
+making a dough.}
+
+If you over hydrate your dough at the beginning it becomes more difficult
+for the gluten chains to form. The molecules are not as close together in
+a wetter dough compared to a stiffer dough. It is harder for the molecules
+to align and form the web structure. For this reason it is always easier
+to start with a lower hydration and then increase the water quantity if needed.
+This is also commonly known as the \textit{Bassinage method}. The gluten
+bonds have formed at the lower hydration and can then be made more extensible
+by adding water and kneading again. This is a great trick to make
+a more extensible dough with a lower gluten flour. \cite{bassinage+technique}
+
+When machine kneading a dough opt for the same technique shown in figure \ref*{fig:wheat-sourdough-kneading-process}.
+Initially opt for a low speed. This helps the homogenization process.
+After waiting to allow the flour to soak up the water, proceed on a higher speed
+setting. A good sign of a well developed gluten network is
+that your dough lets go of the container. This is because the gluten's elasticity.
+The elasticity is higher than the urge of the
+dough to stick to the container. 
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{dough-strength-sourdough}
+  \caption{A schematic visualization of
+  gluten development in sourdoughs with different kneading techniques.
+  A combination of techniques can be utilized to achieve maximum
+  dough strength.
+  }
+\end{figure}
+
+Generally the more dough strength you create, the less sticky your dough is going to
+feel. As the dough holds together it will no longer stick to your hands as
+much. This is a common problem beginners face. A sticky dough is frequently
+the sign of a not well enough developed gluten network.
+
+Kneading more is great in almost all cases. You'll have a stronger
+gluten network. Only in case you are making soft milk breads you
+might want to have a more extensible dough to begin with. For every
+other type of wheat based dough kneading is helpful. When you use
+a stand mixer, you can run into the issue of kneading too much. This
+is hardly possible though. Even after kneading for 30 minutes on medium
+speed my doughs hardly ever were over-kneaded. The moment you knead
+too much the color of the dough can begin to change. You mostly
+notice this though during baking. The resulting loaf looks very
+pale and white. This is because mixing dough causes oxidation,
+which is necessary for the development of gluten.
+However, if the dough is mixed too much, the compounds that contribute
+to the bread's flavor, aroma, and color may be destroyed, negatively
+affecting the quality of the bread.\cite{oxidization+dough}
+
 
 \section{Controlling fermentation}
+This chapter is still pending and will be added soon.
+
+\section{Stretch and folds}
 This chapter is still pending and will be added soon.
 
 \section{Optional Preshaping}
