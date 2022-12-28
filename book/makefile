@@ -2,7 +2,6 @@ all:
 	pdflatex book.tex
 	biber book
 	pdflatex book.tex
-	pdflatex book.tex
 
 fast:
 	pdflatex book.tex
@@ -17,3 +16,6 @@ clean:
 	rm book.bcf
 	rm book.pdf
 	rm book.log
+
+release:
+	cp book.pdf TheBreadCode-The-Sourdough-Framework.pdf
