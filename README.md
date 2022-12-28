@@ -48,7 +48,7 @@ The book is a work in progress. This represents the current status:
 Make sure you have `biber` installed. Refer to your system's installation
 instructions. Also make sure you have `pdflatex` installed.
 
-```bash```
+```console
 cd book/
 make
 ```
