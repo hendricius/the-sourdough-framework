@@ -1,5 +1,7 @@
+% Optimise for A4 size
 \documentclass[a4paper, 12pt]{book}
 
+% General packages
 \usepackage[utf8]{inputenc}
 \usepackage{blindtext}
 \usepackage{graphicx}
@@ -10,21 +12,19 @@
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage{tocloft}
+
+% References
 \usepackage[backend=biber]{biblatex}
 \addbibresource{references.bib}
-\usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
 
+% Clickable links in the table of contents
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
     linktoc=all
     allcolors=black
 }
 
-\definecolor{codeblue}{RGB}{69, 161, 248}
-
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
-
+% Folders where to search for images
 \graphicspath{
   {./images/}
   {./troubleshooting/}
@@ -36,13 +36,17 @@
   {./wheat-sourdough/}
 }
 
+% Layout rules
 \interfootnotelinepenalty=10000
-
 \advance\cftsecnumwidth 0.5em\relax
 \advance\cftsubsecindent 0.5em\relax
 \advance\cftsubsecnumwidth 0.5em\relax
+\usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
 
-% Define block styles
+% Define styles for the flow chart graphics
+\definecolor{codeblue}{RGB}{69, 161, 248}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 \tikzstyle{decision} = [diamond, draw, fill=codeblue, text=white,
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
@@ -51,15 +55,19 @@
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
 
+% Caption and figure size below images
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize}
+
 \begin{document}
 
+% Title page
 \begin{titlepage}
 	\centering
   \includegraphics[width=\textwidth]{cover-page}
   Version:
   \today
 \end{titlepage}
-
 
 \frontmatter
 
