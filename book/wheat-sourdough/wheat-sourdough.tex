@@ -26,7 +26,7 @@ found another valuable puzzle piece. Aggregating all this
 information was one of my main motivations to start the bread code.
 My key learning was that there there is no recipe that
 you can blindly follow. You will always have to adapt the recipe
-to your locally available tools and environment. 
+to your locally available tools and environment.
 
 But do not worry. After reading this chapter you will know
 all the signs to look out for. You will be able to read your dough.
@@ -44,16 +44,16 @@ that tastes much better than any store-bought bread.
 
 \begin{figure}[!htb]
   \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Ready starter}; 
-    \node [block, right of=init, node distance=3cm] (mix_ingredients) {\footnotesize Mix ingredients}; 
-    \node [block, right of=mix_ingredients, node distance=3cm] (dough_strength) {\footnotesize Create dough strength}; 
-    \node [block, right of=dough_strength, node distance=3cm] (bulk) {\footnotesize Bulk ferment}; 
+    \node [block] (init) {\footnotesize Ready starter};
+    \node [block, right of=init, node distance=3cm] (mix_ingredients) {\footnotesize Mix ingredients};
+    \node [block, right of=mix_ingredients, node distance=3cm] (dough_strength) {\footnotesize Create dough strength};
+    \node [block, right of=dough_strength, node distance=3cm] (bulk) {\footnotesize Bulk ferment};
     \node [decision, below of=dough_strength, node distance=3cm] (divide_test) {\footnotesize Making 1 loaf?};
-    \node [block, left of=divide_test, node distance=3cm] (divide) {\footnotesize Divide}; 
-    \node [block, left of=divide, node distance=3cm] (preshape) {\footnotesize Preshape}; 
-    \node [block, below of=preshape, node distance=3cm] (shape) {\footnotesize Shape}; 
-    \node [block, right of=shape, node distance=3cm] (proof) {\footnotesize Proof}; 
-    \node [block, right of=proof, node distance=3cm] (bake) {\footnotesize Bake}; 
+    \node [block, left of=divide_test, node distance=3cm] (divide) {\footnotesize Divide};
+    \node [block, left of=divide, node distance=3cm] (preshape) {\footnotesize Preshape};
+    \node [block, below of=preshape, node distance=3cm] (shape) {\footnotesize Shape};
+    \node [block, right of=shape, node distance=3cm] (proof) {\footnotesize Proof};
+    \node [block, right of=proof, node distance=3cm] (bake) {\footnotesize Bake};
     \path [line] (init) -- (mix_ingredients);
     \path [line] (mix_ingredients) -- (dough_strength);
     \path [line] (dough_strength) -- (bulk);
@@ -118,21 +118,21 @@ main dough.
   \begin{tikzpicture}[node distance = 3cm, auto]
     \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
     \node [block, right of=init, node distance=4cm] (feed_no_branch)
-      {\footnotesize Feed starter twice. 48 hours before and 6-12 hours before}; 
+      {\footnotesize Feed starter twice. 48 hours before and 6-12 hours before};
     \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
-      {\footnotesize Feed starter once 6-12 hours before making dough}; 
+      {\footnotesize Feed starter once 6-12 hours before making dough};
     \node [block, right of=feed_no_branch, node distance=6cm] (high_ratio)
-      {\footnotesize Use a 1:10:10 ratio. 10g starter, 100g flour, 100g water}; 
+      {\footnotesize Use a 1:10:10 ratio. 10g starter, 100g flour, 100g water};
     \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
-      {\footnotesize Use a 1:5:5 ratio. 10g starter, 50g flour, 50g water}; 
+      {\footnotesize Use a 1:5:5 ratio. 10g starter, 50g flour, 50g water};
     \node [block, below of=high_ratio, node distance=6cm] (check_starter)
-      {\footnotesize Check if starter is ready to be used}; 
+      {\footnotesize Check if starter is ready to be used};
     \node [decision, below of=init, node distance=6cm] (size_check)
       {\footnotesize Bubbly? Increased in size?};
     \node [decision, below of=size_check, node distance=5cm] (smell_check)
       {\footnotesize Vinegary or yogurty smell?};
     \node [block, right of=smell_check, node distance=6cm] (make_dough)
-      {\footnotesize Prepare dough}; 
+      {\footnotesize Prepare dough};
     \path [line] (init) -- node{no} (feed_no_branch);
     \path [line] (init) -- node{yes} (feed_yes_branch);
     \path [line] (feed_yes_branch) -- (low_ratio);
@@ -342,7 +342,7 @@ is however one option that makes things easier and causes fewer headaches:
 Slow fermentation. You get the same extensibility advantages the high hydration
 offers by simply letting your dough ferment for a longer period.
 Slowing the fermentation process is easy. Use less
-sourdough starter or ferment in a cooler environment. 
+sourdough starter or ferment in a cooler environment.
 
 There are two reasons for the slow fermentation advantages.
 As explained earlier both the protease enzyme and bacteria break down your
@@ -388,7 +388,7 @@ If you are just getting started with a new batch of flour
 I recommend conducting the following test. This will help you to
 identify the sweet spot of your flour's hydration capabilities.
 
-Make 5 bowls with each 100g of flour. Add different slightly increasing 
+Make 5 bowls with each 100g of flour. Add different slightly increasing
 water amounts to each of the bowls.
 
 \begin{itemize}
@@ -401,7 +401,7 @@ water amounts to each of the bowls.
 
 Proceed and mix the flour and water mixture until you see that there
 are no chunks of flour left. Wait 15 minutes and return to your dough.
-Carefully pull the dough apart with your hands. Your dough should be elastic, holding 
+Carefully pull the dough apart with your hands. Your dough should be elastic, holding
 together very well. Stretch your dough until very thin. Then hold it against a light.
 You should be able to see through it. The flour water mixture that breaks without
 seeing the windowpane is your no-go zone. Opt for a dough with
@@ -595,7 +595,7 @@ the gases would just diffuse out of your dough.
 
 \begin{figure}[!htb]
   \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Homogenize recipe ingredients}; 
+    \node [block] (init) {\footnotesize Homogenize recipe ingredients};
     \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15 minutes};
     \path [line] (init) -- (wait1);
     \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5 minutes};
@@ -685,7 +685,7 @@ After waiting to allow the flour to soak up the water, proceed on a higher speed
 setting. A good sign of a well-developed gluten network is
 that your dough lets go of the container. This is because of the gluten's elasticity.
 The elasticity is higher than the urge of the
-dough to stick to the container. 
+dough to stick to the container.
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{dough-strength-sourdough}
@@ -694,6 +694,7 @@ dough to stick to the container.
   A combination of techniques can be utilized to achieve maximum
   dough strength.
   }
+  \label{fig:dough-strength-sourdough}
 \end{figure}
 % See https://www.figma.com/file/wTUVe6Nm2INOvT82mJhQur/Dough-strength-visualisation?node-id=0%3A1&t=fjdPvXYuJpsdQfWN-1 for
 % the source of this visualization
@@ -766,7 +767,7 @@ has a nice smooth surface. The final dough should look like the dough
 shown in \ref{fig:dough-ball-steps}.
 
 If your outer gluten layer tears you have overstretched your dough. In
-that case, take a 10-minute break leaving your dough on the kitchen countertop. 
+that case, take a 10-minute break leaving your dough on the kitchen countertop.
 This allows the gluten to re-bond and heal. Repeat the same process
 and the damaged rugged areas should disappear.
 
@@ -805,7 +806,7 @@ The key is to find the sweet spot between not too little
 and not too much bulk fermentation. I'd always recommend pushing
 the dough more toward a longer fermentation. The
 flavor of the resulting bread is better compared to a pale
-underfermented dough. 
+underfermented dough.
 
 \begin{table}[!htb]
   \small
@@ -821,7 +822,7 @@ underfermented dough.
   \caption{The different stages of sourdough fermentation and the effects on crumb, alveoli, texture, and overall taste.}
 \end{table}
 
-The worst thing you can do when fermenting sourdough 
+The worst thing you can do when fermenting sourdough
 is to rely on a recipe's timing suggestions. In 99 percent
 of the cases, the timing will not work for you. The writer
 of the recipe probably has different flour and a different
@@ -842,7 +843,7 @@ Experienced bakers will tell you to go by the look and feel of
 the dough. While this works if you have made hundreds of loaves,
 this is not an option for an inexperienced baker. As
 you make more and more dough you will be able to judge
-the dough's state by touching it. 
+the dough's state by touching it.
 
 My go-to method for beginners is to use an \textbf{Aliquot jar}.
 The aliquot is a sample that you extract from your dough. The
@@ -973,7 +974,7 @@ While this method is very reliable there are also certain
 limitations to consider.
 
 First of all the pH values that work for me likely won't work for
-you. Depending on your own starter's composition of lactic 
+you. Depending on your own starter's composition of lactic
 and acetic acid bacteria your pH values will be different.
 You can use the values shown in table \ref{table:sample-ph-values}
 as rough ballpark figures. Regardless you need to find values
@@ -1053,9 +1054,14 @@ bread would feature an excellent very tangy taste.
 
 
 \section{Stretch and folds}
-This chapter is still pending and will be added soon.
 
-\section{Optional Preshaping}
+- What is it?
+- Why do it?
+- Different methods
+- When to do it
+- When not to do it
+
+\section{Optional: Divinding and Preshaping}
 This chapter is still pending and will be added soon.
 
 \section{Shaping}
