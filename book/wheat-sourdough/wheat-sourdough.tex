@@ -66,7 +66,7 @@ that tastes much better than any store-bought bread.
     \path [line] (proof) -- (bake);
   \end{tikzpicture}
   \caption{The typical process of making a wheat-based sourdough bread}
-  \label{j:wheat-sourdough-process}
+  \label{fig:wheat-sourdough-process}
 \end{figure}
 
 The whole process of making great sourdough bread starts with
@@ -1159,7 +1159,6 @@ in the decay stage shown in figure \ref{fig:dough-strength-sourdough}.
   its dough strength a stretch and fold should be applied.}
 \end{figure}
 
-
 Now the reasonable amount of stretch and folds you should do greatly depends on how much you
 kneaded initially and how extensible your dough is. A good recommendation is
 to observe your dough in your bulk container. Once you see that the dough
@@ -1171,7 +1170,128 @@ waking up. Then the bulk fermentation might take another 2 hours before I
 proceed with dividing and preshaping or directly shaping.
 
 \section{Optional: Dividing and Preshaping}
-This chapter is still pending and will be added soon.
+
+Dividing and preshaping is an optional step that is done
+once your sourdough finishes with the bulk fermentation stage.
+The step is required if you are making multiple loaves in one
+batch. It is optional if you are making a single loaf.
+
+\begin{figure}[!htb]
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [block] (init) {\footnotesize Dividing required?};
+    \node [decision, right of=init, node distance=5cm] (more_than_one_loaf) {\footnotesize More than 1 loaf?};
+    \node [block, right of=more_than_one_loaf, node distance=5cm] (yes) {\footnotesize Yes};
+    \node [block, below of=yes, node distance=3cm] (no) {\footnotesize No};
+    \path [line] (init) -- (more_than_one_loaf);
+    \path [line] (more_than_one_loaf) -- (yes);
+    \path [line] (more_than_one_loaf) -- (no);
+  \end{tikzpicture}
+  \caption{Dividing is only required when you are making multiple loaves in a single dough batch}
+  \label{fig:dividing-decision-tree}
+\end{figure}
+
+The goal of dividing your dough into smaller pieces is to portion
+your dough accordingly. This way you'll have multiple pieces of bread
+which all weigh the same. For this reason, a scale is commonly
+used to weigh the pieces of dough. If one piece of dough weighs
+too little you can simply cut a bit more from your dough blob
+to increase its weight.
+
+When cutting the dough try to be as concise as possible with your
+movements. You don't want to unnecessarily damage your dough too much.
+Quick movements with a knife or dough scraper help to prevent the
+dough from sticking too much to your tools.
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{divide-preshape}
+  \caption{The steps of dividing and preshaping your dough}
+\end{figure}
+
+I sometimes like to draw small lines with the dough scraper's edge
+on the large dough mass before cutting it into smaller pieces.
+This helps me to better plan where I want to do my incisions. When
+I plan to make 8 loaves I try to use the lines to divide the dough
+into 8 equally sized portions before cutting. If this is not precise enough,
+you can use the aforementioned scale.
+
+Now that you cut your dough the resulting chunks are not in an equal shape.
+This is problematic for the next stage when you are shaping your dough.
+The resulting loaves wouldn't look nice and even. You would probably
+end up with areas that tear the moment you are shaping your dough.
+You wouldn't start the whole process on a good foundation. For that
+reason, you need to preshape your dough.
+
+Preshaping is done for several reasons:
+\begin{itemize}
+  \item You divided your dough and require preshaping
+  \item Your dough lacks dough strength. Preshaping will add more strength
+  \item You want to even out the final loaf's crumb structure. By preshaping
+  the resulting crumb will look more even.
+\end{itemize}
+
+If you are making a single loaf from one dough batch the step is not required.
+In that case, you can directly proceed with shaping, skipping this step.
+  
+The preshaping technique is the same as the process figure \ref{fig:dough-ball-steps}.
+Whereas earlier you could tear the dough's surface this could now result in a catastrophe.
+For this reason, I recommend practicing this step for as long as you need after kneading.
+The gluten network might be so extensible and degraded at this point that there
+is hardly any room for error. The dough wouldn't come together again. The only
+way to save such dough is to use a loaf pan.
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{preshape-direction}
+  \caption{Drag the dough in the direction of the rough surface area. This
+  way you minimize the movements required to complete the step.}
+  \label{fig:preshape-direction}
+\end{figure}
+
+Preshape the dough as much as is needed to round up the top
+surface area. Try to touch the dough as little as possible
+to reduce its chance to stick to your hands. Drag the dough
+in the direction where you see a rough surface area. In
+case you have too little space to drag the dough because it might
+fall from the edge of your counter, simply lift it with a swift movement and place
+it in a better position for preshaping. Please refer to figure \ref{fig:preshape-direction}
+for a visualization showing the preshaping direction.
+
+Try to set yourself a limit of movements to finish preshaping
+a dough. Then you will be more conscious about each movement
+you are performing. At the start you can try 5 movements,
+iteratively reducing this to 3. The only reason for exceeding these
+numbers could be if you on purpose want to even out the crumb
+structure of your final loaves further.
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{preshaped-dough}
+  \caption{Baguette doughs resting after preshaping}
+  \label{fig:dough-after-preshaping}
+\end{figure}
+
+Once you finished preshaping allow the dough balls to rest
+on your counter for at least 10-15 minutes. Do not
+cover the preshaped balls. By drying out the surface
+the following shaping step will be easier. The dried-out surface
+will not stick to your hands as much. As
+you tightened the dough's gluten you will need to
+allow it to relax. Without a resting period, you wouldn't
+be able to shape your dough into for instance a baguette-like structure.
+The dough would resist each movement
+always springing back into the previous shape. You
+might have noticed this before when making pizza dough. If you
+don't wait long enough after balling the pizzas it's impossible
+to stretch the pizza. By waiting a few more minutes
+stretching becomes a lot easier. The dough will not resist
+being transformed into the final shape that you like.
+
+The aforementioned 10-15 minutes bench rest time depends
+on how strongly you preshaped your dough. The more
+you preshape the longer you need to wait. If your dough
+resits a lot during shaping, extend this period up to 30 minutes.
+If you wait too long your dough's surface area can become too dry,
+resulting in the dough tearing during shaping. As always please
+take these timings with a grain of salt and experiment in
+your environment.
 
 \section{Shaping}
 This chapter is still pending and will be added soon.
