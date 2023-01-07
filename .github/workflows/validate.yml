@@ -1,0 +1,17 @@
+name: Validate LaTeX Document
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+      - uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            apk add make
+            cd book
+            make all
