@@ -18,4 +18,6 @@ clean:
 	rm book.log
 
 release:
-	cp book.pdf TheBreadCode-The-Sourdough-Framework.pdf
+	rm -rf release
+	mkdir release
+	cp book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
