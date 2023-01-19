@@ -1,5 +1,5 @@
 name: Validate LaTeX Document
-on: [ push ]
+on: [ push, pull_request ]
 jobs:
   test_building_book:
     runs-on: ubuntu-latest
