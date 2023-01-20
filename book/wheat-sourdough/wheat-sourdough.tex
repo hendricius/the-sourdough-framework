@@ -1530,6 +1530,35 @@ at a slower rate at colder temperatures. But I doubt that they alter
 their biochemical processes. More research is needed on the topic
 of retarding and flavor development.
 
+
+\begin{figure}[!htb]
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [decision] (init) {\footnotesize Room temperature proofing?};
+    \node [decision, right of=init, node distance=9cm] (retard_bake_decision) {\footnotesize Bake in less than 10 hours from now?};
+    \node [block, below of=init, node distance=4cm] (poke) {\footnotesize Poke the dough};
+    \node [block, right of=poke, node distance=4cm] (wait_poke) {\footnotesize Wait 15 minutes};
+    \node [decision, below of=poke, node distance=3cm] (dent_visible_decision) {\footnotesize Dent still visible after 1 minute?};
+    \node [block, right of=dent_visible_decision, node distance=4cm] (bake) {\footnotesize Score and bake};
+    \node [block, below of=retard_bake_decision, node distance=3cm] (wait_retard) {\footnotesize Wait 15 minutes};
+    \node [block, below of=wait_retard, node distance=3cm] (retard) {\footnotesize Proof in fridge at 4°C (40°F)};
+    \node [block, right of=wait_retard, node distance=3cm] (move_to_fridge) {\footnotesize Move dough directly to fridge};
+    \path [line] (init) -- node{yes} (poke);
+    \path [line] (init) -- node{no} (retard_bake_decision);
+    \path [line] (poke) -- (dent_visible_decision);
+    \path [line] (dent_visible_decision) -- node{yes} (bake);
+    \path [line] (dent_visible_decision) -- node{no} (wait_poke);
+    \path [line] (wait_poke) -- (poke);
+    \path [line] (retard_bake_decision) -- node{yes} (wait_retard);
+    \path [line] (retard_bake_decision) -- node{no} (move_to_fridge);
+    \path [line] (wait_retard) -- (retard);
+    \path [line] (move_to_fridge) -- (retard);
+    \path [line] (retard) -- (bake);
+  \end{tikzpicture}
+  \caption{A schematic overview of the different steps of the sourdough proofing process. The proofing technique to choose
+  depends on your availability and schedule.}
+  \label{fig:proofing-process}
+\end{figure}
+
 To me, the sole purpose of cold proofing is its ability to allow you
 to better manage the timing of the whole process. Assuming you finished shaping
 your dough at 10 pm, chances are you wouldn't want to wait for another
@@ -1555,6 +1584,8 @@ To summarize, choose the technique that works for you depending on your
 schedule and availability.
 
 \subsection{Room temperature proofing}
+
+
 
 \subsection{Cold proofing (retarding)}
 
