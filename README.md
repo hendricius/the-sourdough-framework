@@ -9,7 +9,7 @@ is different. This makes making sourdough bread at home so hard.
 Say no more, this book will help you to master making bread in
 your environment.
 
-![Cover image](cover.jpg)
+![A whole wheat sourdough bread](./book/images/whole-wheat-crumb.jpg)
 
 ## Motivation
 
@@ -25,6 +25,8 @@ That's why I decided to open source my knowledge hoping
 that it will reach more people all over the world without
 budget constrains.
 
+![The book cover](cover.jpg)
+
 ## Status
 
 The book is a work in progress. This represents the current status:
@@ -36,7 +38,7 @@ The book is a work in progress. This represents the current status:
 * ✅ Sourdough starter types
 * ✅ Flour types
 * ✅ Bread types
-* ❌ Wheat sourdough
+* ✅ Wheat sourdough
 * ❌ Non wheat sourdough
 * ✅ Baking
 * ❌ Storing bread

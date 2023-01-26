@@ -1504,9 +1504,270 @@ not notice that this improves the dough's strength. As far as I can
 tell this only improves the visual appearance of the bottom side
 of the final loaf.} If you did everything right then your
 dough should look somewhat similar to the dough shown in figure \ref{fig:shaping-prepare-proofing}.
+As the last step of shaping place a kitchen towel over your banneton
+or bowl and begin proofing.
 
 \section{Proofing}
-This chapter is still pending and will be added soon.
+
+In bread baking, proofing refers to the final rise of dough before baking,
+after it has been shaped into a loaf. The chemical reactions and processes
+that occur during bulk fermentation and proofing are the same.
+
+By shaping your dough it has lost some of the air previously generated
+throughout the bulk fermentation. The goal of proofing is to inflate
+the dough again. A dough without proofing wouldn't offer the same texture
+as a properly proofed dough. The proofed dough features a very fluffy
+and soft crumb.
+
+There are two proofing techniques. One strategy is to proof the dough
+at room temperature whereas the other proofs the dough in the fridge.
+Fridge-proofing is also commonly known as retarding.
+
+Some bakers claim that cold proofing improves the final flavor of the bread.
+In all the loaves that I retarded I could not notice a difference
+in terms of flavor for cold-proofed doughs. The microorganisms work
+at a slower rate at colder temperatures. But I doubt that they alter
+their biochemical processes. More research is needed on the topic
+of retarding and flavor development.
+
+
+\begin{figure}[!htb]
+  \begin{tikzpicture}[node distance = 3cm, auto]
+    \node [decision] (init) {\footnotesize Room temperature proofing?};
+    \node [decision, right of=init, node distance=9cm] (retard_bake_decision) {\footnotesize Bake in less than 10 hours from now?};
+    \node [block, below of=init, node distance=4cm] (poke) {\footnotesize Poke the dough};
+    \node [block, right of=poke, node distance=4cm] (wait_poke) {\footnotesize Wait 15 minutes};
+    \node [decision, below of=poke, node distance=3cm] (dent_visible_decision) {\footnotesize Dent still visible after 1 minute?};
+    \node [block, right of=dent_visible_decision, node distance=4cm] (bake) {\footnotesize Score and bake};
+    \node [block, below of=retard_bake_decision, node distance=3cm] (wait_retard) {\footnotesize Wait 15 minutes};
+    \node [block, below of=wait_retard, node distance=3cm] (retard) {\footnotesize Proof in fridge at 4°C (40°F)};
+    \node [block, right of=wait_retard, node distance=3cm] (move_to_fridge) {\footnotesize Move dough directly to fridge};
+    \path [line] (init) -- node{yes} (poke);
+    \path [line] (init) -- node{no} (retard_bake_decision);
+    \path [line] (poke) -- (dent_visible_decision);
+    \path [line] (dent_visible_decision) -- node{yes} (bake);
+    \path [line] (dent_visible_decision) -- node{no} (wait_poke);
+    \path [line] (wait_poke) -- (poke);
+    \path [line] (retard_bake_decision) -- node{yes} (wait_retard);
+    \path [line] (retard_bake_decision) -- node{no} (move_to_fridge);
+    \path [line] (wait_retard) -- (retard);
+    \path [line] (move_to_fridge) -- (retard);
+    \path [line] (retard) -- (bake);
+  \end{tikzpicture}
+  \caption{A schematic overview of the different steps of the sourdough proofing process. The proofing technique to choose
+  depends on your availability and schedule.}
+  \label{fig:proofing-process}
+\end{figure}
+
+To me, the sole purpose of cold proofing is its ability to allow you
+to better manage the timing of the whole process. Assuming you finished shaping
+your dough at 10 pm, chances are you wouldn't want to wait for another
+2 hours to proof the dough and then another 1 hour to bake it. In this case,
+you can move your dough directly to the fridge after shaping. Your
+dough will be proofing overnight in the fridge. Then it can be baked at any time
+the following day (there are a few exceptions, more on that a little bit later).
+This is especially handy for large-scale bakeries that use fridge-proofing
+extensively. Some of the doughs are proofed a day before and placed in the fridge.
+Early in the morning, they can be baked directly out of the fridge. Within 2
+hours they will be ready to sell the first bread to morning customers. If
+throughout the day more bread is needed simply take some proofed dough out
+of the fridge and bake it. The time frame in which you can bake retarded
+dough is big. It can be 6 hours later up to 24 hours later.
+
+Assuming you made an overnight dough and your dough is ready in the morning,
+the situation might be different. You potentially want to bake the dough directly
+for breakfast, or at lunchtime. In this case, you wouldn't want to proof the dough for
+another 6 hours in the fridge. Room temperature proofing is your technique
+of choice.
+
+To summarize, choose the technique that works for you depending on your
+schedule and availability.
+
+\subsection{Room temperature proofing}
+
+The easiest and most reliable way to proof your dough is to proof the dough at
+room temperature. It is my method of choice if my schedule allows it. This method
+works great if you make an overnight dough and then proof in the next
+morning.
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{step-13-finger-poke-test}
+  \caption{The finger poke test is a very reliable method to check
+  if your dough has been properly proofed. If the induced dent is still
+  visible 1 minute later your dough can be baked.}
+  \label{fig:shaping-finger-poke}
+\end{figure}
+
+The time it takes to proof your dough can be anything between 30 minutes and
+3 hours. Rather than relying on timing most bakers use the finger poke test.
+
+Flour your thumb and gently press around 0.5cm up to 1cm deep into the dough.
+Try this directly after shaping. You will notice that the created dent will
+recover quickly. It will be gone again after 1 minute.
+
+As you proceed with proofing your dough will fill up with more gas. At the
+same time, the dough will become more extensible. Once it starts to reach the
+right amount of fluffiness and extensibility the dent will disappear more slowly.
+Once the dough is for scoring and baking the dent should still be visible after
+1 minute of waiting.
+
+I recommend performing the finger poke test once every 15 minutes throughout
+the proofing stage. Realistically based on my experience proofing takes at least
+one hour and can sometimes take up to 3 hours. Even at warmer temperatures proofing
+has never been faster than an hour for me. As always please take my timings with
+a grain of salt and experiment on your own.
+
+Once I see that the dough is getting close to perfect proofing I proceed and
+preheat my oven. This way I don't overproof the dough. You would notice an
+over-proofed dough when the dough suddenly becomes very sticky. At the same
+time, the dough is likely to collapse during baking and will not spring back.
+Generally, it is better to end proofing earlier rather than too late.
+
+\subsection{Cold proofing (retarding)}
+
+The second proofing option is to place your dough inside the fridge for
+proofing. This option is great if you do not want to bake the dough
+within the next 3 hours.
+
+The dough will initially proof at the same rate as the room temperature dough.
+As the dough cools down the rate of fermentation slows. Ultimately at below
+4°C (40°F) the fermentation comes to a halt. \footnote{The actual temperature
+depends on the bacteria and yeast you cultivated in your sourdough
+starter.} The dough can rest in the fridge for up to 24 hours. In some
+experiments, the dough was still good even 48 hours later. Interestingly
+there is a limit to fridge proofing. I can only explain this with continuous
+fermentation activity at low temperatures.
+
+The hard part is to judge when the dough is finished proofing in your fridge.
+The previously mentioned finger poke test does not work on cold dough. Low
+temperatures change the dough's elasticity. The dent from the poke test
+will never recover.
+
+For this reason, finding the best fridge-proofing time is best done
+with an iterative approach. Begin with 8 hours on your first dough,
+10 hours on the second, 12 hours on the third, and so on up to 24 hours.
+As the temperature in your fridge is typically constant you have an
+environment in which you can rely on timings. Find the ideal proofing
+time that works for you.
+
+One additional consideration is the dough's core temperature before
+placing it inside the fridge. The warmer your dough is initially
+the longer it takes for the dough to cool down. This is an additional
+variable to take into consideration when choosing the retarding time.
+In summer times when my kitchen is hot I choose a shorter fridge-proofing
+time compared to winter times when the dough is colder.
+
+A reliable way to ensure consistent proofing is to opt for using a pH
+meter. By checking the amount of piled-up acidity you can ensure
+each of your doughs has the right amount of acidity. Opt for an iterative
+approach and check the pH for multiple proofing times. Find the pH
+the value that creates the best bread for you. Once you have identified
+your perfect pH level you can resort to that value on all following
+doughs. See table \ref{table:sample-ph-values} for some sample pH values
+to follow.
 
 \section{Scoring}
-This chapter is still pending and will be added soon.
+
+Once your dough is done proofing it's time to warm up your oven
+to around 230°C (446°F). The next step is then to proceed with
+scoring your dough.
+
+Scoring is done for two reasons. There is functional and decorative
+scoring. Functional scoring refers to making a small incision in the dough
+through which it rises while baking. If the dough wouldn't be scored
+it would likely crack open at the weakest spots where you sealed
+the dough after shaping. Decorative scoring can be used to apply
+artistic patterns to your dough and make it more appealing. When
+you want to apply artistic scoring it is best to rub your dough
+with additional rice flour before scoring. The white rice flour
+greatly boosts the contrast of the scoring incisions and thus
+makes the final pattern look more visually appealing.
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{the-ear}
+  \caption{The ear is a characteristic that can be achieved on wheat sourdough
+  when fermenting and scoring your dough with the perfect technique. It offers additional
+  flavor and great texture when eating the bread.}
+  \label{fig:the-ear}
+\end{figure}
+
+When using a banneton the dough is flipped over and
+placed on an oven rack, tray, stone, steel, or dutch oven. The pros
+and cons of the different baking options are covered in the next chapter.
+The dough's top side which was previously at the bottom of the
+banneton should now be facing you.
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{artistic-scoring}
+  \caption{A loaf by Nancy Anne featuring an artistic scoring pattern.
+  The high contrast was achieved by rubbing the 
+  dough's surface with rice flour before baking. Her Instagram
+  account "simply.beautiful.sourdough" is specialized to showcase
+  beautiful artistic scoring patterns.}
+  \label{fig:artistic-scoring}
+\end{figure}
+
+The scoring cut for done at a 45° angle relative to the dough's
+surface slightly off the dough's center. With the 45° angle cut
+the overlaying side will rise more in the oven than the other side.
+This way you will achieve a so-called "ear" on the final bread.
+The ear is a thin crisp edge that offers intriguing texture
+when eating. The thin edge is typically a bit darker after baking
+and thus offers additional flavor. In my opinion, the ear is turning
+a good loaf into a great loaf.
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{bread-scoring-angle}
+  \caption{The 45° angle at which you score the dough is relative to the surface of the dough.
+  When scoring more towards the side you have to adjust the angle to get achieve the ear on your
+  bread.}
+  \label{fig:scoring-angle}
+\end{figure}
+
+The actual incision is done with a very sharp knife or better a razor
+blade. You can use the razor blade directly or attach it to a chopstick.
+The razor blade offers better flexibility than the sharp knife.
+Regardless the blade should be as sharp as possible. This way when cutting
+the dough is not torn and instead features a clean non rugged incision.
+
+To simplify scoring your dough's surface must be dried out a little bit.
+This way it is a lot easier to make the incision.
+For this reason, it is crucial to rub your dough with a bit of flour
+before placing it in the banneton. The dry flour will absorb some of the
+moisture of the outer layers of your dough. This is especially important
+when working with room temperature-proofed doughs. A cold-proofed dough
+is a lot easier to score due to the dough's low viscosity. The room-temperature
+dough is a lot harder to score. The scoring incision tears a lot
+easier. With a rugged incision, the dough is not as likely to properly
+rise in the oven. Chances are you will not achieve the previously mentioned
+ear. For this reason, drying out the surface is especially important. Scoring
+will become a lot easier.
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{dry-dough-surface}
+  \caption{By applying flour to your dough's surface after shaping the outer part
+  of the dough dries out a little bit. This makes scoring a lot easier as the incision
+  is less likely to tear.}
+  \label{fig:dried-out-dough-scoring}
+\end{figure}
+
+
+Scoring requires a lot of practice. For this reason, I recommend
+practicing making the incision after creating dough strength. The dough
+is going to be very wet and sticky. You can use a sharp knife or razor
+blade to practice the technique. Wait a few minutes and then round
+up the dough again. You can practice this for as long as you like
+until you are happy with your technique. After proofing, you only
+have a single chance to practice scoring. It's either hit or miss.
+
+An additional trick that can help you to combine the benefits
+of room temperature proofing and easy cold proofing scoring
+is to place your dough in the freezer for 30 minutes before baking.
+Once you notice your dough is almost done proofing move it to the
+freezer. The freezer will dry out the surface even further and make
+scoring easier.
+
+Another interesting trick is to bake your dough for 30 seconds without steam.
+The hot air will dry out the dough's surface even further and simplify
+the scoring technique. Experiment with the timing to identify your personal
+sweet spot.
