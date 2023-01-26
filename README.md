@@ -36,7 +36,7 @@ The book is a work in progress. This represents the current status:
 * ✅ Sourdough starter types
 * ✅ Flour types
 * ✅ Bread types
-* ❌ Wheat sourdough
+* ✅ Wheat sourdough
 * ❌ Non wheat sourdough
 * ✅ Baking
 * ❌ Storing bread
