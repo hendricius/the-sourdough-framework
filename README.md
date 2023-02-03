@@ -35,7 +35,7 @@ make
 
 ## Compiled version
 
-You can [download the compiled version here](https://thbrco.io/book).
+You can [download the compiled PDF version here](https://thbrco.io/book).
 
 ## Support
 
@@ -52,5 +52,5 @@ to the project you can do so via my [ko-fi page.](https://ko-fi.com/thebreadcode
 
 ## Links
 
-* [My YouTube channel.](https://youtube.com/c/thebreadcode)
+* [My YouTube channel](https://youtube.com/c/thebreadcode)
 * [Ask a question on Discord](https://breadco.de/discord)
