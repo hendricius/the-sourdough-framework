@@ -268,9 +268,26 @@ yeast has been isolated like this from century old sourdough
 starters.
 
 \begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{sourdough-starter-readiness.jpg}
-  \caption{A flowchart showing how to check if your sourdough starter is ready
-  to be used}
+  \begin{tikzpicture}[node distance = 3cm, auto]
+  \node [block] (init) {\footnotesize Make a starter};
+	\node [block, right of=init, node distance=3cm] (feed) {\footnotesize Feed your starter};
+	\path [line] (init) -- (feed);
+	\node [block, right of=feed, node distance=3cm] (ready_question) {\footnotesize Perform readiness check};
+	\path [line] (feed) -- (ready_question);
+	\node [block, below of=feed, node distance=3cm] (wait_12) {\footnotesize Wait 12 hours};
+	\path [line] (wait_12) -- (feed);
+  \node [decision, right of=ready_question, node distance=3.5cm] (is_bubbly) {\footnotesize Bubbly? Size Increase?};
+	\path [line] (ready_question) -- (is_bubbly);
+	\path [line] (is_bubbly) -- node{no} (wait_12);
+  \node [decision, below of=is_bubbly, node distance=4.0cm] (check_smell) {\footnotesize Vinegary, or yogurt smell?};
+	\path [line] (is_bubbly) -- node{yes} (check_smell);
+	\node [block, below of=init, node distance=6cm] (make_dough) {\footnotesize Make your dough};
+	\path [line] (check_smell) -- node{yes} (make_dough);
+	\path [line] (check_smell) -- node{no} (wait_12);
+  \end{tikzpicture}
+  \caption{A flow chart showing you how to determine if your sourdough starter is ready to be used.
+  For checking readiness look at a size increase and take note of your starter's smell. Both are important
+  indicators to check for readiness.}
   \label{fig:sourdough-starter-readiness}
 \end{figure}
 
