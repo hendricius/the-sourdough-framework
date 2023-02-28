@@ -1,0 +1,5 @@
+END{
+# system("tex4ebook -j output -m draft -a debug main > tex4ebook.log");
+system("tex4ebook -j output -e build.mk4 main");
+system("rm tikz-cache/*");
+}
