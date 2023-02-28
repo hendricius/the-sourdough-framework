@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage{tocloft}
+\usepackage{tex4ebook}
 
 % References
 \usepackage[backend=biber]{biblatex}
@@ -57,10 +58,19 @@
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
+%\usetikzlibrary{external}
+%\tikzexternalize
+%\tikzset{jpg export/.style={external/system call={pdflatex \tikzexternalcheckshellescape -interaction=batchmode -jobname "\image" "\texsource"; convert -gravity center -extent 1245 -strip -quality 100 -density 300 -transparent white "\image.pdf" "\image.jpg"},/pgf/images/external info,/pgf/images/include external/.code=\includegraphics{##1.jpg}}}
+%\tikzset{jpg export}
+%\tikzsetexternalprefix{tikz-cache/} 
 
 % Caption and figure size below images
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize}
+
+% Basic attributes
+\author{Hendrik Kleinwächter}
+\title{The Sourdough Framework}
 
 \begin{document}
 

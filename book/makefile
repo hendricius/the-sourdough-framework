@@ -1,7 +1,7 @@
 all:
-	pdflatex book.tex
 	biber book
-	pdflatex book.tex
+	pdflatex -synctex=1 -interaction=nonstopmode -shell-escape book.tex
+
 
 fast:
 	pdflatex book.tex

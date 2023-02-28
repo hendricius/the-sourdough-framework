@@ -12,3 +12,8 @@
 book/book.out
 .vscode/
 book/book.synctex*
+book/tikz-cache/*
+book/book*
+book/bookch*
+book/content.opf
+book/output-epub
