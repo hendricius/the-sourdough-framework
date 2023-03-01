@@ -35,7 +35,7 @@ make
 
 ## Compiled version
 
-You can [download the compiled PDF version here](https://thbrco.io/book).
+You can [download the compiled PDF version here](https://www.the-bread-code.io/book.pdf).
 
 ## Support
 
@@ -48,7 +48,7 @@ that it will reach more people all over the world without
 budget constraints.
 
 If you would like to contribute financially
-to the project you can do so via my [ko-fi page.](https://ko-fi.com/thebreadcode)
+to the project you can do so via my [ko-fi page.](https://breadco.de/book)
 
 ## Links
 
