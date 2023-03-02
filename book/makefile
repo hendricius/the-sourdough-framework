@@ -57,9 +57,9 @@ clean:
 .PHONY: release
 release: clean build_pdf make_release_dir build_ebook
 	cp book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
-	cp book.epub release/TheBreadCode-The-Sourdough-Framework.epub
-	cp book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
-	cp book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
+	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
+	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	cp book-azw3/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
 
 .PHONY: make_release_dir
 make_release_dir:
