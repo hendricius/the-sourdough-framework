@@ -23,19 +23,49 @@ as possible are provided.
 
 ![The book cover](cover.jpg)
 
-## Building the book
+## Building the book (Docker)
+
+```console
+make
+```
+
+Then you can check out the file `book/book.pdf`
+
+If you want to build the eBook versions (.epub, .mobi, .azw3) run:
+
+```console
+make release
+```
+
+You can check the files in  the folder `book/release/`
+
+## Building the book locally (LaTeX)
 
 Make sure you have `biber` installed. Refer to your system's installation
-instructions. Also make sure you have `pdflatex` installed.
+instructions for LaTeX.
 
 ```console
 cd book/
 make
 ```
 
-## Compiled version
+If you want to build the eBook versions (.epub, .mobi, .azw3) run:
 
-You can [download the compiled PDF version here](https://www.the-bread-code.io/book.pdf).
+```console
+cd book/
+make release
+```
+
+You can check the files in the folder `book/release/`
+
+## Compiled versions
+
+The below versions are automatically built on every push to the `main` branch.
+
+* [Download compiled .pdf version](https://www.the-bread-code.io/book.pdf)
+* [Download compiled .epub version](https://www.the-bread-code.io/book.epub)
+* [Download compiled .mobi version](https://www.the-bread-code.io/book.mobi)
+* [Download compiled .azw3 version](https://www.the-bread-code.io/book.azw3)
 
 ## Support
 
@@ -47,8 +77,10 @@ That's why I decided to open source my knowledge hoping
 that it will reach more people all over the world without
 budget constraints.
 
-If you would like to contribute financially
-to the project you can do so via my [ko-fi page.](https://breadco.de/book)
+If you would like to contribute with a small donation you can do so
+via my [ko-fi page.](https://breadco.de/book). This will help me
+to cover costs related to running the-bread-code and allow me
+to work more updates for this book.
 
 ## Links
 
