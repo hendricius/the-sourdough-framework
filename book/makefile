@@ -1,10 +1,7 @@
-.PHONY: all
-all: clean figures
+.PHONY: build_pdf
+build_pdf: clean figures
 	pdflatex book.tex
 	biber book
-	pdflatex book.tex
-
-fast:
 	pdflatex book.tex
 
 .PHONY: figures
@@ -50,8 +47,20 @@ clean:
 	rm -rf figures/*.log
 	rm -rf figures/*.pdf
 	rm -rf figures/*.png
+	find . -name "*.xbb" | xargs rm
+	rm -rf release/
 
-release:
-	rm -rf release
-	mkdir release
+.PHONY: release
+release: clean build_pdf make_release_dir build_ebook
 	cp book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
+
+.PHONY: make_release_dir
+make_release_dir:
+	mkdir -p release
+
+.PHONY: build_ebook
+build_ebook: build_pdf make_release_dir
+	find . -name "*.jpg" | xargs ebb -x
+	find . -name "*.png" | xargs ebb -x
+	tex4ebook -d release -a debug book.tex
+
