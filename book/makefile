@@ -51,7 +51,7 @@ clean:
 	rm -rf figures/*.log
 	rm -rf figures/*.pdf
 	rm -rf figures/*.png
-	find . -name "*.xbb" | xargs rm
+	find . -name "*.xbb" | xargs rm -f
 	rm -rf release/
 
 .PHONY: release
@@ -72,4 +72,3 @@ build_ebook: build_pdf make_release_dir
 	tex4ebook -c tex4ebook.cfg -f epub book.tex
 	tex4ebook -c tex4ebook.cfg -f mobi book.tex
 	tex4ebook -c tex4ebook.cfg -f azw3 book.tex
-
