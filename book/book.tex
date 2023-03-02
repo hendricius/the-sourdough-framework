@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage{tocloft}
+\usepackage{tex4ebook}
 
 % References
 \usepackage[backend=biber]{biblatex}
@@ -46,21 +47,13 @@
 % Space between paragraphs
 \usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
 
-% Define styles for the flow chart graphics
-\definecolor{codeblue}{RGB}{69, 161, 248}
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
-\tikzstyle{decision} = [diamond, draw, fill=codeblue, text=white,
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
-    text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
-    minimum height=2em]
-
 % Caption and figure size below images
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize}
+
+% Basic attributes
+\author{Hendrik Kleinwächter}
+\title{The Sourdough Framework}
 
 \begin{document}
 

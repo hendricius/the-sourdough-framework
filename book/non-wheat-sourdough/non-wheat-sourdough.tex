@@ -27,19 +27,7 @@ of gluten development, the final bread will feature a denser
 crumb compared to wheat.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Mix ingredients};
-    \node [block, below of=init, node distance=3cm] (bulk_ferment) {\footnotesize Bulk ferment};
-    \node [block, right of=init, node distance=3cm] (divide) {\footnotesize Divide};
-    \node [block, below of=divide, node distance=3cm] (shape) {\footnotesize Shape};
-    \node [block, right of=divide, node distance=3cm] (proof) {\footnotesize Proof};
-    \node [block, below of=proof, node distance=3cm] (bake) {\footnotesize Bake};
-    \path [line] (init) -- (bulk_ferment);
-    \path [line] (bulk_ferment) -- (divide);
-    \path [line] (divide) -- (shape);
-    \path [line] (shape) -- (proof);
-    \path [line] (proof) -- (bake);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-non-wheat-process.pdf}
   \caption{A visualization of the process to make non-wheat sourdough bread.
   The process is much simpler than making wheat sourdough bread. There is
   no gluten development. The ingredients are simply mixed together.}

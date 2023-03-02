@@ -7,21 +7,11 @@ the most accessible, least effort type of bread you can make.
 If you are a busy person and/or don't have an oven this might
 be exactly the type of bread you should consider.
 
-\begin{table}[htp!]
-  \centering
-  \resizebox{\textwidth}{!}{%
-  \begin{tabular}{|l|l|l|l|}
-  \hline
-                                   & \textbf{Flat bread} & \textbf{Loaf pan bread} & \textbf{Free standing bread} \\ \hline
-  \textbf{Cooking method}          & Fire, pan, barbecue & Oven                    & Oven                         \\ \hline
-  \textbf{Working time in minutes} & 3                   & 5                       & 60                           \\ \hline
-  \textbf{Flour types}             & All                 & All                     & Gluten flours                \\ \hline
-  \textbf{Difficulty}              & Very easy           & Easy                    & Difficult                    \\ \hline
-  \textbf{Cost}                    & Low                 & Medium                  & High                         \\ \hline
-  \end{tabular}%
-  }
-  \caption{\label{tab:bread-types-comparison}An overview of different bread types}
-  \end{table}
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{tables/table-overview-bread-types.pdf}
+  \caption{An overview of different bread types and their respective complexity}
+  \label{tab:bread-types-comparison}
+\end{figure}
 
 \section{Flat bread}
 
@@ -170,13 +160,7 @@ few steps you can stop buying bread forever. This works with
 every flour, including gluten free options.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto, every node/.style={inner sep=10, outer sep=0}]
-  \node [block] (init) {Mix ingredients};
-	\node [block, right of=init, node distance=5cm] (wait) {Wait for dough to be ready};
-	\node [block, right of=wait, node distance=5cm] (bake_bread) {Bake bread on stove};
-	\path [line] (init) -- (wait);
-	\path [line] (wait) -- (bake_bread);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-process-flat-bread.pdf}
   \caption{The process of making a flat bread is very simple requiring very little effort. This
   type of bread is especially handy for busy bakers.}
   \label{fig:flat-bread-process}
@@ -187,23 +171,12 @@ I have little time or when I am abroad. You can choose
 between two options. 1) A flat bread similar to a roti or naan bread
 or 2) sourdough pancakes.
 
-\begin{table}[htb!]
-  \centering
-  \resizebox{\textwidth}{!}{%
-  \begin{tabular}{|l|l|l|}
-  \hline
-                             & \textbf{Flat breads} & \textbf{Pancakes}                        \\ \hline
-  \textbf{Flour}             & 100g                               & 100g                       \\ \hline
-  \textbf{Water}             & 100g (100\%)                       & 300g (300\%)               \\ \hline
-  \textbf{Sourdough starter} & 5-20g (5-20\%)                     & 5-20g (5-20\%)             \\ \hline
-  \textbf{Salt}              & 2g (2\%)                           & 2g (2\%)                   \\ \hline
-  \textbf{When bake?}        & Dough increased 50 percent in size & Bubbles visible on surface \\ \hline
-  \end{tabular}%
-  }
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{tables/table-flat-bread-pancake-recipe.pdf}
   \caption{\label{tab:flat-bread-ingredients}Flat breads or pancakes recipe for 1 person. Multiply the ingredients
   to increase portion size. Refer to the section \ref{section:bakers-math} "\nameref{section:bakers-math}" to learn how
   to understand and use the percentages properly.} 
-\end{table}
+\end{figure}
 
 To get started prepare your sourdough starter. If it has not been using for a very
 long time consider giving it another feeding. To do so simply take 1g of your
@@ -240,7 +213,7 @@ when getting started. You can better observe the dough and see when
 it is ready.
 
 \begin{figure}[htb!]
-  \includegraphics[width=1.0\textwidth]{ethiopian-woman-checking-bread.jpeg}
+  \includegraphics[width=1.0\textwidth]{ethiopian-woman-checking-bread}
   \centering
   \caption{An ethiopian woman baking an "injera" made using teff flour. 
   The image has been provided by Charliefleurene via Wikipedia}
