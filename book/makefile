@@ -1,5 +1,5 @@
 .PHONY: build_pdf
-build_pdf: clean figures
+build_pdf: clean figures tables
 	pdflatex book.tex
 	biber book
 	pdflatex book.tex
@@ -7,6 +7,10 @@ build_pdf: clean figures
 .PHONY: figures
 figures:
 	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \; && cd ../
+
+.PHONY: tables
+tables:
+	cd tables && find . -name "table-*.tex" -exec pdflatex '{}' \; && cd ../
 
 .PHONY: clean
 clean:

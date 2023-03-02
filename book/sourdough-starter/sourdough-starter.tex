@@ -34,19 +34,10 @@ but there is an easier way. This is where baker's math
 comes in handy. Let's look at the default recipe with baker's
 math and then adjust it for the 1.4 kilogram flour quantity.
 
-\begin{table}[H]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|r|r|}
-\hline
-\textbf{Ingredient}    & \multicolumn{1}{l|}{\textbf{Percent}} & \multicolumn{1}{l|}{\textbf{Calculation}}  \\ \hline
-1000g flour            & 100\%                                     & 1000g of 1000g = 100\%                     \\ \hline
-600g water             & 60\%                                      & 600g of 1000g = 60\%                       \\ \hline
-100g sourdough starter & 10\%                                      & 100g of 1000g = 10\%                       \\ \hline
-20g salt               & 2\%                                       & 20g of 1000g = 2\%                         \\ \hline
-\end{tabular}%
-}
-\end{table}
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{tables/table-bakers-math-example.pdf}
+  \caption{An example table demonstrating how to properly calclate using baker's math}
+\end{figure}
 
 Note how each of the ingredients is calculated as a percentage
 based on the flour. The 100 percent is the baseline as the absolute
@@ -57,19 +48,11 @@ Now let's go back to our example and add just the flour, as we have
 more flour available the next day. As mentioned the next day
 we have 1.4 kilograms at hand (1400 grams).
 
-\begin{table}[H]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|r|r|}
-\hline
-\textbf{Ingredient} & \multicolumn{1}{l|}{\textbf{Baker's math}} & \multicolumn{1}{l|}{\textbf{Calculated value}} \\ \hline
-Flour               & 100\%                                      & 1400*1 = 1400g                                 \\ \hline
-Water               & 60\%                                       & 1400*0.6 = 840g                                \\ \hline
-Sourdough starter   & 10\%                                       & 1400*0.1 = 140g                                \\ \hline
-Salt                & 2\%                                        & 1400*0.02 = 28g                                \\ \hline
-\end{tabular}%
-}
-\end{table}
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{tables/table-recipe-bakers-math.pdf}
+  \caption{An example recipe that uses 1400 grams as base and is then
+  calculated using baker's math}
+\end{figure}
 
 For each ingredient we calculate the percentage
 based on the flour available (1400 grams). So for the water
