@@ -47,23 +47,6 @@
 % Space between paragraphs
 \usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
 
-% Define styles for the flow chart graphics
-\definecolor{codeblue}{RGB}{69, 161, 248}
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
-\tikzstyle{decision} = [diamond, draw, fill=codeblue, text=white,
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
-    text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
-    minimum height=2em]
-%\usetikzlibrary{external}
-%\tikzexternalize
-%\tikzset{jpg export/.style={external/system call={pdflatex \tikzexternalcheckshellescape -interaction=batchmode -jobname "\image" "\texsource"; convert -gravity center -extent 1245 -strip -quality 100 -density 300 -transparent white "\image.pdf" "\image.jpg"},/pgf/images/external info,/pgf/images/include external/.code=\includegraphics{##1.jpg}}}
-%\tikzset{jpg export}
-%\tikzsetexternalprefix{tikz-cache/} 
-
 % Caption and figure size below images
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize}

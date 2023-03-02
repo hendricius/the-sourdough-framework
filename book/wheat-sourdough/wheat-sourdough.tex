@@ -43,28 +43,7 @@ that tastes much better than any store-bought bread.
 \section{The process}
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Ready starter};
-    \node [block, right of=init, node distance=3cm] (mix_ingredients) {\footnotesize Mix ingredients};
-    \node [block, right of=mix_ingredients, node distance=3cm] (dough_strength) {\footnotesize Create dough strength};
-    \node [block, right of=dough_strength, node distance=3cm] (bulk) {\footnotesize Bulk ferment};
-    \node [decision, below of=dough_strength, node distance=3cm] (divide_test) {\footnotesize Making 1 loaf?};
-    \node [block, left of=divide_test, node distance=3cm] (divide) {\footnotesize Divide};
-    \node [block, left of=divide, node distance=3cm] (preshape) {\footnotesize Preshape};
-    \node [block, below of=preshape, node distance=3cm] (shape) {\footnotesize Shape};
-    \node [block, right of=shape, node distance=3cm] (proof) {\footnotesize Proof};
-    \node [block, right of=proof, node distance=3cm] (bake) {\footnotesize Bake};
-    \path [line] (init) -- (mix_ingredients);
-    \path [line] (mix_ingredients) -- (dough_strength);
-    \path [line] (dough_strength) -- (bulk);
-    \path [line] (bulk) -- (divide_test);
-    \path [line] (divide_test) -- node{yes} (shape);
-    \path [line] (divide_test) -- node{no} (divide);
-    \path [line] (divide) -- (preshape);
-    \path [line] (preshape) -- (shape);
-    \path [line] (shape) -- (proof);
-    \path [line] (proof) -- (bake);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-wheat-sourdough-process.pdf}
   \caption{The typical process of making a wheat-based sourdough bread}
   \label{fig:wheat-sourdough-process}
 \end{figure}
@@ -116,36 +95,7 @@ doesn't have a good balance of yeast to bacteria, so will your
 main dough.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
-    \node [block, right of=init, node distance=4cm] (feed_no_branch)
-      {\footnotesize Feed starter twice. 48 hours before and 6-12 hours before};
-    \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
-      {\footnotesize Feed starter once 6-12 hours before making dough};
-    \node [block, right of=feed_no_branch, node distance=6cm] (high_ratio)
-      {\footnotesize Use a 1:10:10 ratio. 10g starter, 100g flour, 100g water};
-    \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
-      {\footnotesize Use a 1:5:5 ratio. 10g starter, 50g flour, 50g water};
-    \node [block, below of=high_ratio, node distance=6cm] (check_starter)
-      {\footnotesize Check if starter is ready to be used};
-    \node [decision, below of=init, node distance=6cm] (size_check)
-      {\footnotesize Bubbly? Increased in size?};
-    \node [decision, below of=size_check, node distance=5cm] (smell_check)
-      {\footnotesize Vinegary or yogurty smell?};
-    \node [block, right of=smell_check, node distance=6cm] (make_dough)
-      {\footnotesize Prepare dough};
-    \path [line] (init) -- node{no} (feed_no_branch);
-    \path [line] (init) -- node{yes} (feed_yes_branch);
-    \path [line] (feed_yes_branch) -- (low_ratio);
-    \path [line] (feed_no_branch) -- (high_ratio);
-    \path [line] (high_ratio) -- (check_starter);
-    \path [line] (low_ratio) -- (check_starter);
-    \path [line] (check_starter) -- (size_check);
-    \path [line] (size_check) -- node{no} (feed_yes_branch);
-    \path [line] (size_check) -- node{yes} (smell_check);
-    \path [line] (smell_check) -- node{no} (feed_yes_branch);
-    \path [line] (smell_check) -- node{yes} (make_dough);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-wheat-sourdough-starter-process.pdf}
   \caption{The process to check your sourdough starter when making wheat-based doughs. In practice
   I frequently use a stiff sourdough starter. The stiff starter features enhanced yeast activity. In that case, you can
   use the same ratios as shown in the chart except for the water quantity. The stiff starter has a hydration of 50 to
@@ -597,35 +547,7 @@ all the gases during the fermentation process. Without the gluten network,
 the gases would just diffuse out of your dough.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Homogenize recipe ingredients};
-    \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15 minutes};
-    \path [line] (init) -- (wait1);
-    \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5 minutes};
-    \path [line] (wait1) -- (knead1);
-    \node [block, right of=knead1, node distance=3cm] (wait2) {\footnotesize Wait 15 minutes};
-    \path [line] (knead1) -- (wait2);
-    \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {\footnotesize Window-pane?};
-      \path [line] (wait2) -- (windowpane_test);
-      \path [line] (windowpane_test) -- node{no} (knead1);
-    \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {\footnotesize Bassinage for more water?};
-      \path [line] (windowpane_test) -- node{yes} (more_water);
-    \node [block, left of=more_water, node distance=4.5cm] (add_water) {\footnotesize Add water};
-      \path [line] (more_water) -- node{yes} (add_water);
-      \path [line] (add_water) -- (knead1);
-    \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait 15 minutes};
-    \path [line] (add_water) -- (wait3);
-    \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot jar?};
-    \path [line] (wait3) -- (dough_sample);
-    \path [line] (more_water) -- node{no} (dough_sample);
-    \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {\footnotesize Make round dough ball};
-    \path [line] (dough_sample) -- node{no} (dough_ball);
-    \node [block, below of=dough_sample, node distance=3cm] (extract_sample) {\footnotesize Extract sample};
-    \path [line] (dough_sample) -- node{yes} (extract_sample);
-    \path [line] (extract_sample) -- (dough_ball);
-    \node [block, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
-    \path [line] (dough_ball) -- (begin_bulk);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-kneading-process.pdf}
   \caption{The gluten development process for a wheat-based dough}
   \label{fig:wheat-sourdough-kneading-process}
 \end{figure}
@@ -1179,15 +1101,7 @@ The step is required if you are making multiple loaves in one
 batch. It is optional if you are making a single loaf.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Dividing required?};
-    \node [decision, right of=init, node distance=5cm] (more_than_one_loaf) {\footnotesize More than 1 loaf?};
-    \node [block, right of=more_than_one_loaf, node distance=5cm] (yes) {\footnotesize Yes};
-    \node [block, below of=yes, node distance=3cm] (no) {\footnotesize No};
-    \path [line] (init) -- (more_than_one_loaf);
-    \path [line] (more_than_one_loaf) -- (yes);
-    \path [line] (more_than_one_loaf) -- (no);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-dividing-preshaping.pdf}
   \caption{Dividing is only required when you are making multiple loaves in a single dough batch}
   \label{fig:dividing-decision-tree}
 \end{figure}
@@ -1298,23 +1212,7 @@ your environment.
 \section{Shaping}
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Begin shaping};
-    \node [decision, right of=init, node distance=5cm] (overfermented_decision) {\footnotesize Dough overly sticky or dough tears?};
-    \node [block, right of=overfermented_decision, node distance=4cm] (overfermented) {\footnotesize Your dough is likely overfermented};
-    \node [block, right of=overfermented, node distance=3cm] (loafpan) {\footnotesize Move to loaf pan, short proof, then bake directly};
-    \node [block, below of=init, node distance=4cm] (shaping_technique) {\footnotesize Proceed with shaping technique};
-    \node [block, right of=shaping_technique, node distance=3cm] (flour) {\footnotesize Flour shaped dough};
-    \node [block, right of=flour, node distance=3cm] (banneton) {\footnotesize Place upside down in banneton};
-    \node [block, right of=banneton, node distance=3cm] (proof) {\footnotesize Begin proofing};
-    \path [line] (init) -- (overfermented_decision);
-    \path [line] (overfermented_decision) -- node{yes} (overfermented);
-    \path [line] (overfermented_decision) -- node{no} (shaping_technique);
-    \path [line] (shaping_technique) -- (flour);
-    \path [line] (flour) -- (banneton);
-    \path [line] (banneton) -- (proof);
-    \path [line] (overfermented) -- (loafpan);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-shaping-process.pdf}
   \caption{A schematic visualization of the shaping process including checks for an overfermented dough.}
   \label{fig:shaping-decision-tree}
 \end{figure}
@@ -1532,30 +1430,8 @@ at a slower rate at colder temperatures. But I doubt that they alter
 their biochemical processes. More research is needed on the topic
 of retarding and flavor development.
 
-
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [decision] (init) {\footnotesize Room temperature proofing?};
-    \node [decision, right of=init, node distance=9cm] (retard_bake_decision) {\footnotesize Bake in less than 10 hours from now?};
-    \node [block, below of=init, node distance=4cm] (poke) {\footnotesize Poke the dough};
-    \node [block, right of=poke, node distance=4cm] (wait_poke) {\footnotesize Wait 15 minutes};
-    \node [decision, below of=poke, node distance=3cm] (dent_visible_decision) {\footnotesize Dent still visible after 1 minute?};
-    \node [block, right of=dent_visible_decision, node distance=4cm] (bake) {\footnotesize Score and bake};
-    \node [block, below of=retard_bake_decision, node distance=3cm] (wait_retard) {\footnotesize Wait 15 minutes};
-    \node [block, below of=wait_retard, node distance=3cm] (retard) {\footnotesize Proof in fridge at 4°C (40°F)};
-    \node [block, right of=wait_retard, node distance=3cm] (move_to_fridge) {\footnotesize Move dough directly to fridge};
-    \path [line] (init) -- node{yes} (poke);
-    \path [line] (init) -- node{no} (retard_bake_decision);
-    \path [line] (poke) -- (dent_visible_decision);
-    \path [line] (dent_visible_decision) -- node{yes} (bake);
-    \path [line] (dent_visible_decision) -- node{no} (wait_poke);
-    \path [line] (wait_poke) -- (poke);
-    \path [line] (retard_bake_decision) -- node{yes} (wait_retard);
-    \path [line] (retard_bake_decision) -- node{no} (move_to_fridge);
-    \path [line] (wait_retard) -- (retard);
-    \path [line] (move_to_fridge) -- (retard);
-    \path [line] (retard) -- (bake);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-proofing-process.pdf}
   \caption{A schematic overview of the different steps of the sourdough proofing process. The proofing technique to choose
   depends on your availability and schedule.}
   \label{fig:proofing-process}

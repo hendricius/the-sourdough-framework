@@ -1,0 +1,33 @@
+\input{./vars}
+
+\begin{document}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [block] (init) {\footnotesize Homogenize recipe ingredients};
+  \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15 minutes};
+  \path [line] (init) -- (wait1);
+  \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5 minutes};
+  \path [line] (wait1) -- (knead1);
+  \node [block, right of=knead1, node distance=3cm] (wait2) {\footnotesize Wait 15 minutes};
+  \path [line] (knead1) -- (wait2);
+  \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {\footnotesize Window-pane?};
+  \path [line] (wait2) -- (windowpane_test);
+  \path [line] (windowpane_test) -- node{no} (knead1);
+  \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {\footnotesize Bassinage for more water?};
+  \path [line] (windowpane_test) -- node{yes} (more_water);
+  \node [block, left of=more_water, node distance=4.5cm] (add_water) {\footnotesize Add water};
+  \path [line] (more_water) -- node{yes} (add_water);
+  \path [line] (add_water) -- (knead1);
+  \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait 15 minutes};
+  \path [line] (add_water) -- (wait3);
+  \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot jar?};
+  \path [line] (wait3) -- (dough_sample);
+  \path [line] (more_water) -- node{no} (dough_sample);
+  \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {\footnotesize Make round dough ball};
+  \path [line] (dough_sample) -- node{no} (dough_ball);
+  \node [block, below of=dough_sample, node distance=3cm] (extract_sample) {\footnotesize Extract sample};
+  \path [line] (dough_sample) -- node{yes} (extract_sample);
+  \path [line] (extract_sample) -- (dough_ball);
+  \node [block, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
+  \path [line] (dough_ball) -- (begin_bulk);
+\end{tikzpicture}
+\end{document}

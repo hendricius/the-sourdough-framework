@@ -108,26 +108,9 @@ starter's flavour by changing the type to a liquid starter.
   \label{fig:liquid-sourdough-starter}
 \end{figure}
 
+
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Make a regular or stiff starter};
-    \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix 1g existing starter, 5g flour and 25g water};
-    \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait 24 hours};
-    \node [block, below of=init, node distance=4cm] (feed_again) {\footnotesize Feed again using 1:5:25 ratio};
-    \node [block, right of=next_day, node distance=5cm] (test) {\footnotesize Check starter readiness?};
-    \node [decision, below of=next_day, node distance=4cm] (ready_signs) {\footnotesize Sour yogurty smell and bubbles visible on flour?};
-    \node [block, below of=test, node distance=4cm] (last_feed) {\footnotesize Feed one last time};
-    \node [block, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
-    \path [line] (init) -- (feed_new_ratio);
-    \path [line] (feed_new_ratio) -- (next_day);
-    \path [line] (feed_again) -- node{\footnotesize repeat 3 times} (feed_new_ratio);
-    \path [line] (next_day) -- node{\footnotesize after 3 days} (test);
-    \path [line] (next_day) -- (feed_again);
-    \path [line] (test) -- (ready_signs);
-    \path [line] (ready_signs) -- node{\footnotesize no} (feed_again);
-    \path [line] (ready_signs) -- node{\footnotesize yes} (last_feed);
-    \path [line] (last_feed) -- node{\footnotesize after 6-12 hours} (bread_dough);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-liquid-starter-conversion.pdf}
   \caption{The process to convert your regular or stiff starter into a liquid starter. The whole
   process takes around 3 days. The longer you maintain your starter at the
   suggested hydration level the more adapted your microorganisms become. It is recommended
@@ -200,25 +183,7 @@ around 50 to 60 percent. So for 100 grams of flour you are using around 50 to
 60 grams of water.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-    \node [block] (init) {\footnotesize Make a regular or liquid starter};
-    \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix 10g existing starter, 50g flour and 25g water};
-    \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait 24 hours};
-    \node [block, below of=feed_new_ratio] (feed_again) {\footnotesize Feed again using 1:5:2.5 ratio};
-    \node [block, right of=next_day, node distance=5cm] (test) {\footnotesize Check starter readiness?};
-    \node [decision, right of=feed_again, node distance=4cm] (ready_signs) {\footnotesize Size increase and sour smell?};
-    \node [block, right of=ready_signs, node distance=4cm] (last_feed) {\footnotesize Feed one last time};
-    \node [block, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
-    \path [line] (init) -- (feed_new_ratio);
-    \path [line] (feed_new_ratio) -- (next_day);
-    \path [line] (feed_again) -- node{\footnotesize repeat 3 times} (feed_new_ratio);
-    \path [line] (next_day) -- node{\footnotesize after 3 days} (test);
-    \path [line] (next_day) -- (feed_again);
-    \path [line] (test) -- (ready_signs);
-    \path [line] (ready_signs) -- node{\footnotesize no} (feed_again);
-    \path [line] (ready_signs) -- node{\footnotesize yes} (last_feed);
-    \path [line] (last_feed) -- node{\footnotesize after 6-12 hours} (bread_dough);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-stiff-starter-conversion.pdf}
   \caption{The process to convert your regular starter into a stiff starter. The whole
   process takes around 3 days. The longer you maintain your starter at the
   suggested hydration level the more adapted your microorganisms become. The

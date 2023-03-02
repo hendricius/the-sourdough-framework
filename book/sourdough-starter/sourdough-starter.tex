@@ -133,26 +133,7 @@ use a glass and place another inverted one on top. The container shouldn't
 be airtight. You still want some gas exchange to be possible.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-   	\node [block] (init) {\footnotesize Mix 50g flour + 50g water, stir}; 
-	\node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 24 hours};
-	\path [line] (init) -- (wait1);
-	\node [block, right of=wait1, node distance=3cm] (feed) {\footnotesize 10g of previous day + 50g water + 50g flour, stir};
-	\path [line] (wait1) -- (feed);
-	\node [block, below of=feed] (discard) {\footnotesize Discard the rest};
-	\path [line] (feed) -- (discard);
-    \node [decision, right of=feed, node distance=3.5cm] (decide) {\footnotesize Is good?};
-    \node [decision, above of=decide, node distance=3cm] (timeout) {\footnotesize Less than 10 feeds?};
-	\node [block, above of=feed, node distance=3cm] (wait2) {\footnotesize Wait 24 hours};
-    \node [block, right of=timeout, node distance=3cm] (discard2) {\footnotesize Batch failed};
-	\path [line] (timeout) -- node{no} (discard2);
-	\path [line] (timeout) -- node{yes} (wait2);
-	\path [line] (feed) -- (decide);
-    \node [block, right of=decide, node distance=3cm] (use) {\footnotesize Ready to use};
-	\path [line] (decide) -- node{no} (timeout);
-	\path [line] (wait2) -- (feed);
-	\path [line] (decide) -- node{yes} (use);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-starter-process.pdf}
   \caption{The process of making a sourdough starter from scratch}
   \label{fig:sourdough-starter-process}
 \end{figure}
@@ -270,23 +251,7 @@ yeast has been isolated like this from century old sourdough
 starters.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Make a starter};
-	\node [block, right of=init, node distance=3cm] (feed) {\footnotesize Feed your starter};
-	\path [line] (init) -- (feed);
-	\node [block, right of=feed, node distance=3cm] (ready_question) {\footnotesize Perform readiness check};
-	\path [line] (feed) -- (ready_question);
-	\node [block, below of=feed, node distance=3cm] (wait_12) {\footnotesize Wait 12 hours};
-	\path [line] (wait_12) -- (feed);
-  \node [decision, right of=ready_question, node distance=3.5cm] (is_bubbly) {\footnotesize Bubbly? Size Increase?};
-	\path [line] (ready_question) -- (is_bubbly);
-	\path [line] (is_bubbly) -- node{no} (wait_12);
-  \node [decision, below of=is_bubbly, node distance=4.0cm] (check_smell) {\footnotesize Vinegary, or yogurt smell?};
-	\path [line] (is_bubbly) -- node{yes} (check_smell);
-	\node [block, below of=init, node distance=6cm] (make_dough) {\footnotesize Make your dough};
-	\path [line] (check_smell) -- node{yes} (make_dough);
-	\path [line] (check_smell) -- node{no} (wait_12);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-starter-readiness.pdf}
   \caption{A flow chart showing you how to determine if your sourdough starter is ready to be used.
   For checking readiness look at a size increase and take note of your starter's smell. Both are important
   indicators to check for readiness.}
@@ -353,38 +318,7 @@ yeast part of your sourdough and balance the fermentation.
 \section{Maintenance}
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Make your bread dough};
-  \node [decision, below of=init, node distance=3.5cm] (all_starter_used) {\footnotesize All starter used?};
-	\path [line] (init) -- (all_starter_used);
-	\node [block, right of=init, node distance=3cm] (use_dough) {\footnotesize Take 10g of your bread dough};
-	\node [block, right of=all_starter_used, node distance=3cm] (use_starter) {\footnotesize Take all but not more than 10g of your starter};
-	\path [line] (all_starter_used) -- node{yes} (use_dough);
-	\path [line] (all_starter_used) -- node{no} (use_starter);
-	\node [block, right of=use_dough, node distance=3cm] (feed_starter) {\footnotesize Feed using 1:5:5 ratio};
-	\path [line] (use_dough) -- (feed_starter);
-	\path [line] (use_starter) -- (feed_starter);
-  \node [decision, right of=feed_starter, node distance=3cm] (bake_next_day_check) {\footnotesize Bake next day?};
-  \path [line] (feed_starter) -- (bake_next_day_check);
-	\node [block, right of=bake_next_day_check, node distance=3.5cm] (make_bread_dough) {\footnotesize Make bread dough again after 8-12 hours};
-  \path [line] (bake_next_day_check) -- node{yes} (make_bread_dough);
-  \node [decision, right of=use_starter, node distance=3cm] (bake_next_week_check) {\footnotesize Baking in next 2 weeks?};
-	\node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {\footnotesize Store starter in fridge at 4°C(40°F)};
-  \path [line] (bake_next_week_check) -- node{yes} (store_fridge);
-	\node [block, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ration 8-12 hours before making dough};
-  \path [line] (store_fridge) -- (feed_after_fridge);
-	\path [line] (bake_next_day_check) -- node{no} (bake_next_week_check);
-  \node [decision, below of=use_starter, node distance=3cm] (freezer_check) {\footnotesize Have a freezer?};
-  \path [line] (bake_next_week_check) -- (store_fridge);
-  \path [line] (bake_next_week_check) -- node{no} (freezer_check);
-	\node [block, right of=freezer_check, node distance=3cm] (dry_starter) {\footnotesize Dry your starter};
-	\node [block, below of=dry_starter, node distance=3cm] (freeze_starter) {\footnotesize Freeze your starter};
-  \path [line] (freezer_check) -- node{no} (dry_starter);
-  \path [line] (freezer_check) -- node{yes} (freeze_starter);
-	\node [block, right of=dry_starter, node distance=3.5cm] (reactivate_freezer) {\footnotesize Reactivate starter for 3 days with daily 1:5:5 feedings};
-  \path [line] (dry_starter) -- (reactivate_freezer);
-  \path [line] (freeze_starter) -- (reactivate_freezer);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-starter-maintenance.pdf}
   \caption{A full flowchart showing you how to conduct proper sourdough starter maintenance. You can use a
   piece of your dough as the next starter. You can also use left-over starter and feed it again. Choose an
   option that works fest for your own schedule. The chart assumes that you are using a starter at a 100 percent

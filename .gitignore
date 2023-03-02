@@ -17,3 +17,5 @@ book/book*
 book/bookch*
 book/content.opf
 book/output-epub
+book/figures/*.png
+book/figures/*.pdf

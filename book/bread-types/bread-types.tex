@@ -170,13 +170,7 @@ few steps you can stop buying bread forever. This works with
 every flour, including gluten free options.
 
 \begin{figure}[!htb]
-  \begin{tikzpicture}[node distance = 3cm, auto, every node/.style={inner sep=10, outer sep=0}]
-  \node [block] (init) {Mix ingredients};
-	\node [block, right of=init, node distance=5cm] (wait) {Wait for dough to be ready};
-	\node [block, right of=wait, node distance=5cm] (bake_bread) {Bake bread on stove};
-	\path [line] (init) -- (wait);
-	\path [line] (wait) -- (bake_bread);
-  \end{tikzpicture}
+  \includegraphics{figures/fig-process-flat-bread.pdf}
   \caption{The process of making a flat bread is very simple requiring very little effort. This
   type of bread is especially handy for busy bakers.}
   \label{fig:flat-bread-process}
