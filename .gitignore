@@ -35,6 +35,8 @@ book/book.idv
 book/book.lg
 book/book.log
 book/book.mobi
+book/book.azw3
+book/book.epub
 book/book.ncx
 book/book.out
 book/book.pdf
@@ -45,3 +47,4 @@ book/book.xref
 book/book*.html
 book/book-epub/
 book/book-mobi/
+book/book-azw3/

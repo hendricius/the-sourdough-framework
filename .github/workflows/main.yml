@@ -15,7 +15,6 @@ jobs:
           run: |
             apk add make
             cd book
-            make all
             make release
       - name: Release book on S3
         uses: shallwefootball/s3-upload-action@master
