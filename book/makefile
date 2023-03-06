@@ -1,3 +1,5 @@
+SHELL:=/bin/bash -O globstar
+
 .PHONY: build_pdf
 build_pdf: clean figures tables
 	pdflatex book.tex
@@ -7,6 +9,12 @@ build_pdf: clean figures tables
 .PHONY: figures
 figures:
 	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \; && cd ../
+
+.PHONY: optimize_images
+optimize_images:
+	for JPG in **/*.jpg; do \
+		echo $$JPG; \
+	done
 
 .PHONY: tables
 tables:
