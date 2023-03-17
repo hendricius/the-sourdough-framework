@@ -1,0 +1,5 @@
+local filter  = require "make4ht-filter"
+local changeimg = function(s) return s:gsub("%./images//","images/") end
+local process = filter{changeimg}
+Make:htlatex()
+Make:match("html$",process)
