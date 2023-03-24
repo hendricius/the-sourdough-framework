@@ -19,7 +19,7 @@
   \node [decision, right of=use_starter, node distance=3cm] (bake_next_week_check) {\footnotesize Baking in next 2 weeks?};
   \node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {\footnotesize Store starter in fridge at 4°C(40°F)};
   \path [line] (bake_next_week_check) -- node{yes} (store_fridge);
-  \node [block, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ration 8-12 hours before making dough};
+  \node [block, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ratio 8-12 hours before making dough};
   \path [line] (store_fridge) -- (feed_after_fridge);
   \path [line] (bake_next_day_check) -- node{no} (bake_next_week_check);
   \node [decision, below of=use_starter, node distance=3cm] (freezer_check) {\footnotesize Have a freezer?};
