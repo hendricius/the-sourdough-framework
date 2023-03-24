@@ -42,6 +42,8 @@ clean:
 	rm -rf book-epub/
 	rm -rf book-epub3/
 	rm -rf book-mobi/
+	rm -rf book-azw3/
+	rm -rf book.azw3
 	rm -f *.pdf
 	rm -f output.log
 	rm -f content.opf
