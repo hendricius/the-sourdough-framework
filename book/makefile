@@ -4,16 +4,31 @@ build_pdf: clean figures tables
 	biber book
 	pdflatex book.tex
 
+.PHONY: clean_figures
+clean_figures:
+	cd figures
+	rm -rf figures/*.aux
+	rm -rf figures/*.fdb_latexmk
+	rm -rf figures/*.fls
+	rm -rf figures/*.log
+	rm -rf figures/*.pdf
+	rm -rf figures/*.png
+
+.PHONY: export_figures
+# Requires that you have docker running on your computer.
+export_figures:
+	cd figures/ && bash export_figures.sh
+
 .PHONY: figures
-figures:
-	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \; && cd ../
+figures: clean_figures
+	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \;
 
 .PHONY: tables
 tables:
-	cd tables && find . -name "table-*.tex" -exec pdflatex '{}' \; && cd ../
+	cd tables && find . -name "table-*.tex" -exec pdflatex '{}' \;
 
 .PHONY: clean
-clean:
+clean: clean_figures
 	rm -f book.blg
 	rm -f book.bbl
 	rm -f book.aux
@@ -47,12 +62,6 @@ clean:
 	rm -f *.pdf
 	rm -f output.log
 	rm -f content.opf
-	rm -rf figures/*.aux
-	rm -rf figures/*.fdb_latexmk
-	rm -rf figures/*.fls
-	rm -rf figures/*.log
-	rm -rf figures/*.pdf
-	rm -rf figures/*.png
 	find . -name "*.xbb" | xargs rm -f
 	rm -rf release/
 
