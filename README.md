@@ -78,7 +78,7 @@ that it will reach more people all over the world without
 budget constraints.
 
 If you would like to contribute with a small donation you can do so
-via my [ko-fi page.](https://breadco.de/book). This will help me
+via my [ko-fi page.](https://breadco.de/book) This will help me
 to cover costs related to running the-bread-code and allow me
 to work more updates for this book.
 
