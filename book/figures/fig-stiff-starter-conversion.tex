@@ -4,20 +4,26 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Make a regular or liquid starter};
   \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix 10g existing starter, 50g flour and 25g water};
-  \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait 24 hours};
-  \node [block, below of=feed_new_ratio] (feed_again) {\footnotesize Feed again using 1:5:2.5 ratio};
-  \node [block, right of=next_day, node distance=5cm] (test) {\footnotesize Check starter readiness?};
-  \node [decision, right of=feed_again, node distance=4cm] (ready_signs) {\footnotesize Size increase and sour smell?};
-  \node [block, right of=ready_signs, node distance=4cm] (last_feed) {\footnotesize Feed one last time};
+  \node [decision, right of=feed_new_ratio, node distance=3cm] (too_dry) {\footnotesize Starter very dry, hard to mix?};
+  \node [block, right of=too_dry, node distance=4cm] (add_water) {\footnotesize Add more water};
+  \node [block, below of=add_water, node distance=2cm] (next_day) {\footnotesize Wait 24 hours};
+  \node [decision, below of=too_dry, node distance=3cm] (repeated_3_times) {\footnotesize Stiff starter fed 3 times overall?};
+  \node [block, left of=repeated_3_times] (feed_again) {\footnotesize Feed again using 1:5:2.5 ratio};
+  \node [decision, below of=repeated_3_times, node distance=3.5cm] (ready_signs) {\footnotesize Size increase and sour smell?};
+  \node [block, below of=next_day, node distance=2cm] (last_feed) {\footnotesize Feed one last time};
   \node [block, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
   \path [line] (init) -- (feed_new_ratio);
-  \path [line] (feed_new_ratio) -- (next_day);
-  \path [line] (feed_again) -- node{\footnotesize repeat 3 times} (feed_new_ratio);
-  \path [line] (next_day) -- node{\footnotesize after 3 days} (test);
-  \path [line] (next_day) -- (feed_again);
-  \path [line] (test) -- (ready_signs);
+  \path [line] (feed_again) -- (feed_new_ratio);
+  \path [line] (next_day) -- (repeated_3_times);
+  \path [line] (repeated_3_times) -- node{\footnotesize yes} (ready_signs);
+  \path [line] (repeated_3_times) -- node{\footnotesize no} (feed_again);
   \path [line] (ready_signs) -- node{\footnotesize no} (feed_again);
   \path [line] (ready_signs) -- node{\footnotesize yes} (last_feed);
   \path [line] (last_feed) -- node{\footnotesize after 6-12 hours} (bread_dough);
+  \path [line] (feed_new_ratio) -- (too_dry);
+  \path [line] (add_water) -- (next_day);
+  \path [line] (too_dry) -- node{\footnotesize no} (next_day);
+  \path [line] (too_dry) -- node{\footnotesize yes} (add_water);
+  \path [line] (ready_signs) -- node{\footnotesize yes} (last_feed);
 \end{tikzpicture}
 \end{document}
