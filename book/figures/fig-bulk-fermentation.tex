@@ -1,0 +1,30 @@
+\input{./vars}
+
+\begin{document}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [block] (init) {\footnotesize Bulk fermentation};
+  \node [block, right of=init] (check_dough) {\footnotesize Check the dough};
+  \node [block, right of=check_dough] (size_increase) {\footnotesize Check dough size increase};
+  \node [block, below of=size_increase, node distance=2cm] (ph_value) {\footnotesize Check dough pH value};
+  \node [block, below of=ph_value, node distance=2cm] (smell) {\footnotesize Check dough smell};
+  \node [decision, right of=smell] (dough_ready) {\footnotesize Dough ready?};
+  \node [block, below of=dough_ready] (divide_preshape) {\footnotesize Divide and preshape};
+  \node [decision, below of=smell] (dough_flattened) {\footnotesize Dough flattened out?};
+  \node [block, left of=dough_flattened] (stretch_fold) {\footnotesize Stretch and fold};
+  \node [block, left of=smell] (wait_60_minutes) {\footnotesize Wait 60 minutes};
+
+  \path [line] (init) -- (check_dough);
+  \path [line] (check_dough) -- (size_increase);
+  \path [line] (check_dough) -- node{or} (ph_value);
+  \path [line] (check_dough) -- node{or} (smell);
+  \path [line] (size_increase) -- (dough_ready);
+  \path [line] (ph_value) -- (dough_ready);
+  \path [line] (smell) -- (dough_ready);
+  \path [line] (dough_ready) -- node{yes} (divide_preshape);
+  \path [line] (dough_ready) -- node{no} (dough_flattened);
+  \path [line] (dough_flattened) -- node{yes} (stretch_fold);
+  \path [line] (dough_flattened) -- node{no} (wait_60_minutes);
+  \path [line] (stretch_fold) -- (wait_60_minutes);
+  \path [line] (wait_60_minutes) -- (check_dough);
+\end{tikzpicture}
+\end{document}
