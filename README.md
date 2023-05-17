@@ -21,7 +21,7 @@ project intends to go one step deeper into the workings of
 natural fermentation. At the same time as many scientific references
 as possible are provided.
 
-![The book cover](cover.jpg)
+![The book cover](book/images/cover-page.jpg)
 
 ## Building the book (Docker)
 
