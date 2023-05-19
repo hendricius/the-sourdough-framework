@@ -48,3 +48,6 @@ book/book*.html
 book/book-epub/
 book/book-mobi/
 book/book-azw3/
+*.bak
+book_sans_serif/
+*.opf
