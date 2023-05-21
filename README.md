@@ -3,14 +3,14 @@
 The sourdough framework is an open-source book dedicated to
 helping you to make the best possible sourdough bread at home.
 
+![The book cover](book/images/cover-page.jpg)
+
 Rather than providing recipes this book intends to provide a
 framework that enables you to bake bread in your respective
 environment. Every flour, every sourdough, and every home setup
 is different. This makes following recipes without background
 information so hard and a fail-prone endeavor. This book
 intends to close that gap.
-
-![A whole wheat sourdough bread](./book/images/whole-wheat-crumb.jpg)
 
 ## Background
 
@@ -21,7 +21,8 @@ project intends to go one step deeper into the workings of
 natural fermentation. At the same time as many scientific references
 as possible are provided.
 
-![The book cover](book/images/cover-page.jpg)
+![A whole wheat sourdough bread](./book/images/whole-wheat-crumb.jpg)
+
 
 ## Building the book (Docker)
 
@@ -67,6 +68,13 @@ The below versions are automatically built on every push to the `main` branch.
 * [Download compiled .mobi version](https://www.the-bread-code.io/book.mobi)
 * [Download compiled .azw3 version](https://www.the-bread-code.io/book.azw3)
 
+There's an additional enhanced accessibility version using a sans serif font:
+
+* [Download compiled .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
+* [Download compiled .epub version](https://www.the-bread-code.io/book-sans-serif.epub)
+* [Download compiled .mobi version](https://www.the-bread-code.io/book-sans-serif.mobi)
+* [Download compiled .azw3 version](https://www.the-bread-code.io/book-sans-serif.azw3)
+
 ## Support
 
 Did you find a typo, or feel the wording could be improved?
@@ -78,9 +86,9 @@ that it will reach more people all over the world without
 budget constraints.
 
 If you would like to contribute with a small donation you can do so
-via my [ko-fi page.](https://breadco.de/book) This will help me
-to cover costs related to running the-bread-code and allow me
-to work more updates for this book.
+via my [ko-fi page.](https://breadco.de/book) Your donation will tremendously
+help me to cover costs related to running the-bread-code. It futhermore allows
+me to dedidcate time to continously update and improve this book.
 
 ## Links
 
