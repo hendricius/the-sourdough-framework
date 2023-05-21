@@ -24,7 +24,7 @@ as possible are provided.
 ![A whole wheat sourdough bread](./book/images/whole-wheat-crumb.jpg)
 
 
-## Building the book (Docker)
+## 🍞 Baking the book (Docker)
 
 ```console
 make
@@ -32,15 +32,15 @@ make
 
 Then you can check out the file `book/book.pdf`
 
-If you want to build the eBook versions (.epub, .mobi, .azw3) run:
+If you want to 🍞 bake all the versions including ebook formats (.pdf, .epub, .mobi, .azw3) run:
 
 ```console
-make release
+make bake
 ```
 
 You can check the files in  the folder `book/release/`
 
-## Building the book locally (LaTeX)
+## 🍞 Baking the book locally (LaTeX)
 
 Make sure you have `biber` installed. Refer to your system's installation
 instructions for LaTeX.
@@ -50,11 +50,11 @@ cd book/
 make
 ```
 
-If you want to build the eBook versions (.epub, .mobi, .azw3) run:
+If you want to 🍞 bake all the versions including ebook formats (.pdf, .epub, .mobi, .azw3) run:
 
 ```console
 cd book/
-make release
+make bake
 ```
 
 You can check the files in the folder `book/release/`

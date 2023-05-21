@@ -78,8 +78,8 @@ release_default: clean build_pdf make_release_dir build_ebook
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 	cp book-azw3/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
 
-.PHONY: release_default
-release: release_default release_sans_serif
+.PHONY: bake
+bake: release_default release_sans_serif
 
 .PHONY: make_release_dir
 make_release_dir:
