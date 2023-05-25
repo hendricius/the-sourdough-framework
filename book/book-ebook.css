@@ -1,0 +1,8 @@
+.figure {
+    max-width: 100% !important;
+}
+.figure img {
+    max-width: 100% !important;
+    object-fit: contain !important;
+    width: auto !important;
+}

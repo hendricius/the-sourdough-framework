@@ -1,0 +1,8 @@
+local filter  = require "make4ht-filter"
+local changePath = function(s) return s:gsub("%./images//","images/") end
+local removeHeight = function(s) return s:gsub("height=\"390\"","") end
+local removeWidth = function(s) return s:gsub("width=\"390\"","") end
+local removeFixedSettings = function(s) return removeWidth(removeHeight(changePath(s))) end
+local process = filter{removeFixedSettings}
+Make:htlatex()
+Make:match("html$",process)

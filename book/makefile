@@ -115,4 +115,7 @@ build_ebook: make_release_dir
 	find . -name "*.png" | xargs ebb -x
 	tex4ebook -c tex4ebook.cfg -f epub book.tex
 	tex4ebook -c tex4ebook.cfg -f mobi book.tex
+	# not sure why, but I hvae to generate the mobi twice for the
+	# release command to properly work.
+	tex4ebook -c tex4ebook.cfg -f mobi book.tex
 	tex4ebook -c tex4ebook.cfg -f azw3 book.tex
