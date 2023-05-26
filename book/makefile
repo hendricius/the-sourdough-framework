@@ -111,8 +111,6 @@ release_sans_serif: make_release_dir
 
 .PHONY: build_ebook
 build_ebook: make_release_dir
-	find . -name "*.jpg" | xargs ebb -x
-	find . -name "*.png" | xargs ebb -x
 	tex4ebook -c tex4ebook.cfg -f epub book.tex
 	tex4ebook -c tex4ebook.cfg -f mobi book.tex
 	# not sure why, but I hvae to generate the mobi twice for the
