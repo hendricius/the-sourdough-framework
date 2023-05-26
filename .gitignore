@@ -50,4 +50,5 @@ book/book-mobi/
 book/book-azw3/
 *.bak
 book_sans_serif/
+release_sans_serif/
 *.opf
