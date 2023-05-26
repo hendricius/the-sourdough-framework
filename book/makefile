@@ -1,8 +1,17 @@
+LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
+
+%.pdf: %.tex
+	$(LATEX) $<
+
+SRC_FIGURES := $(wildcard figures/fig-*.tex)
+TGT_FIGURES := $(patsubst %.tex,%.pdf, $(SRC_FIGURES))
+
+SRC_TABLES := $(wildcard tables/table-*.tex)
+TGT_TABLES := $(patsubst %.tex,%.pdf, $(SRC_TABLES))
+
 .PHONY: build_pdf
-build_pdf: clean figures tables
-	pdflatex book.tex
-	biber book
-	pdflatex book.tex
+build_pdf: $(TGT_FIGURES) $(TGT_TABLES) book.tex
+	$(LATEX) book.tex
 
 # setup_default_build:
 # 	sed -i '.bak' 's#^\\usepackage{helvet}#%\\usepackage{helvet}#g' book.tex
@@ -24,13 +33,15 @@ clean_figures:
 export_figures:
 	cd figures/ && bash export_figures.sh
 
+# TODO figures/vars.tex is not seen as a dependency
+figures/%.pdf: figures/fig-%.tex
 .PHONY: figures
-figures: clean_figures
-	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \;
+figures: $(TGT_FIGURES)
 
+# TODO tables/vars.tex is not seen as a dependency
+tables/%.pdf: tables/table-%.tex
 .PHONY: tables
-tables:
-	cd tables && find . -name "table-*.tex" -exec pdflatex '{}' \;
+tables: $(TGT_TABLES)
 
 .PHONY: clean
 clean: clean_figures
