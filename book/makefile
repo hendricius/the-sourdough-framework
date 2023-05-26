@@ -1,5 +1,6 @@
 LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
 CLEAN := latexmk -cd -c
+PROPER := latexmk -cd -C
 
 %.pdf: %.tex
 	$(LATEX) $<
@@ -21,16 +22,20 @@ build_pdf: $(TGT_FIGURES) $(TGT_TABLES) book.tex
 .PHONY: clean_tables
 clean_tables:
 	$(CLEAN) $(SRC_TABLES)
-	cd tables/ 
-	- rm -f $(TGT_TABLES)
-	- rm -f *.png
+
+.PHONY: proper_tables
+proper_tables: clean_tables
+	$(PROPER) $(SRC_TABLES)
+	- rm -f tables/*.png
 
 .PHONY: clean_figures
 clean_figures:
 	$(CLEAN) $(SRC_FIGURES)
-	cd figures/ 
-	- rm -f $(TGT_FIGURES)
-	- rm -f *.png
+
+.PHONY: proper_figures
+proper_figures: clean_figures
+	$(PROPER) $(SRC_FIGURES)
+	- rm -f figures/*.png
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
@@ -47,16 +52,24 @@ tables/%.pdf: tables/table-%.tex
 .PHONY: tables
 tables: $(TGT_TABLES)
 
+.PHONY: mrproper
+mrproper: clean
+	$(PROPER) book.tex
+	- rm -rf release/
+	- rm -rf release_sans_serif/
+	- rm -rf book-epub/
+	- rm -rf book-epub3/
+	- rm -rf book-mobi/
+	- rm -rf book-azw3/
+
 .PHONY: clean
 clean: clean_figures
 	$(CLEAN) book.tex
 	- rm -f book.bbl
 	- rm -f book.run.xml
-	- rm -f book.pdf
 	- rm -f book.mobi
 	- rm -f book.4ct
 	- rm -f book.4tc
-	- rm -f book.dvi
 	- rm -f book.epub
 	- rm -f book.css
 	- rm -f book.idv
@@ -67,18 +80,12 @@ clean: clean_figures
 	- rm -f book*.svg
 	- rm -f book*.html
 	- rm -f book*.xhtml
-	- rm -rf book-epub/
-	- rm -rf book-epub3/
-	- rm -rf book-mobi/
-	- rm -rf book-azw3/
 	- rm -rf book.azw3
 	- rm -f content.opf
 	- find . -name "*.xbb" | xargs rm -f
-	- rm -rf release/
-	- rm -rf release_sans_serif/
 
 .PHONY: release_default
-release_default: clean build_pdf make_release_dir build_ebook
+release_default: mrproper build_pdf make_release_dir build_ebook
 	cp book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
