@@ -85,7 +85,7 @@ clean: clean_figures
 	- find . -name "*.xbb" | xargs rm -f
 
 .PHONY: release_default
-release_default: mrproper build_pdf make_release_dir build_ebook
+release_default: build_pdf build_ebook
 	cp book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
