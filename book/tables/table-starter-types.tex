@@ -1,13 +1,10 @@
-\input{./vars}
-
-\begin{document}
-\begin{tabular}{lllrl}
+\begin{tabular}{@{}lclll@{}}
 \toprule
-\textbf{Starter type} & \textbf{Hydration in \%} & \textbf{Flour type}     & \multicolumn{1}{l}{\textbf{Yeast activity}} & \textbf{Bacterial activity} \\ \midrule
-Regular               & 100                      & Strong wheat flour      & Balanced                                     & Balanced                    \\ \midrule
-Liquid                & 500                      & Very strong wheat flour & Minimal                                      & High                        \\ \midrule
-Stiff                 & 50-60                    & All wheat flour         &
-High                                         & Low                         \\
+                     &                         &                         &\multicolumn{2}{c}{\textbf{Activity}}\\
+                                                                                 \cmidrule(rl){4-5}
+\thead{Starter type} & \thead{Hydration (\%)} & \thead{Flour type}  & \thead{Yeast} & \thead{Bacterial} \\ \midrule
+Regular              & 100                     & Strong wheat       & Balanced      & Balanced          \\ \midrule
+Liquid               & 500                     & Very strong wheat  & Minimal       & High              \\ \midrule
+Stiff                & 50--60                  & All wheat          & High          & Low               \\
 \bottomrule
 \end{tabular}
-\end{document}

@@ -1,12 +1,8 @@
-\input{./vars}
-
-\begin{document}
-\begin{tabular}{lrr}
+\begin{tabular}{@{}r@{g }lrr@{ = }r@{}}
 \toprule
-\textbf{Ingredient}    & \multicolumn{1}{l}{\textbf{Percent}} & \multicolumn{1}{l}{\textbf{Calculation}}  \\ \midrule
-1000g flour            & 100\%                                & 1000g of 1000g = 100\%                    \\ \midrule
-600g water             & 60\%                                 & 600g of 1000g = 60\%                      \\ \midrule
-100g sourdough starter & 10\%                                 & 100g of 1000g = 10\%                      \\ \midrule
-20g salt               & 2\%                                  & 20g of 1000g = 2\%                        \\ \bottomrule
+\multicolumn{2}{c}{\thead{Ingredient}}& \thead{Percentage} & \multicolumn{2}{c}{\thead{Calculation}} \\ \midrule
+1000& flour             &100\%        & 1000g of 1000g & 100\% \\ \midrule
+ 600& water             & 60\%        & 600g of 1000g  &  60\% \\ \midrule
+ 100& sourdough starter & 10\%        & 100g of 1000g  &  10\% \\ \midrule
+  20& salt              &  2\%         & 20g of 1000g  &   2\% \\ \bottomrule
 \end{tabular}
-\end{document}
