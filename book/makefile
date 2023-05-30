@@ -89,33 +89,23 @@ make_release_dir:
 
 .PHONY: release_sans_serif
 release_sans_serif: make_release_dir
-	# For the sans serif version we are just going
-	# to copy all the files into a new folder and
-	rm -rf release_sans_serif/
-	mkdir /tmp/release_sans_serif
-	cp -R * /tmp/release_sans_serif
-	mv /tmp/release_sans_serif .
-	# The next part will uncomment the sans serif font in the book.tex
-	#
-	# Note that the OS X sed behaves a little different
-	# than the gnu sed. If you are on OS X you might
-	# have to install gnu sed for this to work. Or you can
-	# use sed -i '.bak' restofcommand. OS X wants to have
-	# a backup file listed before replacing the contents
-	# of a file.
-	sed -i 's#%\\usepackage{helvet}#\\usepackage{helvet}#g' release_sans_serif/book.tex
-	sed -i 's#%\\renewcommand{\\familydefault}{\\sfdefault}#\\renewcommand{\\familydefault}{\\sfdefault}#g' release_sans_serif/book.tex
-	cd release_sans_serif && $(MAKE) release_default
-	cp release_sans_serif/release/TheBreadCode-The-Sourdough-Framework.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
-	cp release_sans_serif/release/TheBreadCode-The-Sourdough-Framework.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
-	cp release_sans_serif/release/TheBreadCode-The-Sourdough-Framework.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
-	cp release_sans_serif/release/TheBreadCode-The-Sourdough-Framework.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+	${LATEX} -output-directory=book_sans_serif book_sans_serif.tex
+	tex4ebook -c tex4ebook.cfg -f epub book_sans_serif.tex
+	tex4ebook -c tex4ebook.cfg -f mobi book_sans_serif.tex
+	# not sure why, but I have to generate the mobi twice for the release
+	# command to properly work.
+	tex4ebook -c tex4ebook.cfg -f mobi book_sans_serif.tex
+	tex4ebook -c tex4ebook.cfg -f azw3 book_sans_serif.tex
+	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
+	cp book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
+	cp book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
+	cp book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
 .PHONY: build_ebook
 build_ebook: make_release_dir
 	tex4ebook -c tex4ebook.cfg -f epub book.tex
 	tex4ebook -c tex4ebook.cfg -f mobi book.tex
-	# not sure why, but I hvae to generate the mobi twice for the
-	# release command to properly work.
+	# not sure why, but I have to generate the mobi twice for the release
+	# command to properly work.
 	tex4ebook -c tex4ebook.cfg -f mobi book.tex
 	tex4ebook -c tex4ebook.cfg -f azw3 book.tex
