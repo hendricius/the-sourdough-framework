@@ -1,8 +1,14 @@
+LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
 .PHONY: build_pdf
-build_pdf: clean figures tables
-	pdflatex book.tex
-	biber book
-	pdflatex book.tex
+
+%.pdf: %.tex
+	$(LATEX) $<
+
+SRC_FIGURES := $(wildcard figures/fig-*.tex)
+TGT_FIGURES := $(patsubst %.tex,%.pdf, $(SRC_FIGURES))
+
+build_pdf: book.tex $(TGT_FIGURES)
+	$(LATEX) -output-directory=book_serif book.tex
 
 # setup_default_build:
 # 	sed -i '.bak' 's#^\\usepackage{helvet}#%\\usepackage{helvet}#g' book.tex
@@ -69,7 +75,7 @@ clean: clean_figures
 
 .PHONY: release_default
 release_default: clean build_pdf make_release_dir build_ebook
-	cp book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
+	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 	cp book-azw3/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
