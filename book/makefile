@@ -74,7 +74,7 @@ clean: clean_figures
 	rm -rf release_sans_serif/
 
 .PHONY: release_default
-release_default: clean build_pdf make_release_dir build_ebook
+release_default: clean build_pdf build_ebook | make_release_dir 
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
@@ -88,7 +88,7 @@ make_release_dir:
 	mkdir -p release
 
 .PHONY: release_sans_serif
-release_sans_serif: make_release_dir
+release_sans_serif: | make_release_dir
 	${LATEX} -output-directory=book_sans_serif book_sans_serif.tex
 	tex4ebook -c tex4ebook.cfg -f epub book_sans_serif.tex
 	tex4ebook -c tex4ebook.cfg -f mobi book_sans_serif.tex
@@ -102,7 +102,7 @@ release_sans_serif: make_release_dir
 	cp book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
 .PHONY: build_ebook
-build_ebook: make_release_dir
+build_ebook: | make_release_dir
 	tex4ebook -c tex4ebook.cfg -f epub book.tex
 	tex4ebook -c tex4ebook.cfg -f mobi book.tex
 	# not sure why, but I have to generate the mobi twice for the release
