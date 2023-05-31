@@ -31,7 +31,7 @@ export_figures:
 	cd figures/ && bash export_figures.sh
 
 .PHONY: figures
-figures: clean_figures
+figures: $(SRC_FIGURES)
 	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \;
 
 .PHONY: clean
@@ -74,7 +74,7 @@ clean: clean_figures
 	rm -rf release_sans_serif/
 
 .PHONY: release_default
-release_default: clean build_pdf build_ebook | make_release_dir 
+release_default: build_pdf build_ebook | make_release_dir 
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
