@@ -1,14 +1,10 @@
-\input{./vars}
-
-\begin{document}
-\begin{tabular}{llll}
+% TODO: Not great Looking... 
+\begin{tabular}{@{}p{0.25\textwidth}ccc@{}}
 \toprule
-\textbf{Oven type}                                                         & \textbf{Plain (no tools)} & \textbf{Inverted tray} & \textbf{Dutch oven} \\ \midrule
-Gas                                                                        & No                        & No                     & Yes                 \\ \midrule
-\begin{tabular}[c]{@{}l@{}}Convection\\ (Fan always on)\end{tabular}       & No                        & No                     & Yes                 \\ \midrule
-\begin{tabular}[c]{@{}l@{}}Convection\\ (Fan can be disabled)\end{tabular} & No                        & Yes                    & Yes                 \\ \midrule
-Steam                                                                      &
-Yes                       & Yes                    & Yes                 \\
+\thead{Oven type}  & \thead{Plain (no tools)} & \thead{Inverted tray} & \thead{Dutch oven} \\ \midrule
+Gas                & No                       & No                    & Yes                 \\ 
+Convection (Fan always on) & No               & No                    & Yes                 \\ 
+Convection (Fan can be disabled) & No         & Yes                   & Yes                 \\ 
+Steam              & Yes                      & Yes                   & Yes                 \\
 \bottomrule
 \end{tabular}
-\end{document}
