@@ -1,4 +1,3 @@
-# Dockerfile.rails
 FROM ghcr.io/xu-cheng/texlive-full
 
 WORKDIR /root
