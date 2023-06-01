@@ -1,14 +1,55 @@
 LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
-.PHONY: build_pdf
+EBOOK := tex4ebook -c tex4ebook.cfg
 
 %.pdf: %.tex
 	$(LATEX) $<
 
+book-epub/%.epub: %.tex
+	$(EBOOK) -f epub $<
+
+book-mobi/%.mobi: %.tex
+	# not sure why, but I have to generate the mobi twice for the release
+	# command to properly work.
+	$(EBOOK) -f mobi $<
+	$(EBOOK) -f mobi $<
+
+book-azw3/%.azw3: %.tex
+	$(EBOOK) -f azw3 $<
+
+book_sans_serif-epub/%.epub: %.tex
+	$(EBOOK) -f epub $<
+
+book_sans_serif-mobi/%.mobi: %.tex
+	# not sure why, but I have to generate the mobi twice for the release
+	# command to properly work.
+	$(EBOOK) -f mobi $<
+	$(EBOOK) -f mobi $<
+
+book_sans_serif-azw3/%.azw3: %.tex
+	$(EBOOK) -f azw3 $<
+
+SRC_TABLES := $(wildcard tables/table-*.tex)
+
 SRC_FIGURES := $(wildcard figures/fig-*.tex)
 TGT_FIGURES := $(patsubst %.tex,%.pdf, $(SRC_FIGURES))
 
-build_pdf: book.tex $(TGT_FIGURES)
-	$(LATEX) -output-directory=book_serif book.tex
+SRC_ALL := book.tex book_sans_serif.tex references.bib $(SRC_FIGURES)\
+		   $(SRC_TABLES) tex4ebook.cfg book.mk4
+
+book_serif/book.pdf: book.tex
+	$(LATEX) -output-directory=book_serif $<
+
+book_sans_serif/book_sans_serif.pdf: book_sans_serif.tex
+	$(LATEX) -output-directory=book_sans_serif $<
+
+.PHONY: build_pdf
+build_pdf: build_serif_pdf build_sans_serif_pdf
+
+.PHONY: build_serif_pdf
+build_serif_pdf: book_serif/book.pdf 
+
+.PHONY: build_sans_serif_pdf
+build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
 # setup_default_build:
 # 	sed -i '.bak' 's#^\\usepackage{helvet}#%\\usepackage{helvet}#g' book.tex
@@ -74,7 +115,7 @@ clean: clean_figures
 	rm -rf release_sans_serif/
 
 .PHONY: release_default
-release_default: build_pdf build_ebook | make_release_dir 
+release_default: build_pdf build_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
@@ -83,29 +124,22 @@ release_default: build_pdf build_ebook | make_release_dir
 .PHONY: bake
 bake: release_default release_sans_serif
 
+.PHONY: release
 .PHONY: make_release_dir
 make_release_dir:
 	mkdir -p release
 
 .PHONY: release_sans_serif
-release_sans_serif: | make_release_dir
-	${LATEX} -output-directory=book_sans_serif book_sans_serif.tex
-	tex4ebook -c tex4ebook.cfg -f epub book_sans_serif.tex
-	tex4ebook -c tex4ebook.cfg -f mobi book_sans_serif.tex
-	# not sure why, but I have to generate the mobi twice for the release
-	# command to properly work.
-	tex4ebook -c tex4ebook.cfg -f mobi book_sans_serif.tex
-	tex4ebook -c tex4ebook.cfg -f azw3 book_sans_serif.tex
+release_sans_serif: build_sans_serif_pdf build_ebook_sans_serif| make_release_dir
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
-	cp book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
-	cp book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
-	cp book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+	cp book_sans_serif-mobi/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
+	cp book_sans_serif-epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
+	cp book_sans_serif-azw3/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+
+.PHONY: build_ebook_sans_serif
+build_ebook_sans_serif: book_sans_serif-epub/book_sans_serif.epub \
+						book_sans_serif-mobi/book_sans_serif.mobi \
+						book_sans_serif-azw3/book_sans_serif.azw3 | make_release_dir
 
 .PHONY: build_ebook
-build_ebook: | make_release_dir
-	tex4ebook -c tex4ebook.cfg -f epub book.tex
-	tex4ebook -c tex4ebook.cfg -f mobi book.tex
-	# not sure why, but I have to generate the mobi twice for the release
-	# command to properly work.
-	tex4ebook -c tex4ebook.cfg -f mobi book.tex
-	tex4ebook -c tex4ebook.cfg -f azw3 book.tex
+build_ebook: book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
