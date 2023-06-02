@@ -14,29 +14,29 @@ book_serif/book.pdf: book.tex
 book_sans_serif/book_sans_serif.pdf: book_sans_serif.tex
 	$(LATEX) -output-directory=book_sans_serif $<
 
-book-epub/%.epub: %.tex
+book-epub/%.epub: %.tex figures
 	$(EBOOK) -f epub $<
 
-book-mobi/%.mobi: %.tex
+book-mobi/%.mobi: %.tex figures
 	# not sure why, but I have to generate the mobi twice for the release
 	# command to properly work.
 	$(EBOOK) -f mobi $<
 	$(EBOOK) -f mobi $<
 
-book-azw3/%.azw3: %.tex
+book-azw3/%.azw3: %.tex figures
 	$(EBOOK) -f azw3 $<
 
 # Not sure if there is a better way with a wildcard?
-book_sans_serif-epub/%.epub: %.tex
+book_sans_serif-epub/%.epub: %.tex figures
 	$(EBOOK) -f epub $<
 
-book_sans_serif-mobi/%.mobi: %.tex
+book_sans_serif-mobi/%.mobi: %.tex figures
 	# not sure why, but I have to generate the mobi twice for the release
 	# command to properly work.
 	$(EBOOK) -f mobi $<
 	$(EBOOK) -f mobi $<
 
-book_sans_serif-azw3/%.azw3: %.tex
+book_sans_serif-azw3/%.azw3: %.tex figures
 	$(EBOOK) -f azw3 $<
 
 # List all files that are dependencies
