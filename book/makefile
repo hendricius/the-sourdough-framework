@@ -45,6 +45,12 @@ SRC_ALL := book.tex book_sans_serif.tex references.bib $(SRC_FIGURES)\
 		   tex4ebook.cfg book.mk4
 
 # Now with the rules
+# Default rules first
+
+default: build_pdf
+
+all: bake
+
 .PHONY: build_pdf
 build_pdf: build_serif_pdf build_sans_serif_pdf
 
