@@ -74,15 +74,11 @@ figures: $(SRC_FIGURES)
 .PHONY: clean_figures
 clean_figures:
 	$(CLEAN) $(SRC_FIGURES)
-	-rm figures/*.pdf
-	-rm figures/*.png
 
 .PHONY: clean
 clean: clean_figures
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
-	-rm  book_serif/book.pdf
-	-rm  book_sans_serif/book_sans_serif.pdf
 	-rm  book*.aux
 	-rm  book*.run.xml
 	-rm  book*.bcf
@@ -99,13 +95,36 @@ clean: clean_figures
 	-rm  book*.tmp
 	-rm  book*.xref
 	-rm  book*.html
-	-rm -rf book*-epub/
-	-rm -rf book*-epub3/
-	-rm -rf book*-mobi/
-	-rm -rf book*-azw3/
+	-rm book_*/*.bbl
+	-rm book_*/*.run.xml
+	-rm -rf book*-epub/META-INF
+	-rm -rf book*-epub/OEBPS
+	-rm  book*-epub/mimetype
+	-rm -rf book*-mobi/META-INF
+	-rm -rf book*-mobi/OEBPS
+	-rm  book*-mobi/mimetype
+	-rm  book*-mobi/book.epub
+	-rm -rf book*-mobi/META-INF
+	-rm -rf book*-azw3/OEBPS
+	-rm -rf book*-azw3/META-INF
+	-rm  book*-azw3/book.epub
+	-rm  book*-azw3/mimetype
 	-rm  content.opf
-	-rm -rf release/
-	-rm -rf release_sans_serif/
+
+.PHONY: mrproper
+mrproper: clean
+	$(CLEAN) -C $(SRC_FIGURES)
+	$(CLEAN) -C -output-directory=book_serif book.tex
+	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
+	-rm figures/*.pdf
+	-rm figures/*.png
+	rm -rf book*-mobi/
+	rm -rf book*-azw3/
+	rm -rf book*-epub/
+	rm -rf release/
+	rm -rf release/
+	rm -rf release_sans_serif/
+	rm -rf release_sans_serif/
 
 .PHONY: bake
 bake: release_default release_sans_serif
