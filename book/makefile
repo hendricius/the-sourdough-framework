@@ -28,6 +28,10 @@ export_figures:
 figures: clean_figures
 	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \;
 
+.PHONY: tables
+tables:
+	cd tables && find . -name "table-*.tex" -exec pdflatex '{}' \;
+
 .PHONY: clean
 clean: clean_figures
 	rm -f book.blg

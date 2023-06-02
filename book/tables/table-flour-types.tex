@@ -1,9 +1,15 @@
-\begin{tabular}{@{}llrrr@{}}
+\input{./vars}
+
+\begin{document}
+\begin{tabular}{llrrr}
 \toprule
-\thead{USA}  & \thead{UK}  & {\thead{Germany}} & {\thead{France}} & {\thead{Italy}} \\ \midrule
-Cake         & Soft flour  &  T405    &  T45   & 00 \\ 
-All purpose  & Plain flour &  T550    &  T55   &  0 \\ 
-             &             &  T812    &  T80   &  1 \\ 
-             &             & T1050    & T110   &  2 \\ 
-Whole        & Whole       & Vollkorn & T150   & Integrale \\ \bottomrule
+\textbf{USA}      & \textbf{UK}      & \multicolumn{1}{l}{\textbf{Germany}}      & \multicolumn{1}{l}{\textbf{France}}      & \multicolumn{1}{l}{\textbf{Italy}} \\ \midrule
+Cake              & Soft flour       & T405                                       & T45                                       & 00                                       \\ \midrule
+All purpose       & Plain flour      & T550                                       & T55                                       & 0                                        \\ \midrule
+                  &                  & T812                                       & T80                                       & 1                                        \\ \midrule
+                  &                  & T1050                                      & T110                                      & 2                                        \\ \midrule
+Whole             & Whole            & Vollkorn
+                  & T150                                      & Integrale
+                  \\ \bottomrule
 \end{tabular}
+\end{document}
