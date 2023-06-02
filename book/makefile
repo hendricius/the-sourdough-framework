@@ -1,9 +1,18 @@
+# Macros for commands
 LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
 EBOOK := tex4ebook -c tex4ebook.cfg
 CLEAN := latexmk -cd -c -use-make
 
+# Default rules for pdf and ebooks, getting overwritten when built in a
+# sub-directory
 %.pdf: %.tex
 	$(LATEX) $<
+
+book_serif/book.pdf: book.tex
+	$(LATEX) -output-directory=book_serif $<
+
+book_sans_serif/book_sans_serif.pdf: book_sans_serif.tex
+	$(LATEX) -output-directory=book_sans_serif $<
 
 book-epub/%.epub: %.tex
 	$(EBOOK) -f epub $<
@@ -17,6 +26,7 @@ book-mobi/%.mobi: %.tex
 book-azw3/%.azw3: %.tex
 	$(EBOOK) -f azw3 $<
 
+# Not sure if there is a better way with a wildcard?
 book_sans_serif-epub/%.epub: %.tex
 	$(EBOOK) -f epub $<
 
@@ -29,39 +39,28 @@ book_sans_serif-mobi/%.mobi: %.tex
 book_sans_serif-azw3/%.azw3: %.tex
 	$(EBOOK) -f azw3 $<
 
-SRC_TABLES := $(wildcard tables/table-*.tex)
-
+# List all files that are dependencies
 SRC_FIGURES := $(wildcard figures/fig-*.tex)
-TGT_FIGURES := $(patsubst %.tex,%.pdf, $(SRC_FIGURES))
-
 SRC_ALL := book.tex book_sans_serif.tex references.bib $(SRC_FIGURES)\
-		   $(SRC_TABLES) tex4ebook.cfg book.mk4
+		   tex4ebook.cfg book.mk4
 
-book_serif/book.pdf: book.tex
-	$(LATEX) -output-directory=book_serif $<
-
-book_sans_serif/book_sans_serif.pdf: book_sans_serif.tex
-	$(LATEX) -output-directory=book_sans_serif $<
-
+# Now with the rules
 .PHONY: build_pdf
 build_pdf: build_serif_pdf build_sans_serif_pdf
 
 .PHONY: build_serif_pdf
-build_serif_pdf: book_serif/book.pdf 
+build_serif_pdf: book_serif/book.pdf
 
 .PHONY: build_sans_serif_pdf
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
-# setup_default_build:
-# 	sed -i '.bak' 's#^\\usepackage{helvet}#%\\usepackage{helvet}#g' book.tex
-# 	sed -i '.bak' 's#^\\renewcommand{\\familydefault}{\\sfdefault}#%\\renewcommand{\\familydefault}{\\sfdefault}#g' book.tex
+.PHONY: build_ebook
+build_ebook: book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
 
-
-.PHONY: clean_figures
-clean_figures:
-	$(CLEAN) $(SRC_FIGURES)
-	-rm figures/*.pdf
-	-rm figures/*.png
+.PHONY: build_sans_serif_ebook
+build_sans_serif_ebook: book_sans_serif-epub/book_sans_serif.epub \
+						book_sans_serif-mobi/book_sans_serif.mobi \
+						book_sans_serif-azw3/book_sans_serif.azw3 | make_release_dir
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
@@ -71,6 +70,12 @@ export_figures:
 .PHONY: figures
 figures: $(SRC_FIGURES)
 	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \;
+
+.PHONY: clean_figures
+clean_figures:
+	$(CLEAN) $(SRC_FIGURES)
+	-rm figures/*.pdf
+	-rm figures/*.png
 
 .PHONY: clean
 clean: clean_figures
@@ -102,6 +107,13 @@ clean: clean_figures
 	-rm -rf release/
 	-rm -rf release_sans_serif/
 
+.PHONY: bake
+bake: release_default release_sans_serif
+
+.PHONY: make_release_dir
+make_release_dir:
+	mkdir -p release
+
 .PHONY: release_default
 release_default: build_pdf build_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
@@ -109,25 +121,9 @@ release_default: build_pdf build_ebook | make_release_dir
 	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 	cp book-azw3/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
 
-.PHONY: bake
-bake: release_default release_sans_serif
-
-.PHONY: release
-.PHONY: make_release_dir
-make_release_dir:
-	mkdir -p release
-
 .PHONY: release_sans_serif
-release_sans_serif: build_sans_serif_pdf build_ebook_sans_serif| make_release_dir
+release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_dir
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
 	cp book_sans_serif-mobi/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
 	cp book_sans_serif-epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
 	cp book_sans_serif-azw3/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
-
-.PHONY: build_ebook_sans_serif
-build_ebook_sans_serif: book_sans_serif-epub/book_sans_serif.epub \
-						book_sans_serif-mobi/book_sans_serif.mobi \
-						book_sans_serif-azw3/book_sans_serif.azw3 | make_release_dir
-
-.PHONY: build_ebook
-build_ebook: book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
