@@ -51,6 +51,26 @@ default: build_pdf
 
 all: bake
 
+help:
+	@echo ""
+	@echo "default: builds the book in pdf format (serif)"
+	@echo ""
+	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as build release"
+	@echo "bake: same as build all"
+	@echo "release_default: same as build all"
+	@echo ""
+	@echo "clean: delete all intermediate files keep targets (pdf/ebook)"
+	@echo "mrproper: delete all generated files intermediate and pdf/ebooks"
+	@echo "clean_figures: delete intermediate TikZ files"
+	@echo ""
+	@echo "build_ebook: builds only the ebook serif and accessible version"
+	@echo "build_pdf:builds both serif and accessible pdf"
+	@echo ""
+	@echo "build_sans_serif_ebook: build accessible ebook only"
+	@echo "build_sans_serif_pdf: build accessible pdf only"
+	@echo ""
+	@echo "figures: build TikZ figures"
+
 .PHONY: build_pdf
 build_pdf: build_serif_pdf build_sans_serif_pdf
 
