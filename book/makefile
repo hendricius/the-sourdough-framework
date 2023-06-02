@@ -95,7 +95,7 @@ export_figures:
 
 .PHONY: figures
 figures: $(SRC_FIGURES)
-	cd figures && find . -name "fig-*.tex" -exec pdflatex '{}' \;
+	$(LATEX) $<
 
 .PHONY: clean_figures
 clean_figures:
