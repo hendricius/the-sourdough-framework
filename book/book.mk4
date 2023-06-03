@@ -1,0 +1,8 @@
+local filter  = require "make4ht-filter"
+local removeHeight = function(s) return s:gsub('height="%d+"', '') end
+local removeWidth = function(s) return s:gsub('width="%d+"', '') end
+local removeMaxWidth = function(s) return s:gsub(' max-width: %d+px;', '') end
+local removeFixedSettings = function(s) return removeMaxWidth(removeWidth(removeHeight(s))) end
+local process = filter{removeFixedSettings}
+Make:htlatex()
+Make:match("html$",process)

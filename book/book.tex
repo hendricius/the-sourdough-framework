@@ -13,6 +13,14 @@
 \usepackage{tocloft}
 \usepackage{tex4ebook}
 \usepackage{chemformula}
+\usepackage{booktabs}
+\usepackage{makecell}
+
+\renewcommand\theadfont{\bfseries}
+
+% Fonts for accessibility
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
 
 % References
 \usepackage[backend=biber]{biblatex}
@@ -27,16 +35,16 @@
 
 % Folders where to search for images
 \graphicspath{
-  {./images/}
-  {./troubleshooting/}
-  {./sourdough-starter/}
-  {./troubleshooting/crumb-structures/}
-  {./history/}
-  {./images/external/}
-  {./baking/}
-  {./wheat-sourdough/}
-  {./wheat-sourdough/shaping/}
-  {./non-wheat-sourdough/}
+  {images/}
+  {troubleshooting/}
+  {sourdough-starter/}
+  {troubleshooting/crumb-structures/}
+  {history/}
+  {images/external/}
+  {baking/}
+  {wheat-sourdough/}
+  {wheat-sourdough/shaping/}
+  {non-wheat-sourdough/}
 }
 
 % Layout rules
@@ -61,7 +69,7 @@
 % Title page
 \begin{titlepage}
 	\centering
-  \includegraphics[width=\textwidth]{cover-page}
+  \includegraphics[width=\textwidth]{images/cover-page.jpg}
   Version:
   \today
 \end{titlepage}

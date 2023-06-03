@@ -5,8 +5,10 @@
   \node [block] (init) {\footnotesize Make a starter};
   \node [block, right of=init, node distance=3cm] (feed) {\footnotesize Feed your starter};
   \path [line] (init) -- (feed);
-  \node [block, right of=feed, node distance=3cm] (ready_question) {\footnotesize Perform readiness check};
-  \path [line] (feed) -- (ready_question);
+  \node [block, right of=feed, node distance=3cm] (wait_12_after_feed) {\footnotesize Wait 12 hours};
+  \path [line] (feed) -- (wait_12_after_feed);
+  \node [block, right of=wait_12_after_feed, node distance=3cm] (ready_question) {\footnotesize Perform readiness check};
+  \path [line] (wait_12_after_feed) -- (ready_question);
   \node [block, below of=feed, node distance=3cm] (wait_12) {\footnotesize Wait 12 hours};
   \path [line] (wait_12) -- (feed);
   \node [decision, right of=ready_question, node distance=3.5cm] (is_bubbly) {\footnotesize Bubbly? Size Increase?};
