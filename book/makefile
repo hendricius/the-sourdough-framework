@@ -8,41 +8,41 @@ CLEAN := latexmk -cd -c -use-make
 %.pdf: %.tex
 	$(LATEX) $<
 
-book_serif/book.pdf: book.tex
-	$(LATEX) -output-directory=book_serif $<
+book_serif/book.pdf:
+	$(LATEX) -output-directory=book_serif book.tex
 
-book_sans_serif/book_sans_serif.pdf: book_sans_serif.tex
-	$(LATEX) -output-directory=book_sans_serif $<
+book_sans_serif/book_sans_serif.pdf:
+	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-book-epub/%.epub: %.tex figures
+book-epub/%.epub: %.tex
 	$(EBOOK) -f epub $<
 
-book-mobi/%.mobi: %.tex figures
+book-mobi/%.mobi: %.tex
 	# not sure why, but I have to generate the mobi twice for the release
 	# command to properly work.
 	$(EBOOK) -f mobi $<
 	$(EBOOK) -f mobi $<
 
-book-azw3/%.azw3: %.tex figures
+book-azw3/%.azw3: %.tex
 	$(EBOOK) -f azw3 $<
 
 # Not sure if there is a better way with a wildcard?
-book_sans_serif-epub/%.epub: %.tex figures
+book_sans_serif-epub/%.epub: %.tex
 	$(EBOOK) -f epub $<
 
-book_sans_serif-mobi/%.mobi: %.tex figures
+book_sans_serif-mobi/%.mobi: %.tex
 	# not sure why, but I have to generate the mobi twice for the release
 	# command to properly work.
 	$(EBOOK) -f mobi $<
 	$(EBOOK) -f mobi $<
 
-book_sans_serif-azw3/%.azw3: %.tex figures
+book_sans_serif-azw3/%.azw3: %.tex
 	$(EBOOK) -f azw3 $<
 
 # List all files that are dependencies
 SRC_FIGURES := $(wildcard figures/fig-*.tex)
 SRC_ALL := book.tex book_sans_serif.tex references.bib $(SRC_FIGURES)\
-		   tex4ebook.cfg book.mk4
+		   $(SRC_TABLES) tex4ebook.cfg book.mk4
 
 # Now with the rules
 # Default rules first
