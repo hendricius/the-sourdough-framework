@@ -81,7 +81,10 @@ build_serif_pdf: book_serif/book.pdf
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
 .PHONY: build_ebook
-build_ebook: book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
+build_ebook: build_serif_ebook build_sans_serif_ebook
+
+.PHONY: build_serif_ebook
+build_serif_ebook: book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
 
 .PHONY: build_sans_serif_ebook
 build_sans_serif_ebook: book_sans_serif-epub/book_sans_serif.epub \
