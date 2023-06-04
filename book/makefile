@@ -41,6 +41,7 @@ book_sans_serif-azw3/%.azw3: %.tex
 
 # List all files that are dependencies
 SRC_FIGURES := $(wildcard figures/fig-*.tex)
+TGT_FIGURES := $(patsubst %.tex, %.pdf,$(SRC_FIGURES))
 SRC_ALL := book.tex book_sans_serif.tex references.bib $(SRC_FIGURES)\
 		   $(SRC_TABLES) tex4ebook.cfg book.mk4
 
@@ -84,10 +85,10 @@ build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 build_ebook: build_serif_ebook build_sans_serif_ebook
 
 .PHONY: build_serif_ebook
-build_serif_ebook: book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
+build_serif_ebook: $(TGT_FIGURES) book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
 
 .PHONY: build_sans_serif_ebook
-build_sans_serif_ebook: book_sans_serif-epub/book_sans_serif.epub \
+build_sans_serif_ebook: $(TGT_FIGURES) book_sans_serif-epub/book_sans_serif.epub \
 						book_sans_serif-mobi/book_sans_serif.mobi \
 						book_sans_serif-azw3/book_sans_serif.azw3 | make_release_dir
 
