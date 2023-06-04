@@ -92,8 +92,8 @@ budget constraints.
 
 If you would like to contribute with a small donation you can do so
 via my [ko-fi page.](https://breadco.de/book) Your donation will tremendously
-help me to cover costs related to running the-bread-code. It futhermore allows
-me to dedidcate time to continously update and improve this book.
+help me to cover costs related to running the-bread-code. It furthermore allows
+me to dedicate time to continuously update and improve this book.
 
 ## Links
 
