@@ -124,13 +124,12 @@ figures: $(SRC_FIGURES)
 clean_figures:
 	$(CLEAN) $(SRC_FIGURES)
 
-.PHONY: clean
-clean: clean_figures
-	$(CLEAN) -output-directory=book_serif book.tex
-	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+.PHONY: clean_ebook_build
+clean_ebook_build:
 	-rm  book*.aux
 	-rm  book*.run.xml
 	-rm  book*.bcf
+	-rm  book*.blg
 	-rm  book*.log
 	-rm  book*.4tc
 	-rm  book*.4ct
@@ -146,9 +145,15 @@ clean: clean_figures
 	-rm  book*.html
 	-rm  book*.fls
 	-rm  book*.fdb_latexmk
-	-rm book*.bbl
-	-rm book*/*.bbl
-	-rm book*/*.run.xml
+	-rm  book*.bbl
+	-rm  content.opf
+
+.PHONY: clean
+clean: clean_ebook_build clean_figures
+	$(CLEAN) -output-directory=book_serif book.tex
+	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+	-rm  book*/*.bbl
+	-rm  book*/*.run.xml
 	-rm -rf book*-epub/META-INF
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
@@ -161,7 +166,6 @@ clean: clean_figures
 	-rm -rf book*-azw3/META-INF
 	-rm  book*-azw3/book.epub
 	-rm  book*-azw3/mimetype
-	-rm  content.opf
 
 .PHONY: mrproper
 mrproper: clean
