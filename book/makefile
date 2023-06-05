@@ -29,10 +29,10 @@ SRC_ALL := $(SRC_TEX) $(SRC_FIGURES) $(SRC_TABLES) tex4ebook.cfg book.mk4 $(IMAG
 %.pdf: %.tex
 	$(LATEX) $<
 
-book_serif/book.pdf: $(SRC_ALL)
+book_serif/book.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_serif book.tex
 
-book_sans_serif/book_sans_serif.pdf: $(SRC_ALL)
+book_sans_serif/book_sans_serif.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
 book-epub/%.epub: %.tex $(SRC_ALL)
