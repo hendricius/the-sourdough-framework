@@ -33,7 +33,6 @@ book_serif/book.pdf: $(SRC_ALL)
 	$(LATEX) -output-directory=book_serif book.tex
 
 book_sans_serif/book_sans_serif.pdf: $(SRC_ALL)
-	@echo $<
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
 book-epub/%.epub: %.tex $(SRC_ALL)
@@ -145,8 +144,11 @@ clean: clean_figures
 	-rm  book*.tmp
 	-rm  book*.xref
 	-rm  book*.html
-	-rm book_*/*.bbl
-	-rm book_*/*.run.xml
+	-rm  book*.fls
+	-rm  book*.fdb_latexmk
+	-rm book*.bbl
+	-rm book*/*.bbl
+	-rm book*/*.run.xml
 	-rm -rf book*-epub/META-INF
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
