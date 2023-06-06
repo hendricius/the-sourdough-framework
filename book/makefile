@@ -3,55 +3,73 @@ LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-mak
 EBOOK := tex4ebook -c tex4ebook.cfg
 CLEAN := latexmk -cd -c -use-make
 
+# List all files that are dependencies
+SRC_FIGURES := $(wildcard figures/fig-*.tex)
+# List all files that are dependencies
+CHAPTERS = baking basics bread-types flour-types history intro\
+		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
+		wheat-sourdough
+
+SRC_TABLES  := $(wildcard tables/tables-*.tex)
+SRC_FIGURES := $(wildcard figures/fig-*.tex)
+
+SRC_TEX := $(foreach directory, $(CHAPTERS), $(wildcard $(directory)/*.tex))
+SRC_TEX := $(SRC_TEX) book.tex book_sans_serif.tex references.bib
+
+IMAGES := $(wildcard images/*/*.jpg)
+IMAGES := $(IMAGES) $(wildcard images/*/*.png)
+IMAGES := $(IMAGES) $(foreach directory, $(CHAPTERS), $(wildcard $(directory)/*.jpg))
+IMAGES := $(IMAGES) $(foreach directory, $(CHAPTERS), $(wildcard $(directory)/*.png))
+
+TGT_FIGURES := $(patsubst %.tex, %.pdf,$(SRC_FIGURES))
+SRC_ALL := $(SRC_TEX) $(SRC_FIGURES) $(SRC_TABLES) tex4ebook.cfg book.mk4 $(IMAGES)
+
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
 %.pdf: %.tex
 	$(LATEX) $<
 
-book_serif/book.pdf:
+book_serif/book.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_serif book.tex
 
-book_sans_serif/book_sans_serif.pdf:
+book_sans_serif/book_sans_serif.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-book-epub/%.epub: %.tex
+book-epub/%.epub: %.tex $(SRC_ALL)
 	$(EBOOK) -f epub $<
 
-book-mobi/%.mobi: %.tex
+book-mobi/%.mobi: %.tex $(SRC_ALL)
 	# not sure why, but I have to generate the mobi twice for the release
 	# command to properly work.
 	$(EBOOK) -f mobi $<
 	$(EBOOK) -f mobi $<
 
-book-azw3/%.azw3: %.tex
+book-azw3/%.azw3: %.tex $(SRC_ALL)
 	$(EBOOK) -f azw3 $<
 
 # Not sure if there is a better way with a wildcard?
-book_sans_serif-epub/%.epub: %.tex
+book_sans_serif-epub/%.epub: %.tex $(SRC_ALL)
 	$(EBOOK) -f epub $<
 
-book_sans_serif-mobi/%.mobi: %.tex
+book_sans_serif-mobi/%.mobi: %.tex $(SRC_ALL)
 	# not sure why, but I have to generate the mobi twice for the release
 	# command to properly work.
 	$(EBOOK) -f mobi $<
 	$(EBOOK) -f mobi $<
 
-book_sans_serif-azw3/%.azw3: %.tex
+book_sans_serif-azw3/%.azw3: %.tex $(SRC_ALL)
 	$(EBOOK) -f azw3 $<
 
-# List all files that are dependencies
-SRC_FIGURES := $(wildcard figures/fig-*.tex)
-TGT_FIGURES := $(patsubst %.tex, %.pdf,$(SRC_FIGURES))
-SRC_ALL := book.tex book_sans_serif.tex references.bib $(SRC_FIGURES)\
-		   $(SRC_TABLES) tex4ebook.cfg book.mk4
-
 # Now with the rules
-# Default rules first
+# Expected usual rules first
 
+.PHONY: default
 default: build_pdf
 
+.PHONY: all
 all: bake
 
+.PHONY: help
 help:
 	@echo ""
 	@echo "default: builds the book in pdf format (serif)"
@@ -72,6 +90,7 @@ help:
 	@echo ""
 	@echo "figures: build TikZ figures"
 
+# Finally project specif targets
 .PHONY: build_pdf
 build_pdf: build_serif_pdf build_sans_serif_pdf
 
@@ -105,13 +124,12 @@ figures: $(SRC_FIGURES)
 clean_figures:
 	$(CLEAN) $(SRC_FIGURES)
 
-.PHONY: clean
-clean: clean_figures
-	$(CLEAN) -output-directory=book_serif book.tex
-	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+.PHONY: clean_ebook_build
+clean_ebook_build:
 	-rm  book*.aux
 	-rm  book*.run.xml
 	-rm  book*.bcf
+	-rm  book*.blg
 	-rm  book*.log
 	-rm  book*.4tc
 	-rm  book*.4ct
@@ -125,8 +143,17 @@ clean: clean_figures
 	-rm  book*.tmp
 	-rm  book*.xref
 	-rm  book*.html
-	-rm book_*/*.bbl
-	-rm book_*/*.run.xml
+	-rm  book*.fls
+	-rm  book*.fdb_latexmk
+	-rm  book*.bbl
+	-rm  content.opf
+
+.PHONY: clean
+clean: clean_ebook_build clean_figures
+	$(CLEAN) -output-directory=book_serif book.tex
+	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+	-rm  book*/*.bbl
+	-rm  book*/*.run.xml
 	-rm -rf book*-epub/META-INF
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
@@ -139,7 +166,6 @@ clean: clean_figures
 	-rm -rf book*-azw3/META-INF
 	-rm  book*-azw3/book.epub
 	-rm  book*-azw3/mimetype
-	-rm  content.opf
 
 .PHONY: mrproper
 mrproper: clean
