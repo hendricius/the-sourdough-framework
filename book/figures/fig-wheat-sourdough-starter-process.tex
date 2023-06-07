@@ -4,9 +4,9 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
   \node [block, right of=init, node distance=4cm] (feed_no_branch)
-    {\footnotesize Feed starter twice. 48 hours before and 6-12 hours before};
+    {\footnotesize Feed starter twice. 48 hours before and 6--12 hours before};
   \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
-    {\footnotesize Feed starter once 6-12 hours before making dough};
+    {\footnotesize Feed starter once 6--12 hours before making dough};
   \node [block, right of=feed_no_branch, node distance=6cm] (high_ratio)
     {\footnotesize Use a 1:10:10 ratio. 10g starter, 100g flour, 100g water};
   \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
