@@ -5,25 +5,26 @@ CLEAN := latexmk -cd -c -use-make
 EBOOK_CONVERT := kindlegen
 
 # List all files that are dependencies
-SRC_FIGURES := $(wildcard figures/fig-*.tex)
+src_figures := $(wildcard figures/fig-*.tex)
+
 # List all files that are dependencies
-CHAPTERS = baking basics bread-types flour-types history intro\
+chapters = baking basics bread-types flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
-SRC_TABLES  := $(wildcard tables/tables-*.tex)
-SRC_FIGURES := $(wildcard figures/fig-*.tex)
+src_tables  := $(wildcard tables/tables-*.tex)
+src_figures := $(wildcard figures/fig-*.tex)
 
-SRC_TEX := $(foreach directory, $(CHAPTERS), $(wildcard $(directory)/*.tex))
-SRC_TEX := $(SRC_TEX) book.tex book_sans_serif.tex references.bib
+src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
+src_tex += book.tex book_sans_serif.tex references.bib
 
-IMAGES := $(wildcard images/*/*.jpg)
-IMAGES := $(IMAGES) $(wildcard images/*/*.png)
-IMAGES := $(IMAGES) $(foreach directory, $(CHAPTERS), $(wildcard $(directory)/*.jpg))
-IMAGES := $(IMAGES) $(foreach directory, $(CHAPTERS), $(wildcard $(directory)/*.png))
+images := $(wildcard images/*/*.jpg)
+images += $(wildcard images/*/*.png)
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 
-TGT_FIGURES := $(patsubst %.tex, %.pdf,$(SRC_FIGURES))
-SRC_ALL := $(SRC_TEX) $(SRC_FIGURES) $(SRC_TABLES) tex4ebook.cfg book.mk4 $(IMAGES)
+tgt_figures := $(patsubst %.tex, %.pdf,$(src_figures))
+src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
 
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
@@ -36,28 +37,17 @@ book_serif/book.pdf: clean_ebook_build $(SRC_ALL)
 book_sans_serif/book_sans_serif.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-epub/book.epub: book.tex $(SRC_ALL)
+epub/%.epub: %.tex $(src_all)
 	$(EBOOK) -f epub $<
 
-epub/book.mobi: epub/book.epub
+epub/%.mobi: epub/%.epub
 	$(EBOOK_CONVERT) $< -o $(notdir $@)
 
-epub/book.azw3:  epub/book.epub
-	$(EBOOK_CONVERT) $< -o $(notdir $@)
-
-# Not sure if there is a better way with a wildcard?
-epub/book_sans_serif.epub: book_sans_serif.tex $(SRC_ALL)
-	$(EBOOK) -f epub $<
-
-epub/book_sans_serif.mobi: epub/book_sans_serif.epub
-	$(EBOOK_CONVERT) $< -o $(notdir $@)
-
-epub/book_sans_serif.azw3: epub/book_sans_serif.epub
+epub/%.azw3:  epub/%.epub
 	$(EBOOK_CONVERT) $< -o $(notdir $@)
 
 # Now with the rules
 # Expected usual rules first
-
 .PHONY: default
 default: build_pdf
 
@@ -99,10 +89,10 @@ build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 build_ebook: build_serif_ebook build_sans_serif_ebook
 
 .PHONY: build_serif_ebook
-build_serif_ebook: $(TGT_FIGURES) epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
+build_serif_ebook: $(tgt_figures) epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
 
 .PHONY: build_sans_serif_ebook
-build_sans_serif_ebook: $(TGT_FIGURES) epub/book_sans_serif.epub \
+build_sans_serif_ebook: $(tgt_figures) epub/book_sans_serif.epub \
 						epub/book_sans_serif.mobi \
 						epub/book_sans_serif.azw3 | make_release_dir
 
@@ -112,12 +102,12 @@ export_figures:
 	cd figures/ && bash export_figures.sh
 
 .PHONY: figures
-figures: $(SRC_FIGURES)
+figures: $(src_figures)
 	$(LATEX) $<
 
 .PHONY: clean_figures
 clean_figures:
-	$(CLEAN) $(SRC_FIGURES)
+	$(CLEAN) $(src_figures)
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
@@ -164,14 +154,13 @@ clean: clean_ebook_build clean_figures
 
 .PHONY: mrproper
 mrproper: clean
-	$(CLEAN) -C $(SRC_FIGURES)
+	$(CLEAN) -C $(src_figures)
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
 	-rm figures/*.pdf
 	-rm figures/*.png
 	rm -rf epub/
 	rm -rf release/
-	rm -rf release_sans_serif/
 	rm -rf book_serif/
 	rm -rf book_sans_serif/
 	rm -rf book-epub/
