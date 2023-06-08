@@ -1,7 +1,8 @@
 # Macros for commands
 LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
-EBOOK := tex4ebook -c tex4ebook.cfg
+EBOOK := tex4ebook -d epub -c tex4ebook.cfg
 CLEAN := latexmk -cd -c -use-make
+EBOOK_CONVERT := kindlegen
 
 # List all files that are dependencies
 SRC_FIGURES := $(wildcard figures/fig-*.tex)
@@ -35,30 +36,24 @@ book_serif/book.pdf: clean_ebook_build $(SRC_ALL)
 book_sans_serif/book_sans_serif.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-book-epub/%.epub: %.tex $(SRC_ALL)
+epub/book.epub: book.tex $(SRC_ALL)
 	$(EBOOK) -f epub $<
 
-book-mobi/%.mobi: %.tex $(SRC_ALL)
-	# not sure why, but I have to generate the mobi twice for the release
-	# command to properly work.
-	$(EBOOK) -f mobi $<
-	$(EBOOK) -f mobi $<
+epub/book.mobi: epub/book.epub
+	$(EBOOK_CONVERT) $< -o $(notdir $@)
 
-book-azw3/%.azw3: %.tex $(SRC_ALL)
-	$(EBOOK) -f azw3 $<
+epub/book.azw3:  epub/book.epub
+	$(EBOOK_CONVERT) $< -o $(notdir $@)
 
 # Not sure if there is a better way with a wildcard?
-book_sans_serif-epub/%.epub: %.tex $(SRC_ALL)
+epub/book_sans_serif.epub: book_sans_serif.tex $(SRC_ALL)
 	$(EBOOK) -f epub $<
 
-book_sans_serif-mobi/%.mobi: %.tex $(SRC_ALL)
-	# not sure why, but I have to generate the mobi twice for the release
-	# command to properly work.
-	$(EBOOK) -f mobi $<
-	$(EBOOK) -f mobi $<
+epub/book_sans_serif.mobi: epub/book_sans_serif.epub
+	$(EBOOK_CONVERT) $< -o $(notdir $@)
 
-book_sans_serif-azw3/%.azw3: %.tex $(SRC_ALL)
-	$(EBOOK) -f azw3 $<
+epub/book_sans_serif.azw3: epub/book_sans_serif.epub
+	$(EBOOK_CONVERT) $< -o $(notdir $@)
 
 # Now with the rules
 # Expected usual rules first
@@ -104,12 +99,12 @@ build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 build_ebook: build_serif_ebook build_sans_serif_ebook
 
 .PHONY: build_serif_ebook
-build_serif_ebook: $(TGT_FIGURES) book-epub/book.epub book-mobi/book.mobi book-azw3/book.azw3 | make_release_dir
+build_serif_ebook: $(TGT_FIGURES) epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
 
 .PHONY: build_sans_serif_ebook
-build_sans_serif_ebook: $(TGT_FIGURES) book_sans_serif-epub/book_sans_serif.epub \
-						book_sans_serif-mobi/book_sans_serif.mobi \
-						book_sans_serif-azw3/book_sans_serif.azw3 | make_release_dir
+build_sans_serif_ebook: $(TGT_FIGURES) epub/book_sans_serif.epub \
+						epub/book_sans_serif.mobi \
+						epub/book_sans_serif.azw3 | make_release_dir
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
@@ -174,13 +169,13 @@ mrproper: clean
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
 	-rm figures/*.pdf
 	-rm figures/*.png
-	rm -rf book*-mobi/
-	rm -rf book*-azw3/
-	rm -rf book*-epub/
-	rm -rf release/
+	rm -rf epub/
 	rm -rf release/
 	rm -rf release_sans_serif/
-	rm -rf release_sans_serif/
+	rm -rf book_serif/
+	rm -rf book_sans_serif/
+	rm -rf book-epub/
+	rm -rf book_sans_serif-epub/
 
 .PHONY: bake
 bake: release_default release_sans_serif
@@ -192,13 +187,13 @@ make_release_dir:
 .PHONY: release_default
 release_default: build_pdf build_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
-	cp book-mobi/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
-	cp book-epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
-	cp book-azw3/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
+	cp epub/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
+	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	cp epub/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
 
 .PHONY: release_sans_serif
 release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_dir
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
-	cp book_sans_serif-mobi/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
-	cp book_sans_serif-epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
-	cp book_sans_serif-azw3/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+	cp epub/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
+	cp epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
+	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
