@@ -119,7 +119,6 @@ clean_ebook_build:
 	-rm  book*.4tc
 	-rm  book*.4ct
 	-rm  book*.dvi
-	-rm  book*.epub
 	-rm  book.css
 	-rm  book_sans_serif.css
 	-rm  book*.idv
@@ -142,15 +141,6 @@ clean: clean_ebook_build clean_figures
 	-rm -rf book*-epub/META-INF
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
-	-rm -rf book*-mobi/META-INF
-	-rm -rf book*-mobi/OEBPS
-	-rm  book*-mobi/mimetype
-	-rm  book*-mobi/book.epub
-	-rm -rf book*-mobi/META-INF
-	-rm -rf book*-azw3/OEBPS
-	-rm -rf book*-azw3/META-INF
-	-rm  book*-azw3/book.epub
-	-rm  book*-azw3/mimetype
 
 .PHONY: mrproper
 mrproper: clean
