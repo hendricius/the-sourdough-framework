@@ -19,8 +19,10 @@
 \renewcommand\theadfont{\bfseries}
 
 % Fonts for accessibility
-%\usepackage{helvet}
-%\renewcommand{\familydefault}{\sfdefault}
+\ifdefined\isaccessible
+    \usepackage{helvet}
+    \renewcommand{\familydefault}{\sfdefault}
+\fi
 
 % References
 \usepackage[backend=biber]{biblatex}
