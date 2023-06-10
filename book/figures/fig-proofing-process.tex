@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [decision] (init) {\footnotesize Room temperature proofing?};
   \node [decision, right of=init, node distance=9cm] (retard_bake_decision) {\footnotesize Bake in less than 10 hours from now?};
@@ -23,4 +20,3 @@
   \path [line] (move_to_fridge) -- (retard);
   \path [line] (retard) -- (bake);
 \end{tikzpicture}
-\end{document}

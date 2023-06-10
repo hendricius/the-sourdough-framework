@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Make your bread dough};
   \node [decision, below of=init, node distance=3.5cm] (all_starter_used) {\footnotesize All starter used?};
@@ -33,4 +30,3 @@
   \path [line] (dry_starter) -- (reactivate_freezer);
   \path [line] (freeze_starter) -- (reactivate_freezer);
 \end{tikzpicture}
-\end{document}

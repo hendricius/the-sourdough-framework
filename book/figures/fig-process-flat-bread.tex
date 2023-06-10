@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto, every node/.style={inner sep=10, outer sep=0}]
 \node [block] (init) {Mix ingredients};
   \node [block, right of=init, node distance=5cm] (wait) {Wait for dough to be ready};
@@ -8,4 +5,3 @@
   \path [line] (init) -- (wait);
   \path [line] (wait) -- (bake_bread);
 \end{tikzpicture}
-\end{document}
