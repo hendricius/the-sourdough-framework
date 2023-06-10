@@ -11,7 +11,6 @@ chapters = baking basics bread-types flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
-src_tables  := $(wildcard tables/tables-*.tex)
 src_figures := $(wildcard figures/fig-*.tex)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
@@ -22,7 +21,6 @@ images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 
-tgt_figures := $(patsubst %.tex, %.pdf,$(src_figures))
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
 
 # Default rules for pdf and ebooks, getting overwritten when built in a
@@ -92,21 +90,11 @@ build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 build_ebook: build_serif_ebook build_sans_serif_ebook
 
 .PHONY: build_serif_ebook
-build_serif_ebook: $(tgt_figures) epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
+build_serif_ebook: epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
 
 .PHONY: build_sans_serif_ebook
-build_sans_serif_ebook: $(tgt_figures) epub/book_sans_serif.epub \
-						epub/book_sans_serif.mobi \
+build_sans_serif_ebook: epub/book_sans_serif.epub epub/book_sans_serif.mobi \
 						epub/book_sans_serif.azw3 | make_release_dir
-
-.PHONY: export_figures
-# Requires that you have docker running on your computer.
-export_figures:
-	cd figures/ && bash export_figures.sh
-
-.PHONY: figures
-figures: $(src_figures)
-	$(LATEX) $<
 
 .PHONY: check
 # Goal is not really to have 0 warning reported but we should check we don't
