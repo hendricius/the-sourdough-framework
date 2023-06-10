@@ -18,6 +18,15 @@
 
 \renewcommand\theadfont{\bfseries}
 
+\definecolor{codeblue}{RGB}{69, 161, 248}
+\definecolor{codegray}{RGB}{40, 40, 40}
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{decision} = [diamond, draw, fill=codegray, text=white,
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+
 % Fonts for accessibility
 \ifdefined\isaccessible
     \usepackage{helvet}
