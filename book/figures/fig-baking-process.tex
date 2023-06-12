@@ -11,7 +11,7 @@
   \node [block, below of=inverted_tray_method, node distance=3cm] (bake_30) {\footnotesize Bake dough for 30 minutes with steam};
   \node [block, right of=bake_30, node distance=3cm] (remove_steam) {\footnotesize Remove source of steam};
   \node [block, right of=remove_steam, node distance=3cm] (build_crust) {\footnotesize Build the crust};
-  \node [block, right of=build_crust, node distance=3cm] (finish_baking) {\footnotesize Stop baking 10-30 minutes later depending on crust preference};
+  \node [block, right of=build_crust, node distance=3cm] (finish_baking) {\footnotesize Stop baking 10--30 minutes later depending on crust preference};
   \path [line] (heat_oven) -- (score_dough);
   \path [line] (score_dough) -- (decide_steam);
   \path [line] (decide_steam) -- (inverted_tray_method);
