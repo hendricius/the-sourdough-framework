@@ -2,6 +2,8 @@
 LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
 EBOOK := tex4ebook -c tex4ebook.cfg
 CLEAN := latexmk -cd -c -use-make
+CHECK_1 := lacheck
+CHECK_2 := chktex 
 
 # List all files that are dependencies
 SRC_FIGURES := $(wildcard figures/fig-*.tex)
@@ -74,9 +76,13 @@ help:
 	@echo ""
 	@echo "default: builds the book in pdf format (serif)"
 	@echo ""
-	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as build release"
+	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as"
+	@echo "     build release"
 	@echo "bake: same as build all"
 	@echo "release_default: same as build all"
+	@echo ""
+	@echo "check: runs static analysis checker on LaTeX source to spot"
+	@echo "       programming or typographic mistakes"
 	@echo ""
 	@echo "clean: delete all intermediate files keep targets (pdf/ebook)"
 	@echo "mrproper: delete all generated files intermediate and pdf/ebooks"
@@ -119,6 +125,16 @@ export_figures:
 .PHONY: figures
 figures: $(SRC_FIGURES)
 	$(LATEX) $<
+
+.PHONY: check
+# Goal is not really to have 0 warning reported but we should check we don't
+# add many and if we do, we know they are false positive
+check: $(SRC_TEX)
+	@echo "Running: " $(CHECK_1) 
+	$(CHECK_1) book.tex
+	@echo ""
+	@echo "Running: " $(CHECK_2) 
+	$(CHECK_2) book.tex
 
 .PHONY: clean_figures
 clean_figures:
