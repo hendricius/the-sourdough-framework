@@ -4,7 +4,7 @@ EBOOK := tex4ebook -d epub -c tex4ebook.cfg
 CLEAN := latexmk -cd -c -use-make
 EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
-CHECK_2 := chktex 
+CHECK_2 := chktex
 
 # List all files that are dependencies
 chapters = baking basics bread-types flour-types history intro\
@@ -23,10 +23,20 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
 
+tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
+
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
 %.pdf: %.tex
 	$(LATEX) $<
+
+%.png: %.tex
+	@echo "\input{./vars}" > $@.in
+	# \b is backspace..
+	@echo "\\\begin{document}" >> $@.in
+	@cat $< >> $@.in
+	@echo "\end{document}" >> $@.in
+	$(LATEX) $@.in
 
 book_serif/book.pdf: clean_ebook_build $(SRC_ALL)
 	$(LATEX) -output-directory=book_serif book.tex
@@ -96,19 +106,27 @@ build_serif_ebook: epub/book.epub epub/book.mobi epub/book.azw3 | make_release_d
 build_sans_serif_ebook: epub/book_sans_serif.epub epub/book_sans_serif.mobi \
 						epub/book_sans_serif.azw3 | make_release_dir
 
-.PHONY: check
+.PHONY: export_figures
+# Requires that you have docker running on your computer.
+export_figures: $(tgt_figures)
+	echo $(tgt_figures)
+	cd figures/ && bash export_figures.sh
+
 # Goal is not really to have 0 warning reported but we should check we don't
 # add many and if we do, we know they are false positive
+PHONY: check
 check: $(SRC_TEX)
-	@echo "Running: " $(CHECK_1) 
+	@echo "Running: " $(CHECK_1)
 	$(CHECK_1) book.tex
 	@echo ""
-	@echo "Running: " $(CHECK_2) 
+	@echo "Running: " $(CHECK_2)
 	$(CHECK_2) book.tex
 
 .PHONY: clean_figures
 clean_figures:
-	$(CLEAN) $(src_figures)
+	$(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
+	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
+	- rm $(patsubst %.tex, %.png.in, $(src_figures))
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
@@ -149,7 +167,6 @@ mrproper: clean
 	$(CLEAN) -C $(src_figures)
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
-	-rm figures/*.pdf
 	-rm figures/*.png
 	rm -rf epub/
 	rm -rf release/
