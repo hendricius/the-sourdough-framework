@@ -132,6 +132,7 @@ clean_ebook_build:
 	-rm  book*.fdb_latexmk
 	-rm  book*.bbl
 	-rm  content.opf
+	-rm  book*x.svg
 
 .PHONY: clean
 clean: clean_ebook_build clean_figures
