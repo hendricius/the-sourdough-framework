@@ -124,7 +124,7 @@ check: $(SRC_TEX)
 
 .PHONY: clean_figures
 clean_figures:
-	$(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
+	- $(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
 	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
 	- rm $(patsubst %.tex, %.png.in, $(src_figures))
 
