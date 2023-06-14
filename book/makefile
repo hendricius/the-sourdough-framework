@@ -30,10 +30,10 @@ src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(imag
 %.pdf: %.tex
 	$(LATEX) $<
 
-book_serif/book.pdf: clean_ebook_build $(src_all)
+book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
 
-book_sans_serif/book_sans_serif.pdf: clean_ebook_build $(src_all)
+book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
 epub/%.epub: %.tex $(src_all)
