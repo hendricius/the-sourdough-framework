@@ -81,6 +81,9 @@ help:
 	@echo "Debug targets:"
 	@echo ""
 	@echo "show_tools_version: Show version of tools used on the build machine"
+	@echo ""
+	@echo "print-X: print makefile variable X"
+
 # Finally project specif targets
 .PHONY: build_pdf
 build_pdf: build_serif_pdf build_sans_serif_pdf
@@ -214,3 +217,7 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- make --version
 	@echo ""
+
+# You can find the value of variable X with the following command:
+# make print-X
+print-%: ; @echo $* = $($*)  # Print a makefile variable
