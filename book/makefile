@@ -77,7 +77,10 @@ help:
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
 	@echo "figures: build TikZ figures"
-
+	@echo ""
+	@echo "Debug targets:"
+	@echo ""
+	@echo "show_tools_version: Show version of tools used on the build machine"
 # Finally project specif targets
 .PHONY: build_pdf
 build_pdf: build_serif_pdf build_sans_serif_pdf
@@ -189,3 +192,25 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
 	cp epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+
+# Debug Stuff from now on
+.PHONY: show_tools_version
+show_tools_version:  # Show version of tools used on the build machine
+	- latexmk --version
+	@echo ""
+	- pdflatex --version
+	@echo ""
+	- tex4ebook --version
+	@echo ""
+	- make4ht --version
+	@echo ""
+	- tidy -version
+	@echo ""
+	- kindlegen --version
+	@echo ""
+	- lacheck --version
+	@echo ""
+	- chktex --version
+	@echo ""
+	- make --version
+	@echo ""
