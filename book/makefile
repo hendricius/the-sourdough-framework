@@ -6,6 +6,10 @@ EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex 
 
+ifdef DEBUG
+EBOOK += -a debug
+endif
+
 # List all files that are dependencies
 chapters = baking basics bread-types flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
@@ -85,6 +89,9 @@ help:
 	@echo "print-X: print makefile variable X"
 	@echo ""
 	@echo "printvars: print all variables in the makefile"
+	@echo ""
+	@echo "set DEBUG i.e make DEBUG=1 build_ebook to add debug flags to commands"
+
 
 # Finally project specif targets
 .PHONY: build_pdf
