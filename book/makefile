@@ -83,6 +83,8 @@ help:
 	@echo "show_tools_version: Show version of tools used on the build machine"
 	@echo ""
 	@echo "print-X: print makefile variable X"
+	@echo ""
+	@echo "printvars: print all variables in the makefile"
 
 # Finally project specif targets
 .PHONY: build_pdf
@@ -221,3 +223,9 @@ show_tools_version:  # Show version of tools used on the build machine
 # You can find the value of variable X with the following command:
 # make print-X
 print-%: ; @echo $* = $($*)  # Print a makefile variable
+
+.PHONY: printvars
+printvars:  # Print all variables in the makefile
+	@$(foreach V,$(sort $(.VARIABLES)), \
+	$(if $(filter-out environ% default automatic, \
+	$(origin $V)),$(info $V=$($V) ($(value $V)))))
