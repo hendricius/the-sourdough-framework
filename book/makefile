@@ -11,7 +11,7 @@ chapters = baking basics bread-types flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
-src_tables  := $(wildcard tables/tables-*.tex)
+src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
