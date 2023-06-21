@@ -65,7 +65,6 @@ help:
 	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as"
 	@echo "     build release"
 	@echo "bake: same as build all"
-	@echo "release_default: same as build all"
 	@echo ""
 	@echo "check: runs static analysis checker on LaTeX source to spot"
 	@echo "       programming or typographic mistakes"
@@ -75,12 +74,18 @@ help:
 	@echo "clean_figures: delete intermediate TikZ files"
 	@echo ""
 	@echo "build_ebook: builds only the ebook serif and accessible version"
-	@echo "build_pdf:builds both serif and accessible pdf"
+	@echo "build_pdf: builds both serif and accessible pdf"
 	@echo ""
 	@echo "build_sans_serif_ebook: build accessible ebook only"
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
+	@echo "build_serif_ebook: build serif ebook only"
+	@echo "build_serif_pdf: build serif pdf only"
+	@echo ""
 	@echo "figures: build TikZ figures"
+	@echo ""
+	@echo "release_serif: build serif only version of pdf and ebooks"
+	@echo "release_sans_serif: build sans-serif/accessible version of pdf and ebooks"
 	@echo ""
 	@echo "Debug targets:"
 	@echo ""
@@ -185,14 +190,14 @@ mrproper: clean
 	rm -rf book_sans_serif-epub/
 
 .PHONY: bake
-bake: release_default release_sans_serif
+bake: release_serif release_sans_serif
 
 .PHONY: make_release_dir
 make_release_dir:
 	mkdir -p release
 
-.PHONY: release_default
-release_default: build_pdf build_ebook | make_release_dir
+.PHONY: release_serif
+release_serif: build_serif_pdf build_serif_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
