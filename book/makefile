@@ -52,7 +52,7 @@ epub/%.azw3:  epub/%.epub
 # Now with the rules
 # Expected usual rules first
 .PHONY: default
-default: build_pdf
+default: build_serif_pdf
 
 .PHONY: all
 all: bake
