@@ -35,13 +35,13 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.pdf: %.tex
 	$(LATEX) $<
 
-book_serif/book.pdf: $(src_all) $(tgt_figures)
+book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
 
-book_sans_serif/book_sans_serif.pdf: $(src_all) $(tgt_figures)
+book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-epub/%.epub: %.tex $(src_all) $(tgt_figures)
+epub/%.epub: %.tex $(src_all)
 	$(EBOOK) -f epub $<
 
 epub/%.mobi: epub/%.epub
@@ -122,7 +122,6 @@ build_sans_serif_ebook: epub/book_sans_serif.epub epub/book_sans_serif.mobi \
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
 export_figures: $(tgt_figures)
-	echo $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 
 # Goal is not really to have 0 warning reported but we should check we don't
