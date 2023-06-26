@@ -6,15 +6,20 @@ EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex
 
+ifdef DEBUG
+EBOOK += -a debug
+endif
+
 # List all files that are dependencies
 chapters = baking basics bread-types flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
+src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
-src_tex += book.tex book_sans_serif.tex references.bib
+src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
 
 images := $(wildcard images/*/*.jpg)
 images += $(wildcard images/*/*.png)
@@ -38,13 +43,13 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 	@echo "\end{document}" >> $@.in
 	$(LATEX) $@.in
 
-book_serif/book.pdf: clean_ebook_build $(SRC_ALL)
+book_serif/book.pdf: $(src_all) $(tgt_figures)
 	$(LATEX) -output-directory=book_serif book.tex
 
-book_sans_serif/book_sans_serif.pdf: clean_ebook_build $(SRC_ALL)
+book_sans_serif/book_sans_serif.pdf: $(src_all) $(tgt_figures)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-epub/%.epub: %.tex $(src_all)
+epub/%.epub: %.tex $(src_all) $(tgt_figures)
 	$(EBOOK) -f epub $<
 
 epub/%.mobi: epub/%.epub
@@ -56,7 +61,7 @@ epub/%.azw3:  epub/%.epub
 # Now with the rules
 # Expected usual rules first
 .PHONY: default
-default: build_pdf
+default: build_serif_pdf
 
 .PHONY: all
 all: bake
@@ -69,7 +74,6 @@ help:
 	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as"
 	@echo "     build release"
 	@echo "bake: same as build all"
-	@echo "release_default: same as build all"
 	@echo ""
 	@echo "check: runs static analysis checker on LaTeX source to spot"
 	@echo "       programming or typographic mistakes"
@@ -79,12 +83,29 @@ help:
 	@echo "clean_figures: delete intermediate TikZ files"
 	@echo ""
 	@echo "build_ebook: builds only the ebook serif and accessible version"
-	@echo "build_pdf:builds both serif and accessible pdf"
+	@echo "build_pdf: builds both serif and accessible pdf"
 	@echo ""
 	@echo "build_sans_serif_ebook: build accessible ebook only"
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
+	@echo "build_serif_ebook: build serif ebook only"
+	@echo "build_serif_pdf: build serif pdf only"
+	@echo ""
 	@echo "figures: build TikZ figures"
+	@echo ""
+	@echo "release_serif: build serif only version of pdf and ebooks"
+	@echo "release_sans_serif: build sans-serif/accessible version of pdf and ebooks"
+	@echo ""
+	@echo "Debug targets:"
+	@echo ""
+	@echo "show_tools_version: Show version of tools used on the build machine"
+	@echo ""
+	@echo "print-X: print makefile variable X"
+	@echo ""
+	@echo "printvars: print all variables in the makefile"
+	@echo ""
+	@echo "set DEBUG i.e make DEBUG=1 build_ebook to add debug flags to commands"
+
 
 # Finally project specif targets
 .PHONY: build_pdf
@@ -176,14 +197,14 @@ mrproper: clean
 	rm -rf book_sans_serif-epub/
 
 .PHONY: bake
-bake: release_default release_sans_serif
+bake: release_serif release_sans_serif
 
 .PHONY: make_release_dir
 make_release_dir:
 	mkdir -p release
 
-.PHONY: release_default
-release_default: build_pdf build_ebook | make_release_dir
+.PHONY: release_serif
+release_serif: build_serif_pdf build_serif_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
@@ -195,3 +216,35 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
 	cp epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+
+# Debug Stuff from now on
+.PHONY: show_tools_version
+show_tools_version:  # Show version of tools used on the build machine
+	- latexmk --version
+	@echo ""
+	- pdflatex --version
+	@echo ""
+	- tex4ebook --version
+	@echo ""
+	- make4ht --version
+	@echo ""
+	- tidy -version
+	@echo ""
+	- kindlegen --version
+	@echo ""
+	- lacheck --version
+	@echo ""
+	- chktex --version
+	@echo ""
+	- make --version
+	@echo ""
+
+# You can find the value of variable X with the following command:
+# make print-X
+print-%: ; @echo $* = $($*)  # Print a makefile variable
+
+.PHONY: printvars
+printvars:  # Print all variables in the makefile
+	@$(foreach V,$(sort $(.VARIABLES)), \
+	$(if $(filter-out environ% default automatic, \
+	$(origin $V)),$(info $V=$($V) ($(value $V)))))
