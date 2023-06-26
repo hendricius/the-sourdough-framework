@@ -35,6 +35,15 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.pdf: %.tex
 	$(LATEX) $<
 
+# TODO: check if it works on github CI
+%.png: %.tex
+	@echo "\input{./vars}" > $@.in
+	# \b is backspace..
+	@echo "\\\begin{document}" >> $@.in
+	@cat $< >> $@.in
+	@echo "\end{document}" >> $@.in
+	$(LATEX) $@.in
+
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
 
