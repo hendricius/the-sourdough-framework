@@ -35,14 +35,6 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.pdf: %.tex
 	$(LATEX) $<
 
-%.png: %.tex
-	@echo "\input{./vars}" > $@.in
-	# \b is backspace..
-	@echo "\\\begin{document}" >> $@.in
-	@cat $< >> $@.in
-	@echo "\end{document}" >> $@.in
-	$(LATEX) $@.in
-
 book_serif/book.pdf: $(src_all) $(tgt_figures)
 	$(LATEX) -output-directory=book_serif book.tex
 
