@@ -1,14 +1,14 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (heat_oven) {\footnotesize Heat oven to 230°C (446°F) for 30 minutes};
+  \node [block] (heat_oven) {\footnotesize Heat oven to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
   \node [block, right of=heat_oven, node distance=3cm] (score_dough) {\footnotesize Score your dough};
   \node [decision, right of=score_dough, node distance=4cm] (decide_steam) {\footnotesize Choose your steaming method};
   \node [block, below of=heat_oven, node distance=4cm] (inverted_tray_method) {\footnotesize Inverted tray method};
   \node [block, right of=inverted_tray_method, node distance=3cm] (dutch_oven) {\footnotesize Dutch oven};
   \node [block, right of=dutch_oven, node distance=3cm] (steam_injection) {\footnotesize Steam injection oven};
-  \node [block, below of=inverted_tray_method, node distance=3cm] (bake_30) {\footnotesize Bake dough for 30 minutes with steam};
+  \node [block, below of=inverted_tray_method, node distance=3cm] (bake_30) {\footnotesize Bake dough for 30~minutes with steam};
   \node [block, right of=bake_30, node distance=3cm] (remove_steam) {\footnotesize Remove source of steam};
   \node [block, right of=remove_steam, node distance=3cm] (build_crust) {\footnotesize Build the crust};
-  \node [block, right of=build_crust, node distance=3cm] (finish_baking) {\footnotesize Stop baking 10--30 minutes later depending on crust preference};
+  \node [block, right of=build_crust, node distance=3cm] (finish_baking) {\footnotesize Stop baking 10--30~minutes later depending on crust preference};
   \path [line] (heat_oven) -- (score_dough);
   \path [line] (score_dough) -- (decide_steam);
   \path [line] (decide_steam) -- (inverted_tray_method);
