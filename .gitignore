@@ -19,6 +19,7 @@ book/content.opf
 book/output-epub
 book/figures/*.png
 book/figures/*.pdf
+book/figures/*.in
 book/tables/*.png
 book/tables/*.pdf
 book/release/*
@@ -53,4 +54,5 @@ book/book-azw3/
 book_sans_serif/
 book_serif/
 release_sans_serif/
+epub/
 *.opf
