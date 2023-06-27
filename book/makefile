@@ -130,7 +130,7 @@ build_sans_serif_ebook: epub/book_sans_serif.epub epub/book_sans_serif.mobi \
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
-export_figures: $(tgt_figures)
+export_figures: build_pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 
 # Goal is not really to have 0 warning reported but we should check we don't
