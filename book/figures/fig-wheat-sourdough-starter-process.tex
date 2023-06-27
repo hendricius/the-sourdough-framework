@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
   \node [block, right of=init, node distance=4cm] (feed_no_branch)
@@ -31,4 +28,3 @@
   \path [line] (smell_check) -- node{no} (feed_yes_branch);
   \path [line] (smell_check) -- node{yes} (make_dough);
 \end{tikzpicture}
-\end{document}

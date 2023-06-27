@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Mix 50g flour + 50g water, stir}; 
   \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 24 hours};
@@ -21,4 +18,3 @@
   \path [line] (wait2) -- (feed);
   \path [line] (decide) -- node{yes} (use);
 \end{tikzpicture}
-\end{document}

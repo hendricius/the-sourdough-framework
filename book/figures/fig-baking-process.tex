@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (heat_oven) {\footnotesize Heat oven to 230°C (446°F) for 30 minutes};
   \node [block, right of=heat_oven, node distance=3cm] (score_dough) {\footnotesize Score your dough};
@@ -24,4 +21,3 @@
   \path [line] (remove_steam) -- (build_crust);
   \path [line] (build_crust) -- (finish_baking);
 \end{tikzpicture}
-\end{document}

@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Homogenize recipe ingredients};
   \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15 minutes};
@@ -30,4 +27,3 @@
   \node [block, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
   \path [line] (dough_ball) -- (begin_bulk);
 \end{tikzpicture}
-\end{document}
