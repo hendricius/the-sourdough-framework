@@ -19,19 +19,19 @@ for bakers, the quantity of each ingredient
 is calculated as a percentage based on how much flour you have.
 Let me demonstrate this with a small example from
 a pizzeria. In the morning you check and you realize you
-have around 1 kilogram of flour.
-Your default recipe calls for around 600 grams of water.
+have around  \qty{1}{\kg} of flour.
+Your default recipe calls for around \qty{600}{\gram} of water.
 That would be a typical pizza dough, not too dry but
-also not too wet. Then you would be using around 20 grams
-of salt and around 100 grams of sourdough starter\footnote{This is my go to
+also not too wet. Then you would be using around \qty{20}{\gram}
+of salt and around \qty{100}{\gram} of sourdough starter\footnote{This is my go to
 pizza dough recipe. In Napoli modern pizzerias would use fresh or dry yeast.
 However traditionally pizza has always been made with sourdough.}.
-The next day you suddenly have 1.4 kilograms of flour
+The next day you suddenly have \qty{1.4}{\kg} of flour
 at hand and thus can make more pizza dough. What do you do?
 Do you multiply all the ingredients by 1.4? Yes you could,
 but there is an easier way. This is where baker's math
 comes in handy. Let's look at the default recipe with baker's
-math and then adjust it for the 1.4 kilogram flour quantity.
+math and then adjust it for the \qty{1.4}{\kg} flour quantity.
 
 \begin{table}[!htb]
 \begin{center}
@@ -41,40 +41,40 @@ math and then adjust it for the 1.4 kilogram flour quantity.
 \end{table}
 
 Note how each of the ingredients is calculated as a percentage
-based on the flour. The 100 percent is the baseline and represents the absolute
-amount of flour that you have at hand. In this case that's 1000 grams
-(1 kilogram).
+based on the flour. The \qty{100}{\percent} is the baseline and represents the absolute
+amount of flour that you have at hand. In this case that's \qty{1000}{\gram}
+(\qty{1}{\kg}).
 
 Now let's go back to our example and adjust the flour, as we have
 more flour available the next day. As mentioned the next day
-we have 1.4 kilograms at hand (1400 grams).
+we have \qty{1.4}{\kg} at hand (\qty{1400}{\gram}).
 
 \begin{table}[!htb]
     \begin{center}
         \input{tables/table-recipe-bakers-math.tex}
-        \caption{An example recipe that uses 1400 grams as its baseline and
+        \caption{An example recipe that uses \qty{1400}{\gram} as its baseline and
         is then calculated using baker's math.}
     \end{center}
 \end{table}
 
 For each ingredient we calculate the percentage
-based on the flour available (1400 grams). So for the water
-we calculate 60 percent based on 1400. Open up your
-calculator and type in 1400 * 0.6 and you have
-the absolute value in grams that you should be using.
-For the second day, that is 840 grams. Proceed to do the same
+based on the flour available (\qty{1400}{\gram}). So for the water
+we calculate \qty{60}{\percent} based on \num{1400}. Open up your
+calculator and type in \numproduct{1400}{0.6} and you have
+the absolute value in gram  that you should be using.
+For the second day, that is \qty{840}{\gram}. Proceed to do the same
 thing for all the other ingredients and you will know
 your recipe.
 
 
-Let's say you would want to use 50 kilograms of flour
+Let's say you would want to use \qty{50}{\kg} of flour
 the next day. What would you do? You would simply proceed
 to calculate the percentages one more time. I~like this
 way of writing recipes a lot. Imagine you wanted to make
 some pasta. You would like to know how much sauce you should
 be making. Now rather than making a recipe just for you, a
 hungry family arrives. You are tasked with making pasta
-for 20 people. How would you calculate the amount of sauce
+for \num{20} people. How would you calculate the amount of sauce
 you need? You go to the internet and check a recipe and then
 are completely lost when trying to scale it up.
 
@@ -103,7 +103,7 @@ contamination of the microbes you are trying to cultivate
 in your starter. More of them live on the hull compared to the
 endophytes living in the grain.
 
-Start by measuring approximately 50 grams each of flour and
+Start by measuring approximately \qty{50}{\gram} each of flour and
 water. The measurements don't have to be exact; you can use
 less or more, or just eyeball the proportions. These
 values are just shown as a reference.
@@ -114,8 +114,8 @@ like Germany, tap water is perfectly fine. Chlorine is added
 to water as a disinfectant to kill microorganisms, you will
 not be able to grow a starter with chlorinated water.
 
-In this process, the hydration of your starter is 100
-percent. This means you're using equal parts flour and
+In this process, the hydration of your starter is \qty{100}{\percent}.
+This means you're using equal parts flour and
 water. Stir everything together so that all the flour is
 properly hydrated. This step activates the microbial spores
 in your mixture, drawing them out of hibernation and
@@ -189,24 +189,24 @@ my kitchen.
 \end{figure}
 
 
-Wait for around 24 hours and observe what happens to your starter.
+Wait for around 24~hours and observe what happens to your starter.
 You might see some early signs of fermentation already. Use your nose
 to smell the dough. Look for bubbles in the dough. Your dough
 might already have increased in size a little bit. Whatever
 you see and notice is a sign of the first battle. Some microbes
 have already been outperformed. Others have won the first battle.
-After around 24 hours most of the starch has been broken down
+After around 24~hours most of the starch has been broken down
 and your microbes are hungry for additional sugars. With a spoon
-take around 10 grams from the previous day's mixture and place
+take around \qty{10}{\gram} from the previous day's mixture and place
 it in a new container. Again --- you could also simply eye ball
 all the quantities. It does not matter that much. Mix the 10
-grams from the previous day with another 50 grams of flour
-and 50 grams of water. Note the ratio of 1:5. I~very often use
+grams from the previous day with another \qty{50}{\gram} of flour
+and \qty{50}{\gram} of water. Note the ratio of 1:5. I~very often use
 1 part of old culture with 5 parts of flour and 5 parts of water.
 This is also very often the same ratio I~use when making a dough.
 A dough is nothing else than a sourdough starter with slightly different
-properties. I'd always be using around 100--200 grams of starter
-for around 1000 grams of flour (baker's math: 10--20 percent).
+properties. I'd always be using around \qtyrange{100}{200}{\gram} of starter
+for around \qty{1000}{\gram} of flour (baker's math: \qtyrange{10}{20}{\percent}).
 Homogenize your new mixture again with a spoon. Then cover
 the mix again with a glass or a lid. If you notice the top of
 your mixture dries out a lot consider using another cover. The
@@ -231,7 +231,7 @@ grow in population with each subsequent feeding. Even if you see no signs
 of activity directly, don't worry. There is activity in
 your starter on a microscopic level.
 
-24 hours later again we will repeat the same thing again until
+24~hours later again we will repeat the same thing again until
 we see that our sourdough starter is active. More on that in the
 next section of this book.
 
@@ -323,7 +323,7 @@ yeast part of your sourdough and balance the fermentation.
   \input{figures/fig-starter-maintenance.tex}
   \caption{A full flowchart showing you how to conduct proper sourdough starter maintenance. You can use a
   piece of your dough as the next starter. You can also use left-over starter and feed it again. Choose an
-  option that works best for your own schedule. The chart assumes that you are using a starter at a 100 percent
+  option that works best for your own schedule. The chart assumes that you are using a starter at a \qty{100}{\percent}
   hydration level. Adjust the water content accordingly when you use a stiff
 starter.}%
   \label{fig:sourdough-maintenance-process}
@@ -337,8 +337,8 @@ perform daily feedings of the starter. The key to understanding how to properly
 conduct maintenance is to understand what happens to your starter after you
 used it to make a dough. Whatever starter you have left, or a tiny piece of
 your bread dough can serve to make your next starter\footnote{I~very often use all my
-starter to make a dough. So if the recipe calls for 50g of starter I~make
-exactly 50g starter in advance. This means I~have no starter left. In that
+starter to make a dough. So if the recipe calls for \qty{50}{\gram} of starter I~make
+exactly \qty{50}{\gram} starter in advance. This means I~have no starter left. In that
 case I~would proceed to take tiny bit of the dough at the end of the
 fermentation period. This piece I~would use to regrow my starter again.}.
 
@@ -390,7 +390,7 @@ all your starter you can cut a piece of your dough. The dough itself is
 nothing different than a gigantic starter. I~recommend a 1:5:5 ratio like
 mentioned before. So take 1 piece of starter, feed with 5 parts of flour and 5
 parts of water. If it is very hot where you live, or if you want to make the
-bread around 24 hours later after your last feeding, change the ratio. In that
+bread around 24~hours later after your last feeding, change the ratio. In that
 case I~would go for a 1:10:10 ratio. Sometimes I~don't have enough starter.
 Then I~even use a ratio of 1:50:50 or 1:100:100. Depending on how much new
 flour you feed it takes longer for your starter to be ready again.
@@ -409,7 +409,7 @@ to make a lacto fermented hot sauce for instance.
 The colder it is the longer you preserve a good balance of yeast and
 bacteria. Generally, the warmer it is the faster the fermentation process is,
 and the colder it is the slower the whole process becomes.
-Below 4°C the starter fermentation almost completely stops. The
+Below  \qty{4}{\degreeCelsius} the starter fermentation almost completely stops. The
 fermentation speed at low temperatures depends on the
 strains of wild yeast and bacteria
 that you have cultivated.
@@ -425,7 +425,7 @@ Simply take your starter and mix it with flour. Try to crumble the starter as
 much as possible. Add more flour continuously until you notice that there is no
 moisture left. Place the flour starter in a dry place in your house. Let it
 dry out even more. If you have a dehydrator you can use this to speed up the
-process. Set it to around 30°C and dry the starter for 12--20 hours. The next
+process. Set it to around  \qty{30}{\degreeCelsius} and dry the starter for 12--20~hours. The next
 day your starter has dried out a bit. It is in a vulnerable state as there is still a bit
 of humidity left. Add some more flour to speed up the drying process. Repeat
 for another 2 days until you feel that there is no humidity left. This is
