@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Make a regular or stiff starter};
   \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix 1g existing starter, 5g flour and 25g water};
@@ -18,6 +15,5 @@
   \path [line] (test) -- (ready_signs);
   \path [line] (ready_signs) -- node{\footnotesize no} (feed_again);
   \path [line] (ready_signs) -- node{\footnotesize yes} (last_feed);
-  \path [line] (last_feed) -- node{\footnotesize after 6-12 hours} (bread_dough);
+  \path [line] (last_feed) -- node{\footnotesize after 6--12 hours} (bread_dough);
 \end{tikzpicture}
-\end{document}

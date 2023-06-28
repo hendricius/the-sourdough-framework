@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Make your bread dough};
   \node [decision, below of=init, node distance=3.5cm] (all_starter_used) {\footnotesize All starter used?};
@@ -14,12 +11,12 @@
   \path [line] (use_starter) -- (feed_starter);
   \node [decision, right of=feed_starter, node distance=3cm] (bake_next_day_check) {\footnotesize Bake next day?};
   \path [line] (feed_starter) -- (bake_next_day_check);
-  \node [block, right of=bake_next_day_check, node distance=3.5cm] (make_bread_dough) {\footnotesize Make bread dough again after 8-12 hours};
+  \node [block, right of=bake_next_day_check, node distance=3.5cm] (make_bread_dough) {\footnotesize Make bread dough again after 8--12 hours};
   \path [line] (bake_next_day_check) -- node{yes} (make_bread_dough);
   \node [decision, right of=use_starter, node distance=3cm] (bake_next_week_check) {\footnotesize Baking in next 2 weeks?};
   \node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {\footnotesize Store starter in fridge at 4°C(40°F)};
   \path [line] (bake_next_week_check) -- node{yes} (store_fridge);
-  \node [block, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ratio 8-12 hours before making dough};
+  \node [block, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ratio 8--12 hours before making dough};
   \path [line] (store_fridge) -- (feed_after_fridge);
   \path [line] (bake_next_day_check) -- node{no} (bake_next_week_check);
   \node [decision, below of=use_starter, node distance=3cm] (freezer_check) {\footnotesize Have a freezer?};
@@ -33,4 +30,3 @@
   \path [line] (dry_starter) -- (reactivate_freezer);
   \path [line] (freeze_starter) -- (reactivate_freezer);
 \end{tikzpicture}
-\end{document}

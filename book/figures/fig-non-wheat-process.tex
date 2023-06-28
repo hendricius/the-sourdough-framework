@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Mix ingredients};
   \node [block, below of=init, node distance=3cm] (bulk_ferment) {\footnotesize Bulk ferment};
@@ -14,4 +11,3 @@
   \path [line] (shape) -- (proof);
   \path [line] (proof) -- (bake);
 \end{tikzpicture}
-\end{document}

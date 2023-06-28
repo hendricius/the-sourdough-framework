@@ -8,7 +8,7 @@ You will learn to understand the signs to determine
 your starter's readiness. Furthermore you will
 also learn how to prepare your starter for long-term storage.
 
-\section{Baker's math}
+\section{Baker's math}%
 \label{section:bakers-math}
 
 In a large bakery, a determining factor is how
@@ -23,10 +23,9 @@ have around 1 kilogram of flour.
 Your default recipe calls for around 600 grams of water.
 That would be a typical pizza dough, not too dry but
 also not too wet. Then you would be using around 20 grams
-of salt and around 100 grams of sourdough starter.
-\footnote{This is my go to pizza dough recipe. In Napoli
-modern pizzerias would use fresh or dry yeast. However
-traditionally pizza has always been made with sourdough.}
+of salt and around 100 grams of sourdough starter\footnote{This is my go to
+pizza dough recipe. In Napoli modern pizzerias would use fresh or dry yeast.
+However traditionally pizza has always been made with sourdough.}.
 The next day you suddenly have 1.4 kilograms of flour
 at hand and thus can make more pizza dough. What do you do?
 Do you multiply all the ingredients by 1.4? Yes you could,
@@ -34,12 +33,12 @@ but there is an easier way. This is where baker's math
 comes in handy. Let's look at the default recipe with baker's
 math and then adjust it for the 1.4 kilogram flour quantity.
 
-\begin{figure}[!htb]
+\begin{table}[!htb]
 \begin{center}
-  \includegraphics{tables/table-bakers-math-example.pdf}
+  \input{tables/table-bakers-math-example.tex}
   \caption{An example table demonstrating how to properly calculate using baker's math}
 \end{center}
-\end{figure}
+\end{table}
 
 Note how each of the ingredients is calculated as a percentage
 based on the flour. The 100 percent is the baseline and represents the absolute
@@ -50,13 +49,13 @@ Now let's go back to our example and adjust the flour, as we have
 more flour available the next day. As mentioned the next day
 we have 1.4 kilograms at hand (1400 grams).
 
-\begin{figure}[H]
+\begin{table}[!htb]
     \begin{center}
-        \includegraphics{tables/table-recipe-bakers-math.pdf}
+        \input{tables/table-recipe-bakers-math.tex}
         \caption{An example recipe that uses 1400 grams as its baseline and
-        is then calculated using baker's math}
+        is then calculated using baker's math.}
     \end{center}
-\end{figure}
+\end{table}
 
 For each ingredient we calculate the percentage
 based on the flour available (1400 grams). So for the water
@@ -70,7 +69,7 @@ your recipe.
 
 Let's say you would want to use 50 kilograms of flour
 the next day. What would you do? You would simply proceed
-to calculate the percentages one more time. I like this
+to calculate the percentages one more time. I~like this
 way of writing recipes a lot. Imagine you wanted to make
 some pasta. You would like to know how much sauce you should
 be making. Now rather than making a recipe just for you, a
@@ -83,7 +82,7 @@ are completely lost when trying to scale it up.
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{sourdough-starter.jpg}
-  \caption{A very active sourdough starter shown by the bubbles in the dough}
+  \caption{A very active sourdough starter shown by the bubbles in the dough.}%
   \label{fig:sourdough-starter}
 \end{figure}
 
@@ -123,19 +122,21 @@ in your mixture, drawing them out of hibernation and
 reviving them.
 
 Finally, cover your mixture but make sure the covering is
-not airtight. I like to use a glass and place another
+not airtight. I~like to use a glass and place another
 inverted one on top. The container shouldn't be airtight,
 you still want some gas exchange to be possible.
 
 \begin{figure}[!htb]
-  \includegraphics{figures/fig-starter-process.pdf}
-  \caption{The process of making a sourdough starter from scratch}
+\begin{center}
+  \input{figures/fig-starter-process.tex}
+  \caption{The process of making a sourdough starter from scratch.}%
   \label{fig:sourdough-starter-process}
+\end{center}
 \end{figure}
 
 Now an epic battle begins. In one study scientists
 have identified more than 150 different yeast species living
-on a single leaf of a plant \cite{yeasts+biocontrol+agent}.
+on a single leaf of a plant~\cite{yeasts+biocontrol+agent}.
 All of the different yeasts and bacteria are trying to get
 the upper hand in this battle. Other pathogens such as mold
 are also being activated as we added water. Only the strongest
@@ -167,7 +168,7 @@ niche are going to survive. This means the microorganisms that know
 how to convert maltose or glucose will have the upper hand. Or the
 microbes that ferment the waste of the other microbes. Ethanol created
 by the yeast is metabolized by the bacteria in your sourdough. That's
-why a sourdough has no alcohol. I can confirm the role of aerial
+why a sourdough has no alcohol. I~can confirm the role of aerial
 contamination to a certain extent. When setting up a new sourdough
 starter the whole process is quite quick for me. After a few
 days my new starter seems to be quite alive already. This might
@@ -176,12 +177,14 @@ my kitchen.
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{sourdough-starter-microbial-war}
-  \caption{A simple visualization of the microbial warfare that happens during the making of a sourdough starter. The
-  wild spores on the plant and flour become activated the moment flour and water is mixed.
-  Only the most adapted flour-fermenting microbes will survive. Because of unwanted microbial fermentation it is advised
-  to discard the feeding-leftovers of the first days. The surviving yeast and bacteria continuously try to
-  outcompete each other for resources. New microbes have a hard time entering the starter and are eliminated.
-  }
+  \caption{A simple visualization of the microbial warfare that happens during
+      the making of a sourdough starter. The wild spores on the plant and
+      flour become activated the moment flour and water is mixed.  Only the
+      most adapted flour-fermenting microbes will survive. Because of unwanted
+      microbial fermentation it is advised to discard the feeding-leftovers of
+      the first days. The surviving yeast and bacteria continuously try to
+      outcompete each other for resources. New microbes have a hard time
+      entering the starter and are eliminated.}%
   \label{fig:sourdough-starter-microbial-war}
 \end{figure}
 
@@ -195,28 +198,28 @@ have already been outperformed. Others have won the first battle.
 After around 24 hours most of the starch has been broken down
 and your microbes are hungry for additional sugars. With a spoon
 take around 10 grams from the previous day's mixture and place
-it in a new container. Again - you could also simply eye ball
+it in a new container. Again --- you could also simply eye ball
 all the quantities. It does not matter that much. Mix the 10
 grams from the previous day with another 50 grams of flour
-and 50 grams of water. Note the ratio of 1:5. I very often use
+and 50 grams of water. Note the ratio of 1:5. I~very often use
 1 part of old culture with 5 parts of flour and 5 parts of water.
-This is also very often the same ratio I use when making a dough.
+This is also very often the same ratio I~use when making a dough.
 A dough is nothing else than a sourdough starter with slightly different
-properties. I'd always be using around 100-200 grams of starter
-for around 1000 grams of flour (baker's math: 10-20 percent).
+properties. I'd always be using around 100--200 grams of starter
+for around 1000 grams of flour (baker's math: 10--20 percent).
 Homogenize your new mixture again with a spoon. Then cover
 the mix again with a glass or a lid. If you notice the top of
 your mixture dries out a lot consider using another cover. The
 dried-out parts will be composted by more adapted microbes such as
-mold. In many user reports, I saw mold being able to damage
+mold. In many user reports, I~saw mold being able to damage
 the starter when the starter itself dried out a lot. You will
 still have some mixture left from your first day. As this contains
 possibly dangerous pathogens that have been activated we will discard
 this mixture. Once your sourdough starter is mature never
 discard it. It's long-fermented flour that is an excellent addon
 used to make crackers, pancakes and or delicious hearty sandwich
-bread. I also frequently dry it and use it as a rolling agent
-for pizzas that I am making.
+bread. I~also frequently dry it and use it as a rolling agent
+for pizzas that I~am making.
 
 You should hopefully again see some bubbles, the starter increasing
 in size and/or the starter changing its smell. Some people give
@@ -247,11 +250,13 @@ yeast has been isolated like this from century old sourdough
 starters.
 
 \begin{figure}[!htb]
-  \includegraphics{figures/fig-starter-readiness.pdf}
+\begin{center}
+  \input{figures/fig-starter-readiness.tex}
   \caption{A flow chart showing you how to determine if your sourdough starter is ready to be used.
   For checking readiness look at a size increase and take note of your starter's smell. Both are important
-  indicators to check for readiness.}
+  indicators to check for readiness.}%
   \label{fig:sourdough-starter-readiness}
+\end{center}
 \end{figure}
 
 The key signs to look at are bubbles that you see in your starter
@@ -266,14 +271,14 @@ more gluten and will thus result in a larger size increase. At
 the same time the microbes are probably not more active compared
 to when living in rye sourdough. You could only argue that
 wheat microbes might be better at breaking down gluten compared
-to rye microbes. That's one of the reasons why I decided to change
-the flour of my sourdough starter quite often. I had hoped to create
-an all-around starter that can ferment all sorts of different flour.\footnote
-{Whether this is working I can't scientifically say.
+to rye microbes. That's one of the reasons why I~decided to change
+the flour of my sourdough starter quite often. I~had hoped to create
+an all-around starter that can ferment all sorts of different
+flour\footnote{Whether this is working I~can't scientifically say.
 Typically the microbes that have once taken place are very strong
 and won't allow other microbes to enter. My starter has initially
 been made with rye flour. So chances are that the majority of
-my microorganisms are from a rye source.} Your nose is also
+my microorganisms are from a rye source.}. Your nose is also
 a great tool to determine starter readiness. Depending on
 your starter's microbiome you should notice either the smell
 of lactic acid or acetic acid. Lactic acid has dairy yogurty notes.
@@ -294,10 +299,10 @@ on top of some water. If the dough is full with gas it will float
 on top of the water. If it's not ready, it can't float and will
 sink to the bottom. This test does not work with every flour.
 Rye flour for instance can't retain the gas as well as wheat flour
-and thus in some cases will not float. That's why I personally
+and thus in some cases will not float. That's why I~personally
 don't use this test and can't recommend it.
 
-Once you see your starter is ready I would recommend giving it
+Once you see your starter is ready I~would recommend giving it
 one last feeding and then you are ready to make your dough in the
 evening or the next day. For the instructions to make your
 first dough please refer to the next chapters in this book.
@@ -314,12 +319,15 @@ yeast part of your sourdough and balance the fermentation.
 \section{Maintenance}
 
 \begin{figure}[!htb]
-  \includegraphics{figures/fig-starter-maintenance.pdf}
+\begin{center}
+  \input{figures/fig-starter-maintenance.tex}
   \caption{A full flowchart showing you how to conduct proper sourdough starter maintenance. You can use a
   piece of your dough as the next starter. You can also use left-over starter and feed it again. Choose an
   option that works best for your own schedule. The chart assumes that you are using a starter at a 100 percent
-  hydration level. Adjust the water content accordingly when you use a stiff starter.}
+  hydration level. Adjust the water content accordingly when you use a stiff
+starter.}%
   \label{fig:sourdough-maintenance-process}
+\end{center}
 \end{figure}
 
 You have made your sourdough starter and your first bread. How do you perform
@@ -328,12 +336,11 @@ methods out there. Some people go completely crazy about their starter and
 perform daily feedings of the starter. The key to understanding how to properly
 conduct maintenance is to understand what happens to your starter after you
 used it to make a dough. Whatever starter you have left, or a tiny piece of
-your bread dough can serve to make your next starter.\footnote{I very often use all my
-starter to make a dough. So if the recipe calls for 50g of starter I make
-exactly 50g starter in advance. This means I have no starter left. In that
-case I would proceed to take tiny bit of the dough at the end of the
-fermentation period. This piece I would use to regrow my starter again.}
-
+your bread dough can serve to make your next starter\footnote{I~very often use all my
+starter to make a dough. So if the recipe calls for 50g of starter I~make
+exactly 50g starter in advance. This means I~have no starter left. In that
+case I~would proceed to take tiny bit of the dough at the end of the
+fermentation period. This piece I~would use to regrow my starter again.}.
 
 As explained earlier your starter is adapted
 to fermenting flour. The microbes in your starter are very resilient. They
@@ -344,7 +351,7 @@ microbes when it comes to fermenting flour. Normally everything in nature
 starts to decompose after a while. However, the microbes of your starter have
 very strong defense mechanisms. In the end, your sourdough starter can be
 compared to pickled food. Pickled food has been shown to stay good for a very
-long period of time \cite{pickled+foods+expiration}. The acidity of your sourdough starter is quite
+long period of time~\cite{pickled+foods+expiration}. The acidity of your sourdough starter is quite
 toxic to other microbes. The yeast and bacteria though have adapted to living
 in the high-acid environment. Compare this to your stomach, the acidity
 neutralizes many possible pathogens. As long as your starter has sufficient
@@ -353,14 +360,14 @@ food the microbes will start to sporulate. They prepare for a period of no
 food and will then reactivate the moment new food is present. The
 spores are very resilient and can survive under extreme conditions.
 Scientists have claimed they found 250 million-year-old spores that are still
-active \cite{old+spores}. While being spores
+active~\cite{old+spores}. While being spores
 they are however more vulnerable to external pathogens such as mold.
 Under ideal conditions though the spores can survive for a
 long time.
 
 But as long as they stay in the environment of your starter they live
 in a very protected environment. Other fungi and bacteria have a hard time decomposing your left over starter mass.
-I have seen only very few cases where the starter actually died. It is almost impossible
+I~have seen only very few cases where the starter actually died. It is almost impossible
 to kill a starter.
 
 What happens though is that the balance of yeast and
@@ -376,26 +383,26 @@ sourdough starter into the right shape again.
 The following are a couple of scenarios that will help you to conduct proper
 starter maintenance, depending on when you want to bake the next time.
 
-\textbf{I would like to bake again the next day:}
+\textbf{I~would like to bake again the next day:}
 
 Simply take whatever starter you have left and feed it again. If you depleted
 all your starter you can cut a piece of your dough. The dough itself is
-nothing different than a gigantic starter. I recommend a 1:5:5 ratio like
+nothing different than a gigantic starter. I~recommend a 1:5:5 ratio like
 mentioned before. So take 1 piece of starter, feed with 5 parts of flour and 5
 parts of water. If it is very hot where you live, or if you want to make the
 bread around 24 hours later after your last feeding, change the ratio. In that
-case I would go for a 1:10:10 ratio. Sometimes I don't have enough starter.
-Then I even use a ratio of 1:50:50 or 1:100:100. Depending on how much new
+case I~would go for a 1:10:10 ratio. Sometimes I~don't have enough starter.
+Then I~even use a ratio of 1:50:50 or 1:100:100. Depending on how much new
 flour you feed it takes longer for your starter to be ready again.
 
-\textbf{I would like to take a break and bake next week:}
+\textbf{I~would like to take a break and bake next week:}
 
 Simply take your leftover starter and place it inside of your fridge. It will stay good
-for a very long period. The only thing I see happening is the surface
-drying out in the fridge. So I recommend drowning the starter in a little bit
+for a very long period. The only thing I~see happening is the surface
+drying out in the fridge. So I~recommend drowning the starter in a little bit
 of water. This extra layer of water provides good protection from the top
 part drying out. As mold is aerobic it can not grow efficiently under
-water \cite{mold+anaerobic}. Before using the starter again simply either stir
+water~\cite{mold+anaerobic}. Before using the starter again simply either stir
 the liquid into the dough or drain it. If you drain the liquid you can use it
 to make a lacto fermented hot sauce for instance.
 
@@ -407,7 +414,7 @@ fermentation speed at low temperatures depends on the
 strains of wild yeast and bacteria
 that you have cultivated.
 
-\textbf{I would like to take a several months break:}
+\textbf{I~would like to take a several months break:}
 
 Drying your starter might be the best option to preserve it in this case. As
 you remove humidity and food your microbes will sporulate. As there is no
@@ -418,7 +425,7 @@ Simply take your starter and mix it with flour. Try to crumble the starter as
 much as possible. Add more flour continuously until you notice that there is no
 moisture left. Place the flour starter in a dry place in your house. Let it
 dry out even more. If you have a dehydrator you can use this to speed up the
-process. Set it to around 30°C and dry the starter for 12-20 hours. The next
+process. Set it to around 30°C and dry the starter for 12--20 hours. The next
 day your starter has dried out a bit. It is in a vulnerable state as there is still a bit
 of humidity left. Add some more flour to speed up the drying process. Repeat
 for another 2 days until you feel that there is no humidity left. This is
@@ -429,7 +436,7 @@ is now waiting for your next feeding. If available you can add some silica
 bags to the container to further absorb excess moisture.
 
 Initially, it would take 3 days or so for my starter to become alive again
-after drying and reactivating it. If I do the same thing now my starter is
+after drying and reactivating it. If I~do the same thing now my starter is
 sometimes ready after a single feeding. It seems that the microbes adapt. The ones
 that survive this shock become dominant subsequently.
 

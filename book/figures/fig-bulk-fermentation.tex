@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Bulk fermentation};
   \node [block, right of=init] (check_dough) {\footnotesize Check the dough};
@@ -27,4 +24,3 @@
   \path [line] (stretch_fold) -- (wait_60_minutes);
   \path [line] (wait_60_minutes) -- (check_dough);
 \end{tikzpicture}
-\end{document}

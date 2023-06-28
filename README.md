@@ -75,6 +75,11 @@ There's an additional enhanced accessibility version using a sans serif font:
 * [Download compiled .mobi version](https://www.the-bread-code.io/book-sans-serif.mobi)
 * [Download compiled .azw3 version](https://www.the-bread-code.io/book-sans-serif.azw3)
 
+## Hardcover version
+
+There is a hardcover version of the book available for purchase. [You can
+read more details here.](https://breadco.de/physical-book)
+
 ## Support
 
 Did you find a typo, or feel the wording could be improved?
@@ -87,8 +92,8 @@ budget constraints.
 
 If you would like to contribute with a small donation you can do so
 via my [ko-fi page.](https://breadco.de/book) Your donation will tremendously
-help me to cover costs related to running the-bread-code. It futhermore allows
-me to dedidcate time to continously update and improve this book.
+help me to cover costs related to running the-bread-code. It furthermore allows
+me to dedicate time to continuously update and improve this book.
 
 ## Links
 

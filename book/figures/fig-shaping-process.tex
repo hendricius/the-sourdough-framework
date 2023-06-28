@@ -1,6 +1,3 @@
-\input{./vars}
-
-\begin{document}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [block] (init) {\footnotesize Begin shaping};
   \node [decision, right of=init, node distance=5cm] (overfermented_decision) {\footnotesize Dough overly sticky or dough tears?};
@@ -18,4 +15,3 @@
   \path [line] (banneton) -- (proof);
   \path [line] (overfermented) -- (loafpan);
 \end{tikzpicture}
-\end{document}
