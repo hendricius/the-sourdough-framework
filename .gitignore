@@ -54,5 +54,6 @@ book/book-azw3/
 book_sans_serif/
 book_serif/
 release_sans_serif/
+book/book_sans_serif-epub/
 epub/
 *.opf
