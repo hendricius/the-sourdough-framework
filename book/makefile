@@ -20,6 +20,7 @@ src_figures := $(wildcard figures/fig-*.tex)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
+src_tex += supporters.csv
 
 images := $(wildcard images/*/*.jpg)
 images += $(wildcard images/*/*.png)
