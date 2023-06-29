@@ -15,20 +15,7 @@ bread at home.
 
 Thank you very much for your support!\\
 
-\begin{filecontents}{supporters.csv}
-  \end{filecontents}
+\textbf{Big shout-out to all the initial supporters who helped launching this
+project:\\}
 
-  {Big shout-out to all the initial supporters who helped launching this project:}
-
-  \pgfplotstableset{
-  begin table=\begin{longtable},
-  end table=\end{longtable},
-  }
-
-  \pgfplotstabletypeset[col sep=comma,
-  header=true,
-  columns={Name},
-  columns/Name/.style={column type=l,string type},
-  every head row/.style={before row=\toprule, after row=\midrule\endhead},
-  every last row/.style={after row=\bottomrule}
-  ]{supporters.csv}
+\input{supporters.csv}
