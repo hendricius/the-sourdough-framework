@@ -5,6 +5,7 @@ CLEAN := latexmk -cd -c -use-make
 EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex
+WEBSITE_DIR := static_website_html
 
 ifdef DEBUG
 EBOOK += -a debug
@@ -216,6 +217,15 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
 	cp epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
+
+.PHONY: website
+website:
+	if command -v cowsay &> /dev/null; then\
+		cowsay "baking the website";\
+	fi
+	rm -rf $(WEBSITE_DIR)
+	make4ht -uf html5+tidy+common_domfilters -d $(WEBSITE_DIR) book.tex
+	mv $(WEBSITE_DIR)/bookli1.html $(WEBSITE_DIR)/index.html
 
 # Debug Stuff from now on
 .PHONY: show_tools_version
