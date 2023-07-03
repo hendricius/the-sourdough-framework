@@ -34,8 +34,8 @@ jobs:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
-          source_dir: book/html
-          destination_dir: static_website_html
+          source_dir: book/static_website_html
+          destination_dir: static_html_root
       - name: Invalidate Cloudfront book cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
