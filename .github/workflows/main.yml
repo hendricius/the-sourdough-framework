@@ -19,6 +19,7 @@ jobs:
             mv kindlegen /usr/bin
             cd book
             make bake
+            make website
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
@@ -27,10 +28,26 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
           source_dir: book/release
           destination_dir: release
+      - name: Release website
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
+          source_dir: book/html
+          destination_dir: static_html_root
       - name: Invalidate Cloudfront book cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_BOOK }}
+          PATHS: "/*"
+          AWS_REGION: "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Invalidate Cloudfront website cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_WEBSITE }}
           PATHS: "/*"
           AWS_REGION: "us-east-1"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}

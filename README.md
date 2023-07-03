@@ -75,6 +75,10 @@ There's an additional enhanced accessibility version using a sans serif font:
 * [Download compiled .mobi version](https://www.the-bread-code.io/book-sans-serif.mobi)
 * [Download compiled .azw3 version](https://www.the-bread-code.io/book-sans-serif.azw3)
 
+## Online HTML version (WIP)
+
+Head over to [https://www.the-sourdough-framework.com](https://www.the-sourdough-framework.com)
+
 ## Hardcover version
 
 There is a hardcover version of the book available for purchase. [You can

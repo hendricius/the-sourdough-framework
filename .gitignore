@@ -55,5 +55,6 @@ book_sans_serif/
 book_serif/
 release_sans_serif/
 book/book_sans_serif-epub/
+book/static_website_html/
 epub/
 *.opf
