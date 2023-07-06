@@ -1,0 +1,166 @@
+/* 
+Color scheme 
+#bab5a9;
+#d5e3c6 
+
+ */
+
+/* ************** */
+/* *** Fonts  *** */
+/* ************** */
+
+/* Font size tricks from https://www.madebymike.com.au/writing/precise-control-responsive-typography/ 
+ * The font size will be adjusted to the screen size.
+ * */
+:root{
+  font-size: 16px;
+}
+
+/* the min width is calculated as:
+ * font-size / ( number of viewport units / 100 )
+ * it means 16 / (1.5/100)
+ */
+@media (min-width: 1200px){
+  :root {
+    font-size: 1.5vw;
+  }
+}
+
+/* Maximal font size should be 24px, so stop font scalling at some point (24 / (1.5/100)) */
+
+@media (min-width: 1500px){
+  :root {
+    font-size: 20px;
+  }
+}
+
+/* ************** */
+/* *** Layout *** */
+/* ************** */
+
+body{
+  /* max-width:52rem; */
+  margin:0;
+  padding:0;
+  /* display:grid; */
+  /* grid-auto-rows: auto; */
+}
+
+@media screen and (min-width: 57rem) {
+  body{
+    display:grid;
+    grid-template-columns: 15rem 1fr;
+  }
+  main.main-content, main.titlepage, div.footnotes{max-width:40rem;grid-column: 2}
+  main.titlepage {grid-row: 1;}
+  nav.TOC{
+    grid-row:1;
+    grid-column: 1;
+    min-height:100vh;
+  }
+}
+
+
+/* ****************** */
+/* *** Formatting *** */
+/* ****************** */
+
+main.main-content,main.titlepage,div.footnotes{
+  padding:1rem;
+}
+
+p.indent, p.noindent{text-indent:0}
+/* code{font-size:1.4rem;} */
+/* figure pre.listings{font-size: 1.4rem;} */
+figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
+  margin:0.5rem 0; 
+  padding-left:0.5rem; 
+  overflow:auto;
+}
+figure pre.listings{font-size: 1em;}
+
+.chapterToc, .sectionToc, .subsectionToc{margin:0;padding:0;}
+nav.TOC{
+  padding:0.5rem;
+  font-size:0; /* trick to remove vertical space above TOC entries */
+}
+
+ .chapterToc ~ .likesectionToc, .chapterToc ~ .sectionToc, .likechapterToc ~ .likesectionToc, .likechapterToc ~ .sectionToc {padding-left:2em;margin-left:0}
+ .chapterToc ~ .likesectionToc ~ .likesubsectionToc, .chapterToc ~ .likesectionToc ~ .subsectionToc, .chapterToc ~ .sectionToc ~ .likesubsectionToc, .chapterToc ~ .sectionToc ~ .subsectionToc, .likechapterToc ~ .likesectionToc ~ .likesubsectionToc, .likechapterToc ~ .likesectionToc ~ .subsectionToc, .likechapterToc ~ .sectionToc ~ .likesubsectionToc, .likechapterToc ~ .sectionToc ~ .subsectionToc {padding-left:4em;margin-left:0;}
+
+nav.TOC span{
+  display:block;
+  margin-top:0;
+  font-size:0.8rem;
+}
+
+nav.TOC a, nav.TOC a:visited{
+  text-decoration:none;
+}
+
+/* ************** */
+/* *** Colors *** */
+/* ************** */
+
+
+/* body{background-color:#dce8d0;} */
+/* It seems that dark background is better to my eyes */
+body{background-color:#B8CDA3;} 
+
+main.main-content, div.footnotes, main.titlepage{
+  background-color:white;
+}
+
+nav.TOC,nav.TOC a, nav.TOC a:visited{
+  background-color:#22211f;
+  color:#cec1aa;
+}
+
+nav.TOC span:hover, nav.TOC span:hover *{
+  background-color:#66635d;
+}
+
+
+
+figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
+  border:1px solid #cec1aa; 
+  background-color:#d5e3c6;
+}
+
+/* ***************** */
+/* *** Dark mode *** */
+/* ***************** */
+
+/* Code from https://ar.al/2021/08/24/implementing-dark-mode-in-a-handful-of-lines-of-css-with-css-filters/ */
+
+@media (prefers-color-scheme: dark) {
+  /* Invert all elements on the body while attempting to not alter the hue substantially. */
+  body {
+    filter: invert(100%) hue-rotate(180deg);
+  }
+
+  /* Workarounds and optical adjustments. */
+
+  /* Firefox workaround: Set the background colour for the html
+     element separately because, unlike other browsers, Firefox
+     doesn’t apply the filter to the root element’s background. */
+  html {
+    background-color: #111;
+  }
+
+  /* Do not invert media (revert the invert). */
+  img, video, iframe {
+    filter: invert(100%) hue-rotate(180deg);
+  }
+
+
+  /* Re-enable code block backgrounds. */
+  pre {
+    filter: invert(6%);
+  }
+
+  /* Improve contrast on list item markers. */
+  li::marker {
+    color: #666;
+  }
+}

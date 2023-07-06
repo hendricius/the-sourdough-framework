@@ -225,8 +225,8 @@ website:
 		cowsay "baking the website";\
 	fi
 	rm -rf $(WEBSITE_DIR)
-	make4ht -uf html5+tidy+common_domfilters -d $(WEBSITE_DIR) book.tex
-	mv $(WEBSITE_DIR)/bookli1.html $(WEBSITE_DIR)/index.html
+	make4ht -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
+	mv $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
 
 # Debug Stuff from now on
 .PHONY: show_tools_version

@@ -4,5 +4,15 @@ local removeWidth = function(s) return s:gsub('width="%d+"', '') end
 local removeMaxWidth = function(s) return s:gsub(' max-width: %d+px;', '') end
 local removeFixedSettings = function(s) return removeMaxWidth(removeWidth(removeHeight(s))) end
 local process = filter{removeFixedSettings}
+local domfilter = require "make4ht-domfilter"
+
+
+filter_settings "collapsetoc" {
+  toc_query = "nav.TOC"
+}
+
+local domprocess = domfilter{"collapsetoc"}
 Make:latexmk {}
+-- Make:htlatex {}
 Make:match("html$",process)
+Make:match("html$",domprocess)

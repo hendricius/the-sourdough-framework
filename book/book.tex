@@ -9,7 +9,6 @@
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage{tocloft}
-\usepackage{tex4ebook}
 \usepackage{chemformula}
 \usepackage{booktabs}
 \usepackage{makecell}
@@ -79,6 +78,7 @@
 
 \begin{document}
 
+\frontmatter
 % Title page
 \begin{titlepage}
 \begin{center}
@@ -88,9 +88,9 @@
 \end{center}
 \end{titlepage}
 
-\frontmatter
 
-\tableofcontents
+% \tableofcontents
+\ifdefined\HCode\else\tableofcontents\fi
 
 \chapter{Foreword}
 \input{intro/foreword}
