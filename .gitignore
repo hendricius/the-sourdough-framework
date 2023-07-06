@@ -10,6 +10,8 @@
 *.bcf
 *.blg
 *.run.xml
+*.html
+*.dlog
 book/book.out
 .vscode/
 book/book.synctex*
@@ -55,6 +57,6 @@ book_sans_serif/
 book_serif/
 release_sans_serif/
 book/book_sans_serif-epub/
-book/static_website_html/
+book/static_website_html/*
 epub/
 *.opf
