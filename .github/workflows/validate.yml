@@ -10,7 +10,7 @@ jobs:
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
-            apk add make zip tidyhtml
+            apk add make zip tidyhtml git sudo pandoc
             wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz
             tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz
             mv kindlegen /usr/bin
