@@ -33,12 +33,6 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET_BOOK }}
           source_dir: book/release
           destination_dir: release
-      - name: Bake the website
-        uses: xu-cheng/texlive-action/full@v1
-        with:
-          run: |
-            apk add make zip tidyhtml
-            make website
       - name: Release baked website to S3
         uses: shallwefootball/s3-upload-action@master
         with:
