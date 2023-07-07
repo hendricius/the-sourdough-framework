@@ -229,8 +229,6 @@ website:
 	mv $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
 	sed -r -i -e 's|<title></title>|<title>The Sourdough Framework</title>|g' $(WEBSITE_DIR)/index.html
 
-
-
 # Debug Stuff from now on
 .PHONY: show_tools_version
 show_tools_version:  # Show version of tools used on the build machine
