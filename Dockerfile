@@ -3,6 +3,7 @@ FROM ubuntu:latest
 LABEL "maintainer"="Hendrik Kleinwächter <hendrik.kleinwaechter@gmail.com>"
 LABEL "repository"="https://github.com/hendricius/the-sourdough-framework"
 LABEL "homepage"="https://github.com/hendricius/the-sourdough-framework"
+LABEL org.opencontainers.image.source="https://github.com/hendricius/the-sourdough-framework"
 
 # Install base depdendencies
 RUN apt-get update && \
