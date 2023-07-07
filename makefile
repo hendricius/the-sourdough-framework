@@ -19,3 +19,7 @@ push_docker_image:
 .PHONY: website
 website:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make website"
+
+.PHONY: validate
+validate:
+	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make -j build_pdf build_serif_ebook"
