@@ -10,7 +10,7 @@ jobs:
       - name: Set up git repository
         uses: actions/checkout@v3
       - name: Bake the book
-        uses: docker://ghcr.io/hendricius:the-sourdough-framework:latest
+        uses: docker://ghcr.io/hendricius/the-sourdough-framework:latest
         with:
           run: |
             make website
