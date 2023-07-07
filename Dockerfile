@@ -1,19 +1,47 @@
-FROM ghcr.io/xu-cheng/texlive-full
+FROM ubuntu:latest
 
-WORKDIR /root
+LABEL "maintainer"="Hendrik Kleinwächter <hendrik.kleinwaechter@gmail.com>"
+LABEL "repository"="https://github.com/hendricius/the-sourdough-framework"
+LABEL "homepage"="https://github.com/hendricius/the-sourdough-framework"
 
-RUN apk add make zip tidyhtml git sudo pandoc
-RUN wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz
-RUN tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz
-RUN mv kindlegen /usr/bin
-RUN git clone https://github.com/michal-h21/tex4ebook.git
-WORKDIR /root/tex4ebook
-RUN make
-RUN make install
-WORKDIR /root
+# Install base depdendencies
+RUN apt-get update && \
+    apt-get install --yes -y --no-install-recommends \
+    make \
+    tidy \
+    pandoc \
+    zip \
+    git \
+    wget
 
-WORKDIR /opt/the-sourdough-framework
+# Install LaTeX
+RUN apt-get install --yes -y --no-install-recommends \
+    texlive-full \
+    texlive-lang-all
 
-COPY . .
+# Install LaTeX extras
+RUN apt-get install --yes -y --no-install-recommends \
+    latexmk \
+    lmodern \
+    fonts-lmodern \
+    tex-gyre \
+    fonts-texgyre \
+    dvisvgm \
+    context
 
-CMD ["/bin/sh"]
+RUN apt-get autoclean && apt-get --purge --yes autoremove
+
+# Custom TeX packages on latest version
+RUN git clone https://github.com/michal-h21/make4ht && \
+    cd make4ht && \
+    make justinstall SUDO=""
+
+RUN git clone https://github.com/michal-h21/tex4ebook.git && \
+    cd tex4ebook && \
+    make && \
+    make install SUDO=""
+
+# Support to build amazon kindle books
+RUN wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz && \
+    tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz && \
+    mv kindlegen /usr/bin

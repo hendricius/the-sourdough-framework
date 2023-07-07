@@ -221,9 +221,6 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 
 .PHONY: website
 website:
-	if command -v cowsay &> /dev/null; then\
-		cowsay "baking the website";\
-	fi
 	rm -rf $(WEBSITE_DIR)
 	make4ht -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
 	mv $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
