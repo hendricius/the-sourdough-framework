@@ -8,10 +8,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Run make4ht
         uses: docker://ghcr.io/michal-h21/make4ht-action:latest 
-        with:
-          run: |
-            wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz
-            tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz
-            mv kindlegen /usr/bin
-            ls
+        env:
+          command: "wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz; \
+                    tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz; \
+                    mv kindlegen /usr/bin; \
+                    ls;
 
