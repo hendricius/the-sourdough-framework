@@ -17,8 +17,17 @@ jobs:
             wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz
             tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz
             mv kindlegen /usr/bin
-            cd book
+            git clone https://github.com/michal-h21/make4ht
+            cd make4ht
+            make justinstall
+            cd ../
+            git clone https://github.com/michal-h21/tex4ebook.git
+            cd tex4ebook
+            make
+            make install
+            cd ../book/
             make bake
+            make website
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
