@@ -1,25 +1,15 @@
-/* 
-Color scheme 
-#bab5a9;
-#d5e3c6 
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;900&family=Ubuntu+Mono&display=swap');
 
- */
-
-/* ************** */
-/* *** Fonts  *** */
-/* ************** */
-
-/* Font size tricks from https://www.madebymike.com.au/writing/precise-control-responsive-typography/ 
- * The font size will be adjusted to the screen size.
- * */
 :root{
-  font-size: 16px;
+  --ff-sans: 'Raleway', sans-serif;
+  --ff-mono: 'Ubuntu Mono', monospace;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+  --f-lh: 28px;
 }
 
-/* the min width is calculated as:
- * font-size / ( number of viewport units / 100 )
- * it means 16 / (1.5/100)
- */
 @media (min-width: 1200px){
   :root {
     font-size: 1.5vw;
@@ -39,11 +29,11 @@ Color scheme
 /* ************** */
 
 body{
-  /* max-width:52rem; */
   margin:0;
   padding:0;
-  /* display:grid; */
-  /* grid-auto-rows: auto; */
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-medium);
+  font-size: 16px;
 }
 
 @media screen and (min-width: 57rem) {
@@ -81,7 +71,6 @@ figure pre.listings{font-size: 1em;}
 
 .chapterToc, .sectionToc, .subsectionToc{margin:0;padding:0;}
 nav.TOC{
-  padding:0.5rem;
   font-size:0; /* trick to remove vertical space above TOC entries */
 }
 
@@ -92,6 +81,46 @@ nav.TOC span{
   display:block;
   margin-top:0;
   font-size:0.8rem;
+  padding:0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* HACKZS since table of contents number is not in HTML Tag */
+/* nav.TOC span {
+  letter-spacing: 10px;
+}
+
+nav.TOC span a {
+  letter-spacing: normal;
+  flex-grow: 1;
+}
+
+nav.TOC span.sectionToc {
+  letter-spacing: normal;
+}
+
+nav.TOC span.sectionToc a {
+  margin-left: 10px;
+}
+
+nav.TOC span.subsectionToc {
+  letter-spacing: normal;
+}
+
+nav.TOC span.subsectionToc a {
+  margin-left: 10px;
+}
+
+
+/* END HACKZS */
+
+nav.TOC span a {
+  flex-grow: 1;
+}
+
+nav.TOC span a:only-child {
+  margin-left: 10px;
 }
 
 nav.TOC a, nav.TOC a:visited{
@@ -103,64 +132,48 @@ nav.TOC a, nav.TOC a:visited{
 /* ************** */
 
 
-/* body{background-color:#dce8d0;} */
-/* It seems that dark background is better to my eyes */
-body{background-color:#B8CDA3;} 
+body{
+  background-color:#F5F2EF;
+}
+
+a {
+  color: #5D9FF0;
+}
 
 main.main-content, div.footnotes, main.titlepage{
   background-color:white;
 }
 
 nav.TOC,nav.TOC a, nav.TOC a:visited{
-  background-color:#22211f;
-  color:#cec1aa;
+  background-color:#F5F2EF;
+  color:#000000;
 }
 
 nav.TOC span:hover, nav.TOC span:hover *{
-  background-color:#66635d;
+  background-color:#dad5ca;
 }
 
-
-
 figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
-  border:1px solid #cec1aa; 
+  border:1px solid #cec1aa;
   background-color:#d5e3c6;
 }
 
-/* ***************** */
-/* *** Dark mode *** */
-/* ***************** */
+.main-content {
+  line-height: var(--f-lh);
+}
 
-/* Code from https://ar.al/2021/08/24/implementing-dark-mode-in-a-handful-of-lines-of-css-with-css-filters/ */
+div.footnotes {
+  border: none;
+}
 
-@media (prefers-color-scheme: dark) {
-  /* Invert all elements on the body while attempting to not alter the hue substantially. */
-  body {
-    filter: invert(100%) hue-rotate(180deg);
-  }
+.footnote-mark {
+  margin-right: 3px;
+}
 
-  /* Workarounds and optical adjustments. */
+table.tabular {
+  width: 100%;
+}
 
-  /* Firefox workaround: Set the background colour for the html
-     element separately because, unlike other browsers, Firefox
-     doesn’t apply the filter to the root element’s background. */
-  html {
-    background-color: #111;
-  }
-
-  /* Do not invert media (revert the invert). */
-  img, video, iframe {
-    filter: invert(100%) hue-rotate(180deg);
-  }
-
-
-  /* Re-enable code block backgrounds. */
-  pre {
-    filter: invert(6%);
-  }
-
-  /* Improve contrast on list item markers. */
-  li::marker {
-    color: #666;
-  }
+.chapterHead .titlemark {
+  display: block;
 }
