@@ -10,7 +10,7 @@ bake: build_docker_image
 
 .PHONY: build_docker_image
 build_docker_image:
-	docker build -t $(DOCKER_IMAGE) -f Dockerfile .
+	docker build -t $(DOCKER_IMAGE) -f Dockerfile --platform linux/amd64 .
 
 .PHONY: push_docker_image
 push_docker_image:
