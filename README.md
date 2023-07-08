@@ -42,8 +42,8 @@ You can check the files in  the folder `book/release/`
 
 ## 🍞 Baking the book locally (LaTeX)
 
-Make sure you have `biber` installed. Refer to your system's installation
-instructions for LaTeX.
+Make sure you have `biber` and `latexmk` installed. Refer to your system's
+installation instructions for LaTeX. To create the serif .pdf format, run:
 
 ```console
 cd book/
@@ -59,6 +59,12 @@ make bake
 
 You can check the files in the folder `book/release/`
 
+You can get some help on building various versions with:
+
+```console
+cd book/
+make help
+```
 ## Compiled versions
 
 The below versions are automatically built on every push to the `main` branch.
