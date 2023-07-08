@@ -17,7 +17,7 @@ RUN apt-get update && \
 
 # Install LaTeX
 RUN apt-get install --yes -y --no-install-recommends \
-    texlive-full \
+    texlive-latex-extra \
     texlive-lang-all
 
 # Install LaTeX extras
