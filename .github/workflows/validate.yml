@@ -7,12 +7,8 @@ jobs:
       - name: Set up git repository
         uses: actions/checkout@v3
       - name: Test baking the release versions
-        uses: xu-cheng/texlive-action/full@v1
+        uses: docker://ghcr.io/hendricius/the-sourdough-framework:latest
         with:
           run: |
-            apk add make zip tidyhtml
-            wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz
-            tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz
-            mv kindlegen /usr/bin
             cd book
             make -j build_pdf build_serif_ebook
