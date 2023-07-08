@@ -13,6 +13,7 @@ jobs:
         uses: docker://ghcr.io/hendricius/the-sourdough-framework:latest
         with:
           run: |
+            cd book
             make bake
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
