@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:rolling
 
 LABEL "maintainer"="Hendrik Kleinwächter <hendrik.kleinwaechter@gmail.com>"
 LABEL "repository"="https://github.com/hendricius/the-sourdough-framework"
@@ -15,10 +15,9 @@ RUN apt-get update && \
     git \
     wget
 
-# Install LaTeX
+# Install base LaTeX system
 RUN apt-get install --yes -y --no-install-recommends \
-    texlive-full \
-    texlive-lang-all
+    texlive-full
 
 # Install LaTeX extras
 RUN apt-get install --yes -y --no-install-recommends \
@@ -28,19 +27,13 @@ RUN apt-get install --yes -y --no-install-recommends \
     tex-gyre \
     fonts-texgyre \
     dvisvgm \
-    context
+    context \
+    python3-pygments \
+    python3-setuptools
 
 RUN apt-get autoclean && apt-get --purge --yes autoremove
 
-# Custom TeX packages on latest version
-RUN git clone https://github.com/michal-h21/make4ht && \
-    cd make4ht && \
-    make justinstall SUDO=""
-
-RUN git clone https://github.com/michal-h21/tex4ebook.git && \
-    cd tex4ebook && \
-    make && \
-    make install SUDO=""
+WORKDIR /root
 
 # Support to build amazon kindle books
 RUN wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz && \
