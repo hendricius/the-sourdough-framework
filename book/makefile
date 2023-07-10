@@ -191,12 +191,15 @@ mrproper: clean
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
 	-rm figures/*.png
+	-rm *.html
+	-rm *.svg
 	rm -rf epub/
 	rm -rf release/
 	rm -rf book_serif/
 	rm -rf book_sans_serif/
 	rm -rf book-epub/
 	rm -rf book_sans_serif-epub/
+	rm -rf static_website_html/
 
 .PHONY: bake
 bake: release_serif release_sans_serif
@@ -220,7 +223,7 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
 .PHONY: website
-website:
+website: default
 	rm -rf $(WEBSITE_DIR)
 	make4ht -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
 	mv $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
