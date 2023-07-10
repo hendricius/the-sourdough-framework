@@ -250,6 +250,8 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- make --version
 	@echo ""
+	- biber -version
+	@echo ""
 
 # You can find the value of variable X with the following command:
 # make print-X
