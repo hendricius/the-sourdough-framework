@@ -223,7 +223,7 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
 .PHONY: website
-website: default
+website:
 	rm -rf $(WEBSITE_DIR)
 	make4ht -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
 	mv $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html

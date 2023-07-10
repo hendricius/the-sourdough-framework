@@ -36,6 +36,10 @@ show_tools_version:
 printvars:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make printvars"
 
+.PHONY: print_os_version
+print_os_version:
+	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cat /etc/*release"
+
 .PHONY: start_shell
 start_shell:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash
