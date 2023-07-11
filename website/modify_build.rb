@@ -59,6 +59,8 @@ class ModifyBuild
     elements.each do |n|
       chapter_number_or_nothing = n.children[0].text.strip
       hyperlink_node = n.children[1]
+      next if hyperlink_node.nil?
+
       # remove unneeded text and merge into single a tag
       n.children[0].remove
       link_text = hyperlink_node.content
