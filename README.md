@@ -85,6 +85,20 @@ There's an additional enhanced accessibility version using a sans serif font:
 
 Head over to [https://www.the-sourdough-framework.com](https://www.the-sourdough-framework.com)
 
+To build the website make sure to have the ruby version installed specified in
+`website/.ruby-version`.
+
+```console
+cd website/
+make website
+```
+
+Alternatively you can build the website directly with Docker:
+
+```console
+make website
+```
+
 ## Hardcover version
 
 There is a hardcover version of the book available for purchase. [You can
