@@ -18,6 +18,10 @@ push_docker_image:
 
 .PHONY: website
 website: mrproper
+	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/website && make website"
+
+.PHONY: latex_website
+latex_website: mrproper
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make website"
 
 .PHONY: validate

@@ -86,11 +86,17 @@ nav.TOC a, nav.TOC a:visited{
   text-decoration:none;
 }
 
-.chapterToc, .sectionToc, .subsectionToc {
+.chapterToc,
+.sectionToc,
+.subsectionToc,
+.likechapterToc {
   display: block;
 }
 
-.chapterToc a, .sectionToc a, .subsectionToc a {
+.chapterToc a,
+.sectionToc a,
+.subsectionToc a,
+.likechapterToc a {
   display: flex;
   flex-grow: 1;
   padding: 7px 10px 7px 15px;
@@ -98,7 +104,9 @@ nav.TOC a, nav.TOC a:visited{
   align-items: center;
 }
 
-.chapterToc span, .sectionToc span, .subsectionToc span {
+.chapterToc span,
+.sectionToc span,
+.subsectionToc span {
   display: block;
 }
 

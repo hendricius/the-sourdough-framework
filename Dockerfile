@@ -17,11 +17,21 @@ RUN apt-get update && \
     pandoc \
     zip \
     git \
-    wget
+    wget \
+    ruby3.1 \
+    ruby-dev \
+    build-essential
 
 WORKDIR /root
 
-# Support to build amazon kindle books
+# Install ruby for the website build process
+RUN gem install bundler
+COPY website/Gemfile.lock /root
+COPY website/Gemfile /root
+COPY website/.ruby-version /root
+RUN bundle install
+
+# Install support to build amazon kindle books
 RUN wget https://archive.org/download/kindlegen_linux_2_6_i386_v2_9/kindlegen_linux_2.6_i386_v2_9.tar.gz && \
     tar xzf kindlegen_linux_2.6_i386_v2_9.tar.gz && \
     mv kindlegen /usr/bin
