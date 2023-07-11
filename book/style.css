@@ -78,53 +78,41 @@ nav.TOC{
  .chapterToc ~ .likesectionToc ~ .likesubsectionToc, .chapterToc ~ .likesectionToc ~ .subsectionToc, .chapterToc ~ .sectionToc ~ .likesubsectionToc, .chapterToc ~ .sectionToc ~ .subsectionToc, .likechapterToc ~ .likesectionToc ~ .likesubsectionToc, .likechapterToc ~ .likesectionToc ~ .subsectionToc, .likechapterToc ~ .sectionToc ~ .likesubsectionToc, .likechapterToc ~ .sectionToc ~ .subsectionToc {padding-left:4em;margin-left:0;}
 
 nav.TOC span{
-  display:block;
   margin-top:0;
   font-size:0.8rem;
-  padding:0.5rem;
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* HACKZS since table of contents number is not in HTML Tag */
-/* nav.TOC span {
-  letter-spacing: 10px;
-}
-
-nav.TOC span a {
-  letter-spacing: normal;
-  flex-grow: 1;
-}
-
-nav.TOC span.sectionToc {
-  letter-spacing: normal;
-}
-
-nav.TOC span.sectionToc a {
-  margin-left: 10px;
-}
-
-nav.TOC span.subsectionToc {
-  letter-spacing: normal;
-}
-
-nav.TOC span.subsectionToc a {
-  margin-left: 10px;
-}
-
-
-/* END HACKZS */
-
-nav.TOC span a {
-  flex-grow: 1;
-}
-
-nav.TOC span a:only-child {
-  margin-left: 10px;
 }
 
 nav.TOC a, nav.TOC a:visited{
   text-decoration:none;
+}
+
+.chapterToc,
+.sectionToc,
+.subsectionToc,
+.likechapterToc {
+  display: block;
+}
+
+.chapterToc a,
+.sectionToc a,
+.subsectionToc a,
+.likechapterToc a {
+  display: flex;
+  flex-grow: 1;
+  padding: 7px 10px 7px 15px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.chapterToc span,
+.sectionToc span,
+.subsectionToc span {
+  display: block;
+}
+
+.chapterToc .chapter_number, .sectionToc .chapter_number, .subsectionToc .chapter_number {
+  margin-right: 7px;
+  white-space: nowrap;
 }
 
 /* ************** */
