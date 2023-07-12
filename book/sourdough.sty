@@ -1,0 +1,70 @@
+\ProvidesPackage{sourdough}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{tocloft}
+% \usepackage{tex4ebook}
+\usepackage{chemformula}
+\usepackage{chemfig}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{siunitx}
+
+\renewcommand\theadfont{\bfseries}
+
+\definecolor{codeblue}{RGB}{69, 161, 248}
+\definecolor{codegray}{RGB}{40, 40, 40}
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{decision} = [diamond, draw, fill=codegray, text=white,
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+
+% Fonts for accessibility
+\ifdefined\isaccessible
+    \usepackage{helvet}
+    \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+% Kerning in footnotes
+\usepackage{fnpct}
+
+% References
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% Clickable links in the table of contents
+\usepackage[ocgcolorlinks]{hyperref}
+\hypersetup{%
+    linktoc=all,
+    allcolors=codeblue
+}
+
+% Folders where to search for images
+\graphicspath{
+  {images/}
+  {troubleshooting/}
+  {sourdough-starter/}
+  {troubleshooting/crumb-structures/}
+  {history/}
+  {images/external/}
+  {baking/}
+  {wheat-sourdough/}
+  {wheat-sourdough/shaping/}
+  {non-wheat-sourdough/}
+}
+
+% Space between paragraphs
+\usepackage[skip=5pt plus1pt, indent=0pt]{parskip}
+
+% Caption and figure size below images
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize}
+
+
+\DeclareSIUnit\degF{\text{°}F}
