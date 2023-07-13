@@ -150,7 +150,9 @@ class ModifyBuild
     body = doc.css("body")[0]
     content = doc.css("body > .titlepage")[0]
     menu = doc.css("body > .menu")[0]
-
+    cover = content.css(".center")[0]
+    cover_html = cover.to_html
+    cover.inner_html = "<a href='Thehistoryofsourdough.html'>#{cover_html}</a>"
     body.inner_html = "#{menu} #{content}"
     doc.to_html
   end
