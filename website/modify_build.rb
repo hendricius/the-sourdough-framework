@@ -18,6 +18,7 @@ class ModifyBuild
     system("rm -rf #{build_dir}/")
     system("mkdir #{build_dir}/")
     copy_source_to_local_dir_for_modification
+    copy_assets_into_folder
     list_of_files_to_modify.each do |filename|
       modify_file(filename)
     end
@@ -34,6 +35,7 @@ class ModifyBuild
     text = fix_cover_page(text) if is_cover_page?(filename)
     text = add_home_link_to_menu(text)
     text = fix_anchor_hyperlinks_menu(text)
+    text = add_favicon(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -52,6 +54,10 @@ class ModifyBuild
     system("cp -R ../book/#{build_dir}/* #{build_dir}")
   end
 
+  def copy_assets_into_folder
+    system("cp -R ./assets/* #{build_dir}")
+  end
+
   def source_website_output_exists?
     File.directory?("../book/#{build_dir}/")
   end
@@ -68,7 +74,7 @@ class ModifyBuild
     doc = build_doc(text)
     elements = [doc.search('.chapterToc'), doc.search('.sectionToc'), doc.search('.subsectionToc')].flatten
     elements.each do |n|
-      chapter_number_or_nothing = n.children[0].text.strip
+      chapter_number_or_nothing = n.children[0].text.strip.to_i
       hyperlink_node = n.children[1]
       next if hyperlink_node.nil?
 
@@ -76,7 +82,7 @@ class ModifyBuild
       n.children[0].remove
       link_text = hyperlink_node.content
       # no chapter number
-      if chapter_number_or_nothing.length == 0
+      if chapter_number_or_nothing == 0
         content = hyperlink_node.to_s
       else
         link_node_content = %Q{
@@ -231,6 +237,14 @@ class ModifyBuild
       el["href"] = splitted[0]
     end
 
+    doc.to_html
+  end
+
+  def add_favicon(text)
+    doc = build_doc(text)
+    head = doc.css("head")[0]
+    fav_html = %Q{<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />}
+    head.inner_html = "#{head.inner_html} #{fav_html}"
     doc.to_html
   end
 
