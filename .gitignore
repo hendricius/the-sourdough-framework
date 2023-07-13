@@ -60,3 +60,4 @@ book/book_sans_serif-epub/
 book/static_website_html/*
 epub/
 *.opf
+website/static_website_html/*

@@ -191,12 +191,15 @@ mrproper: clean
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
 	-rm figures/*.png
+	-rm *.html
+	-rm *.svg
 	rm -rf epub/
 	rm -rf release/
 	rm -rf book_serif/
 	rm -rf book_sans_serif/
 	rm -rf book-epub/
 	rm -rf book_sans_serif-epub/
+	rm -rf static_website_html/
 
 .PHONY: bake
 bake: release_serif release_sans_serif
@@ -223,7 +226,7 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 website:
 	rm -rf $(WEBSITE_DIR)
 	make4ht -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
-	mv $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
+	cp $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
 	sed -r -i -e 's|<title></title>|<title>The Sourdough Framework</title>|g' $(WEBSITE_DIR)/index.html
 
 # Debug Stuff from now on
@@ -246,6 +249,8 @@ show_tools_version:  # Show version of tools used on the build machine
 	- chktex --version
 	@echo ""
 	- make --version
+	@echo ""
+	- biber -version
 	@echo ""
 
 # You can find the value of variable X with the following command:

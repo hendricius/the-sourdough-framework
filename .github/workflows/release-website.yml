@@ -9,11 +9,29 @@ jobs:
     steps:
       - name: Set up git repository
         uses: actions/checkout@v3
-      - name: Bake the book
-        uses: docker://ghcr.io/hendricius/the-sourdough-framework:latest
+      - name: Print dependency versions
+        uses: addnab/docker-run-action@v3
         with:
+          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          options: -v ${{ github.workspace }}:/app
           run: |
-            cd book
+            cd /app/book
+            make show_tools_version
+      - name: Print build variables
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make printvars
+      - name: Bake the book
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/website
             make website
       - name: Release baked website to S3
         uses: shallwefootball/s3-upload-action@master
@@ -21,7 +39,7 @@ jobs:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
-          source_dir: book/static_website_html
+          source_dir: website/static_website_html
           destination_dir: static_html_root
       - name: Invalidate Cloudfront website cache
         uses: chetan/invalidate-cloudfront-action@v2
