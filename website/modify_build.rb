@@ -119,6 +119,40 @@ class ModifyBuild
 
   def title_appendix
     "The Sourdough Framework"
+  def fix_menu(text)
+    doc = Nokogiri::HTML(text)
+    nav = doc.css("nav.TOC")[0]
+    # page has no nav
+    return text unless nav
+
+    menu_items_html = doc.css("nav.TOC > *").to_html
+    nav.add_class("menu")
+    nav_content = %Q{
+      #{menu_mobile_nav}
+      <div class="menu-items">#{menu_items_html}</div>
+    }
+    nav.inner_html = nav_content
+    doc.to_html
+  end
+
+  def menu_mobile_nav
+  %Q{
+    <a href="/" class="logo">
+      The Sourdough Framework
+    </a>
+    <input type="checkbox" id="toggle-menu">
+    <label class="hamb toggle-menu-label" for="toggle-menu"><span class="hamb-line"></span></label>
+  }
+  end
+
+  def fix_cover_page(text)
+    doc = Nokogiri::HTML(text)
+    body = doc.css("body")[0]
+    content = doc.css("body > .titlepage")[0]
+    menu = doc.css("body > .menu")[0]
+
+    body.inner_html = "#{menu} #{content}"
+    doc.to_html
   end
 
   # By default the menu is not made for mobile devices. This adds mobile
