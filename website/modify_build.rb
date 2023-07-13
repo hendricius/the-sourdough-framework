@@ -256,6 +256,7 @@ class ModifyBuild
     title = head.css("title")[0].text
     path = filename.split("/")[1]
     description = extract_description(text, filename)
+    og_image = og_image_for_chapter(path)
     meta_html = %Q{
       <meta property="og:locale" content="en_US">
       <meta property="og:site_name" content="The Sourdough Framework">
@@ -264,6 +265,7 @@ class ModifyBuild
       <meta property="og:url" content="https://www.the-sourdough-framework.com/#{path}">
       <meta property="og:description" content="#{description}">
       <meta property="description" content="#{description}">
+      <meta property="og:image" content="https://the-sourdough-framework/#{og_image}" />
     }
     head.inner_html = "#{head.inner_html} #{meta_html}"
     doc.to_html
@@ -300,6 +302,27 @@ class ModifyBuild
     el.remove
     doc.to_html
   end
+
+  def og_image_for_chapter(chapter_name)
+    open_graph_images_map[chapter_name] || open_graph_images_map["index.html"]
+  end
+
+  def open_graph_images_map
+    {
+      "Baking.html" => "og_image_baking.png",
+      "Breadtypes.html" => "og_image_bread_types.png",
+      "Flourtypes.html" => "og_image_flour_types.png",
+      "index.html" => "og_image_general.png",
+      "Howsourdoughworks.html" => "og_image_how_sourdough_works.png",
+      "Makingasourdoughstarter.html" => "og_image_making_a_sourdough_starter.png",
+      "Nonwheatsourdough.html" => "og_image_non_wheat_sourdough.png",
+      "Sourdoughstartertypes.html" => "og_image_sourdough_starter_types.png",
+      "Storingbread.html" => "og_image_storing_bread.png",
+      "Thehistoryofsourdough.html" => "og_image_the_history_of_sourdough.png",
+      "Wheatsourdough.html" => "og_image_troubleshooting.png",
+    }
+  end
+
 
   def build_doc(text)
     Nokogiri::HTML(text)
