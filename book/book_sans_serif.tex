@@ -1,2 +1,4 @@
 \def\isaccessible{1}
-\input{book.tex}
+% We have to use a symlink to book.tex to prevent tex4ebook to load book.ht4
+% before loading any other package and create conflicts 
+\input{sourdough_book.tex}
