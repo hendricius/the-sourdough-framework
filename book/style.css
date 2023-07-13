@@ -272,7 +272,7 @@ figcaption.caption {
     left: 0;
     width: 100%;
     background-color: #f2f2f2;
-    padding: 10px;
+    padding-left: 3px;
     z-index: 1;
   }
 
