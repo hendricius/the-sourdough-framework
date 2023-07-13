@@ -119,8 +119,12 @@ class ModifyBuild
 
   def title_appendix
     "The Sourdough Framework"
+  end
+
+  # By default the menu is not made for mobile devices. This adds mobile
+  # capabilities to the menu
   def fix_menu(text)
-    doc = Nokogiri::HTML(text)
+    doc = build_doc(text)
     nav = doc.css("nav.TOC")[0]
     # page has no nav
     return text unless nav
@@ -145,8 +149,10 @@ class ModifyBuild
   }
   end
 
+  # The cover page should have some additional content and allow the user to
+  # click the book cover in order to start reading.
   def fix_cover_page(text)
-    doc = Nokogiri::HTML(text)
+    doc = build_doc(text)
     body = doc.css("body")[0]
     content = doc.css("body > .titlepage")[0]
     menu = doc.css("body > .menu")[0]
