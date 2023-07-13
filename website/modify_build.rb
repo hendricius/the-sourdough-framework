@@ -36,6 +36,8 @@ class ModifyBuild
     text = add_home_link_to_menu(text)
     text = fix_anchor_hyperlinks_menu(text)
     text = add_favicon(text)
+    text = add_meta_tags(text, filename)
+    text = remove_section_table_of_contents(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -245,6 +247,57 @@ class ModifyBuild
     head = doc.css("head")[0]
     fav_html = %Q{<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />}
     head.inner_html = "#{head.inner_html} #{fav_html}"
+    doc.to_html
+  end
+
+  def add_meta_tags(text, filename)
+    doc = build_doc(text)
+    head = doc.css("head")[0]
+    title = head.css("title")[0].text
+    path = filename.split("/")[1]
+    description = extract_description(text, filename)
+    meta_html = %Q{
+      <meta property="og:locale" content="en_US">
+      <meta property="og:site_name" content="The Sourdough Framework">
+      <meta property="og:title" content="#{title}">
+      <meta property="og:type" content="article">
+      <meta property="og:url" content="https://www.the-sourdough-framework.com/#{path}">
+      <meta property="og:description" content="#{description}">
+      <meta property="description" content="#{description}">
+    }
+    head.inner_html = "#{head.inner_html} #{meta_html}"
+    doc.to_html
+  end
+
+  def extract_description(text, filename)
+    doc = build_doc(text)
+    el = doc.css(".main-content p:first-of-type")[0]
+    custom = custom_titles_per_filename(clean_filename(filename))
+    return custom if custom
+    return "" if el.nil?
+    el.text
+  end
+
+  # static_website_html/Acknowledgements.html => "Acknowledgements.html"
+  def clean_filename(filename)
+    filename.split("/")[1]
+  end
+
+  def custom_titles_per_filename(filename)
+    index_text = "The Sourdough Framework goes beyond just recipes and provides a solid knowledge foundation, covering the science of sourdough, the basics of bread making, and advanced techniques for achieving the perfect sourdough bread at home."
+    data = {
+      "book.html" => index_text,
+      "index.html" => index_text
+    }
+    data[filename]
+  end
+
+  def remove_section_table_of_contents(text)
+    doc = build_doc(text)
+    el = doc.css(".sectionTOCS")[0]
+    return text unless el
+
+    el.remove
     doc.to_html
   end
 
