@@ -152,6 +152,7 @@ figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figu
 
 div.footnotes {
   border: none;
+  margin-right: 0;
 }
 
 .footnote-mark {
@@ -164,4 +165,141 @@ table.tabular {
 
 .chapterHead .titlemark {
   display: block;
+}
+
+figure.figure {
+  margin: 30px 0px 30px 0px;;
+  text-align: center;
+  padding: 0;
+}
+
+figcaption.caption {
+  text-indent: 0;
+  margin: 0;
+}
+
+
+.table div.center, .table div.center div.center {
+  margin: 0;
+}
+
+.table {
+  overflow-x: auto;
+}
+
+.table table {
+  width: 100%;
+}
+
+
+.menu {
+  position: relative;
+}
+
+.toggle-menu-label {
+  display: none;
+}
+
+.menu input {
+  display: none;
+}
+
+.menu-items {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-items .chapterToc {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.menu-items a {
+  text-decoration: none;
+}
+
+
+@media (max-width: 768px) {
+  .toggle-menu-label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .hamb{
+    cursor: pointer;
+    float: right;
+    padding: 30px 20px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+
+  .hamb-line {
+    background: #000;
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 24px;
+  }
+
+  .hamb-line::before,
+  .hamb-line::after{
+    background: #000;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+  .hamb-line::before{
+    top: 5px;
+  }
+  .hamb-line::after{
+    top: -5px;
+  }
+
+  span.hamb-line:hover  {
+    background-color: #000 !important;
+  }
+
+  .menu-items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding-left: 3px;
+    z-index: 1;
+  }
+
+  .menu-items .chapterToc {
+    margin-bottom: 8px;
+  }
+
+  .menu {
+    background: #F5F2EF;
+    padding: 20px 0px;
+    position: relative;
+  }
+
+  #toggle-menu:checked ~ .menu-items {
+    display: block;
+  }
+
+  .logo {
+    display: block;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 17px;
+  }
+}
+
+div.center {
+  margin-left: 0;
+  margin-right: 0;
 }
