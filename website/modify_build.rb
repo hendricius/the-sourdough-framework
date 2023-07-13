@@ -29,6 +29,7 @@ class ModifyBuild
     orig_text = File.read(filename)
     text = fix_double_slashes(orig_text)
     text = fix_navigation_bar(text)
+    text = fix_titles(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -78,6 +79,35 @@ class ModifyBuild
       n.inner_html = content
     end
     doc.to_html
+  end
+
+  def fix_titles(text)
+    doc = Nokogiri::HTML(text)
+    title_node = doc.css("title")[0]
+    raise ArgumentError.new("No title found in HTML document") if title_node.nil?
+
+    title_node.content = build_title(title_node.content)
+    doc.to_html
+  end
+
+
+  # "3 Making a sourdough starter"
+  # Should return Making a sourdough starter - The Sourdough Framework"
+  def build_title(title)
+    # No title, happens on index page in LaTeX build
+    return title_appendix if title.length == 0
+
+    # Starts with number
+    if title[0].to_i > 0
+      use_title = title.split(" ").drop(1).join(" ")
+    else
+      use_title = title
+    end
+    "#{use_title} - #{title_appendix}"
+  end
+
+  def title_appendix
+    "The Sourdough Framework"
   end
 end
 
