@@ -137,7 +137,10 @@ nav.TOC,nav.TOC a, nav.TOC a:visited{
   color:#000000;
 }
 
-nav.TOC span:hover, nav.TOC span:hover *{
+nav.TOC span:hover,
+nav.TOC span:hover *,
+nav.TOC span.chapterToc.selected,
+nav.TOC span.chapterToc.selected a {
   background-color:#dad5ca;
 }
 
@@ -163,10 +166,6 @@ table.tabular {
   width: 100%;
 }
 
-.chapterHead .titlemark {
-  display: block;
-}
-
 figure.figure {
   margin: 30px 0px 30px 0px;;
   text-align: center;
@@ -178,19 +177,17 @@ figcaption.caption {
   margin: 0;
 }
 
-
 .table div.center, .table div.center div.center {
   margin: 0;
 }
 
-.table {
+.table, div.tabular {
   overflow-x: auto;
 }
 
 .table table {
   width: 100%;
 }
-
 
 .menu {
   position: relative;
@@ -211,9 +208,8 @@ figcaption.caption {
   padding: 0;
 }
 
-.menu-items .chapterToc {
+.menu-items .chapterToc, .menu-items .likechapterToc {
   display: block;
-  margin-bottom: 10px;
 }
 
 .menu-items a {
@@ -276,10 +272,6 @@ figcaption.caption {
     z-index: 1;
   }
 
-  .menu-items .chapterToc {
-    margin-bottom: 8px;
-  }
-
   .menu {
     background: #F5F2EF;
     padding: 20px 0px;
@@ -300,6 +292,10 @@ figcaption.caption {
 }
 
 div.center {
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+main.titlepage h2.chapterHead {
+  margin-top: 0px;
 }
