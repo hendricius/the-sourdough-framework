@@ -151,16 +151,6 @@ class ModifyBuild
     doc.to_html
   end
 
-  def menu_mobile_nav
-  %Q{
-    <a href="/" class="logo">
-      The Sourdough Framework
-    </a>
-    <input type="checkbox" id="toggle-menu">
-    <label class="hamb toggle-menu-label" for="toggle-menu"><span class="hamb-line"></span></label>
-  }
-  end
-
   # The cover page should have some additional content and allow the user to
   # click the book cover in order to start reading.
   def fix_cover_page(text)
@@ -196,7 +186,7 @@ class ModifyBuild
   def menu_mobile_nav
   %Q{
     <a href="/" class="logo">
-      The Sourdough Framework
+      🍞 The Sourdough Framework
     </a>
     <input type="checkbox" id="toggle-menu">
     <label class="hamb toggle-menu-label" for="toggle-menu"><span class="hamb-line"></span></label>
@@ -397,7 +387,7 @@ class ModifyBuild
   def build_cover_page_content
     %Q{
     <h2 class="chapterHead">
-      🍞 The Sourdough Framework 📓
+      🍞 The Sourdough Framework
     </h2>
     <p class="noindent">
        The Sourdough Framework goes beyond just recipes and provides you a solid
