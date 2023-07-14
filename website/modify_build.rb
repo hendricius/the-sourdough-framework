@@ -231,7 +231,7 @@ class ModifyBuild
   # this for the top level menu entries though.
   def fix_anchor_hyperlinks_menu(text)
     doc = build_doc(text)
-    top_level_menus = doc.css(".menu-items > span > a")
+    top_level_menus = doc.css(".menu-items > span.chapterToc > a")
     top_level_menus.each do |el|
       link = el.attribute("href").value
       splitted = link.split("#")
