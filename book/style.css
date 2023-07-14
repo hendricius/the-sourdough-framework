@@ -177,19 +177,17 @@ figcaption.caption {
   margin: 0;
 }
 
-
 .table div.center, .table div.center div.center {
   margin: 0;
 }
 
-.table {
+.table, div.tabular {
   overflow-x: auto;
 }
 
 .table table {
   width: 100%;
 }
-
 
 .menu {
   position: relative;
