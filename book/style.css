@@ -208,9 +208,8 @@ figcaption.caption {
   padding: 0;
 }
 
-.menu-items .chapterToc {
+.menu-items .chapterToc, .menu-items .likechapterToc {
   display: block;
-  margin-bottom: 10px;
 }
 
 .menu-items a {
@@ -271,10 +270,6 @@ figcaption.caption {
     background-color: #f2f2f2;
     padding-left: 3px;
     z-index: 1;
-  }
-
-  .menu-items .chapterToc {
-    margin-bottom: 8px;
   }
 
   .menu {

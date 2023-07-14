@@ -225,7 +225,11 @@ class ModifyBuild
     return text if menu.nil?
 
     home_html = %Q{<span class="chapterToc home-link"><a href="/">Home</a></span>}
-    menu.inner_html = "#{home_html} #{menu.inner_html}"
+    appendix_html = %Q{
+      <span class="chapterToc"><a href="https://breadco.de/kofi">Donate</a></span>
+      <span class="chapterToc"><a href="https://breadco.de/hardcover-book">Hardcover Book</a></span>
+    }
+    menu.inner_html = "#{home_html} #{menu.inner_html} #{appendix_html}"
     doc.to_html
   end
 
