@@ -40,6 +40,7 @@ class ModifyBuild
     text = remove_section_table_of_contents(text)
     text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = add_canonical_for_duplicates(text, extract_file_from_path(filename))
+    text = include_javascript(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -364,6 +365,16 @@ class ModifyBuild
       <link rel="canonical" href="https://www.the-sourdough-framework.com" />
     }
     head.inner_html = "#{head.inner_html} #{canonical_html}"
+    doc.to_html
+  end
+
+  def include_javascript(text)
+    doc = build_doc(text)
+    head = doc.css("head")[0]
+    js_tag_html = %Q{
+      <script type="text/javascript" src="script.js"></script>
+    }
+    head.inner_html = "#{head.inner_html} #{js_tag_html}"
     doc.to_html
   end
 
