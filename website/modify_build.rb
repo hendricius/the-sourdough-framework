@@ -38,6 +38,7 @@ class ModifyBuild
     text = add_favicon(text)
     text = add_meta_tags(text, filename)
     text = remove_section_table_of_contents(text)
+    text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -220,7 +221,7 @@ class ModifyBuild
     menu = doc.css(".menu-items")[0]
     return text if menu.nil?
 
-    home_html = %Q{<span class="chapterToc"><a href="/">Home</a></span>}
+    home_html = %Q{<span class="chapterToc home-link"><a href="/">Home</a></span>}
     menu.inner_html = "#{home_html} #{menu.inner_html}"
     doc.to_html
   end
@@ -254,21 +255,30 @@ class ModifyBuild
     doc = build_doc(text)
     head = doc.css("head")[0]
     title = head.css("title")[0].text
-    path = filename.split("/")[1]
+    cleaned_filename = extract_file_from_path(filename)
     description = extract_description(text, filename)
-    og_image = og_image_for_chapter(path)
+    og_image = og_image_for_chapter(cleaned_filename)
     meta_html = %Q{
       <meta property="og:locale" content="en_US">
       <meta property="og:site_name" content="The Sourdough Framework">
       <meta property="og:title" content="#{title}">
       <meta property="og:type" content="article">
-      <meta property="og:url" content="https://www.the-sourdough-framework.com/#{path}">
+      <meta property="og:url" content="https://www.the-sourdough-framework.com/#{cleaned_filename}">
       <meta property="og:description" content="#{description}">
       <meta property="description" content="#{description}">
       <meta property="og:image" content="https://the-sourdough-framework/#{og_image}" />
     }
     head.inner_html = "#{head.inner_html} #{meta_html}"
     doc.to_html
+  end
+
+  # Takes a name like "static_website_html/book.html" and returns "book.html"
+  def extract_file_from_path(filename)
+    result = filename.split("/")
+    return filename if result.length == 1
+    raise ArgumentError.new("The filename #{filename} is odd. Don't know how to handle it") if result.length > 2
+
+    result[1]
   end
 
   def extract_description(text, filename)
@@ -321,6 +331,26 @@ class ModifyBuild
       "Thehistoryofsourdough.html" => "og_image_the_history_of_sourdough.png",
       "Wheatsourdough.html" => "og_image_troubleshooting.png",
     }
+  end
+
+  def mark_menu_as_selected_if_on_page(text, filename)
+    doc = build_doc(text)
+    selected = doc.css(".menu-items .chapterToc > a").find do |el|
+      el["href"] == ""
+    end
+
+    # Special case for index page
+    if ["index.html", "book.html"].include?(filename)
+      doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
+      return doc.to_html
+    end
+    return doc.to_html unless selected
+
+    # Fix that when the menu is selected the href is empty. This way users can
+    # click the menu and the page will reload.
+    selected["href"] = filename
+    selected.parent.add_class("selected")
+    doc.to_html
   end
 
 
