@@ -39,6 +39,7 @@ class ModifyBuild
     text = add_meta_tags(text, filename)
     text = remove_section_table_of_contents(text)
     text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
+    text = add_canonical_for_duplicates(text, extract_file_from_path(filename))
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -266,7 +267,7 @@ class ModifyBuild
       <meta property="og:url" content="https://www.the-sourdough-framework.com/#{cleaned_filename}">
       <meta property="og:description" content="#{description}">
       <meta property="description" content="#{description}">
-      <meta property="og:image" content="https://the-sourdough-framework/#{og_image}" />
+      <meta property="og:image" content="https://www.the-sourdough-framework/#{og_image}" />
     }
     head.inner_html = "#{head.inner_html} #{meta_html}"
     doc.to_html
@@ -285,9 +286,9 @@ class ModifyBuild
     doc = build_doc(text)
     el = doc.css(".main-content p:first-of-type")[0]
     custom = custom_titles_per_filename(clean_filename(filename))
-    return custom if custom
+    return custom.strip if custom
     return "" if el.nil?
-    el.text
+    el.text.strip
   end
 
   # static_website_html/Acknowledgements.html => "Acknowledgements.html"
@@ -353,6 +354,18 @@ class ModifyBuild
     doc.to_html
   end
 
+  def add_canonical_for_duplicates(text, filename)
+    # Only applies to book.html which is a duplicate for index.html. The file
+    # is still needed though for proper display.
+    return text unless filename == "book.html"
+    doc = build_doc(text)
+    head = doc.css("head")[0]
+    canonical_html = %Q{
+      <link rel="canonical" href="https://www.the-sourdough-framework.com" />
+    }
+    head.inner_html = "#{head.inner_html} #{canonical_html}"
+    doc.to_html
+  end
 
   def build_doc(text)
     Nokogiri::HTML(text)
