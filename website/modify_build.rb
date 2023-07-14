@@ -267,7 +267,7 @@ class ModifyBuild
       <meta property="og:url" content="https://www.the-sourdough-framework.com/#{cleaned_filename}">
       <meta property="og:description" content="#{description}">
       <meta property="description" content="#{description}">
-      <meta property="og:image" content="https://www.the-sourdough-framework/#{og_image}" />
+      <meta property="og:image" content="https://www.the-sourdough-framework.com/#{og_image}" />
     }
     head.inner_html = "#{head.inner_html} #{meta_html}"
     doc.to_html
