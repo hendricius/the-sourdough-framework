@@ -137,7 +137,10 @@ nav.TOC,nav.TOC a, nav.TOC a:visited{
   color:#000000;
 }
 
-nav.TOC span:hover, nav.TOC span:hover *{
+nav.TOC span:hover,
+nav.TOC span:hover *,
+nav.TOC span.chapterToc.selected,
+nav.TOC span.chapterToc.selected a {
   background-color:#dad5ca;
 }
 
@@ -296,6 +299,6 @@ figcaption.caption {
 }
 
 div.center {
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
