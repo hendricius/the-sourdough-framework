@@ -300,3 +300,7 @@ div.center {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+main.titlepage h2.chapterHead {
+  margin-top: 0px;
+}

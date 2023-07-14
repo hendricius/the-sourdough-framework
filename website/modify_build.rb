@@ -14,6 +14,8 @@ class ModifyBuild
     build_latex_html
   end
 
+  private
+
   def build_latex_html
     system("rm -rf #{build_dir}/")
     system("mkdir #{build_dir}/")
@@ -23,8 +25,6 @@ class ModifyBuild
       modify_file(filename)
     end
   end
-
-  private
 
   def modify_file(filename)
     orig_text = File.read(filename)
@@ -41,6 +41,7 @@ class ModifyBuild
     text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = add_canonical_for_duplicates(text, extract_file_from_path(filename))
     text = include_javascript(text)
+    text = add_text_to_coverpage(text, extract_file_from_path(filename))
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -376,6 +377,106 @@ class ModifyBuild
     }
     head.inner_html = "#{head.inner_html} #{js_tag_html}"
     doc.to_html
+  end
+
+  def add_text_to_coverpage(text, filename)
+    return text unless is_cover_page?(filename)
+    doc = build_doc(text)
+    content = doc.css(".titlepage")[0]
+    raise ArgumentError.new(".titlepage not found in HTML") if content.nil?
+
+    content.add_class("main-content")
+    content.inner_html = "#{build_cover_page_content} #{content.inner_html}"
+    doc.to_html
+  end
+
+  def build_cover_page_content
+    %Q{
+    <h2 class="chapterHead">
+      🍞 The Sourdough Framework 📓
+    </h2>
+    <p class="noindent">
+       The Sourdough Framework goes beyond just recipes and provides you a solid
+       knowledge foundation, covering the science of sourdough, the basics of
+       bread making, and advanced techniques for achieving the perfect sourdough bread at home.
+    </p>
+
+    <p class="noindent">
+       Creating this book has been a labor of love. My
+       main goal has always been to spread the joy of baking and empower bread
+       enthusiasts like yourself. To ensure that the book remains accessible
+       to everyone, I have decided to make it available as a free digital download.
+    </p>
+
+    <p class="noindent">
+      However, producing and maintaining resources like this requires
+      considerable time, effort, and financial investment. If you find value
+      in "The Sourdough Framework" and appreciate the effort that went into
+      creating it, I kindly request your support <a href="https://breadco.de/book">
+      through a donation</a> or by
+      <a href="https://www.breadco.de/hardcover-book">considering the purchase of
+      the hardcover version of this book.</a>
+    </p>
+
+    <p class="noindent">
+      Your generous contribution will not only help me cover the costs associated
+      with this project but will also enable me to continue creating more valuable
+      content in the future.
+    </p>
+
+    <p class="noindent">
+      If you feel inspired to contribute, please consider making a donation of
+      any amount through <a href="https://breadco.de/book">my donation page</a>.
+      Your support will go a long way in ensuring
+      that this knowledge can reach even more bread enthusiasts worldwide.
+    </p>
+
+    <p class="noindent">
+      Remember, your donation is entirely voluntary and any amount you
+      contribute is deeply appreciated. If you are unable to make a donation at
+      this time, please know that your readership and support in spreading the
+      word about "The Sourdough Framework" are invaluable contributions as well.
+    </p>
+
+    <p class="noindent">
+      Thank you for being a part of this journey, and I hope that
+      "The Sourdough Framework" enriches your bread-making adventures.
+      Together, we can continue to share the love of baking and cultivate a
+      community passionate about the art of sourdough.
+    </p>
+    <p class="noindent">
+      You can either browse through this page or download the full book directly:
+    </p>
+    <p class="noindent">
+      PDF: <a href="https://www.the-bread-code.io/book.pdf">https://www.the-bread-code.io/book.pdf</a><br>
+      PDF (no serif): <a href="https://www.the-bread-code.io/book-sans-serif.pdf">https://www.the-bread-code.io/book-sans-serif.pdf</a>
+    </p>
+
+    <p class="noindent">
+      EPUB: <a href="https://www.the-bread-code.io/book.epub">https://www.the-bread-code.io/book.epub</a><br>
+      EPUB (no serif): <a href="https://www.the-bread-code.io/book-sans-serif.epub">https://www.the-bread-code.io/book-sans-serif.epub</a>
+    </p>
+
+    <p class="noindent">
+      Kindle: <a href="https://www.the-bread-code.io/book.azw3">https://www.the-bread-code.io/book.azw3</a><br>
+      Kindle (no serif): <a href="https://www.the-bread-code.io/book-sans-serif.azw3">https://www.the-bread-code.io/book-sans-serif.azw3</a>
+    </p>
+
+    <p class="noindent">
+      The full source code of the book can be found here:
+      <a href="https://www.github.com/hendricius/the-sourdough-framework">https://www.github.com/hendricius/the-sourdough-framework</a>
+    </p>
+
+    <p class="noindent">
+      There's also a hardcover version of the book available featuring an even more awesome design. You can read more information here:
+      <a href="https://www.breadco.de/hardcover-book">https://www.breadco.de/hardcover-book</a>
+    </p>
+
+    <p class="noindent">
+      Thank you and may the gluten be strong with you,<br>
+      Hendrik
+    </p>
+    }
   end
 
   def build_doc(text)
