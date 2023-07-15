@@ -89,7 +89,7 @@ To build the website make sure to have the ruby version installed specified in
 `website/.ruby-version`.
 
 ```console
-cd website/
+cd book/
 make website
 ```
 
