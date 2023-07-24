@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;900&family=Ubuntu+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
 
 :root{
   --ff-sans: 'Raleway', sans-serif;
-  --ff-mono: 'Ubuntu Mono', monospace;
+  --ff-mono: 'Open Sans', sans-serif;
   --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-bold: 700;
-  --fw-black: 900;
+  --fw-bold: 800;
   --f-lh: 28px;
 }
 
@@ -32,7 +30,7 @@ body{
   margin:0;
   padding:0;
   font-family: var(--ff-sans);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-regular);
   font-size: 16px;
 }
 
@@ -229,7 +227,7 @@ figcaption.caption {
     padding: 30px 20px;
     position: absolute;
     right: 0px;
-    top: 0px;
+    top: 2px;
   }
 
   .hamb-line {
@@ -298,4 +296,13 @@ div.center {
 
 main.titlepage h2.chapterHead {
   margin-top: 0px;
+}
+
+h2 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: var(--fw-bold);
 }
