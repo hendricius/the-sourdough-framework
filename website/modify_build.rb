@@ -395,12 +395,18 @@ class ModifyBuild
        bread making, and advanced techniques for achieving the perfect sourdough bread at home.
     </p>
 
+    <div class="videoWrapper">
+      <iframe width="560" height="349" src="https://www.youtube-nocookie.com/embed/l0GwG74otX4?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
     <p class="noindent">
        Creating this book has been a labor of love. My
        main goal has always been to spread the joy of baking and empower bread
        enthusiasts like yourself. To ensure that the book remains accessible
        to everyone, I have decided to make it available as a free digital download.
     </p>
+
+    <img alt="One of my best Sourdough Breads" class="home-bread" src="bread.jpg" />
 
     <p class="noindent">
       However, producing and maintaining resources like this requires
