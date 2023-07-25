@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
 
 :root{
-  --ff-sans: 'Raleway', sans-serif;
-  --ff-mono: 'Open Sans', sans-serif;
+  --ff-sans: 'Open Sans', sans-serif;
   --fw-regular: 400;
   --fw-bold: 800;
   --f-lh: 28px;
+  --c-black: #282828;
 }
 
 @media (min-width: 1200px){
@@ -119,7 +119,9 @@ nav.TOC a, nav.TOC a:visited{
 
 
 body{
-  background-color:#F5F2EF;
+  background-color:#F8F8F8;
+  background: url("bg.jpg") center center no-repeat;
+  background-size: cover;
 }
 
 a {
@@ -131,15 +133,15 @@ main.main-content, div.footnotes, main.titlepage{
 }
 
 nav.TOC,nav.TOC a, nav.TOC a:visited{
-  background-color:#F5F2EF;
-  color:#000000;
+  background-color: var(--c-black);
+  color:#fff;
 }
 
 nav.TOC span:hover,
 nav.TOC span:hover *,
 nav.TOC span.chapterToc.selected,
 nav.TOC span.chapterToc.selected a {
-  background-color:#dad5ca;
+  background-color:#5b5a58;
 }
 
 figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
@@ -305,4 +307,25 @@ h2 {
 
 h3 {
   font-weight: var(--fw-bold);
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-bread {
+  max-width: 100%;
+  margin-top: 1em;
 }
