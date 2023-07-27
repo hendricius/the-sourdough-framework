@@ -189,7 +189,7 @@ class ModifyBuild
       🍞 The Sourdough Framework
     </a>
     <input type="checkbox" id="toggle-menu">
-    <label class="hamb toggle-menu-label" for="toggle-menu"><img src="menu.svg" class="hamb-line"></label>
+    <label class="hamb toggle-menu-label" for="toggle-menu"><span class="hamb-line"></span></label>
   }
   end
 

@@ -216,13 +216,13 @@ figcaption.caption {
   text-decoration: none;
 }
 
-
 @media (max-width: 768px) {
   .toggle-menu-label {
     display: block;
     padding: 10px;
     cursor: pointer;
   }
+
   .hamb{
     cursor: pointer;
     padding: 5px;
@@ -230,19 +230,22 @@ figcaption.caption {
     align-items: center;
     align-content: center;
     justify-content: center;
-}
   }
 
   .hamb-line {
     display: block;
-    position: relative;
     transition: all .2s ease-out;
     filter: brightness(0) invert(1);
+    background: url("menu.svg") no-repeat center center;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    font-size: 0px;
   }
 
   span.hamb-line:hover  {
-    background-color: #000 !important;
-    filter: brightness(0) invert(0.95);
+    background-color: transparent !important;
+    font-size: 0px;
   }
 
   .menu-items {
@@ -266,6 +269,10 @@ figcaption.caption {
 
   #toggle-menu:checked ~ .menu-items {
     display: block;
+  }
+  #toggle-menu:checked ~ .toggle-menu-label span {
+    background-image: url("close.svg");
+    background-color: transparent !important;
   }
 
   .logo {
