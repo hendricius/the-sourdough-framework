@@ -42,6 +42,7 @@ class ModifyBuild
     text = add_canonical_for_duplicates(text, extract_file_from_path(filename))
     text = include_javascript(text)
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
+    text = fix_js_dependency_link(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -253,6 +254,8 @@ class ModifyBuild
     head = doc.css("head")[0]
     title = head.css("title")[0].text
     cleaned_filename = extract_file_from_path(filename)
+    # Exception for index.html when we are on the root page
+    use_filename = ["index.html"].include?(cleaned_filename) ? "" : cleaned_filename
     description = extract_description(text, filename)
     og_image = og_image_for_chapter(cleaned_filename)
     meta_html = %Q{
@@ -477,6 +480,11 @@ class ModifyBuild
       Hendrik
     </p>
     }
+  end
+
+  # For some reason the depdency is missing a // in the url.
+  def fix_js_dependency_link(text)
+    text.gsub("https:/cdn.jsdelivr.net", "https://cdn.jsdelivr.net")
   end
 
   def build_doc(text)
