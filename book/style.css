@@ -225,40 +225,24 @@ figcaption.caption {
   }
   .hamb{
     cursor: pointer;
-    float: right;
-    padding: 30px 20px;
-    position: absolute;
-    right: 0px;
-    top: 2px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
   }
 
   .hamb-line {
-    background: #000;
     display: block;
-    height: 2px;
     position: relative;
-    width: 24px;
-  }
-
-  .hamb-line::before,
-  .hamb-line::after{
-    background: #000;
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
     transition: all .2s ease-out;
-    width: 100%;
-  }
-  .hamb-line::before{
-    top: 5px;
-  }
-  .hamb-line::after{
-    top: -5px;
+    filter: brightness(0) invert(1);
   }
 
   span.hamb-line:hover  {
     background-color: #000 !important;
+    filter: brightness(0) invert(0.95);
   }
 
   .menu-items {
@@ -267,15 +251,17 @@ figcaption.caption {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #f2f2f2;
-    padding-left: 3px;
+    background-color: var(--c-black);
     z-index: 1;
   }
 
   .menu {
-    background: #F5F2EF;
-    padding: 20px 0px;
+    background: var(--c-black);
+    display: flex;
+    padding: 10px 0px;
     position: relative;
+    align-items: center;
+    justify-content: space-between;
   }
 
   #toggle-menu:checked ~ .menu-items {
@@ -287,6 +273,10 @@ figcaption.caption {
     color: #000;
     font-size: 20px;
     font-weight: bold;
+    padding-left: 17px;
+  }
+
+  .chapterToc a, .sectionToc a, .subsectionToc a, .likechapterToc a {
     padding-left: 17px;
   }
 }
