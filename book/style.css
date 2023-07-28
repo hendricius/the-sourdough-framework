@@ -234,7 +234,6 @@ figcaption.caption {
 
   .hamb-line {
     display: block;
-    transition: all .2s ease-out;
     filter: brightness(0) invert(1);
     background: url("menu.svg") no-repeat center center;
     background-size: contain;
