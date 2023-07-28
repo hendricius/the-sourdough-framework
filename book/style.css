@@ -57,7 +57,10 @@ main.main-content,main.titlepage,div.footnotes{
   padding:1rem;
 }
 
-p.indent, p.noindent{text-indent:0}
+p.indent, p.noindent{
+  text-indent: 0;
+  text-align: justify;
+}
 /* code{font-size:1.4rem;} */
 /* figure pre.listings{font-size: 1.4rem;} */
 figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
