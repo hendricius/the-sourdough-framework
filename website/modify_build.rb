@@ -217,8 +217,8 @@ class ModifyBuild
 
     home_html = %Q{<span class="chapterToc home-link"><a href="/">Home</a></span>}
     appendix_html = %Q{
-      <span class="chapterToc"><a href="https://breadco.de/kofi">Donate</a></span>
-      <span class="chapterToc"><a href="https://breadco.de/hardcover-book">Hardcover Book</a></span>
+      <span class="chapterToc"><a href="https://breadco.de/kofi">⭐️ Donate</a></span>
+      <span class="chapterToc"><a href="https://breadco.de/hardcover-book">📚 Hardcover Book</a></span>
     }
     menu.inner_html = "#{home_html} #{menu.inner_html} #{appendix_html}"
     doc.to_html
@@ -389,7 +389,7 @@ class ModifyBuild
 
   def build_cover_page_content
     %Q{
-    <h2 class="chapterHead">
+    <h2 class="chapterHead home-title">
       🍞 The Sourdough Framework
     </h2>
     <p class="noindent">

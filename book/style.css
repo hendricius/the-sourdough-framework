@@ -77,7 +77,7 @@ nav.TOC{
 
 nav.TOC span{
   margin-top:0;
-  font-size:0.8rem;
+  font-size: 16px;
 }
 
 nav.TOC a, nav.TOC a:visited{
@@ -285,6 +285,10 @@ figcaption.caption {
 
   .chapterToc a, .sectionToc a, .subsectionToc a, .likechapterToc a {
     padding-left: 17px;
+  }
+
+  .home-title {
+    display: none;
   }
 }
 
