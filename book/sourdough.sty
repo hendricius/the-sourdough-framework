@@ -1,16 +1,15 @@
 \ProvidesPackage{sourdough}
-\usepackage[utf8]{inputenc}
 \usepackage{blindtext}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{tocbasic}
-\usepackage[T1]{fontenc}
 \usepackage{chemformula}
 \usepackage{chemfig}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{siunitx}
+\usepackage{fontspec}
 
 \renewcommand\theadfont{\bfseries}
 
@@ -25,8 +24,7 @@
 
 % Fonts for accessibility
 \ifdefined\isaccessible
-    \usepackage{helvet}
-    \renewcommand{\familydefault}{\sfdefault}
+    \setmainfont{Helvetica}
 \fi
 
 % Kerning in footnotes
