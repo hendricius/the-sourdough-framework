@@ -1,7 +1,7 @@
 # Macros for commands
-LATEX := latexmk -cd -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
-EBOOK := tex4ebook -d epub -c tex4ebook.cfg
-CLEAN := latexmk -cd -c -use-make
+LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -use-make
+EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
+CLEAN := latexmk --lua -cd -c -use-make
 EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex
@@ -225,7 +225,7 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 .PHONY: website
 website:
 	rm -rf $(WEBSITE_DIR)
-	make4ht -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
+	make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
 	cp $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
 
 # Debug Stuff from now on
@@ -233,7 +233,7 @@ website:
 show_tools_version:  # Show version of tools used on the build machine
 	- latexmk --version
 	@echo ""
-	- pdflatex --version
+	- lualatex --version
 	@echo ""
 	- tex4ebook --version
 	@echo ""
