@@ -31,7 +31,7 @@ jobs:
           image: ghcr.io/hendricius/the-sourdough-framework:latest
           options: -v ${{ github.workspace }}:/app
           run: |
-            cd /app/website
+            cd /app/book
             make website
       - name: Release baked website to S3
         uses: shallwefootball/s3-upload-action@master
