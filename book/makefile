@@ -1,15 +1,18 @@
 # Macros for commands
 LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -use-make
 EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
+WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
 CLEAN := latexmk -cd -lualatex -c -use-make
 EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex
-WEBSITE_DIR := static_website_html
 
 ifdef DEBUG
 EBOOK += -a debug
+WEBSITE += -a debug
 endif
+
+website_dir := static_website_html
 
 # List all files that are dependencies
 chapters = baking basics bread-types flour-types history intro\
@@ -29,6 +32,12 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
+
+website_src := $(src_all) website.cfg
+
+website_assets := $(wildcard ../website/assets/*)
+ruby_src := ../website/modify_build.rb $(website_assets)
+ruby_src += ../website/Gemfile  ../website/Gemfile.lock 
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
@@ -81,9 +90,11 @@ help:
 	@echo "check: runs static analysis checker on LaTeX source to spot"
 	@echo "       programming or typographic mistakes"
 	@echo ""
-	@echo "clean: delete all intermediate files keep targets (pdf/ebook)"
-	@echo "mrproper: delete all generated files intermediate and pdf/ebooks"
-	@echo "clean_figures: delete intermediate TikZ files"
+	@echo "clean: delete all intermediate files keep targets (pdf/ebooks/website)"
+	@echo "mrproper: delete all generated files intermediate and pdf/ebooks/website"
+	@echo "  clean_figures: delete intermediate TikZ files"
+	@echo "  clean_website_build: delete intermediate website files"
+	@echo "  clean_ebook_build: delete intermediate ebook files"
 	@echo ""
 	@echo "build_ebook: builds only the ebook serif and accessible version"
 	@echo "build_pdf: builds both serif and accessible pdf"
@@ -98,6 +109,9 @@ help:
 	@echo ""
 	@echo "release_serif: build serif only version of pdf and ebooks"
 	@echo "release_sans_serif: build sans-serif/accessible version of pdf and ebooks"
+	@echo ""
+	@echo "website: build the static website from LaTeX sources and post-process it"
+	@echo "html: build the static website from LaTeX sources _without_ post-processing"
 	@echo ""
 	@echo "Debug targets:"
 	@echo ""
@@ -175,8 +189,14 @@ clean_ebook_build:
 	-rm  content.opf
 	-rm  book*x.svg
 
+.PHONY: clean_website_build
+clean_website_build: clean_ebook_build
+	-rm book-*.svg
+	-rm book.dlog
+	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
+
 .PHONY: clean
-clean: clean_ebook_build clean_figures
+clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
 	-rm  book*/*.bbl
@@ -199,7 +219,7 @@ mrproper: clean
 	rm -rf book_sans_serif/
 	rm -rf book-epub/
 	rm -rf book_sans_serif-epub/
-	rm -rf static_website_html/
+	rm -rf $(website_dir)
 
 .PHONY: bake
 bake: release_serif release_sans_serif
@@ -222,11 +242,17 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
+# Website stuff
+$(website_dir)/book.html: $(website_src)
+	$(WEBSITE) -d $(website_dir) book.tex
+
+.PHONY: html
+html: $(website_dir)/book.html
+	cp $< $(website_dir)/index.html
+
 .PHONY: website
-website:
-	rm -rf $(WEBSITE_DIR)
-	make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes -d $(WEBSITE_DIR) book.tex
-	cp $(WEBSITE_DIR)/book.html $(WEBSITE_DIR)/index.html
+website: html $(ruby_src)
+	cd ../website && bundle install && ruby modify_build.rb
 
 # Debug Stuff from now on
 .PHONY: show_tools_version
