@@ -1,7 +1,7 @@
 # Macros for commands
 LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -use-make
 EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
-CLEAN := latexmk --lua -cd -c -use-make
+CLEAN := latexmk -cd -lualatex -c -use-make
 EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex
