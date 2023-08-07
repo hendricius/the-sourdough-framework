@@ -6,15 +6,29 @@ require 'nokogiri'
 # modifications.
 
 class ModifyBuild
+  HOST = "https://www.the-sourdough-framework.com".freeze
+
   def self.build
     new.build
   end
 
   def build
     build_latex_html
+    create_sitemap
   end
 
   private
+
+  def create_sitemap
+    content = ""
+    list_of_files_to_modify.sort.each do |fn|
+      # "static_website_html/Acknowledgements.html"
+      # Only take the html part
+      html_file_name = fn.split("/")[-1]
+      content += "#{HOST}/#{html_file_name}\n"
+    end
+    File.open("#{build_dir}/sitemap.txt", 'w') { |file| file.write(content) }
+  end
 
   def build_latex_html
     system("rm -rf #{build_dir}/")
@@ -273,10 +287,10 @@ class ModifyBuild
       <meta property="og:site_name" content="The Sourdough Framework">
       <meta property="og:title" content="#{title}">
       <meta property="og:type" content="article">
-      <meta property="og:url" content="https://www.the-sourdough-framework.com/#{cleaned_filename}">
+      <meta property="og:url" content="#{HOST}/#{cleaned_filename}">
       <meta property="og:description" content="#{description}">
       <meta property="description" content="#{description}">
-      <meta property="og:image" content="https://www.the-sourdough-framework.com/#{og_image}" />
+      <meta property="og:image" content="#{HOST}/#{og_image}" />
     }
     head.inner_html = "#{head.inner_html} #{meta_html}"
     doc.to_html
@@ -366,7 +380,8 @@ class ModifyBuild
   def add_canonical_for_duplicates(text, filename)
     # Only applies to book.html which is a duplicate for index.html. The file
     # is still needed though for proper display.
-    return text unless filename == "book.html"
+    canonical_pages = ["book.html", "index.html"]
+    return text unless canonical_pages.include?(filename)
     doc = build_doc(text)
     head = doc.css("head")[0]
     canonical_html = %Q{
