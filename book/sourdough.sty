@@ -14,9 +14,16 @@
 \renewcommand\theadfont{\bfseries}
 
 \definecolor{codeblue}{RGB}{69, 161, 248}
-\definecolor{codegray}{RGB}{40, 40, 40}
+\definecolor{codeblack}{RGB}{40, 40, 40}
+
+\definecolor{maingray}{HTML}{F8F8F8}
+
+\definecolor{hlocre}{HTML}{E5B874}
+\definecolor{hlorange}{HTML}{EC7850}
+\definecolor{hlyellow}{HTML}{FAE69E}
+
 \usetikzlibrary{shapes,arrows}
-\tikzstyle{decision} = [diamond, draw, fill=codegray, text=white,
+\tikzstyle{decision} = [diamond, draw, fill=codeblack, text=white,
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
     text width=5em, text centered, rounded corners, minimum height=4em]
@@ -24,7 +31,8 @@
 
 % Fonts for accessibility
 \ifdefined\isaccessible
-    \setmainfont{TeX Gyre Heros} % Helvetica clone
+    \setmainfont{Open Sans}
+    \AtBeginDocument{\sisetup{mode =text}}
 \fi
 
 % Kerning in footnotes
