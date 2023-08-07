@@ -250,7 +250,7 @@ $(website_dir)/book.html: $(website_src)
 html: $(website_dir)/book.html
 	cp $< $(website_dir)/index.html
 
-# Because pacakages will be installed in hard to predict places use a file as
+# Because packages will be installed in hard to predict places use a file as
 # marker..
 ../website/_bundle_install_done: $(ruby_pkg)
 	- rm ../website/$@
