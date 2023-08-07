@@ -37,7 +37,7 @@ website_src := $(src_all) website.cfg
 
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
-ruby_src += ../website/Gemfile  ../website/Gemfile.lock 
+ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock 
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
@@ -250,9 +250,17 @@ $(website_dir)/book.html: $(website_src)
 html: $(website_dir)/book.html
 	cp $< $(website_dir)/index.html
 
+# Because packages will be installed in hard to predict places use a file as
+# marker..
+../website/_bundle_install_done: $(ruby_pkg)
+	- rm ../website/$@
+	cd ../website && bundle install
+	touch ../website/$@
+
+# TODO: this will run every single time, but is so fast we don't really care
 .PHONY: website
-website: html $(ruby_src)
-	cd ../website && bundle install && ruby modify_build.rb
+website: html ../website/_bundle_install_done $(ruby_src)
+	cd ../website && ruby modify_build.rb
 
 # Debug Stuff from now on
 .PHONY: show_tools_version
