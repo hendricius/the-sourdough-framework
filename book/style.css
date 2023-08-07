@@ -6,6 +6,11 @@
   --fw-bold: 800;
   --f-lh: 28px;
   --c-black: #282828;
+  --fs-xxxl: 32px;
+  --fs-xxl: 26px;
+  --fs-xl: 24px;
+  --fs-l: 22px;
+  --fs-m: 16px;
 }
 
 @media (min-width: 1200px){
@@ -31,7 +36,7 @@ body{
   padding:0;
   font-family: var(--ff-sans);
   font-weight: var(--fw-regular);
-  font-size: 16px;
+  font-size: var(--fs-m);
 }
 
 @media screen and (min-width: 57rem) {
@@ -303,13 +308,28 @@ main.titlepage h2.chapterHead {
   margin-top: 0px;
 }
 
+h1 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-xxxl);
+}
+
 h2 {
   font-weight: var(--fw-bold);
   text-transform: uppercase;
+  font-size: var(--fs-xxl);
 }
 
 h3 {
   font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-xl);
+}
+
+h4 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-l);
 }
 
 .videoWrapper {
