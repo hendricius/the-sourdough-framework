@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.the-sourdough-framework/sitemap.txt
+Sitemap: https://www.the-sourdough-framework.com/sitemap.txt
