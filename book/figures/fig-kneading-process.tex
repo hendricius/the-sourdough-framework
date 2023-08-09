@@ -16,7 +16,7 @@
   \path [line] (add_water) -- (knead1);
   \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait 15~minutes};
   \path [line] (add_water) -- (wait3);
-  \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot jar?};
+  \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot sample?};
   \path [line] (wait3) -- (dough_sample);
   \path [line] (more_water) -- node{no} (dough_sample);
   \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {\footnotesize Make round dough ball};
