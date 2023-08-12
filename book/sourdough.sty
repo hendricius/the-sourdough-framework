@@ -30,10 +30,16 @@
     text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
 
+% Fonts
+\defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
 % Fonts for accessibility
 \ifdefined\isaccessible
     \setmainfont{Open Sans}
     \AtBeginDocument{\sisetup{mode =text}}
+\else
+    \setmainfont{TeX Gyre Pagella}[Scale=1.0] % Or Palatino Linotype, etc.
+    \setsansfont{Open Sans}[Scale=MatchLowercase]
+    \setmonofont{Andale Mono}[Scale=MatchLowercase]
 \fi
 
 % Kerning in footnotes
