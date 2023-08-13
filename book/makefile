@@ -15,7 +15,7 @@ endif
 website_dir := static_website_html
 
 # List all files that are dependencies
-chapters = baking basics bread-types flour-types history intro\
+chapters = baking basics bread-types cover flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
