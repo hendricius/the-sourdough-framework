@@ -247,7 +247,7 @@ release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_d
 	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
 # Website stuff
-$(website_dir)/book.html: $(website_src)
+$(website_dir)/book.html: $(website_src) cover/cover-page.xbb
 	$(WEBSITE) -d $(website_dir) book.tex
 
 .PHONY: html
