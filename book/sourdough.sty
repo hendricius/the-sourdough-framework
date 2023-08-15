@@ -8,7 +8,7 @@
 \usepackage{chemfig}
 \usepackage{booktabs}
 \usepackage{makecell}
-\usepackage{siunitx}
+\usepackage[mode=match, reset-text-family=false]{siunitx}
 \usepackage{fontspec}
 
 \renewcommand\theadfont{\bfseries}
@@ -22,6 +22,7 @@
 \definecolor{hlorange}{HTML}{EC7850}
 \definecolor{hlyellow}{HTML}{FAE69E}
 
+\tikzstyle{every picture}+=[font=\small\sffamily]
 \usetikzlibrary{shapes,arrows}
 \tikzstyle{decision} = [diamond, draw, fill=codeblack, text=white,
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
@@ -29,10 +30,17 @@
     text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
 
+% Fonts
+\defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
 % Fonts for accessibility
 \ifdefined\isaccessible
     \setmainfont{Open Sans}
     \AtBeginDocument{\sisetup{mode =text}}
+\else
+    \setmainfont{TeX Gyre Pagella}[Scale=1.0] % Or Palatino Linotype, etc.
+    \setsansfont{Open Sans}[Scale=MatchLowercase]
+    % TODO not available on github CI
+    % \setmonofont{Andale Mono}[Scale=MatchLowercase] 
 \fi
 
 % Kerning in footnotes
