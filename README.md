@@ -3,7 +3,7 @@
 The sourdough framework is an open-source book dedicated to
 helping you to make the best possible sourdough bread at home.
 
-![The book cover](book/images/cover-page.jpg)
+![The book cover](book/cover/cover-page.jpg)
 
 Rather than providing recipes this book intends to provide a
 framework that enables you to bake bread in your respective
