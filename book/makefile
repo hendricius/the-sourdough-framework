@@ -15,7 +15,7 @@ endif
 website_dir := static_website_html
 
 # List all files that are dependencies
-chapters = baking basics bread-types flour-types history intro\
+chapters = baking basics bread-types cover flour-types history intro\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
@@ -37,7 +37,7 @@ website_src := $(src_all) website.cfg
 
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
-ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock 
+ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
@@ -55,13 +55,16 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 	@echo "\end{document}" >> $@.in
 	$(LATEX) $@.in
 
+%.xbb: %.jpg
+	ebb -x $<
+
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
 
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-epub/%.epub: %.tex $(src_all)
+epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 	$(EBOOK) -f epub $<
 
 epub/%.mobi: epub/%.epub
@@ -164,6 +167,7 @@ clean_figures:
 	- $(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
 	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
 	- rm $(patsubst %.tex, %.png.in, $(src_figures))
+	- rm cover/cover-page.xbb
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
