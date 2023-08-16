@@ -210,8 +210,6 @@ class ModifyBuild
         </a>
       </main>
     }
-    #cover_html = cover.to_html
-    #cover.inner_html = "<a href='Thehistoryofsourdough.html'>#{cover_html}</a>"
     body.inner_html = "#{menu} #{content}"
     doc.to_html
   end
