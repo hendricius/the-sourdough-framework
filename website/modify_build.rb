@@ -166,20 +166,6 @@ class ModifyBuild
     doc.to_html
   end
 
-  # The cover page should have some additional content and allow the user to
-  # click the book cover in order to start reading.
-  def fix_cover_page(text)
-    doc = build_doc(text)
-    body = doc.css("body")[0]
-    content = doc.css("body > .titlepage")[0]
-    menu = doc.css("body > .menu")[0]
-    cover = content.css(".center")[0]
-    cover_html = cover.to_html
-    cover.inner_html = "<a href='Thehistoryofsourdough.html'>#{cover_html}</a>"
-    body.inner_html = "#{menu} #{content}"
-    doc.to_html
-  end
-
   # By default the menu is not made for mobile devices. This adds mobile
   # capabilities to the menu
   def fix_menu(text)
@@ -213,11 +199,19 @@ class ModifyBuild
   def fix_cover_page(text)
     doc = build_doc(text)
     body = doc.css("body")[0]
-    content = doc.css("body > .titlepage")[0]
-    menu = doc.css("body > .menu")[0]
-    cover = content.css(".center")[0]
-    cover_html = cover.to_html
-    cover.inner_html = "<a href='Thehistoryofsourdough.html'>#{cover_html}</a>"
+    version = doc.css("body i")[0].text
+    content = doc.css("body > .main-content")[0]
+    menu = doc.css("body > nav")[0]
+    content = %Q{
+      <main class="titlepage">
+        <a href="Thehistoryofsourdough.html">
+          <img src="cover-page.jpg" />
+          <div class="version"><p>#{version}</p></div>
+        </a>
+      </main>
+    }
+    #cover_html = cover.to_html
+    #cover.inner_html = "<a href='Thehistoryofsourdough.html'>#{cover_html}</a>"
     body.inner_html = "#{menu} #{content}"
     doc.to_html
   end
