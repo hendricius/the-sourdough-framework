@@ -11,7 +11,8 @@
 \usepackage[mode=match, reset-text-family=false]{siunitx}
 \usepackage{fontspec}
 \usepackage{calc}
-\usepackage[font={sffamily, bfseries}]{quoting}
+\usepackage[font={sffamily, sbseries}]{quoting}
+
 
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
 
@@ -36,16 +37,22 @@
 
 % Fonts
 \defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
+% Semi-bold
+\DeclareRobustCommand\sbseries{\fontseries{sb}\selectfont}
 % Fonts for accessibility
 \ifdefined\isaccessible
-    \setmainfont{Open Sans}
-    \AtBeginDocument{\sisetup{mode =text}}
+    \setmainfont{Open Sans}[
+    Scale=MatchLowercase]
 \else
     \setmainfont{TeX Gyre Pagella}[Scale=1.0] % Or Palatino Linotype, etc.
-    \setsansfont{Open Sans}[Scale=MatchLowercase]
     % TODO not available on github CI
     % \setmonofont{Andale Mono}[Scale=MatchLowercase] 
 \fi
+% Opens Sans in both case..
+\setsansfont{Open Sans}[
+  Scale=MatchLowercase,
+  FontFace = {sb}{it}{* Semibold Italic},
+  FontFace = {sb}{n}{*-semibold}]
 
 % Kerning in footnotes
 \usepackage{fnpct}
