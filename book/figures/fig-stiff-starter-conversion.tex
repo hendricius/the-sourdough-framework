@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Make a regular or liquid starter};
+  \node [start] (init) {\footnotesize Make a regular or liquid starter};
   \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix \qty{10}{\gram} existing starter, \qty{50}{\gram} flour and \qty{25}{\gram} water};
   \node [decision, right of=feed_new_ratio, node distance=3cm] (too_dry) {\footnotesize Starter very dry, hard to mix?};
   \node [block, right of=too_dry, node distance=4cm] (add_water) {\footnotesize Add more water};
@@ -8,7 +8,7 @@
   \node [block, left of=repeated_3_times] (feed_again) {\footnotesize Feed again using 1:5:2.5 ratio};
   \node [decision, below of=repeated_3_times, node distance=3.5cm] (ready_signs) {\footnotesize Size increase and sour smell?};
   \node [block, below of=next_day, node distance=2cm] (last_feed) {\footnotesize Feed one last time};
-  \node [block, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
+  \node [success, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_again) -- (feed_new_ratio);
   \path [line] (next_day) -- (repeated_3_times);

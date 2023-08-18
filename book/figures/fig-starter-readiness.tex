@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Make a starter};
+  \node [start] (init) {\footnotesize Make a starter};
   \node [block, right of=init, node distance=3cm] (feed) {\footnotesize Feed your starter};
   \path [line] (init) -- (feed);
   \node [block, right of=feed, node distance=3cm] (wait_12_after_feed) {\footnotesize Wait  \qty{12}{\hour}};
@@ -13,7 +13,7 @@
   \path [line] (is_bubbly) -- node{no} (wait_12);
   \node [decision, below of=is_bubbly, node distance=4.0cm] (check_smell) {\footnotesize Vinegary, or yogurt smell?};
   \path [line] (is_bubbly) -- node{yes} (check_smell);
-  \node [block, below of=init, node distance=6cm] (make_dough) {\footnotesize Make your dough};
+  \node [success, below of=init, node distance=6cm] (make_dough) {\footnotesize Make your dough};
   \path [line] (check_smell) -- node{yes} (make_dough);
   \path [line] (check_smell) -- node{no} (wait_12);
 \end{tikzpicture}

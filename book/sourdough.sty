@@ -25,11 +25,23 @@
 \definecolor{hlorange}{HTML}{EC7850}
 \definecolor{hlyellow}{HTML}{FAE69E}
 
+\definecolor{pinkpic}{RGB}{246, 183, 194}
+\definecolor{redpic}{RGB}{232, 72, 71}
+\definecolor{yellowpic}{RGB}{246, 235, 51}
+
 \tikzstyle{every picture}+=[font=\small\sffamily]
 \usetikzlibrary{shapes,arrows}
 \tikzstyle{decision} = [diamond, draw, fill=codeblack, text=white,
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{decision_start} = [diamond, draw, fill=pinkpic, text=black,
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{start} = [rectangle, draw, fill=pinkpic,  text=black,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{success} = [rectangle, draw, fill=yellowpic,  text=black,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{fail} = [rectangle, draw, fill=redpic,  text=black,
     text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
 
