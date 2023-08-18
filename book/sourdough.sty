@@ -13,9 +13,9 @@
 \usepackage{calc}
 \usepackage[font={sffamily, sbseries}]{quoting}
 
-
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
 
+% For tables
 \renewcommand\theadfont{\bfseries}
 
 \definecolor{codeblue}{RGB}{69, 161, 248}
@@ -37,7 +37,7 @@
 
 % Fonts
 \defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
-% Semi-bold
+% Define Semi-bold
 \DeclareRobustCommand\sbseries{\fontseries{sb}\selectfont}
 % Fonts for accessibility
 \ifdefined\isaccessible
@@ -259,5 +259,5 @@
     \setlength{\mtocshift}{0cm}%
 }
 
-% By default start with the kao style
+% By default start with the lines style
 \setchapterstyle{lines}
