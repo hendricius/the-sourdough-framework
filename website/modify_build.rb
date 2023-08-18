@@ -58,11 +58,18 @@ class ModifyBuild
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
+    text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
   def is_cover_page?(filename)
     ["book.html", "index.html"].any? do |name|
+      filename.include?(name)
+    end
+  end
+
+  def is_list_figures_tables?(filename)
+    ["listfigurename.html", "listtablename.html"].any? do |name|
       filename.include?(name)
     end
   end
@@ -508,6 +515,20 @@ class ModifyBuild
     content.each do |node|
       node.remove
     end
+    doc.to_html
+  end
+
+  # The list of tables for some reason expands the menu on other pages? Fix
+  # this.
+  def fix_menus_list_figures_tables(text)
+    doc = build_doc(text)
+    content = doc.css(".menu-items > .subsectionToc, .menu-items > .sectionToc")
+    content.each do |node|
+      node.remove
+    end
+    doc.css(".menu-items > .lotToc").each(&:remove)
+    doc.css(".menu-items > .lofToc").each(&:remove)
+    doc.css(".menu-items > br").each(&:remove)
     doc.to_html
   end
 
