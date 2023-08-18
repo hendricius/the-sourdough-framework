@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Homogenize recipe ingredients};
+  \node [start] (init) {\footnotesize Homogenize recipe ingredients};
   \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15~minutes};
   \path [line] (init) -- (wait1);
   \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5~minutes};
@@ -24,6 +24,6 @@
   \node [block, below of=dough_sample, node distance=3cm] (extract_sample) {\footnotesize Extract sample};
   \path [line] (dough_sample) -- node{yes} (extract_sample);
   \path [line] (extract_sample) -- (dough_ball);
-  \node [block, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
+  \node [success, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
   \path [line] (dough_ball) -- (begin_bulk);
 \end{tikzpicture}

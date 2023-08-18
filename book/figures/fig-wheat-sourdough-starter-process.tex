@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [decision] (init) {\footnotesize Starter last fed within 3 days?};
+  \node [decision_start] (init) {\footnotesize Starter last fed within 3 days?};
   \node [block, right of=init, node distance=4cm] (feed_no_branch)
       {\footnotesize Feed starter twice. \qty{48}{\hour} before and \qtyrange{6}{12}{\hour} before};
   \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
@@ -14,7 +14,7 @@
     {\footnotesize Bubbly? Increased in size?};
   \node [decision, below of=size_check, node distance=5cm] (smell_check)
     {\footnotesize Vinegary or yogurty smell?};
-  \node [block, right of=smell_check, node distance=6cm] (make_dough)
+  \node [success, right of=smell_check, node distance=6cm] (make_dough)
     {\footnotesize Prepare dough};
   \path [line] (init) -- node{no} (feed_no_branch);
   \path [line] (init) -- node{yes} (feed_yes_branch);
