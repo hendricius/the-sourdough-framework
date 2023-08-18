@@ -1,11 +1,11 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [start] (init) {\footnotesize Make a regular or liquid starter};
   \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix \qty{10}{\gram} existing starter, \qty{50}{\gram} flour and \qty{25}{\gram} water};
-  \node [decision, right of=feed_new_ratio, node distance=3cm] (too_dry) {\footnotesize Starter very dry, hard to mix?};
+  \node [decision, right of=feed_new_ratio, node distance=3.5cm] (too_dry) {\footnotesize Starter very dry, hard to mix?};
   \node [block, right of=too_dry, node distance=4cm] (add_water) {\footnotesize Add more water};
   \node [block, below of=add_water, node distance=2cm] (next_day) {\footnotesize Wait  \qty{24}{\hour}};
-  \node [decision, below of=too_dry, node distance=3cm] (repeated_3_times) {\footnotesize Stiff starter fed 3 times overall?};
-  \node [block, left of=repeated_3_times] (feed_again) {\footnotesize Feed again using 1:5:2.5 ratio};
+  \node [decision, below of=too_dry, node distance=3.5cm] (repeated_3_times) {\footnotesize Stiff starter fed 3 times overall?};
+  \node [block, below of=feed_new_ratio, node distance=3.5cm] (feed_again) {\footnotesize Feed again using 1:5:2.5 ratio};
   \node [decision, below of=repeated_3_times, node distance=3.5cm] (ready_signs) {\footnotesize Size increase and sour smell?};
   \node [block, below of=next_day, node distance=2cm] (last_feed) {\footnotesize Feed one last time};
   \node [success, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
