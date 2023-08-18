@@ -1,12 +1,12 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Begin shaping};
+  \node [start] (init) {\footnotesize Begin shaping};
   \node [decision, right of=init, node distance=5cm] (overfermented_decision) {\footnotesize Dough overly sticky or dough tears?};
   \node [block, right of=overfermented_decision, node distance=4cm] (overfermented) {\footnotesize Your dough is likely overfermented};
-  \node [block, right of=overfermented, node distance=3cm] (loafpan) {\footnotesize Move to loaf pan, short proof, then bake directly};
+  \node [fail, right of=overfermented, node distance=3cm] (loafpan) {\footnotesize Move to loaf pan, short proof, then bake directly};
   \node [block, below of=init, node distance=4cm] (shaping_technique) {\footnotesize Proceed with shaping technique};
   \node [block, right of=shaping_technique, node distance=3cm] (flour) {\footnotesize Flour shaped dough};
   \node [block, right of=flour, node distance=3cm] (banneton) {\footnotesize Place upside down in banneton};
-  \node [block, right of=banneton, node distance=3cm] (proof) {\footnotesize Begin proofing};
+  \node [success, right of=banneton, node distance=3cm] (proof) {\footnotesize Begin proofing};
   \path [line] (init) -- (overfermented_decision);
   \path [line] (overfermented_decision) -- node{yes} (overfermented);
   \path [line] (overfermented_decision) -- node{no} (shaping_technique);
