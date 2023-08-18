@@ -57,6 +57,7 @@ class ModifyBuild
     text = include_javascript(text)
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
+    text = fix_list_of_tables_figures_duplicates(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -497,6 +498,17 @@ class ModifyBuild
       Hendrik
     </p>
     }
+  end
+
+  # For some reason the list of figures and tables is displayed twice in the
+  # menu. Fix this.
+  def fix_list_of_tables_figures_duplicates(text)
+    doc = build_doc(text)
+    content = doc.css(".menu-items > .likechapterToc")
+    content.each do |node|
+      node.remove
+    end
+    doc.to_html
   end
 
   # For some reason the depdency is missing a // in the url.
