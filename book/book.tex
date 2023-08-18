@@ -1,4 +1,5 @@
-\documentclass[a4paper, twoside, 12pt, parskip=half]{scrbook}
+\documentclass[a4paper, twoside, 12pt, parskip=half, bibliography=totoc,%
+               listof=totoc]{scrbook}
 
 % General packages
 \usepackage{sourdough}
@@ -64,7 +65,9 @@
 \chapter{Troubleshooting}
 \input{troubleshooting/misc}
 
+\backmatter
 \printbibliography
-
+\listoftables
+\listoffigures
 
 \end{document}
