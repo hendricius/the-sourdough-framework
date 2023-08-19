@@ -7,7 +7,7 @@
   \node [block, below of=spritz] (close) {\footnotesize Close DO};
   \node [block, left of=close] (back_oven) {\footnotesize Place DO back in oven};
   \node [block, left of=back_oven] (bake) {\footnotesize Bake 30~minutes at \qty{230}{\degreeCelsius} (\qty{446}{\degF})};
-  \node [block, below of=heat_oven] (wait_5_minutes) {\footnotesize Wait 5 minutes};
+  \node [block, below of=heat_oven] (wait_5_minutes) {\footnotesize Wait\\ 5 minutes};
   \node [decision, below of=wait_5_minutes, node distance=4cm] (is_ready_check) {\footnotesize Core temperature \qty{92}{\degreeCelsius} (\qty{197}{\degF})?};
   \node [block, right of=is_ready_check, node distance=4cm] (remove_do_lid) {\footnotesize Remove DO lid};
   \node [block, right of=wait_5_minutes] (test_temperature_again) {\footnotesize Test core temperature again};

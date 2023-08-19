@@ -1,7 +1,7 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [start] (init) {\footnotesize Make a regular or stiff starter};
   \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix \qty{1}{\gram} existing starter, \qty{5}{\gram} flour and \qty{25}{\gram} water};
-  \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait  \qty{24}{\hour}};
+  \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait\\ \qty{24}{\hour}};
   \node [block, below of=init, node distance=4cm] (feed_again) {\footnotesize Feed again using 1:5:25 ratio};
   \node [block, right of=next_day, node distance=5cm] (test) {\footnotesize Check starter readiness?};
   \node [decision, below of=next_day, node distance=4cm] (ready_signs) {\footnotesize Sour yogurty smell and bubbles visible on flour?};

@@ -1,10 +1,10 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [start] (init) {\footnotesize Homogenize recipe ingredients};
-  \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait 15~minutes};
+  \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait\\15~minutes};
   \path [line] (init) -- (wait1);
   \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5~minutes};
   \path [line] (wait1) -- (knead1);
-  \node [block, right of=knead1, node distance=3cm] (wait2) {\footnotesize Wait 15~minutes};
+  \node [block, right of=knead1, node distance=3cm] (wait2) {\footnotesize Wait\\15~minutes};
   \path [line] (knead1) -- (wait2);
   \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {\footnotesize Window-pane?};
   \path [line] (wait2) -- (windowpane_test);
@@ -14,7 +14,7 @@
   \node [block, left of=more_water, node distance=4.5cm] (add_water) {\footnotesize Add water};
   \path [line] (more_water) -- node{yes} (add_water);
   \path [line] (add_water) -- (knead1);
-  \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait 15~minutes};
+  \node [block, below of=add_water, node distance=4cm] (wait3) {\footnotesize Wait\\15~minutes};
   \path [line] (add_water) -- (wait3);
   \node [decision, right of=wait3, node distance=4.5cm] (dough_sample) {\footnotesize Aliquot sample?};
   \path [line] (wait3) -- (dough_sample);
