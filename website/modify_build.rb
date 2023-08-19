@@ -104,7 +104,7 @@ class ModifyBuild
     doc = build_doc(text)
     elements = [doc.search('.chapterToc'), doc.search('.sectionToc'), doc.search('.subsectionToc')].flatten
     elements.each do |n|
-      chapter_number_or_nothing = n.children[0].text.strip.to_i
+      chapter_number_or_nothing = n.children[0].text.strip.gsub(/[[:space:]]/, '')
       hyperlink_node = n.children[1]
       next if hyperlink_node.nil?
 
@@ -112,9 +112,10 @@ class ModifyBuild
       n.children[0].remove
       link_text = hyperlink_node.content
       # no chapter number
-      if chapter_number_or_nothing == 0
+      if chapter_number_or_nothing == ""
         content = hyperlink_node.to_s
       else
+        #binding.pry if link_text == "The process"
         link_node_content = %Q{
         <span class="chapter_number">#{chapter_number_or_nothing}</span>
         <span class="link_text">#{link_text}</span>
