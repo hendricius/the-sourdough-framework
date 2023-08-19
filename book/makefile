@@ -20,11 +20,11 @@ chapters = baking basics bread-types cover flour-types history intro\
 		wheat-sourdough
 
 src_tables  := $(wildcard tables/table-*.tex)
-src_figures := $(wildcard figures/fig-*.tex)
+src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
-src_tex += supporters.csv sourdough.sty
+src_tex += supporters.csv sourdough.sty colors.tex
 
 images := $(wildcard images/*/*.jpg)
 images += $(wildcard images/*/*.png)
@@ -48,12 +48,13 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
 # TODO: check if it works on github CI
 %.png: %.tex
-	@echo "\input{./vars}" > $@.in
+	@echo "\input{./vars.tex}" > $@.in
 	# \b is backspace..
 	@echo "\\\begin{document}" >> $@.in
 	@cat $< >> $@.in
-	@echo "\end{document}" >> $@.in
+	@echo "\\\end{document}" >> $@.in
 	$(LATEX) $@.in
+	figures/export_figures.sh $@.pdf
 
 %.xbb: %.jpg
 	ebb -x $<
@@ -167,6 +168,7 @@ clean_figures:
 	- $(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
 	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
 	- rm $(patsubst %.tex, %.png.in, $(src_figures))
+	- rm $(wildcard figures/*.png.*)
 	- rm cover/cover-page.xbb
 
 .PHONY: clean_ebook_build
