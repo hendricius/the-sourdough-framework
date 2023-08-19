@@ -18,41 +18,10 @@
 % For tables
 \renewcommand\theadfont{\bfseries}
 
-\definecolor{codeblue}{RGB}{69, 161, 248}
-\definecolor{codeblack}{RGB}{40, 40, 40}
-
-\definecolor{maingray}{HTML}{F8F8F8}
-
-\definecolor{hlocre}{HTML}{E5B874}
-\definecolor{hlorange}{HTML}{EC7850}
-\definecolor{hlyellow}{HTML}{FAE69E}
-
-\definecolor{pinkpic}{RGB}{246, 183, 194}
-\definecolor{redpic}{RGB}{232, 72, 71}
-\definecolor{yellowpic}{RGB}{246, 235, 51}
-
-\tikzstyle{every picture}+=[font=\small\sffamily]
-\usetikzlibrary{shapes,arrows}
-\tikzstyle{decision} = [diamond, draw=codeblack, fill=codeblack, text=white,
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt,
-    line width=2mm]
-\tikzstyle{block} = [rectangle, draw=codeblack, fill=white,  text=black,
-    text width=5em, text centered, rounded corners, minimum height=4em,
-    line width=0.4mm]
-\tikzstyle{decision_start} = [diamond, draw=codeblack, fill=pinkpic, text=black,
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt,
-    line width=0.4mm]
-\tikzstyle{start} = [rectangle, draw=codeblack, fill=pinkpic,  text=black,
-    text width=5em, text centered, rounded corners, minimum height=4em,
-    line width=0.4mm]
-\tikzstyle{success} = [rectangle, draw=codeblack, fill=yellowpic,  text=black,
-    text width=5em, text centered, rounded corners, minimum height=4em,
-    line width=0.4mm]
-\tikzstyle{fail} = [rectangle, draw=codeblack, fill=redpic,  text=black,
-    text width=5em, text centered, rounded corners, minimum height=4em,
-    line width=0.4mm]
-\tikzstyle{line} = [draw, -latex', thick, ->,>=to]
-
+\input{colors.tex}
+% Define flowcharts macros independently so we can build them as png files
+% for the website or something. This is supported in the makefile
+\input{figures/flowcharts_tikz.tex}
 % Fonts
 \defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
 % Define Semi-bold
@@ -64,7 +33,7 @@
 \else
     \setmainfont{TeX Gyre Pagella}[Scale=1.0] % Or Palatino Linotype, etc.
     % TODO not available on github CI
-    % \setmonofont{Andale Mono}[Scale=MatchLowercase] 
+    % \setmonofont{Andale Mono}[Scale=MatchLowercase]
 \fi
 % Opens Sans in both case..
 \setsansfont{Open Sans}[
