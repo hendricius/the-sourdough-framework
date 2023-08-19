@@ -58,8 +58,8 @@ class ModifyBuild
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
-    text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(text)
-    text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(text)
+    text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
+    text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w") {|file| file.puts text }
   end
 
