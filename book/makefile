@@ -173,6 +173,7 @@ clean_figures:
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
+	-rm  book*.loc
 	-rm  book*.aux
 	-rm  book*.run.xml
 	-rm  book*.bcf
@@ -198,6 +199,7 @@ clean_ebook_build:
 .PHONY: clean_website_build
 clean_website_build: clean_ebook_build
 	-rm book-*.svg
+	-rm book.loc
 	-rm book.dlog
 	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
