@@ -13,6 +13,15 @@
 \usepackage{calc}
 \usepackage[font={sffamily, sbseries}]{quoting}
 
+\DeclareNewTOC[
+  type=flowchart,%
+  types=flowcharts,%  ,
+  float,
+  floattype=4,%
+  name=Flowchart,%
+  listname = {List of Flowcharts}
+]{loc}
+\setuptoc{loc}{chapteratlist}
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
 
 % For tables

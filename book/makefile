@@ -205,6 +205,7 @@ clean_website_build: clean_ebook_build
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+	-rm  book*/*.loc
 	-rm  book*/*.bbl
 	-rm  book*/*.run.xml
 	-rm -rf book*-epub/META-INF
