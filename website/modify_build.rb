@@ -60,7 +60,6 @@ class ModifyBuild
     text = fix_list_of_tables_figures_duplicates(text)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
-    text = remove_link_to_flowcharts(text)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -546,17 +545,6 @@ class ModifyBuild
   # For some reason the depdency is missing a // in the url.
   def fix_js_dependency_link(text)
     text.gsub("https:/cdn.jsdelivr.net", "https://cdn.jsdelivr.net")
-  end
-
-  # The list of flowcharts contains no flowcharts in the HTML version. For
-  # this reason remove the link until we found a better solution
-  def remove_link_to_flowcharts(text)
-    doc = build_doc(text)
-    content = doc.css(".menu-items > .chapterToc").each do |el|
-      link = el.css("a")[0]
-      el.remove if link["href"] == "listflowchartname.html"
-    end
-    doc.to_html
   end
 
   def build_doc(text)
