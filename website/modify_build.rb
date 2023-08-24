@@ -59,7 +59,6 @@ class ModifyBuild
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
-    text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w") {|file| file.puts text }
   end
 
@@ -531,14 +530,6 @@ class ModifyBuild
     doc.css(".menu-items > .lotToc").each(&:remove)
     doc.css(".menu-items > .lofToc").each(&:remove)
     doc.css(".menu-items > br").each(&:remove)
-    doc.to_html
-  end
-
-  # For some reason the links are not properly displayed and have odd color.
-  # This repairs the html and css.
-  def fix_list_of_figures_tables_display(text)
-    doc = build_doc(text)
-    content = doc.css(".main-content .TOC").remove_class("TOC")
     doc.to_html
   end
 
