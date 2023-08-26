@@ -27,6 +27,8 @@ src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
 src_tex += supporters.csv sourdough.sty colors.tex
 
 images := $(wildcard images/*/*.jpg)
+images += $(wildcard images/*.jpg)
+images += $(wildcard images/*.png)
 images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
