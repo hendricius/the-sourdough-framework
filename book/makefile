@@ -15,7 +15,7 @@ endif
 website_dir := static_website_html
 
 # List all files that are dependencies
-chapters = baking basics bread-types cover flour-types history intro\
+chapters = baking basics bread-types cover flour-types history intro mix-ins\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
@@ -27,6 +27,8 @@ src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
 src_tex += supporters.csv sourdough.sty colors.tex
 
 images := $(wildcard images/*/*.jpg)
+images += $(wildcard images/*.jpg)
+images += $(wildcard images/*.png)
 images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))

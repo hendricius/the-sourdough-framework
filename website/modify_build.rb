@@ -69,7 +69,7 @@ class ModifyBuild
   end
 
   def is_list_figures_tables?(filename)
-    ["listfigurename.html", "listtablename.html"].any? do |name|
+    ["listfigurename.html", "listtablename.html", "listoflocname.html"].any? do |name|
       filename.include?(name)
     end
   end
@@ -231,7 +231,16 @@ class ModifyBuild
     return text if menu.nil?
 
     home_html = %Q{<span class="chapterToc home-link"><a href="/">Home</a></span>}
+    # Normally the flowcharts link should be automatically added, but there
+    # seems to be a problem in the generation. See:
+    # https://github.com/hendricius/the-sourdough-framework/pull/188 for more
+    # details
     appendix_html = %Q{
+      <span class="chapterToc">
+        <a href="listoflocname.html">
+          <span class="link_text">List of Flowcharts</span>
+        </a>
+      </span>
       <span class="chapterToc">
         <a href="https://breadco.de/kofi">
           <span class="chapter_number">⭐️</span>
