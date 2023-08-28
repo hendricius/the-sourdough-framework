@@ -25,6 +25,10 @@
 \setuptoc{loc}{chapteratlist}
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
 
+% Common abbreviations
+\newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
+\newcommand{\eg}{\emph{e.g.}\@ifnextchar.{\!\@gobble}{}}
+
 % For tables
 \renewcommand\theadfont{\bfseries}
 
