@@ -276,6 +276,8 @@ website: html ../website/_bundle_install_done $(ruby_src)
 # Debug Stuff from now on
 .PHONY: show_tools_version
 show_tools_version:  # Show version of tools used on the build machine
+	- git log -n 1
+	@echo ""
 	- latexmk --version
 	@echo ""
 	- lualatex --version
@@ -296,6 +298,9 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- biber -version
 	@echo ""
+	- ruby --version
+	@echo ""
+
 
 # You can find the value of variable X with the following command:
 # make print-X
