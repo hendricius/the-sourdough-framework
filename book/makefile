@@ -1,5 +1,5 @@
 # Macros for commands
-LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -use-make
+LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -synctex=1 -use-make
 EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
 WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
 CLEAN := latexmk -cd -lualatex -c -use-make
@@ -276,6 +276,8 @@ website: html ../website/_bundle_install_done $(ruby_src)
 # Debug Stuff from now on
 .PHONY: show_tools_version
 show_tools_version:  # Show version of tools used on the build machine
+	- git log -n 1
+	@echo ""
 	- latexmk --version
 	@echo ""
 	- lualatex --version
@@ -296,6 +298,9 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- biber -version
 	@echo ""
+	- ruby --version
+	@echo ""
+
 
 # You can find the value of variable X with the following command:
 # make print-X
