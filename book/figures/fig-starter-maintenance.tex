@@ -15,7 +15,7 @@
       (make_bread_dough) {\footnotesize Make bread dough again after \qtyrange{8}{12}{\hour}};
   \path [line] (bake_next_day_check) -- node{yes} (make_bread_dough);
   \node [decision, right of=use_starter, node distance=3cm] (bake_next_week_check) {\footnotesize Baking in next 2 weeks?};
-  \node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {\footnotesize Store starter in fridge at  \qty{4}{\degreeCelsius}(\qty{40}{\degF})};
+  \node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {\footnotesize Store starter in fridge at  \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
   \path [line] (bake_next_week_check) -- node{yes} (store_fridge);
   \node [success, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ratio \qtyrange{8}{12}{\hour} before making dough};
   \path [line] (store_fridge) -- (feed_after_fridge);
