@@ -6,14 +6,14 @@
   \path [line] (feed) -- (wait_12_after_feed);
   \node [block, right of=wait_12_after_feed, node distance=3cm] (ready_question) {\footnotesize Perform readiness check};
   \path [line] (wait_12_after_feed) -- (ready_question);
-  \node [block, below of=feed, node distance=4cm] (wait_12) {\footnotesize Wait\\ \qty{12}{\hour}};
+  \node [block, above of=feed, node distance=3cm] (wait_12) {\footnotesize Wait\\ \qty{12}{\hour}};
   \path [line] (wait_12) -- (feed);
-  \node [decision, right of=ready_question, node distance=3.5cm] (is_bubbly) {\footnotesize Bubbly? Size Increase?};
+  \node [decision, right of=ready_question, node distance=3.2cm] (is_bubbly) {\footnotesize Bubbly? Size Increase?};
   \path [line] (ready_question) -- (is_bubbly);
-  \path [line] (is_bubbly) -- node{no} (wait_12);
+  \path [line] (is_bubbly) -- node[anchor=east, above=2pt] {no} ++(2.2,0) |- (wait_12);
   \node [decision, below of=is_bubbly, node distance=4.0cm] (check_smell) {\footnotesize Vinegary, or yogurt smell?};
   \path [line] (is_bubbly) -- node{yes} (check_smell);
-  \node [success, below of=init, node distance=6cm] (make_dough) {\footnotesize Make your dough};
-  \path [line] (check_smell) -- node{yes} (make_dough);
-  \path [line] (check_smell) -- node{no} (wait_12);
+  \node [success, below of=wait_12_after_feed, node distance=4cm] (make_dough) {\footnotesize Make your dough};
+  \path [line] (check_smell) -- node[anchor=west, above=2pt]{yes} (make_dough);
+  \path [line] (check_smell) -- node[anchor=east, above=2pt] {no} ++(2.2,0) |- (wait_12);
 \end{tikzpicture}
