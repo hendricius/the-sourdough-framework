@@ -12,6 +12,8 @@
 *.run.xml
 *.html
 *.dlog
+.env
+.DS_Store
 book/book.out
 .vscode/
 book/book.synctex*
@@ -61,3 +63,5 @@ book/static_website_html/*
 epub/
 *.opf
 website/static_website_html/*
+
+*-translated.tex
