@@ -3,7 +3,6 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{tocbasic}
 \usepackage{chemformula}
 \usepackage{chemfig}
 \usepackage{booktabs}
@@ -67,7 +66,10 @@
 \usepackage{bookmark}
 \hypersetup{%
     linktoc=all,
-    allcolors=codeblue,
+    linkcolor = hlorange,
+    urlcolor  = codeblue,
+    citecolor = hlocre,
+    breaklinks = true,
     pdfinfo={%
         Title={The Sourdough Framework},
         Author={Hendrik Kleinw\"achter},
@@ -80,6 +82,7 @@
             open-source, CC-BY-SA}
     }
 }
+
 
 % Folders where to search for images
 \graphicspath{

@@ -13,8 +13,10 @@
 \titlepage
 
 \frontmatter
-% \tableofcontents
+{%
+\hypersetup{hidelinks}
 \ifdefined\HCode\else\tableofcontents\fi
+}
 
 \input{intro/foreword}
 \input{intro/preface}
@@ -61,8 +63,11 @@
 
 \backmatter
 \printbibliography
+{%
+\hypersetup{hidelinks}
 \listofflowcharts
 \listoftables
 \listoffigures
+}
 
 \end{document}
