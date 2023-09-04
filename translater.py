@@ -15,9 +15,8 @@ system = f"""
 You are a translating assistant. 
 You translate in {lang}. 
 You directly translate messages your receive, without saying anything else than the translation of the messages. 
-Some messages may be in Markdown or Latex format. 
-You keep the langage syntax so it results in the same aspect, but you also translate the content that may be inside the code.
-You don't need to translate latex comments.
+The content you take as input are LaTeX document. 
+You need to only translate the text that is rendered on the output. Do not translate comments, labels, references, file paths, or anything that is syntax-related or that would break the LaTex compilation.
 """
 max_chunk_length = 1000*4
 
@@ -58,17 +57,18 @@ def translate_big(big_content):
         chunk += paragraph
         if index == len(content_paragraphs)-1:
             chunks.append(chunk)
+            break;
         else:
             chunk += "\n\n"
 
     translated_chunks = []
     for index, chunk in enumerate(chunks):
-        print(f'PENDING - Translating chunk {index+1}/{len(chunks)+1}')
+        print(f'PENDING - Translating chunk {index+1}/{len(chunks)}')
 
         translated_chunk = translate(chunk)
         # translated_chunk = chunk
 
-        print(f'OK - Done translating chunk {index+1}/{len(chunks)+1}')
+        print(f'OK - Done translating chunk {index+1}/{len(chunks)}')
         translated_chunks.append(translated_chunk)
 
     translated = "".join(translated_chunks)
@@ -89,6 +89,7 @@ def list_files():
 
 def translate_one_file(input_path, output_path):
     if os.path.exists(output_path):
+        print(f'SKIP - File already translated')
         return
 
     content = read_file(input_path)
@@ -100,8 +101,8 @@ def translate_all_files():
     
     files_to_translate = list_files()
 
-    files_to_translate = [files_to_translate[1]]
-    print(files_to_translate)
+    #files_to_translate = [files_to_translate[1]]
+    #print(files_to_translate)
 
     for file_to_translate in files_to_translate:
         print(f'PENDING - Translating {file_to_translate}')
@@ -120,10 +121,10 @@ def copy_translations():
             filename = file_to_translate + '.tex'
         content = read_file(filename)
         write_file(file_to_translate + '-translated.tex', content)
-
-def main():
-    translate_all_files()
-    copy_translations()
         
 if __name__ == "__main__":
-    main()
+    if "--copy" in sys.argv:
+        copy_translations()
+    else:
+        translate_all_files()
+        copy_translations()
