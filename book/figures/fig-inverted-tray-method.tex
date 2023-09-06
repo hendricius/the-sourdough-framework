@@ -1,14 +1,14 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {\footnotesize Place water tray and stone in oven};
-  \node [block, right of=init] (heat_oven) {\footnotesize Heat oven to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
-  \node [block, right of=heat_oven] (score_your_dough) {\footnotesize Score your dough};
-  \node [block, right of=score_your_dough] (spritz) {\footnotesize Spritz your dough with water};
-  \node [block, right of=spritz] (load_tray) {\footnotesize Place non-preheated inverted tray in oven};
-  \node [block, below of=load_tray, node distance=4cm] (load_doughs) {\footnotesize Load doughs into oven};
-  \node [block, left of=load_doughs, node distance=3cm] (load_water) {\footnotesize Place water in heated water tray};
-  \node [block, left of=load_water, node distance=3cm] (bake) {\footnotesize Bake 30~minutes or until core temperature is  \qty{92}{\degreeCelsius} (\qty{197}{\degF})};
-  \node [block, left of=bake, node distance=3cm] (remove_steam) {\footnotesize Remove steam source and top tray};
-  \node [success, left of=remove_steam, node distance=3cm] (finish) {\footnotesize Bake at least another 10~minutes or until crust has your desired color};
+  \node [start] (init) {Place water tray and stone in oven};
+  \node [block, right of=init] (heat_oven) {Heat oven to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
+  \node [block, right of=heat_oven] (score_your_dough) {Score your dough};
+  \node [block, right of=score_your_dough] (spritz) {Spritz your dough with water};
+  \node [block, right of=spritz] (load_tray) {Place non-preheated inverted tray in oven};
+  \node [block, below of=load_tray, node distance=4cm] (load_doughs) {Load doughs into oven};
+  \node [block, left of=load_doughs, node distance=3cm] (load_water) {Place water in heated water tray};
+  \node [block, left of=load_water, node distance=3cm] (bake) {Bake 30~minutes or until core temperature is  \qty{92}{\degreeCelsius} (\qty{197}{\degF})};
+  \node [block, left of=bake, node distance=3cm] (remove_steam) {Remove steam source and top tray};
+  \node [success, left of=remove_steam, node distance=3cm] (finish) {Bake at least another 10~minutes or until crust has your desired color};
   \path [line] (init) -- (heat_oven);
   \path [line] (heat_oven) -- (score_your_dough);
   \path [line] (score_your_dough) -- (spritz);

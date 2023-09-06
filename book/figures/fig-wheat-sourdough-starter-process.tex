@@ -1,21 +1,21 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [decision_start] (init) {\footnotesize Starter last fed within 3 days?};
+  \node [decision_start] (init) {Starter last fed within 3 days?};
   \node [block, right of=init, node distance=4cm] (feed_no_branch)
-      {\footnotesize Feed starter twice. \qty{48}{\hour} before and \qtyrange{6}{12}{\hour} before};
+      {Feed starter twice. \qty{48}{\hour} before and \qtyrange{6}{12}{\hour} before};
   \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
-      {\footnotesize Feed starter once \qtyrange{6}{12}{\hour} before making dough};
+      {Feed starter once \qtyrange{6}{12}{\hour} before making dough};
   \node [block, right of=feed_no_branch, node distance=6cm] (high_ratio)
-    {\footnotesize Use a 1:10:10 ratio. \qty{10}{\gram} starter, \qty{100}{\gram} flour, \qty{100}{\gram} water};
+    {Use a 1:10:10 ratio. \qty{10}{\gram} starter, \qty{100}{\gram} flour, \qty{100}{\gram} water};
   \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
-    {\footnotesize Use a 1:5:5 ratio. \qty{10}{\gram} starter, \qty{50}{\gram} flour, \qty{50}{\gram} water};
+    {Use a 1:5:5 ratio. \qty{10}{\gram} starter, \qty{50}{\gram} flour, \qty{50}{\gram} water};
   \node [block, below of=high_ratio, node distance=6cm] (check_starter)
-    {\footnotesize Check if starter is ready to be used};
+    {Check if starter is ready to be used};
   \node [decision, below of=init, node distance=6cm] (size_check)
-    {\footnotesize Bubbly? Increased in size?};
+    {Bubbly? Increased in size?};
   \node [decision, below of=size_check, node distance=5cm] (smell_check)
-    {\footnotesize Vinegary or yogurty smell?};
+    {Vinegary or yogurty smell?};
   \node [success, right of=smell_check, node distance=6cm] (make_dough)
-    {\footnotesize Prepare dough};
+    {Prepare dough};
   \path [line] (init) -- node{no} (feed_no_branch);
   \path [line] (init) -- node{yes} (feed_yes_branch);
   \path [line] (feed_yes_branch) -- (low_ratio);
