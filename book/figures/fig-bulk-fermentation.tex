@@ -1,14 +1,14 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {\footnotesize Bulk fermentation};
-  \node [block, right of=init] (check_dough) {\footnotesize Check the dough};
-  \node [block, right of=check_dough, node distance=4cm] (size_increase) {\footnotesize Check dough size increase};
-  \node [block, below of=size_increase, node distance=2cm] (ph_value) {\footnotesize Check dough pH value};
-  \node [block, below of=ph_value, node distance=2cm] (smell) {\footnotesize Check dough smell};
-  \node [decision, right of=ph_value, node distance=4cm] (dough_ready) {\footnotesize Dough ready?};
-  \node [success, below of=dough_ready] (divide_preshape) {\footnotesize Divide and preshape};
-  \node [decision, below of=smell] (dough_flattened) {\footnotesize Dough flattened out?};
-  \node [block, below of=check_dough, node distance=3cm] (wait_60_minutes) {\footnotesize Wait\\ 60~minutes};
-  \node [block, below of=wait_60_minutes, node distance=4cm] (stretch_fold) {\footnotesize Stretch and fold};
+  \node [start] (init) {Bulk fermentation};
+  \node [block, right of=init] (check_dough) {Check the dough};
+  \node [block, right of=check_dough, node distance=4cm] (size_increase) {Check dough size increase};
+  \node [block, below of=size_increase, node distance=2cm] (ph_value) {Check dough pH value};
+  \node [block, below of=ph_value, node distance=2cm] (smell) {Check dough smell};
+  \node [decision, right of=ph_value, node distance=4cm] (dough_ready) {Dough ready?};
+  \node [success, below of=dough_ready] (divide_preshape) {Divide and preshape};
+  \node [decision, below of=smell] (dough_flattened) {Dough flattened out?};
+  \node [block, below of=check_dough, node distance=3cm] (wait_60_minutes) {Wait\\ 60~minutes};
+  \node [block, below of=wait_60_minutes, node distance=4cm] (stretch_fold) {Stretch and fold};
 
   \path [line] (init) -- (check_dough);
   \path [line] (check_dough) -- (size_increase);

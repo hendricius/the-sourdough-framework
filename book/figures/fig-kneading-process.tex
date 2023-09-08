@@ -1,26 +1,26 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {\footnotesize Homogenize recipe ingredients};
-  \node [block, right of=init, node distance=3cm] (wait1) {\footnotesize Wait\\15~minutes};
+  \node [start] (init) {Homogenize recipe ingredients};
+  \node [block, right of=init, node distance=3cm] (wait1) {Wait\\15~minutes};
   \path [line] (init) -- (wait1);
-  \node [block, right of=wait1, node distance=3cm] (knead1) {\footnotesize Knead 5~minutes};
+  \node [block, right of=wait1, node distance=3cm] (knead1) {Knead 5~minutes};
   \path [line] (wait1) -- (knead1);
-  \node [block, right of=knead1, node distance=3cm] (wait2) {\footnotesize Wait\\15~minutes};
+  \node [block, right of=knead1, node distance=3cm] (wait2) {Wait\\15~minutes};
   \path [line] (knead1) -- (wait2);
-  \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {\footnotesize Window-pane?};
+  \node [decision, below of=wait2, node distance=3cm] (windowpane_test) {Window-pane?};
   \path [line] (wait2) -- (windowpane_test);
   \path [line] (windowpane_test) -- node{no} (knead1);
-  \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {\footnotesize Bassinage for more water?};
+  \node [decision, left of=windowpane_test, node distance=4.5cm] (more_water) {Bassinage for more water?};
   \path [line] (windowpane_test) -- node{yes} (more_water);
-  \node [block, left of=more_water, node distance=4.5cm] (add_water) {\footnotesize Add water};
+  \node [block, left of=more_water, node distance=4.5cm] (add_water) {Add water};
   \path [line] (more_water) -- node{yes} (add_water);
   \path [line] (add_water) -- (knead1);
-  \node [decision, below of=more_water, node distance=3.5cm] (dough_sample) {\footnotesize Aliquot sample?};
+  \node [decision, below of=more_water, node distance=3.5cm] (dough_sample) {Aliquot sample?};
   \path [line] (more_water) -- node{no} (dough_sample);
-  \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {\footnotesize Make round dough ball};
+  \node [block, right of=dough_sample, node distance=4.5cm] (dough_ball) {Make round dough ball};
   \path [line] (dough_sample) -- node{no} (dough_ball);
-  \node [block, below of=dough_sample, node distance=3cm] (extract_sample) {\footnotesize Extract sample};
+  \node [block, below of=dough_sample, node distance=3cm] (extract_sample) {Extract sample};
   \path [line] (dough_sample) -- node{yes} (extract_sample);
   \path [line] (extract_sample) -- (dough_ball);
-  \node [success, below of=dough_ball, node distance=3cm] (begin_bulk) {\footnotesize Begin bulk fermentation};
+  \node [success, below of=dough_ball, node distance=3cm] (begin_bulk) {Begin bulk fermentation};
   \path [line] (dough_ball) -- (begin_bulk);
 \end{tikzpicture}

@@ -1,33 +1,33 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {\footnotesize Make your bread dough};
-  \node [decision, below of=init, node distance=3.5cm] (all_starter_used) {\footnotesize All starter used?};
+  \node [start] (init) {Make your bread dough};
+  \node [decision, below of=init, node distance=3.5cm] (all_starter_used) {All starter used?};
   \path [line] (init) -- (all_starter_used);
-  \node [block, right of=init, node distance=3cm] (use_dough) {\footnotesize Take \qty{10}{\gram} of your bread dough};
-  \node [block, right of=all_starter_used, node distance=3cm] (use_starter) {\footnotesize Take all but not more than \qty{10}{\gram} of your starter};
+  \node [block, right of=init, node distance=3cm] (use_dough) {Take \qty{10}{\gram} of your bread dough};
+  \node [block, right of=all_starter_used, node distance=3cm] (use_starter) {Take all but not more than \qty{10}{\gram} of your starter};
   \path [line] (all_starter_used) -- node{yes} (use_dough);
   \path [line] (all_starter_used) -- node{no} (use_starter);
-  \node [block, right of=use_dough, node distance=3cm] (feed_starter) {\footnotesize Feed using 1:5:5 ratio};
+  \node [block, right of=use_dough, node distance=3cm] (feed_starter) {Feed using 1:5:5 ratio};
   \path [line] (use_dough) -- (feed_starter);
   \path [line] (use_starter) -- (feed_starter);
-  \node [decision, right of=feed_starter, node distance=3cm] (bake_next_day_check) {\footnotesize Bake next day?};
+  \node [decision, right of=feed_starter, node distance=3cm] (bake_next_day_check) {Bake next day?};
   \path [line] (feed_starter) -- (bake_next_day_check);
   \node [success, right of=bake_next_day_check, node distance=3.5cm]
-      (make_bread_dough) {\footnotesize Make bread dough again after \qtyrange{8}{12}{\hour}};
+      (make_bread_dough) {Make bread dough again after \qtyrange{8}{12}{\hour}};
   \path [line] (bake_next_day_check) -- node{yes} (make_bread_dough);
-  \node [decision, right of=use_starter, node distance=3cm] (bake_next_week_check) {\footnotesize Baking in next 2 weeks?};
-  \node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {\footnotesize Store starter in fridge at  \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
+  \node [decision, right of=use_starter, node distance=3cm] (bake_next_week_check) {Baking in next 2 weeks?};
+  \node [block, right of=bake_next_week_check, node distance=3.5cm] (store_fridge) {Store starter in fridge at  \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
   \path [line] (bake_next_week_check) -- node{yes} (store_fridge);
-  \node [success, right of=store_fridge, node distance=3cm] (feed_after_fridge) {\footnotesize Feed again using 1:5:5 ratio \qtyrange{8}{12}{\hour} before making dough};
+  \node [success, right of=store_fridge, node distance=3cm] (feed_after_fridge) {Feed again using 1:5:5 ratio \qtyrange{8}{12}{\hour} before making dough};
   \path [line] (store_fridge) -- (feed_after_fridge);
   \path [line] (bake_next_day_check) -- node{no} (bake_next_week_check);
-  \node [decision, below of=use_starter, node distance=3cm] (freezer_check) {\footnotesize Have a freezer?};
+  \node [decision, below of=use_starter, node distance=3cm] (freezer_check) {Have a freezer?};
   \path [line] (bake_next_week_check) -- (store_fridge);
   \path [line] (bake_next_week_check) -- node{no} (freezer_check);
-  \node [block, right of=freezer_check, node distance=3cm] (dry_starter) {\footnotesize Dry your starter};
-  \node [block, below of=dry_starter, node distance=3cm] (freeze_starter) {\footnotesize Freeze your starter};
+  \node [block, right of=freezer_check, node distance=3cm] (dry_starter) {Dry your starter};
+  \node [block, below of=dry_starter, node distance=3cm] (freeze_starter) {Freeze your starter};
   \path [line] (freezer_check) -- node{no} (dry_starter);
   \path [line] (freezer_check) -- node{yes} (freeze_starter);
-  \node [success, right of=dry_starter, node distance=3.5cm] (reactivate_freezer) {\footnotesize Reactivate starter for 3 days with daily 1:5:5 feedings};
+  \node [success, right of=dry_starter, node distance=3.5cm] (reactivate_freezer) {Reactivate starter for 3 days with daily 1:5:5 feedings};
   \path [line] (dry_starter) -- (reactivate_freezer);
   \path [line] (freeze_starter) -- (reactivate_freezer);
 \end{tikzpicture}
