@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (heat_oven) {\footnotesize Preheat DO to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
+  \node [start] (heat_oven) {\footnotesize Preheat DO to \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
   \node [block, right of=heat_oven] (remove_oven) {\footnotesize Remove DO from oven };
   \node [block, right of=remove_oven] (open_load_dough) {\footnotesize Open DO \& load your dough};
   \node [block, right of=open_load_dough] (score) {\footnotesize Score your dough};
@@ -7,12 +7,12 @@
   \node [block, below of=spritz] (close) {\footnotesize Close DO};
   \node [block, left of=close] (back_oven) {\footnotesize Place DO back in oven};
   \node [block, left of=back_oven] (bake) {\footnotesize Bake 30~minutes at \qty{230}{\degreeCelsius} (\qty{446}{\degF})};
-  \node [block, below of=heat_oven] (wait_5_minutes) {\footnotesize Wait 5 minutes};
+  \node [block, below of=heat_oven] (wait_5_minutes) {\footnotesize Wait\\ 5 minutes};
   \node [decision, below of=wait_5_minutes, node distance=4cm] (is_ready_check) {\footnotesize Core temperature \qty{92}{\degreeCelsius} (\qty{197}{\degF})?};
   \node [block, right of=is_ready_check, node distance=4cm] (remove_do_lid) {\footnotesize Remove DO lid};
   \node [block, right of=wait_5_minutes] (test_temperature_again) {\footnotesize Test core temperature again};
   \node [decision, right of=remove_do_lid, node distance=4cm] (dark_enough_decision) {\footnotesize Crust color dark enough?};
-  \node [block, below of=dark_enough_decision] (finish_baking) {\footnotesize Bread is finished};
+  \node [success, below of=dark_enough_decision] (finish_baking) {\footnotesize Bread is finished};
   \node [block, below of=close] (test_crust_again) {\footnotesize Test crust color again};
   \node [block, below of=test_crust_again] (bake_5_more_minutes) {\footnotesize Bake another 5~minutes};
   \path [line] (heat_oven) -- (remove_oven);

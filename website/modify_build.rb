@@ -57,11 +57,20 @@ class ModifyBuild
     text = include_javascript(text)
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
+    text = fix_list_of_tables_figures_duplicates(text)
+    text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
+    text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w") {|file| file.puts text }
   end
 
   def is_cover_page?(filename)
     ["book.html", "index.html"].any? do |name|
+      filename.include?(name)
+    end
+  end
+
+  def is_list_figures_tables?(filename)
+    ["listfigurename.html", "listtablename.html", "listoflocname.html"].any? do |name|
       filename.include?(name)
     end
   end
@@ -95,7 +104,7 @@ class ModifyBuild
     doc = build_doc(text)
     elements = [doc.search('.chapterToc'), doc.search('.sectionToc'), doc.search('.subsectionToc')].flatten
     elements.each do |n|
-      chapter_number_or_nothing = n.children[0].text.strip.to_i
+      chapter_number_or_nothing = n.children[0].text.strip.gsub(/[[:space:]]/, '')
       hyperlink_node = n.children[1]
       next if hyperlink_node.nil?
 
@@ -103,9 +112,10 @@ class ModifyBuild
       n.children[0].remove
       link_text = hyperlink_node.content
       # no chapter number
-      if chapter_number_or_nothing == 0
+      if chapter_number_or_nothing == ""
         content = hyperlink_node.to_s
       else
+        #binding.pry if link_text == "The process"
         link_node_content = %Q{
         <span class="chapter_number">#{chapter_number_or_nothing}</span>
         <span class="link_text">#{link_text}</span>
@@ -222,7 +232,16 @@ class ModifyBuild
     return text if menu.nil?
 
     home_html = %Q{<span class="chapterToc home-link"><a href="/">Home</a></span>}
+    # Normally the flowcharts link should be automatically added, but there
+    # seems to be a problem in the generation. See:
+    # https://github.com/hendricius/the-sourdough-framework/pull/188 for more
+    # details
     appendix_html = %Q{
+      <span class="chapterToc">
+        <a href="listoflocname.html">
+          <span class="link_text">List of Flowcharts</span>
+        </a>
+      </span>
       <span class="chapterToc">
         <a href="https://breadco.de/kofi">
           <span class="chapter_number">⭐️</span>
@@ -497,6 +516,39 @@ class ModifyBuild
       Hendrik
     </p>
     }
+  end
+
+  # For some reason the list of figures and tables is displayed twice in the
+  # menu. Fix this.
+  def fix_list_of_tables_figures_duplicates(text)
+    doc = build_doc(text)
+    content = doc.css(".menu-items > .likechapterToc")
+    content.each do |node|
+      node.remove
+    end
+    doc.to_html
+  end
+
+  # The list of tables for some reason expands the menu on other pages? Fix
+  # this.
+  def fix_menus_list_figures_tables(text)
+    doc = build_doc(text)
+    content = doc.css(".menu-items > .subsectionToc, .menu-items > .sectionToc")
+    content.each do |node|
+      node.remove
+    end
+    doc.css(".menu-items > .lotToc").each(&:remove)
+    doc.css(".menu-items > .lofToc").each(&:remove)
+    doc.css(".menu-items > br").each(&:remove)
+    doc.to_html
+  end
+
+  # For some reason the links are not properly displayed and have odd color.
+  # This repairs the html and css.
+  def fix_list_of_figures_tables_display(text)
+    doc = build_doc(text)
+    content = doc.css(".main-content .TOC").remove_class("TOC")
+    doc.to_html
   end
 
   # For some reason the depdency is missing a // in the url.

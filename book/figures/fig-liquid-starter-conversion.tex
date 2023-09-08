@@ -1,12 +1,12 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [block] (init) {\footnotesize Make a regular or stiff starter};
+  \node [start] (init) {\footnotesize Make a regular or stiff starter};
   \node [block, right of=init] (feed_new_ratio) {\footnotesize Mix \qty{1}{\gram} existing starter, \qty{5}{\gram} flour and \qty{25}{\gram} water};
-  \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait  \qty{24}{\hour}};
+  \node [block, right of=feed_new_ratio] (next_day) {\footnotesize Wait\\ \qty{24}{\hour}};
   \node [block, below of=init, node distance=4cm] (feed_again) {\footnotesize Feed again using 1:5:25 ratio};
   \node [block, right of=next_day, node distance=5cm] (test) {\footnotesize Check starter readiness?};
   \node [decision, below of=next_day, node distance=4cm] (ready_signs) {\footnotesize Sour yogurty smell and bubbles visible on flour?};
   \node [block, below of=test, node distance=4cm] (last_feed) {\footnotesize Feed one last time};
-  \node [block, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
+  \node [success, below of=last_feed, node distance=3cm] (bread_dough) {\footnotesize Make bread dough};
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_new_ratio) -- (next_day);
   \path [line] (feed_again) -- node{\footnotesize repeat 3 times} (feed_new_ratio);

@@ -1,5 +1,5 @@
 # Macros for commands
-LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -use-make
+LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -synctex=1 -use-make
 EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
 WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
 CLEAN := latexmk -cd -lualatex -c -use-make
@@ -15,18 +15,20 @@ endif
 website_dir := static_website_html
 
 # List all files that are dependencies
-chapters = baking basics bread-types cover flour-types history intro\
+chapters = baking basics bread-types cover flour-types history intro mix-ins\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough
 
 src_tables  := $(wildcard tables/table-*.tex)
-src_figures := $(wildcard figures/fig-*.tex)
+src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
-src_tex += supporters.csv sourdough.sty
+src_tex += supporters.csv sourdough.sty colors.tex
 
 images := $(wildcard images/*/*.jpg)
+images += $(wildcard images/*.jpg)
+images += $(wildcard images/*.png)
 images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
@@ -48,12 +50,13 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
 # TODO: check if it works on github CI
 %.png: %.tex
-	@echo "\input{./vars}" > $@.in
+	@echo "\input{./vars.tex}" > $@.in
 	# \b is backspace..
 	@echo "\\\begin{document}" >> $@.in
 	@cat $< >> $@.in
-	@echo "\end{document}" >> $@.in
+	@echo "\\\end{document}" >> $@.in
 	$(LATEX) $@.in
+	figures/export_figures.sh $@.pdf
 
 %.xbb: %.jpg
 	ebb -x $<
@@ -167,10 +170,12 @@ clean_figures:
 	- $(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
 	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
 	- rm $(patsubst %.tex, %.png.in, $(src_figures))
+	- rm $(wildcard figures/*.png.*)
 	- rm cover/cover-page.xbb
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
+	-rm  book*.loc
 	-rm  book*.aux
 	-rm  book*.run.xml
 	-rm  book*.bcf
@@ -196,6 +201,7 @@ clean_ebook_build:
 .PHONY: clean_website_build
 clean_website_build: clean_ebook_build
 	-rm book-*.svg
+	-rm book.loc
 	-rm book.dlog
 	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
@@ -203,6 +209,7 @@ clean_website_build: clean_ebook_build
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+	-rm  book*/*.loc
 	-rm  book*/*.bbl
 	-rm  book*/*.run.xml
 	-rm -rf book*-epub/META-INF
@@ -269,6 +276,8 @@ website: html ../website/_bundle_install_done $(ruby_src)
 # Debug Stuff from now on
 .PHONY: show_tools_version
 show_tools_version:  # Show version of tools used on the build machine
+	- git log -n 1
+	@echo ""
 	- latexmk --version
 	@echo ""
 	- lualatex --version
@@ -289,6 +298,9 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- biber -version
 	@echo ""
+	- ruby --version
+	@echo ""
+
 
 # You can find the value of variable X with the following command:
 # make print-X

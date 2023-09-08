@@ -3,45 +3,56 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{tocbasic}
 \usepackage{chemformula}
 \usepackage{chemfig}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage[mode=match, reset-text-family=false]{siunitx}
 \usepackage{fontspec}
+\usepackage{calc}
+\usepackage[font={sffamily, sbseries}]{quoting}
+\usepackage{microtype}
 
+\DeclareNewTOC[
+  type=flowchart,%
+  types=flowcharts,%  ,
+  float,
+  floattype=4,%
+  name=Flowchart,%
+  listname = {List of Flowcharts}
+]{loc}
+\setuptoc{loc}{chapteratlist}
+\DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
+
+% Common abbreviations
+\newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
+\newcommand{\eg}{\emph{e.g.}\@ifnextchar.{\!\@gobble}{}}
+
+% For tables
 \renewcommand\theadfont{\bfseries}
 
-\definecolor{codeblue}{RGB}{69, 161, 248}
-\definecolor{codeblack}{RGB}{40, 40, 40}
-
-\definecolor{maingray}{HTML}{F8F8F8}
-
-\definecolor{hlocre}{HTML}{E5B874}
-\definecolor{hlorange}{HTML}{EC7850}
-\definecolor{hlyellow}{HTML}{FAE69E}
-
-\tikzstyle{every picture}+=[font=\small\sffamily]
-\usetikzlibrary{shapes,arrows}
-\tikzstyle{decision} = [diamond, draw, fill=codeblack, text=white,
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, fill=codeblue,  text=white,
-    text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-
+\input{colors.tex}
+% Define flowcharts macros independently so we can build them as png files
+% for the website or something. This is supported in the makefile
+\input{figures/flowcharts_tikz.tex}
 % Fonts
 \defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
+% Define Semi-bold
+\DeclareRobustCommand\sbseries{\fontseries{sb}\selectfont}
 % Fonts for accessibility
 \ifdefined\isaccessible
-    \setmainfont{Open Sans}
-    \AtBeginDocument{\sisetup{mode =text}}
+    \setmainfont{Open Sans}[
+    Scale=MatchLowercase]
 \else
     \setmainfont{TeX Gyre Pagella}[Scale=1.0] % Or Palatino Linotype, etc.
-    \setsansfont{Open Sans}[Scale=MatchLowercase]
     % TODO not available on github CI
-    % \setmonofont{Andale Mono}[Scale=MatchLowercase] 
+    % \setmonofont{Andale Mono}[Scale=MatchLowercase]
 \fi
+% Opens Sans in both case..
+\setsansfont{Open Sans}[
+  Scale=MatchLowercase,
+  FontFace = {sb}{it}{* Semibold Italic},
+  FontFace = {sb}{n}{*-semibold}]
 
 % Kerning in footnotes
 \usepackage{fnpct}
@@ -52,10 +63,26 @@
 
 % Clickable links in the table of contents
 \usepackage[ocgcolorlinks]{hyperref}
+\usepackage{bookmark}
 \hypersetup{%
     linktoc=all,
-    allcolors=codeblue
+    linkcolor = hlorange,
+    urlcolor  = codeblue,
+    citecolor = hlocre,
+    breaklinks = true,
+    pdfinfo={%
+        Title={The Sourdough Framework},
+        Author={Hendrik Kleinw\"achter},
+        Subject={The sourdough bread baking bible},
+        Keywords={Sourdough, dough, bread, wheat, baking, bake, home-baking,
+            yeast, rye, crumb, debug, gluten, dough strength, crust, DIY,
+            framework, https://the-sourdough-framework.com,
+            https://www.the-bread-code.io/,
+            https://github.com/hendricius/the-sourdough-framework,
+            open-source, CC-BY-SA}
+    }
 }
+
 
 % Folders where to search for images
 \graphicspath{
@@ -75,5 +102,178 @@
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize}
 
-
 \DeclareSIUnit\degF{\text{°}F}
+
+%-----------------------------------------------------------------------------
+%    KAO CHAPTER HEADING STYLES
+%-----------------------------------------------------------------------------
+
+\newlength{\hscale}
+\newlength{\vscale}
+\newlength{\mtocshift}
+
+% By default, the scales are set to work for a4paper
+\setlength{\hscale}{1mm}
+\setlength{\vscale}{1mm}
+
+\newif\ifwidelayout%
+\def\IfWideLayout{%
+    \ifwidelayout%
+        \expandafter\@firstoftwo%
+    \else%
+        \expandafter\@secondoftwo%
+    \fi%
+}
+
+% Command to easily switch between chapter styles
+\DeclareDocumentCommand{\setchapterstyle}{m}{%
+    \ifthenelse{\equal{plain}{#1}}{\chapterstyleplain}{}
+    \ifthenelse{\equal{bar}{#1}}{\chapterstylebar}{}
+    \ifthenelse{\equal{lines}{#1}}{\chapterstylelines}{}
+    \ifthenelse{\equal{kao}{#1}}{\chapterstylekao}{}
+}
+
+% The default definition in KOMA script
+\DeclareDocumentCommand{\chapterstyleplain}{}{%
+    \renewcommand{\chapterlinesformat}[3]{%
+        \@hangfrom{##2}{##3}}
+    \renewcommand*{\chapterformat}{%
+        \mbox{\chapappifchapterprefix{\nobreakspace}\thechapter%
+        \autodot\IfUsePrefixLine{}{\enskip}}}
+    \RedeclareSectionCommand[beforeskip=0cm,afterskip=10\vscale]{chapter}
+    \setlength{\mtocshift}{-1\vscale}
+}
+
+% Gray bar
+\DeclareDocumentCommand{\chapterstylebar}{}{%
+    \renewcommand*{\chapterformat}{%
+        \mbox{\chapappifchapterprefix{\nobreakspace}\thechapter%
+        \autodot\IfUsePrefixLine{}{\enskip}}%
+    }
+    \renewcommand{\chapterlinesformat}[3]{%
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[
+                anchor=south west,
+                xshift=\dimexpr - \hoffset - \oddsidemargin - 1in -1mm,%-30\hscale,
+                yshift=4.3mm,
+                rectangle,
+                fill=gray!20!white,
+                fill opacity=0.8,
+                inner ysep=5\vscale,
+                inner xsep=\dimexpr \hoffset + \oddsidemargin + 1in,%30\hscale,
+                text opacity=1,
+                text width=\paperwidth-40\hscale,
+            ]{\@hangfrom{##2}{##3}};
+        \end{tikzpicture}
+    }
+    \RedeclareSectionCommand[beforeskip=-55\vscale,afterskip=6\vscale]{chapter}
+    \setlength{\mtocshift}{-1\vscale}
+}
+
+% Lines
+\renewcommand{\hrulefill}[1][0.4pt]{%
+    \leavevmode\leaders\hrule height #1\hfill\kern\z@%
+}
+
+\DeclareDocumentCommand{\chapterstylelines}{}{%
+    \renewcommand*{\chapterformat}{%
+        \chapappifchapterprefix{\nobreakspace}\scalebox{3.5}{\thechapter\autodot}%
+    }%
+    \renewcommand\chapterlinesformat[3]{%
+        %\vspace*{-1cm}%
+        \leavevmode%
+        \makebox[0pt][l]{%
+        \makebox[\textwidth][l]{\hrulefill[1pt]##2}%\hfill%\par%\bigskip
+        \makebox[\marginparsep][l]{}%
+        \makebox[\marginparwidth][l]{}%
+        }\\
+        %\vspace{.5cm}
+        \makebox[0pt][l]{%
+        \makebox[\textwidth][l]{##3}%
+        \makebox[\marginparsep][l]{}%
+        \makebox[\marginparwidth][l]{}%
+        }\\
+        \makebox[0pt][l]{%
+        \makebox[\textwidth+\marginparsep+\marginparwidth][l]{\hrulefill[1.1pt]}%
+    }%
+    \RedeclareSectionCommand[beforeskip=0cm,afterskip=10\vscale]{chapter}
+    \setlength{\mtocshift}{-1\vscale}%
+}
+}
+% The Kao style
+\DeclareDocumentCommand{\chapterstylekao}{}{%
+    \IfWideLayout{%
+        \renewcommand*{\chapterformat}{%
+            \mbox{\chapappifchapterprefix{\nobreakspace}\scalebox{2.85}{\thechapter\autodot}}%
+        }%
+        \renewcommand\chapterlinesformat[3]{%
+            \vspace{3.5\vscale}%
+            \if@twoside%
+                \Ifthispageodd{%
+                    \smash{\makebox[0pt][l]{%
+                        \parbox[b]{\textwidth - 6.2\hscale}{\flushright{##3}}%
+                        \makebox[6.2\hscale][c]{\rule[-2\vscale]{1pt}{27.4\vscale+\f@size mm}}%
+                        \parbox[b]{\marginparwidth}{##2}%
+                    }}%
+                }{
+                    \smash{\makebox[\textwidth + 6.2\hscale][r]{%
+                        \parbox[b]{47.7\hscale + 6.2\hscale}{\flushright{##2}}%
+                        \makebox[6.2\hscale][c]{\rule[-2\vscale]{1pt}{27.4\vscale+\f@size mm}}%
+                        \parbox[b]{\textwidth}{\flushleft{##3}}%
+                    }}%
+                }
+            \else%
+                \smash{\makebox[0pt][l]{%
+                    \parbox[b]{\textwidth - 6.2\hscale}{\flushright{##3}}%
+                    \makebox[6.2\hscale][c]{\rule[-2\vscale]{1pt}{27.4\vscale+\f@size mm}}%
+                    \parbox[b]{\marginparwidth}{##2}%
+                }}%
+            \fi%
+        }%
+    }{%
+        \renewcommand*{\chapterformat}{%
+            \mbox{\chapappifchapterprefix{\nobreakspace}\scalebox{2.85}{\thechapter\autodot}}%
+        }%
+        \renewcommand\chapterlinesformat[3]{%
+            \vspace{3.5\vscale}%
+            \if@twoside%
+                \Ifthispageodd{%
+                    \smash{\makebox[0pt][l]{%
+                        \parbox[b]{\textwidth}{\flushright{##3}}%
+                        \makebox[\marginparsep][c]{\rule[-2\vscale]{1pt}{27.4\vscale+\f@size mm}}%
+                        \parbox[b]{\marginparwidth}{##2}%
+                    }}%
+                }{
+                    \smash{\makebox[\textwidth][r]{%
+                        \parbox[b]{\marginparwidth}{\flushright{##2}}%
+                        \makebox[\marginparsep][c]{\rule[-2\vscale]{1pt}{27.4\vscale+\f@size mm}}%
+                        \parbox[b]{\textwidth}{\flushleft{##3}}%
+                    }}%
+                }
+            \else%
+                \smash{\makebox[0pt][l]{%
+                    \parbox[b]{\textwidth}{\flushright{##3}}%
+                    \makebox[\marginparsep][c]{\rule[-2\vscale]{1pt}{27.4\vscale+\f@size mm}}%
+                    \parbox[b]{\marginparwidth}{##2}%
+                }}%
+            \fi%
+        }%
+    }%
+    \RedeclareSectionCommand[beforeskip=0cm,afterskip=10\vscale]{chapter}%
+    \setlength{\mtocshift}{-3.5\vscale}%
+}
+
+% Takes as input the image path and optionally the "beforeskip"
+\DeclareDocumentCommand{\setchapterimage}{O{55\vscale} m}{%
+    \setchapterpreamble[o]{%
+        \vspace*{-27\vscale}\hspace*{\dimexpr - \hoffset - \oddsidemargin - 1in}%
+        \includegraphics[width=\paperwidth,height=#1+27\vscale,keepaspectratio=false]{#2}%
+    }%
+    \chapterstylebar%
+    % beforeskip=-(figure_height-top_margin)
+    \RedeclareSectionCommand[beforeskip=-#1, afterskip=6\vscale]{chapter}%
+    \setlength{\mtocshift}{0cm}%
+}
+
+% By default start with the lines style
+\setchapterstyle{lines}

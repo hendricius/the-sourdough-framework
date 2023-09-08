@@ -1,4 +1,5 @@
-\documentclass[a4paper, twoside, 12pt, parskip=half]{scrbook}
+\documentclass[paper=a4, twoside=false, fontsize=12pt, parskip=half,
+                bibliography=totoc, listof=totoc]{scrbook}
 
 % General packages
 \usepackage{sourdough}
@@ -12,25 +13,19 @@
 \titlepage
 
 \frontmatter
-% \tableofcontents
+{%
+\hypersetup{hidelinks}
 \ifdefined\HCode\else\tableofcontents\fi
+}
 
-\chapter{Foreword}
 \input{intro/foreword}
-
-\chapter{Preface}
 \input{intro/preface}
-
-\chapter{Acknowledgements}
 \input{intro/acknowledgements}
-
 
 \mainmatter
 
-\chapter{The history of sourdough}
 \input{history/sourdough-history}
 
-\chapter{How sourdough works}
 \input{basics/how-sourdough-works}
 
 \chapter{Making a sourdough starter}
@@ -53,6 +48,7 @@
 \label{chapter:non-wheat-sourdough}
 \input{non-wheat-sourdough/non-wheat-sourdough}
 
+% \input{mix-ins/mix-ins.tex}
 \chapter{Baking}%
 \label{chapter:baking}
 \input{baking/baking}
@@ -64,7 +60,13 @@
 \chapter{Troubleshooting}
 \input{troubleshooting/misc}
 
+\backmatter
 \printbibliography
-
+{%
+\hypersetup{hidelinks}
+\listofflowcharts
+\listoftables
+\listoffigures
+}
 
 \end{document}
