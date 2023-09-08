@@ -121,6 +121,10 @@ help:
 	@echo ""
 	@echo "Debug targets:"
 	@echo ""
+	@echo "quick: compiles serif_pdf but runs lulatex only once"
+	@echo ""
+	@echo "quick_ebook: compiles serif_ebook but runs lulatex only once"
+	@echo ""
 	@echo "show_tools_version: Show version of tools used on the build machine"
 	@echo ""
 	@echo "print-X: print makefile variable X"
@@ -274,7 +278,15 @@ website: html ../website/_bundle_install_done $(ruby_src)
 	cd ../website && ruby modify_build.rb
 
 # Debug Stuff from now on
-.PHONY: show_tools_version
+.PHONY: quick show_tools_version printvars
+
+# Those 2 targets allow fast debug cycles but not reolvig refrences etc
+quick:  # run latex only once no biber, no references etc..
+	$(LATEX) -e '$$max_repeat=1' -output-directory=book_serif book.tex
+
+quick_ebook: # run latex only once no biber, no references etc..
+	$(EBOOK) --mode draft -f epub book.tex
+
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
 	@echo ""
@@ -306,7 +318,6 @@ show_tools_version:  # Show version of tools used on the build machine
 # make print-X
 print-%: ; @echo $* = $($*)  # Print a makefile variable
 
-.PHONY: printvars
 printvars:  # Print all variables in the makefile
 	@$(foreach V,$(sort $(.VARIABLES)), \
 	$(if $(filter-out environ% default automatic, \

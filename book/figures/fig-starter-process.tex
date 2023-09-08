@@ -1,18 +1,18 @@
 \begin{tikzpicture}[node distance = 3.5cm, auto]
-  \node [start] (init) {\footnotesize Mix \qty{50}{\gram} flour + \qty{50}{\gram} water, stir}; 
-  \node [block, right of=init] (wait2) {\footnotesize Wait\\ \qty{24}{\hour}};
+  \node [start] (init) {Mix \qty{50}{\gram} flour + \qty{50}{\gram} water, stir};
+  \node [block, right of=init] (wait2) {Wait\\ \qty{24}{\hour}};
   \path [line] (init) -- (wait2);
-  \node [block, below of=wait2, node distance=3.5cm] (feed) {\footnotesize \qty{10}{\gram} of previous day + \qty{50}{\gram} water + \qty{50}{\gram} flour, stir};
+  \node [block, below of=wait2, node distance=3.5cm] (feed) {\qty{10}{\gram} of previous day + \qty{50}{\gram} water + \qty{50}{\gram} flour, stir};
   \path [line] (wait2) -- (feed);
-  \node [block, below of=feed] (discard) {\footnotesize Discard the rest};
+  \node [block, below of=feed] (discard) {Discard the rest};
   \path [line] (feed) -- (discard);
-  \node [decision, right of=feed, node distance=3.5cm] (decide) {\footnotesize Is good?};
-  \node [decision, above of=decide, node distance=3.5cm] (timeout) {\footnotesize Less than 10 feeds?};
-  \node [fail, right of=timeout, node distance=3.5cm] (discard2) {\footnotesize Batch failed};
+  \node [decision, right of=feed, node distance=3.5cm] (decide) {Is good?};
+  \node [decision, above of=decide, node distance=3.5cm] (timeout) {Less than 10 feeds?};
+  \node [fail, right of=timeout, node distance=3.5cm] (discard2) {Batch failed};
   \path [line] (timeout) -- node{no} (discard2);
   \path [line] (timeout) -- node{yes} (wait2);
   \path [line] (feed) -- (decide);
-  \node [success, right of=decide, node distance=3.5cm] (use) {\footnotesize Ready to use};
+  \node [success, right of=decide, node distance=3.5cm] (use) {Ready to use};
   \path [line] (decide) -- node{no} (timeout);
   \path [line] (wait2) -- (feed);
   \path [line] (decide) -- node{yes} (use);
