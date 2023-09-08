@@ -6,7 +6,7 @@
   \node [decision, below of=poke, node distance=3cm] (dent_visible_decision) {Dent still visible after 1~minute?};
   \node [success, right of=dent_visible_decision, node distance=4cm] (bake) {Score and bake};
   \node [block, below of=retard_bake_decision, node distance=3cm] (wait_retard) {Wait\\ 15~minutes};
-  \node [block, below of=wait_retard, node distance=3cm] (retard) {Proof in fridge at  \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
+  \node [block, below of=wait_retard, node distance=3cm] (retard) {Proof in fridge at 4°C (40°F)};
   \node [block, right of=wait_retard, node distance=3cm] (move_to_fridge) {Move dough directly to fridge};
   \path [line] (init) -- node{yes} (poke);
   \path [line] (init) -- node{no} (retard_bake_decision);

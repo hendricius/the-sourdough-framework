@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (heat_oven) {Heat oven to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
+  \node [start] (heat_oven) {Heat oven to  230°C (446°F) for 30~minutes};
   \node [block, right of=heat_oven, node distance=3cm] (score_dough) {Score your dough};
   \node [decision, right of=score_dough, node distance=4cm] (decide_steam) {Choose your steaming method};
   \node [block, below of=heat_oven, node distance=4cm] (inverted_tray_method) {Inverted tray method};
