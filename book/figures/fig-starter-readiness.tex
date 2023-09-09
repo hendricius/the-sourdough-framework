@@ -1,17 +1,16 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [start] (init) {Make a starter};
   \node [decision, right of=init, node distance=3.5cm] (decision_start) {Starter last fed within 3 days?};
-  \node [block, right of=decision_start, node distance=3.5cm] (feed_no_branch)
-      {Feed starter twice. \qty{48}{\hour} before and \qtyrange{6}{12}{\hour} before};
-  \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
-      {Feed starter once \qtyrange{6}{12}{\hour} before making dough};
-  \node [block, right of=feed_no_branch, node distance=3cm] (high_ratio)
-    {Use a 1:10:10 ratio. \qty{10}{\gram} starter, \qty{100}{\gram} flour, \qty{100}{\gram} water};
-  \node [block, right of=feed_yes_branch, node distance=3cm] (low_ratio)
-    {Use a 1:5:5 ratio. \qty{10}{\gram} starter, \qty{50}{\gram} flour, \qty{50}{\gram} water};
-  \node [block, right of=low_ratio, node distance=3cm] (check_starter)
-    {Check if starter is ready to be used};
-  \node [decision, below of=low_ratio, node distance=3cm] (size_check)
+  \node [block, right of=decision_start, text width=7em, node distance=4cm] (feed_no_branch)
+      {Feed starter twice:\par \qty{48}{\hour} before\par \qtyrange{6}{12}{\hour} before};
+  \node [block, below of=feed_no_branch, texd width=7em, node distance=3cm] (feed_yes_branch)
+      {Feed starter \qtyrange{6}{12}{\hour}\par before making dough.};
+  \node [block, right of=feed_no_branch, text width=7em, node distance=4cm] (high_ratio)
+    {Use a 1:10:10 ratio:\par \qty{10}{\gram} starter,\par \qty{100}{\gram} flour,\par \qty{100}{\gram} water.};
+  \node [block, right of=feed_yes_branch, text width=7em, node distance=4cm] (low_ratio)
+    {Use a 1:5:5 ratio:\par \qty{10}{\gram} starter,\par \qty{50}{\gram}
+    flour,\par \qty{50}{\gram} water.};
+  \node [decision, below of=high_ratio, node distance=6cm] (size_check)
     {Bubbly? Increased in size?};
   \node [decision, below of=decision_start, node distance=6cm] (smell_check)
     {Vinegary or yogurty smell?};
@@ -19,17 +18,18 @@
     {Prepare dough};
 
   \path [line] (init) -- (decision_start);
-  \path [line] (decision_start) -- node{no} (feed_no_branch);
-  \path [line] (decision_start) -- node{yes} (feed_yes_branch);
+  \path [line] (decision_start) --  node{no} (feed_no_branch);
+  \path [line] (decision_start) -- node[anchor=south, left=2pt] {yes} ++(0, -3.2) |- (feed_yes_branch);
   \path [line] (feed_yes_branch) -- (low_ratio);
   \path [line] (feed_no_branch) -- (high_ratio);
-  \path [line] (high_ratio) -- (check_starter);
-  \path [line] (low_ratio) -- (check_starter);
-  \path [line] (check_starter) -- (size_check);
+  \path [line] (high_ratio) -- node[anchor=east, above=2pt] {} ++(2.2,0) |-(size_check);
+  \path [line] (low_ratio) -- (size_check);
   \path [line] (size_check) -- node{no} (feed_yes_branch);
   \path [line] (size_check) -- node{yes} (smell_check);
-  \path [line] (smell_check) -- node{no} (feed_yes_branch);
+  \path [line] (smell_check) -- node[anchor=north, left=2pt] {no} ++(0, 3.2) |- (feed_yes_branch);
   \path [line] (smell_check) -- node{yes} (make_dough);
 
-
+  % braces
+  \draw[BC]   (size_check.south) -- 
+      node[below=1em]{Check if starter is ready to be used}(smell_check.south);
 \end{tikzpicture}
