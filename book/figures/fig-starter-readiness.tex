@@ -3,8 +3,8 @@
   \node [decision, right of=init, node distance=3.5cm] (decision_start) {Starter last fed within 3~days?};
   \node [block, right of=decision_start, text width=7em, node distance=4cm] (feed_no_branch)
       {Feed starter twice:\par \qty{48}{\hour} before\par \qtyrange{6}{12}{\hour} before};
-  \node [block, below of=feed_no_branch, node distance=3cm] (feed_yes_branch)
-      {Feed starter \qtyrange{6}{12}{\hour}\par before making dough.};
+  \node [block, below of=feed_no_branch, text width=7em, node distance=2.7cm] (feed_yes_branch)
+      {Feed starter \qtyrange{6}{12}{\hour} before making dough.};
   \node [block, right of=feed_no_branch, text width=7em, node distance=4cm] (high_ratio)
     {Use a 1:10:10 ratio:\par \qty{10}{\gram} starter,\par \qty{100}{\gram} flour,\par \qty{100}{\gram} water.};
   \node [block, right of=feed_yes_branch, text width=7em, node distance=4cm] (low_ratio)
@@ -19,12 +19,12 @@
 
   \path [line] (init) -- (decision_start);
   \path [line] (decision_start) -- node{no} (feed_no_branch);
-  \path [line] (decision_start) -- node{yes} (feed_yes_branch.north west);
+  \path [line] (decision_start) -- node[below=2pt]{yes} (feed_yes_branch.north west);
   \path [line] (feed_yes_branch) -- (low_ratio);
   \path [line] (feed_no_branch) -- (high_ratio);
   \path [line] (high_ratio) -- node[anchor=east, above=2pt] {} ++(2.2,0) |-(size_check);
   \path [line] (low_ratio) -- (size_check);
-  \path [line] (size_check) -- node{no} (feed_yes_branch);
+  \path [line] (size_check) -- node{no} (feed_yes_branch.south east);
   \path [line] (size_check) -- node{yes} (smell_check);
   \path [line] (smell_check) -- node{no} (feed_yes_branch.south west);
   \path [line] (smell_check) -- node{yes} (make_dough);
