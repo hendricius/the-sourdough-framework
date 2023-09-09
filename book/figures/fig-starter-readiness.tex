@@ -6,10 +6,15 @@
   \node [block, below of=feed_no_branch, text width=7em, node distance=2.7cm] (feed_yes_branch)
       {Feed starter \qtyrange{6}{12}{\hour} before making dough.};
   \node [block, right of=feed_no_branch, text width=7em, node distance=4cm] (high_ratio)
-    {Use a 1:10:10 ratio:\par \qty{10}{\gram} starter,\par \qty{100}{\gram} flour,\par \qty{100}{\gram} water.};
-  \node [block, right of=feed_yes_branch, text width=7em, node distance=4cm] (low_ratio)
-    {Use a 1:5:5 ratio:\par \qty{10}{\gram} starter,\par \qty{50}{\gram}
-    flour,\par \qty{50}{\gram} water.};
+    {Use a 1:10:10 ratio:\par \begin{tabular}{r@{}l}
+           10&~g starter,\\
+          100&~g flour, \\
+          100&~g water.\end{tabular}};
+  de [block, right of=feed_yes_branch, text width=7em, node distance=4cm] (low_ratio)
+  {Use a 1:5:5 ratio:\par \begin{tabular}{r@{}l}
+          10&~g starter,\\
+          50&~g flour, \\
+          50&~g water.\end{tabular}};
   \node [decision, below of=high_ratio, node distance=6cm] (size_check)
     {Bubbly? Increased in size?};
   \node [decision, below of=decision_start, node distance=6cm] (smell_check)
