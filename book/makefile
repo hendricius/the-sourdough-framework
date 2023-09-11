@@ -61,6 +61,9 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.xbb: %.jpg
 	ebb -x $<
 
+.PHONY: default
+default: epub/book_sans_serif.epub
+
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
 
@@ -78,8 +81,6 @@ epub/%.azw3:  epub/%.epub
 
 # Now with the rules
 # Expected usual rules first
-.PHONY: default
-default: build_serif_pdf
 
 .PHONY: all
 all: bake
