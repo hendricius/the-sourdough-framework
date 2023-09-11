@@ -12,55 +12,64 @@
 \input{cover/cover.tex}
 \titlepage
 
-\frontmatter
 {%
 \hypersetup{hidelinks}
 \ifdefined\HCode\else\tableofcontents\fi
 }
 
-\input{intro/foreword}
-\input{intro/preface}
-\input{intro/acknowledgements}
+\chapter{ebook problems}
+Dès Noël, où un zéphyr haï me vêt de glaçons würmiens, je dîne d’exquis rôtis
+de bœuf au kir, à l’aÿ d’âge mûr, \&cætera.
+Jörg bäckt quasi zwei Haxenfüße vom Wildpony.
 
-\mainmatter
+\begin{flowchart}[!htb]
+\begin{center}
+  \input{figures/fig-dutch-oven-process.tex}
+  \caption[Baking process with a dutch oven]{A visualization of the baking
+      process using a dutch oven (DO). The dough is steamed for the first half
+      of the bake and then baked without cover for the second half of the
+      bake. The desired darkness and thickness of the crust depends on your
+      personal preference. Some bakers prefer a lighter crust and others a
+      darker.}%
+  \label{fig:dutch-oven-process}
+\end{center}
+\end{flowchart}
 
-\input{history/sourdough-history}
+At around  \qty{60}{\degreeCelsius} (\qty{140}{\degF}) the microbes in your
+dough start to die.  There are rumors that until this happens the microbes
+produce a lot of \ch{CO2}.
 
-\input{basics/how-sourdough-works}
+\begin{figure}[!htb]
+\begin{center}
+  \input{figures/fig-ethanol-oxidation.tex}
+  \caption[Acetic acid creation]{Oxygen is required to create acetic
+      acid~\cite{acetic+acid+production}.}%
+  \label{fig:ethanol-oxidation}
+\end{center}
 
-\chapter{Making a sourdough starter}
-\input{sourdough-starter/sourdough-starter}
+\end{figure}
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{baking-experiment-temperatures.png}
+  \caption[Surface temperature for different steaming methods]{This
+      chart shows how surface temperatures change using different steaming
+      methods. In this case I~used a Dutch oven and an apple as dough
+      replacement. All the apples were coming from the fridge. The temperature
+      was measured using a barbecue thermometer.  The more steam, the faster
+      the surface temperature increases.}
+\end{figure}
+If you're a hobby brewer, you'll know that it's important to keep your beer at
+certain temperatures to allow the different amylases to convert the contained
+starches into sugar~\cite{beer+amylase}.
+This test, called the \emph{Iodine Starch Test}, involves mixing iodine into
+a sample of your brew and checking the color.
 
-\chapter{Sourdough starter types}
-\input{sourdough-starter/sourdough-starter-types}
-
-\chapter{Flour types}
-\input{flour-types/flour-types}
-
-\chapter{Bread types}
-\input{bread-types/bread-types}
-
-\chapter{Wheat sourdough}%
-\label{chapter:wheat-sourdough}
-\input{wheat-sourdough/wheat-sourdough}
-
-\chapter{Non wheat sourdough}%
-\label{chapter:non-wheat-sourdough}
-\input{non-wheat-sourdough/non-wheat-sourdough}
-
-% \input{mix-ins/mix-ins.tex}
-\chapter{Baking}%
-\label{chapter:baking}
-\input{baking/baking}
-
-\chapter{Storing bread}%
-\label{chapter:storing-bread}
-\input{storing-bread/storing-bread}
-
-\chapter{Troubleshooting}
-\input{troubleshooting/misc}
-
-\backmatter
+\begin{table}[!htb]
+    \begin{center}
+        \input{tables/table-oven-baking-overview.tex}
+        \caption[Different oven types]{An overview of different oven types and their
+            different baking methods.}
+    \end{center}
+\end{table}
 \printbibliography
 {%
 \hypersetup{hidelinks}
