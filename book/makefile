@@ -284,7 +284,7 @@ website: html ../website/_bundle_install_done $(ruby_src)
 quick:  # run latex only once no biber, no references etc..
 	$(LATEX) -e '$$max_repeat=1' -output-directory=book_serif book.tex
 
-quick_ebook: # run latex only once no biber, no references etc..
+quick_ebook: cover/cover-page.xbb  # run latex only once no biber, refe etc..
 	$(EBOOK) --mode draft -f epub book.tex
 
 show_tools_version:  # Show version of tools used on the build machine
