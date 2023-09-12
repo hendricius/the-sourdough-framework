@@ -1,5 +1,5 @@
 \tikzstyle{every picture}+=[font=\footnotesize\sffamily]
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes, arrows, decorations.pathreplacing,calligraphy, calligraphy}
 \tikzstyle{decision} = [diamond, draw=codeblack, fill=codeblack, text=white,
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt,
     line width=2mm]
@@ -19,3 +19,7 @@
     text width=5em, text centered, rounded corners, minimum height=4em,
     line width=0.4mm]
 \tikzstyle{line} = [draw, -latex', thick, ->,>=to]
+
+\tikzstyle{BC} =  [decorate,  % Brace Calligraphic
+                 decoration={calligraphic brace, amplitude=3mm, raise=1mm},
+                 very thick, pen colour={black} ]
