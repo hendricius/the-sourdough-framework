@@ -43,6 +43,10 @@ ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
+# Default target is not all becuse most of the time we just want a pdf...
+# ebook take a long time to build.
+.DEFAULT_GOAL := build_serif_pdf
+
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
 %.pdf: %.tex
@@ -78,9 +82,6 @@ epub/%.azw3:  epub/%.epub
 
 # Now with the rules
 # Expected usual rules first
-.PHONY: default
-default: build_serif_pdf
-
 .PHONY: all
 all: bake
 
