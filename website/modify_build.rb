@@ -497,11 +497,6 @@ class ModifyBuild
     </p>
 
     <p class="noindent">
-      Kindle: <a href="https://www.the-bread-code.io/book.azw3">https://www.the-bread-code.io/book.azw3</a><br>
-      Kindle (no serif): <a href="https://www.the-bread-code.io/book-sans-serif.azw3">https://www.the-bread-code.io/book-sans-serif.azw3</a>
-    </p>
-
-    <p class="noindent">
       The full source code of the book can be found here:
       <a href="https://www.github.com/hendricius/the-sourdough-framework">https://www.github.com/hendricius/the-sourdough-framework</a>
     </p>
