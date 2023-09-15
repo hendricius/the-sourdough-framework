@@ -104,12 +104,12 @@ help:
 	@echo "  clean_website_build: delete intermediate website files"
 	@echo "  clean_ebook_build: delete intermediate ebook files"
 	@echo ""
-	@echo "build_ebook: builds only the ebook serif and accessible version"
 	@echo "build_pdf: builds both serif and accessible pdf"
+	@echo ""
+	@echo "build_ebook: builds only the ebook"
 	@echo ""
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
-	@echo "build_serif_ebook: build serif ebook only"
 	@echo "build_serif_pdf: build serif pdf only"
 	@echo ""
 	@echo "figures: build TikZ figures"
@@ -176,42 +176,23 @@ clean_figures:
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
-	-rm  book*.loc
-	-rm  book*.aux
-	-rm  book*.run.xml
-	-rm  book*.bcf
-	-rm  book*.blg
-	-rm  book*.log
-	-rm  book*.4tc
-	-rm  book*.4ct
-	-rm  book*.dvi
-	-rm  book.css
-	-rm  book*.idv
-	-rm  book*.lg
-	-rm  book*.ncx
-	-rm  book*.tmp
-	-rm  book*.xref
-	-rm  book*.html
-	-rm  book*.fls
-	-rm  book*.fdb_latexmk
-	-rm  book*.bbl
-	-rm  content.opf
+	-rm  book*.{4ct, 4tc, aux, bbl, bcf, blg, dvi, fdb_latexmk, fls, html}
+	-rm  book*.{idv, lg, loc, log, ncx, run.xml, tmp, xref}
 	-rm  book*x.svg
+	-rm  book.css
+	-rm  content.opf
 
 .PHONY: clean_website_build
 clean_website_build: clean_ebook_build
 	-rm book-*.svg
-	-rm book.loc
-	-rm book.dlog
+	-rm book.{loc, dlog}
 	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
 .PHONY: clean
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
-	-rm  book*/*.loc
-	-rm  book*/*.bbl
-	-rm  book*/*.run.xml
+	-rm  book*/*.{bbl, loc, .run.xml}
 	-rm -rf book*-epub/META-INF
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
@@ -224,12 +205,12 @@ mrproper: clean
 	-rm figures/*.png
 	-rm *.html
 	-rm *.svg
-	rm -rf epub/
-	rm -rf release/
-	rm -rf book_serif/
-	rm -rf book_sans_serif/
-	rm -rf book-epub/
-	rm -rf $(website_dir)
+	-rm -rf epub/
+	-rm -rf release/
+	-rm -rf book_serif/
+	-rm -rf book_sans_serif/
+	-rm -rf book-epub/
+	-rm -rf $(website_dir)
 
 .PHONY: bake
 bake: release_serif release_sans_serif
