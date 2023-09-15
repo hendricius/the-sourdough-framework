@@ -45,7 +45,7 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
 # Default target is not all becuse most of the time we just want a pdf...
 # ebook take a long time to build.
-.DEFAULT_GOAL := build_serif_pdf
+.DEFAULT_GOAL := build_ebook
 
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
