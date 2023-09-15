@@ -493,7 +493,6 @@ class ModifyBuild
 
     <p class="noindent">
       EPUB: <a href="https://www.the-bread-code.io/book.epub">https://www.the-bread-code.io/book.epub</a><br>
-      EPUB (no serif): <a href="https://www.the-bread-code.io/book-sans-serif.epub">https://www.the-bread-code.io/book-sans-serif.epub</a>
     </p>
 
     <p class="noindent">
