@@ -43,6 +43,10 @@ ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
+# Default target is not all becuse most of the time we just want a pdf...
+# ebook take a long time to build.
+.DEFAULT_GOAL := build_serif_pdf
+
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
 %.pdf: %.tex
@@ -60,9 +64,6 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
 %.xbb: %.jpg
 	ebb -x $<
-
-.PHONY: default
-default: epub/book_sans_serif.epub
 
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
@@ -106,7 +107,6 @@ help:
 	@echo "build_ebook: builds only the ebook serif and accessible version"
 	@echo "build_pdf: builds both serif and accessible pdf"
 	@echo ""
-	@echo "build_sans_serif_ebook: build accessible ebook only"
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
 	@echo "build_serif_ebook: build serif ebook only"
@@ -115,7 +115,7 @@ help:
 	@echo "figures: build TikZ figures"
 	@echo ""
 	@echo "release_serif: build serif only version of pdf and ebooks"
-	@echo "release_sans_serif: build sans-serif/accessible version of pdf and ebooks"
+	@echo "release_sans_serif: build sans-serif/accessible version of pdf"
 	@echo ""
 	@echo "website: build the static website from LaTeX sources and post-process it"
 	@echo "html: build the static website from LaTeX sources _without_ post-processing"
@@ -146,14 +146,10 @@ build_serif_pdf: book_serif/book.pdf
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
 .PHONY: build_ebook
-build_ebook: build_serif_ebook build_sans_serif_ebook
+build_ebook: build_serif_ebook 
 
 .PHONY: build_serif_ebook
 build_serif_ebook: epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
-
-.PHONY: build_sans_serif_ebook
-build_sans_serif_ebook: epub/book_sans_serif.epub epub/book_sans_serif.mobi \
-						epub/book_sans_serif.azw3 | make_release_dir
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
@@ -190,7 +186,6 @@ clean_ebook_build:
 	-rm  book*.4ct
 	-rm  book*.dvi
 	-rm  book.css
-	-rm  book_sans_serif.css
 	-rm  book*.idv
 	-rm  book*.lg
 	-rm  book*.ncx
@@ -234,7 +229,6 @@ mrproper: clean
 	rm -rf book_serif/
 	rm -rf book_sans_serif/
 	rm -rf book-epub/
-	rm -rf book_sans_serif-epub/
 	rm -rf $(website_dir)
 
 .PHONY: bake
@@ -252,11 +246,8 @@ release_serif: build_serif_pdf build_serif_ebook | make_release_dir
 	cp epub/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
 
 .PHONY: release_sans_serif
-release_sans_serif: build_sans_serif_pdf build_sans_serif_ebook | make_release_dir
+release_sans_serif: build_sans_serif_pdf | make_release_dir
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
-	cp epub/book_sans_serif.mobi release/TheBreadCode-The-Sourdough-Framework-sans-serif.mobi
-	cp epub/book_sans_serif.epub release/TheBreadCode-The-Sourdough-Framework-sans-serif.epub
-	cp epub/book_sans_serif.azw3 release/TheBreadCode-The-Sourdough-Framework-sans-serif.azw3
 
 # Website stuff
 $(website_dir)/book.html: $(website_src) cover/cover-page.xbb
@@ -285,7 +276,7 @@ website: html ../website/_bundle_install_done $(ruby_src)
 quick:  # run latex only once no biber, no references etc..
 	$(LATEX) -e '$$max_repeat=1' -output-directory=book_serif book.tex
 
-quick_ebook: # run latex only once no biber, no references etc..
+quick_ebook: cover/cover-page.xbb  # run latex only once no biber, refe etc..
 	$(EBOOK) --mode draft -f epub book.tex
 
 show_tools_version:  # Show version of tools used on the build machine

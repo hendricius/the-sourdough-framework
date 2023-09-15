@@ -71,15 +71,13 @@ The below versions are automatically built on every push to the `main` branch.
 
 * [Download compiled .pdf version](https://www.the-bread-code.io/book.pdf)
 * [Download compiled .epub version](https://www.the-bread-code.io/book.epub)
-* [Download compiled .mobi version](https://www.the-bread-code.io/book.mobi)
-* [Download compiled .azw3 version](https://www.the-bread-code.io/book.azw3)
 
 There's an additional enhanced accessibility version using a sans serif font:
 
 * [Download compiled .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
-* [Download compiled .epub version](https://www.the-bread-code.io/book-sans-serif.epub)
-* [Download compiled .mobi version](https://www.the-bread-code.io/book-sans-serif.mobi)
-* [Download compiled .azw3 version](https://www.the-bread-code.io/book-sans-serif.azw3)
+
+**The ebook files in .mobi and .azw3 have been retired, please let us know if
+you were using them.**
 
 ## Online HTML version (WIP)
 
