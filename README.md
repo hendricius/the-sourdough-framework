@@ -75,7 +75,6 @@ The below versions are automatically built on every push to the `main` branch.
 There's an additional enhanced accessibility version using a sans serif font:
 
 * [Download compiled .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
-* [Download compiled .epub version](https://www.the-bread-code.io/book-sans-serif.epub)
 
 **The ebook files in .mobi and .azw3 have been retired, please let us know if
 you were using them.**
