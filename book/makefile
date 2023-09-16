@@ -3,7 +3,6 @@ LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -sync
 EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
 WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
 CLEAN := latexmk -cd -lualatex -c -use-make
-EBOOK_CONVERT := kindlegen
 CHECK_1 := lacheck
 CHECK_2 := chktex
 
@@ -74,12 +73,6 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 	$(EBOOK) -f epub $<
 
-epub/%.mobi: epub/%.epub
-	$(EBOOK_CONVERT) $< -o $(notdir $@)
-
-epub/%.azw3:  epub/%.epub
-	$(EBOOK_CONVERT) $< -o $(notdir $@)
-
 # Now with the rules
 # Expected usual rules first
 
@@ -149,7 +142,7 @@ build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 build_ebook: build_serif_ebook 
 
 .PHONY: build_serif_ebook
-build_serif_ebook: epub/book.epub epub/book.mobi epub/book.azw3 | make_release_dir
+build_serif_ebook: epub/book.epub | make_release_dir
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
@@ -222,9 +215,7 @@ make_release_dir:
 .PHONY: release_serif
 release_serif: build_serif_pdf build_serif_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
-	cp epub/book.mobi release/TheBreadCode-The-Sourdough-Framework.mobi
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
-	cp epub/book.azw3 release/TheBreadCode-The-Sourdough-Framework.azw3
 
 .PHONY: release_sans_serif
 release_sans_serif: build_sans_serif_pdf | make_release_dir
@@ -285,7 +276,6 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- ruby --version
 	@echo ""
-
 
 # You can find the value of variable X with the following command:
 # make print-X
