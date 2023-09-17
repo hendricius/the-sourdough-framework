@@ -175,8 +175,8 @@ clean_figures:
 
 .PHONY: clean_ebook_build
 clean_ebook_build:
-	-rm  book*.{4ct, 4tc, aux, bbl, bcf, blg, dvi, fdb_latexmk, fls, html}
-	-rm  book*.{idv, lg, loc, log, ncx, run.xml, tmp, xref}
+	-rm  book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
+	-rm  book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
 	-rm  book*x.svg
 	-rm  book.css
 	-rm  content.opf
@@ -184,14 +184,14 @@ clean_ebook_build:
 .PHONY: clean_website_build
 clean_website_build: clean_ebook_build
 	-rm book-*.svg
-	-rm book.{loc, dlog}
+	-rm book.{loc,dlog}
 	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
 .PHONY: clean
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
-	-rm  book*/*.{bbl, loc, .run.xml}
+	-rm  book*/*.{bbl,loc,.run.xml}
 	-rm -rf book*-epub/META-INF
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
