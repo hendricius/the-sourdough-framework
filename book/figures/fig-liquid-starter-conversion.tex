@@ -1,16 +1,17 @@
-\begin{tikzpicture}[node distance = 4cm, auto]
+\begin{tikzpicture}[node distance = 5cm, auto]
   \node [start] (init) {Take your regular or stiff starter};
   \node [block, right of=init] (feed_new_ratio) {Mix \qty{1}{\gram} existing starter, \qty{5}{\gram} flour and \qty{25}{\gram} water};
   \node [decision, below of=feed_new_ratio, node distance=5cm] (ready_signs) {Sour yogurty smell and bubbles visible on flour?};
   \node [block, right of=ready_signs, node distance=4cm] (feed_again) {Feed again using 1:5:25 ratio};
-  \node [block, left of=ready_signs, node distance=4cm] (last_feed) {Feed one last time};
-  \node [success, below of=last_feed, node distance=3cm] (bread_dough) {Make bread dough};
+  \node [block, left of=ready_signs, node distance=5cm] (last_feed) {Feed one last time};
+  \node [success, below of=last_feed, node distance=4cm] (bread_dough) {Make bread dough};
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_new_ratio) -- node{Wait \qty{24}{\hour}} (ready_signs);
   \path [line] (feed_again) -- node[anchor=east]  {} ++(2.2,0) |- (feed_new_ratio);
   \path [line] (ready_signs) -- node{no} (feed_again);
   \path [line] (ready_signs) -- node[above=2pt]{~yes} (last_feed);
   \path [line] (last_feed) -- node{after \qtyrange{6}{12}{\hour}} (bread_dough);
-  \draw[thick, ->] ($ (feed_again.north) +(1cm, 2.5cm)$) arc (25:300:1.5cm);
-  \node[anchor=north, text width=7em] at ($(feed_again.north west)+(2cm, 2cm)$) {Repeat 3~times};
+  \draw [thick, ->] ($ (feed_again.north) +(0.7cm, 1cm)$) arc (-45:220:1cm);
+  \node [anchor=north, text width=5em] at ($(feed_again.north west)+(1.8cm, 2.3cm)$) {Repeat 3~times};
+  
 \end{tikzpicture}
