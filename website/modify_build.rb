@@ -237,7 +237,7 @@ class ModifyBuild
     # https://github.com/hendricius/the-sourdough-framework/pull/188 for more
     # details
     appendix_html = %Q{
-      <span class="chapterToc">
+      <span class="chapterToc flowcharts-menu">
         <a href="listoflocname.html">
           <span class="link_text">List of Flowcharts</span>
         </a>
@@ -379,6 +379,14 @@ class ModifyBuild
       doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
       return doc.to_html
     end
+
+    # Special case for the flowcharts page which is added by us to the menu.
+    # This needs to be done for future manually added pages too
+    if "listoflocname.html" == filename
+      doc.css(".menu-items .chapterToc.flowcharts-menu")[0].add_class("selected")
+      return doc.to_html
+    end
+
     return doc.to_html unless selected
 
     # Fix that when the menu is selected the href is empty. This way users can
