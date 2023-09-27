@@ -1,25 +1,24 @@
-\begin{tikzpicture}[node distance = 3cm, auto]
+\begin{tikzpicture}[node distance = 4cm, auto]
   \node [start] (init) {Take your regular or liquid starter};
-  \node [block, right of=init] (feed_new_ratio) {Mix \qty{10}{\gram} existing starter, \qty{50}{\gram} flour and \qty{25}{\gram} water};
-  \node [decision, right of=feed_new_ratio, node distance=3.5cm] (too_dry) {Starter very dry, hard to mix?};
+  \node [block, right of=init, node distance = 4cm] (feed_new_ratio) {Mix \qty{10}{\gram} existing starter, \qty{50}{\gram} flour and \qty{25}{\gram} water};
+  \node [decision, right of=feed_new_ratio, node distance=5cm] (too_dry) {Starter very dry, hard to mix?};
   \node [block, right of=too_dry, node distance=4cm] (add_water) {Add more water};
-  \node [block, below of=add_water, node distance=2cm] (next_day) {Wait\\ \qty{24}{\hour}};
-  \node [decision, below of=too_dry, node distance=3.5cm] (repeated_3_times) {Stiff starter fed 3 times overall?};
-  \node [block, below of=feed_new_ratio, node distance=3.5cm] (feed_again) {Feed again using 1:5:2.5 ratio};
-  \node [decision, below of=repeated_3_times, node distance=3.5cm] (ready_signs) {Size increase and sour smell?};
-  \node [block, below of=next_day, node distance=2cm] (last_feed) {Feed one last time};
+  \node [block, below of=too_dry] (next_day) {Wait\\ \qty{24}{\hour}};
+  \node [block] at (feed_new_ratio |- next_day) (feed_again) {Feed again using 1:5:2.5 ratio};
+  \node [decision, below of=next_day, node distance=3.5cm] (ready_signs) {Size increase and sour smell?};
+  \node [block] at (ready_signs -| add_water) (last_feed) {Feed one last time};
   \node [success, below of=last_feed, node distance=3cm] (bread_dough) {Make bread dough};
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_again) -- (feed_new_ratio);
-  \path [line] (next_day) -- (repeated_3_times);
-  \path [line] (repeated_3_times) -- node{yes} (ready_signs);
-  \path [line] (repeated_3_times) -- node{no} (feed_again);
-  \path [line] (ready_signs) -- node{no} (feed_again);
+  \path [line] (next_day) -- (ready_signs);
+  \path [line] (ready_signs) -- node{no} (feed_again |- last_feed) |- (feed_again.south);
   \path [line] (ready_signs) -- node{yes} (last_feed);
   \path [line] (last_feed) -- node{after \qtyrange{6}{12}{\hour}} (bread_dough);
   \path [line] (feed_new_ratio) -- (too_dry);
-  \path [line] (add_water) -- (next_day);
+  \path [line] (add_water.north) -- node{} ++(0, 1.3) -| (too_dry.north);
   \path [line] (too_dry) -- node{no} (next_day);
   \path [line] (too_dry) -- node{yes} (add_water);
   \path [line] (ready_signs) -- node{yes} (last_feed);
+  \draw [thick, <-] ($ (feed_again.east) +(2.1cm, 0.7cm)$) arc (-45:220:1cm);
+  \node [anchor=north, text width=5em] at ($(feed_again.east)+(2cm, 2cm)$) {Repeat 3~times};
 \end{tikzpicture}
