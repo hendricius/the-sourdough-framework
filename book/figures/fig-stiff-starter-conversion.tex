@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 4cm, auto]
-  \node [start] (init) {Take your regular or liquid starter};
+  \node [start] (init) {Take your regular starter};
   \node [block, right of=init, node distance = 4cm] (feed_new_ratio) {Mix \qty{10}{\gram} existing starter, \qty{50}{\gram} flour and \qty{25}{\gram} water};
   \node [decision, right of=feed_new_ratio, node distance=5cm] (too_dry) {Starter very dry, hard to mix?};
   \node [block, right of=too_dry, node distance=4cm] (add_water) {Add more water};
