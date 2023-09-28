@@ -264,8 +264,6 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- tidy -version
 	@echo ""
-	- kindlegen --version
-	@echo ""
 	- lacheck --version
 	@echo ""
 	- chktex --version
