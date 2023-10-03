@@ -12,6 +12,7 @@ SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	 else echo sh; fi; fi)
 
 ifdef DEBUG
+LATEX += -diagnostics
 EBOOK += -a debug
 WEBSITE += -a debug
 endif
