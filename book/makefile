@@ -258,6 +258,8 @@ quick_ebook: cover/cover-page.xbb  # run latex only once no biber, refe etc..
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
 	@echo ""
+	- ${SHELL} --version
+	@echo ""
 	- latexmk --version
 	@echo ""
 	- lualatex --version
