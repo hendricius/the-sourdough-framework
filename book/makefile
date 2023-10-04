@@ -6,7 +6,13 @@ CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
 CHECK_2 := chktex
 
+# we want bash as shell
+SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
+	 else if [ -x /bin/bash ]; then echo /bin/bash; \
+	 else echo sh; fi; fi)
+
 ifdef DEBUG
+LATEX += -diagnostics
 EBOOK += -a debug
 WEBSITE += -a debug
 endif
@@ -252,6 +258,8 @@ quick_ebook: cover/cover-page.xbb  # run latex only once no biber, refe etc..
 
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
+	@echo ""
+	- ${SHELL} --version
 	@echo ""
 	- latexmk --version
 	@echo ""
