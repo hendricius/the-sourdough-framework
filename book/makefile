@@ -38,6 +38,8 @@ images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 
+bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
+
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
 
 website_src := $(src_all) website.cfg
@@ -79,6 +81,23 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 	$(EBOOK) -f epub $<
 
+copy_ebook_files: build_ebook
+	mkdir -p bw-book-epub/
+	rsync -au --exclude "book.epub" book-epub/ bw-book-epub/
+
+convert_ebook_images: copy_ebook_files
+	mogrify -resize '800x800>' \
+	    tstrip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
+	    -set colorspace Gray -separate -evaluate-sequence Mean $(bw_images)
+
+bw_ebook.zip: convert_ebook_images
+	zip -qXr9D bw_ebook.zip bw-book-epub
+
+epub/bw_book.epub: bw_ebook.zip
+	mv bw_ebook.zip epub/bw_book.epub
+
+bw_epub: epub/bw_book.epub
+	
 # Now with the rules
 # Expected usual rules first
 .PHONY: all
@@ -89,14 +108,16 @@ help:
 	@echo ""
 	@echo "default: builds the book in pdf format (serif)"
 	@echo ""
-	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as"
-	@echo "     build release"
+	@echo "all: pdf serif and sans-serif accessible version, as well as ebooks"
+	@echo "     in colour and black&white versions"
+	@echo ""
 	@echo "bake: same as build all"
 	@echo ""
 	@echo "check: runs static analysis checker on LaTeX source to spot"
 	@echo "       programming or typographic mistakes"
 	@echo ""
 	@echo "clean: delete all intermediate files keep targets (pdf/ebooks/website)"
+	@echo ""
 	@echo "mrproper: delete all generated files intermediate and pdf/ebooks/website"
 	@echo "  clean_figures: delete intermediate TikZ files"
 	@echo "  clean_website_build: delete intermediate website files"
@@ -104,7 +125,9 @@ help:
 	@echo ""
 	@echo "build_pdf: builds both serif and accessible pdf"
 	@echo ""
-	@echo "build_ebook: builds only the ebook"
+	@echo "build_ebook: builds only the colour ebook"
+	@echo ""
+	@echo "build_bw_ebook: builds the low res black & white ebook"
 	@echo ""
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
@@ -144,6 +167,7 @@ build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
 build_ebook: epub/book.epub | make_release_dir
 
+build_bw_ebook: epub/bw_book.epub | make_release_dir
 
 .PHONY: export_figures check
 # Requires that you have docker running on your computer.
@@ -211,7 +235,7 @@ bake: release_serif release_sans_serif
 make_release_dir:
 	mkdir -p release
 
-release_serif: build_serif_pdf build_ebook | make_release_dir
+release_serif: build_serif_pdf build_ebook build_bw_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 
