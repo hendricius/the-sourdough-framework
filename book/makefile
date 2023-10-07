@@ -122,7 +122,7 @@ help:
 	@echo ""
 	@echo "quick: compiles serif_pdf but runs lulatex only once"
 	@echo ""
-	@echo "quick_ebook: compiles serif_ebook but runs lulatex only once"
+	@echo "quick_ebook: compiles ebook but runs lulatex only once"
 	@echo ""
 	@echo "show_tools_version: Show version of tools used on the build machine"
 	@echo ""
@@ -144,10 +144,7 @@ build_serif_pdf: book_serif/book.pdf
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
 .PHONY: build_ebook
-build_ebook: build_serif_ebook 
-
-.PHONY: build_serif_ebook
-build_serif_ebook: epub/book.epub | make_release_dir
+build_ebook: epub/book.epub | make_release_dir
 
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
@@ -218,7 +215,7 @@ make_release_dir:
 	mkdir -p release
 
 .PHONY: release_serif
-release_serif: build_serif_pdf build_serif_ebook | make_release_dir
+release_serif: build_serif_pdf build_ebook | make_release_dir
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 
