@@ -1,13 +1,13 @@
-\begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {Mix ingredients};
-  \node [block, below of=init, node distance=3cm] (bulk_ferment) {Bulk ferment};
-  \node [block, right of=init, node distance=3cm] (divide) {Divide};
-  \node [block, below of=divide, node distance=3cm] (shape) {Shape};
-  \node [block, right of=divide, node distance=3cm] (proof) {Proof};
-  \node [success, below of=proof, node distance=3cm] (bake) {Bake};
+\begin{tikzpicture}[node distance = 3.8cm, auto]
+  \node [start] (init) {Mix \\ingredients};
+  \node [block, below of=init, node distance = 3cm] (bulk_ferment) {Bulk ferment};
+  \node [block, right of=init] (divide) {Divide};
+  \node [block] at (divide |- bulk_ferment) (shape) {Shape};
+  \node [block, right of=divide] (proof) {Proof};
+  \node [success] at (proof |- bulk_ferment) (bake) {Bake};
   \path [line] (init) -- (bulk_ferment);
-  \path [line] (bulk_ferment) -- (divide);
+  \path [line] (bulk_ferment.north east) -- (divide.south west);
   \path [line] (divide) -- (shape);
-  \path [line] (shape) -- (proof);
+  \path [line] (shape.north east) -- (proof.south west);
   \path [line] (proof) -- (bake);
 \end{tikzpicture}
