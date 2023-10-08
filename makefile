@@ -22,7 +22,7 @@ website: mrproper
 
 .PHONY: validate
 validate: mrproper
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make -j build_pdf build_serif_ebook"
+	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make -j build_pdf build_ebook"
 
 .PHONY: mrproper
 mrproper:
