@@ -179,9 +179,9 @@ build_serif_pdf: book_serif/book.pdf
 
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
-build_ebook: epub/book.epub | make_release_dir
+build_ebook: epub/book.epub
 
-build_bw_ebook: epub/bw_book.epub | make_release_dir
+build_bw_ebook: epub/bw_book.epub
 
 .PHONY: export_figures check
 # Requires that you have docker running on your computer.
@@ -242,18 +242,18 @@ mrproper: clean
 	-rm -rf $(website_dir)
 
 # top level releases rules
-.PHONY: bake make_release_dir release_serif release_sans_serif
+.PHONY: bake release_serif release_sans_serif
 
 bake: release_serif release_sans_serif
 
-make_release_dir:
+release:
 	mkdir -p release
 
-release_serif: build_serif_pdf build_ebook build_bw_ebook | make_release_dir
+release_serif: build_serif_pdf build_ebook build_bw_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 
-release_sans_serif: build_sans_serif_pdf | make_release_dir
+release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
 
 # Website stuff
