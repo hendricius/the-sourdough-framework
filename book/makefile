@@ -5,6 +5,11 @@ WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilter
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
 CHECK_2 := chktex
+CONVERT_PIC := convert
+REDUCE_PIC := -resize '800x800>' \
+	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
+	    -set colorspace Gray -separate -evaluate-sequence Mean
+RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -38,6 +43,8 @@ images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 
+# Black and White ebook, we will just re-zip directory after converting the 
+# images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
@@ -78,25 +85,32 @@ book_serif/book.pdf: $(src_all)
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
+.PHONY: bw_epub copy_ebook_files
+
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 	$(EBOOK) -f epub $<
 
-copy_ebook_files: build_ebook
-	mkdir -p bw-book-epub/
-	rsync -au --exclude "book.epub" book-epub/ bw-book-epub/
+bw-book-epub:
+	mkdir -p bw-book-epub
 
-convert_ebook_images: copy_ebook_files
-	mogrify -resize '800x800>' \
-	    tstrip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
-	    -set colorspace Gray -separate -evaluate-sequence Mean $(bw_images)
+copy_ebook_files: build_ebook | bw-book-epub
+	$(RSYNC) book-epub/ bw-book-epub/
 
-bw_ebook.zip: convert_ebook_images
+# We not convert SVG to B&W or lower res for now as they are super small
+# anyway
+bw-book-epub/OEBPS/%.jpg: %.jpg
+	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
+
+bw-book-epub/OEBPS/%.png: %.png
+	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
+
+bw_ebook.zip: copy_ebook_files $(bw_images)
 	zip -qXr9D bw_ebook.zip bw-book-epub
 
 epub/bw_book.epub: bw_ebook.zip
 	mv bw_ebook.zip epub/bw_book.epub
 
-bw_epub: epub/bw_book.epub
+bw_epub: epub/bw_book.epub | bw-book-epub
 	
 # Now with the rules
 # Expected usual rules first
@@ -296,6 +310,10 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- ruby --version
 	@echo ""
+	- convert --version
+	@echo ""
+	- rsync --version
+
 
 # You can find the value of variable X with the following command:
 # make print-X
