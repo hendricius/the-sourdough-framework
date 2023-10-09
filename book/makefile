@@ -41,7 +41,9 @@ images += $(wildcard images/*.jpg)
 images += $(wildcard images/*.png)
 images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 
 # Black and White ebook, we will just re-zip directory after converting the 
 # images to lower resolution and greyscale
