@@ -252,6 +252,7 @@ release:
 release_serif: build_serif_pdf build_ebook build_bw_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
