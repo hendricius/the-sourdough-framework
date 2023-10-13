@@ -20,6 +20,7 @@ RUN apt-get update && \
     wget \
     ruby3.1 \
     ruby-dev \
+    imagemagick \
     build-essential
 
 WORKDIR /root
