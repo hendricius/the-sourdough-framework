@@ -29,4 +29,4 @@ jobs:
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make -j build_pdf build_serif_ebook
+            make -j build_pdf build_ebook

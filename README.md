@@ -32,7 +32,8 @@ make
 
 Then you can check out the file `book/book.pdf`
 
-If you want to 🍞 bake all the versions including ebook formats (.pdf, .epub, .mobi, .azw3) run:
+If you want to 🍞 bake all the versions including ebook variants (.pdf, .epub
+in colour or size optimized Black&White), run:
 
 ```console
 make bake
@@ -50,7 +51,8 @@ cd book/
 make
 ```
 
-If you want to 🍞 bake all the versions including ebook formats (.pdf, .epub, .mobi, .azw3) run:
+If you want to 🍞 bake all the versions including ebook variants (.pdf, .epub
+in colour or size optimized Black&White), run:
 
 ```console
 cd book/

@@ -5,6 +5,11 @@ WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilter
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
 CHECK_2 := chktex
+CONVERT_PIC := convert
+REDUCE_PIC := -resize '800x800>' \
+	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
+	    -set colorspace Gray -separate -evaluate-sequence Mean
+RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -36,8 +41,12 @@ images += $(wildcard images/*.jpg)
 images += $(wildcard images/*.png)
 images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 
+# Black and White ebook, we will just re-zip directory after converting the 
+# images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
@@ -78,25 +87,32 @@ book_serif/book.pdf: $(src_all)
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
+.PHONY: bw_epub copy_ebook_files
+
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 	$(EBOOK) -f epub $<
 
-copy_ebook_files: build_ebook
-	mkdir -p bw-book-epub/
-	rsync -au --exclude "book.epub" book-epub/ bw-book-epub/
+bw-book-epub:
+	mkdir -p bw-book-epub
 
-convert_ebook_images: copy_ebook_files
-	mogrify -resize '800x800>' \
-	    tstrip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
-	    -set colorspace Gray -separate -evaluate-sequence Mean $(bw_images)
+copy_ebook_files: build_ebook | bw-book-epub
+	$(RSYNC) book-epub/ bw-book-epub/
 
-bw_ebook.zip: convert_ebook_images
+# We not convert SVG to B&W or lower res for now as they are super small
+# anyway
+bw-book-epub/OEBPS/%.jpg: %.jpg
+	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
+
+bw-book-epub/OEBPS/%.png: %.png
+	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
+
+bw_ebook.zip: copy_ebook_files $(bw_images)
 	zip -qXr9D bw_ebook.zip bw-book-epub
 
 epub/bw_book.epub: bw_ebook.zip
 	mv bw_ebook.zip epub/bw_book.epub
 
-bw_epub: epub/bw_book.epub
+bw_epub: epub/bw_book.epub | bw-book-epub
 	
 # Now with the rules
 # Expected usual rules first
@@ -166,9 +182,9 @@ build_serif_pdf: book_serif/book.pdf
 
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
-build_ebook: epub/book.epub | make_release_dir
+build_ebook: epub/book.epub
 
-build_bw_ebook: epub/bw_book.epub | make_release_dir
+build_bw_ebook: epub/bw_book.epub
 
 .PHONY: export_figures check
 # Requires that you have docker running on your computer.
@@ -229,18 +245,19 @@ mrproper: clean
 	-rm -rf $(website_dir)
 
 # top level releases rules
-.PHONY: bake make_release_dir release_serif release_sans_serif
+.PHONY: bake release_serif release_sans_serif
 
 bake: release_serif release_sans_serif
 
-make_release_dir:
+release:
 	mkdir -p release
 
-release_serif: build_serif_pdf build_ebook build_bw_ebook | make_release_dir
+release_serif: build_serif_pdf build_ebook build_bw_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 
-release_sans_serif: build_sans_serif_pdf | make_release_dir
+release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
 
 # Website stuff
@@ -297,6 +314,10 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- ruby --version
 	@echo ""
+	- convert --version
+	@echo ""
+	- rsync --version
+
 
 # You can find the value of variable X with the following command:
 # make print-X
