@@ -27,7 +27,7 @@ website_dir := static_website_html
 # List all files that are dependencies
 chapters = baking basics bread-types cover flour-types history intro mix-ins\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
-		wheat-sourdough
+		wheat-sourdough community-recipes
 
 src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
