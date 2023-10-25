@@ -10,8 +10,15 @@
 \usepackage[mode=match, reset-text-family=false]{siunitx}
 \usepackage{fontspec}
 \usepackage{calc}
+\usepackage{enumitem}
 \usepackage[font={sffamily, sbseries}]{quoting}
+\usepackage{enumitem}
 \usepackage{microtype}
+
+% style=nextline breaks on make4ht
+\ifdefined\HCode\else
+\setlist[description]{style=nextline, leftmargin=0cm}
+\fi
 
 \DeclareNewTOC[
   type=flowchart,%
