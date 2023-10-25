@@ -78,8 +78,10 @@ There's an additional enhanced accessibility version using a sans serif font:
 
 * [Download compiled .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
 
-**The ebook files in .mobi and .azw3 have been retired, please let us know if
-you were using them.**
+An additional black and white ebook is provided with a greatly reduced file size. This
+shrinks the book from more than 50MB down to ~5MB:
+
+* [Download compiled .epub version](https://www.the-bread-code.io/bw-book.epub)
 
 ## Online HTML version (WIP)
 
