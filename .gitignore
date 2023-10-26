@@ -58,6 +58,7 @@ book_serif/
 release_sans_serif/
 book/book_sans_serif-epub/
 book/static_website_html/*
+book/bw-book-epub/*
 epub/
 *.opf
 website/static_website_html/*
