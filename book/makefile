@@ -5,8 +5,19 @@ WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilter
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
 CHECK_2 := chktex
+CONVERT_PIC := convert
+REDUCE_PIC := -resize '800x800>' \
+	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
+	    -set colorspace Gray -separate -evaluate-sequence Mean
+RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
+
+# We want bash as shell
+SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
+	 else if [ -x /bin/bash ]; then echo /bin/bash; \
+	 else echo sh; fi; fi)
 
 ifdef DEBUG
+LATEX += -diagnostics
 EBOOK += -a debug
 WEBSITE += -a debug
 endif
@@ -16,7 +27,7 @@ website_dir := static_website_html
 # List all files that are dependencies
 chapters = baking basics bread-types cover flour-types history intro mix-ins\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
-		wheat-sourdough
+		wheat-sourdough glossary
 
 src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
@@ -30,7 +41,13 @@ images += $(wildcard images/*.jpg)
 images += $(wildcard images/*.png)
 images += $(wildcard images/*/*.png)
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.jpg))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
+images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
+
+# Black and White ebook, we will just re-zip directory after converting the 
+# images to lower resolution and greyscale
+bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
 
@@ -42,8 +59,8 @@ ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
-# Default target is not all becuse most of the time we just want a pdf...
-# ebook take a long time to build.
+# Default target is not all because most of the time we just want a pdf...
+# and ebook take a long time to build.
 .DEFAULT_GOAL := build_serif_pdf
 
 # Default rules for pdf and ebooks, getting overwritten when built in a
@@ -70,9 +87,33 @@ book_serif/book.pdf: $(src_all)
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
+.PHONY: bw_epub copy_ebook_files
+
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 	$(EBOOK) -f epub $<
 
+bw-book-epub:
+	mkdir -p bw-book-epub
+
+copy_ebook_files: build_ebook | bw-book-epub
+	$(RSYNC) book-epub/ bw-book-epub/
+
+# We not convert SVG to B&W or lower res for now as they are super small
+# anyway
+bw-book-epub/OEBPS/%.jpg: %.jpg
+	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
+
+bw-book-epub/OEBPS/%.png: %.png
+	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
+
+bw_ebook.zip: copy_ebook_files $(bw_images)
+	zip -qXr9D bw_ebook.zip bw-book-epub
+
+epub/bw_book.epub: bw_ebook.zip
+	mv bw_ebook.zip epub/bw_book.epub
+
+bw_epub: epub/bw_book.epub | bw-book-epub
+	
 # Now with the rules
 # Expected usual rules first
 .PHONY: all
@@ -83,14 +124,16 @@ help:
 	@echo ""
 	@echo "default: builds the book in pdf format (serif)"
 	@echo ""
-	@echo "all: pdf and ebooks serif and sans-serif accessible version, same as"
-	@echo "     build release"
+	@echo "all: pdf serif and sans-serif accessible version, as well as ebooks"
+	@echo "     in colour and black&white versions"
+	@echo ""
 	@echo "bake: same as build all"
 	@echo ""
 	@echo "check: runs static analysis checker on LaTeX source to spot"
 	@echo "       programming or typographic mistakes"
 	@echo ""
 	@echo "clean: delete all intermediate files keep targets (pdf/ebooks/website)"
+	@echo ""
 	@echo "mrproper: delete all generated files intermediate and pdf/ebooks/website"
 	@echo "  clean_figures: delete intermediate TikZ files"
 	@echo "  clean_website_build: delete intermediate website files"
@@ -98,7 +141,9 @@ help:
 	@echo ""
 	@echo "build_pdf: builds both serif and accessible pdf"
 	@echo ""
-	@echo "build_ebook: builds only the ebook"
+	@echo "build_ebook: builds only the colour ebook"
+	@echo ""
+	@echo "build_bw_ebook: builds the low res black & white ebook"
 	@echo ""
 	@echo "build_sans_serif_pdf: build accessible pdf only"
 	@echo ""
@@ -116,7 +161,7 @@ help:
 	@echo ""
 	@echo "quick: compiles serif_pdf but runs lulatex only once"
 	@echo ""
-	@echo "quick_ebook: compiles serif_ebook but runs lulatex only once"
+	@echo "quick_ebook: compiles ebook but runs lulatex only once"
 	@echo ""
 	@echo "show_tools_version: Show version of tools used on the build machine"
 	@echo ""
@@ -127,30 +172,26 @@ help:
 	@echo "set DEBUG i.e make DEBUG=1 build_ebook to add debug flags to commands"
 
 
-# Finally project specif targets
-.PHONY: build_pdf
+# Finally actual project  targets (i.e. build pdf and ebooks)
+.PHONY: build_pdf build_serif_pdf build_sans_serif_pdf build_ebook
+
 build_pdf: build_serif_pdf build_sans_serif_pdf
 
-.PHONY: build_serif_pdf
 build_serif_pdf: book_serif/book.pdf
 
-.PHONY: build_sans_serif_pdf
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
-.PHONY: build_ebook
-build_ebook: build_serif_ebook 
+build_ebook: epub/book.epub
 
-.PHONY: build_serif_ebook
-build_serif_ebook: epub/book.epub | make_release_dir
+build_bw_ebook: epub/bw_book.epub
 
-.PHONY: export_figures
+.PHONY: export_figures check
 # Requires that you have docker running on your computer.
 export_figures: build_pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 
 # Goal is not really to have 0 warning reported but we should check we don't
 # add many and if we do, we know they are false positive
-PHONY: check
 check: $(SRC_TEX)
 	@echo "Running: " $(CHECK_1)
 	$(CHECK_1) book.tex
@@ -158,7 +199,9 @@ check: $(SRC_TEX)
 	@echo "Running: " $(CHECK_2)
 	$(CHECK_2) book.tex
 
-.PHONY: clean_figures
+
+# Clean up and delete generated files
+.PHONY: clean_figures clean_ebook_build clean_website_build clean mrproper
 clean_figures:
 	- $(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
 	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
@@ -166,7 +209,6 @@ clean_figures:
 	- rm $(wildcard figures/*.png.*)
 	- rm cover/cover-page.xbb
 
-.PHONY: clean_ebook_build
 clean_ebook_build:
 	-rm  book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
 	-rm  book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
@@ -174,13 +216,11 @@ clean_ebook_build:
 	-rm  book.css
 	-rm  content.opf
 
-.PHONY: clean_website_build
 clean_website_build: clean_ebook_build
 	-rm book-*.svg
 	-rm book.{loc,dlog}
 	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
-.PHONY: clean
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
@@ -189,7 +229,6 @@ clean: clean_ebook_build clean_figures clean_website_build
 	-rm -rf book*-epub/OEBPS
 	-rm  book*-epub/mimetype
 
-.PHONY: mrproper
 mrproper: clean
 	$(CLEAN) -C $(src_figures)
 	$(CLEAN) -C -output-directory=book_serif book.tex
@@ -204,27 +243,27 @@ mrproper: clean
 	-rm -rf book-epub/
 	-rm -rf $(website_dir)
 
-.PHONY: bake
+# top level releases rules
+.PHONY: bake release_serif release_sans_serif
+
 bake: release_serif release_sans_serif
 
-.PHONY: make_release_dir
-make_release_dir:
+release:
 	mkdir -p release
 
-.PHONY: release_serif
-release_serif: build_serif_pdf build_serif_ebook | make_release_dir
+release_serif: build_serif_pdf build_ebook build_bw_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 
-.PHONY: release_sans_serif
-release_sans_serif: build_sans_serif_pdf | make_release_dir
+release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
 
 # Website stuff
+.PHONY: html website
 $(website_dir)/book.html: $(website_src) cover/cover-page.xbb
 	$(WEBSITE) -d $(website_dir) book.tex
 
-.PHONY: html
 html: $(website_dir)/book.html
 	cp $< $(website_dir)/index.html
 
@@ -236,22 +275,23 @@ html: $(website_dir)/book.html
 	touch ../website/$@
 
 # TODO: this will run every single time, but is so fast we don't really care
-.PHONY: website
 website: html ../website/_bundle_install_done $(ruby_src)
 	cd ../website && ruby modify_build.rb
 
 # Debug Stuff from now on
 .PHONY: quick show_tools_version printvars
 
-# Those 2 targets allow fast debug cycles but not reolvig refrences etc
-quick:  # run latex only once no biber, no references etc..
+# Those 2 targets allow fast debug cycles but not resolving references etc
+quick:  # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -output-directory=book_serif book.tex
 
-quick_ebook: cover/cover-page.xbb  # run latex only once no biber, refe etc..
+quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft -f epub book.tex
 
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
+	@echo ""
+	- ${SHELL} --version
 	@echo ""
 	- latexmk --version
 	@echo ""
@@ -273,6 +313,10 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- ruby --version
 	@echo ""
+	- convert --version
+	@echo ""
+	- rsync --version
+
 
 # You can find the value of variable X with the following command:
 # make print-X

@@ -10,8 +10,15 @@
 \usepackage[mode=match, reset-text-family=false]{siunitx}
 \usepackage{fontspec}
 \usepackage{calc}
+\usepackage{enumitem}
 \usepackage[font={sffamily, sbseries}]{quoting}
+\usepackage{enumitem}
 \usepackage{microtype}
+
+% style=nextline breaks on make4ht
+\ifdefined\HCode\else
+\setlist[description]{style=nextline, leftmargin=0cm}
+\fi
 
 \DeclareNewTOC[
   type=flowchart,%
@@ -27,6 +34,9 @@
 % Common abbreviations
 \newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
 \newcommand{\eg}{\emph{e.g.}\@ifnextchar.{\!\@gobble}{}}
+
+% Consistent pH values
+\newcommand{\pHvalue}[1]{pH~\SI{#1}{}}
 
 % For tables
 \renewcommand\theadfont{\bfseries}
