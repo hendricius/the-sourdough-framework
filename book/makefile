@@ -45,7 +45,7 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 
-# Black and White ebook, we will just re-zip directory after converting the 
+# Black and White ebook, we will just re-zip directory after converting the
 # images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
@@ -106,14 +106,11 @@ bw-book-epub/OEBPS/%.jpg: %.jpg
 bw-book-epub/OEBPS/%.png: %.png
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw_ebook.zip: copy_ebook_files $(bw_images)
-	zip -qXr9D bw_ebook.zip bw-book-epub
-
-epub/bw_book.epub: bw_ebook.zip
-	mv bw_ebook.zip epub/bw_book.epub
+epub/bw_book.epub: copy_ebook_files $(bw_images)
+	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
 bw_epub: epub/bw_book.epub | bw-book-epub
-	
+
 # Now with the rules
 # Expected usual rules first
 .PHONY: all
