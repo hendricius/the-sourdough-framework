@@ -288,7 +288,9 @@ quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
 	@echo ""
-	- ${SHELL} --version
+	- uname -a
+	@echo ""
+	- $(SHELL) --version
 	@echo ""
 	- latexmk --version
 	@echo ""
@@ -310,10 +312,9 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- ruby --version
 	@echo ""
-	- convert --version
+	- $(CONVERT_PIC) --version
 	@echo ""
 	- rsync --version
-
 
 # You can find the value of variable X with the following command:
 # make print-X
