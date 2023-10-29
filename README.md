@@ -57,7 +57,7 @@ in colour and size optimized Black&White), run:
 
 ```console
 cd book/
-make bake
+make -j bake
 ```
 
 You can check the files in the folder `book/release/`
@@ -75,7 +75,7 @@ The below versions are automatically built on every push to the `main` branch.
 * [Download compiled .pdf version](https://www.the-bread-code.io/book.pdf)
 * [Download compiled .epub version](https://www.the-bread-code.io/book.epub)
 
-There's an additional enhanced accessibility version using a sans serif font:
+There's an additional enhanced accessibility version using a sans-serif font:
 
 * [Download compiled sans-serif .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
 
