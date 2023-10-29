@@ -33,7 +33,7 @@ make
 Then you can check out the file `book/book.pdf`
 
 If you want to 🍞 bake all the versions including ebook variants (.pdf, .epub
-in colour or size optimized Black&White), run:
+in colour and size optimized Black&White), run:
 
 ```console
 make bake
@@ -43,8 +43,9 @@ You can check the files in  the folder `book/release/`
 
 ## 🍞 Baking the book locally (LaTeX)
 
-Make sure you have `biber` and `latexmk` installed. Refer to your system's
-installation instructions for LaTeX. To create the serif .pdf format, run:
+Make sure you have `biber`, `latexmk` and ``ImageMagick`` installed. Refer to
+your system's installation instructions for LaTeX. To create the serif .pdf
+format, run:
 
 ```console
 cd book/
@@ -52,7 +53,7 @@ make
 ```
 
 If you want to 🍞 bake all the versions including ebook variants (.pdf, .epub
-in colour or size optimized Black&White), run:
+in colour and size optimized Black&White), run:
 
 ```console
 cd book/
@@ -76,14 +77,14 @@ The below versions are automatically built on every push to the `main` branch.
 
 There's an additional enhanced accessibility version using a sans serif font:
 
-* [Download compiled .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
+* [Download compiled sans-serif .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
 
-An additional black and white ebook is provided with a greatly reduced file size. This
-shrinks the book from more than 50MB down to ~5MB:
+An additional black and white ebook is provided with a greatly reduced file
+size. This shrinks the book from more than 50MB down to ~5MB:
 
-* [Download compiled .epub version](https://www.the-bread-code.io/bw-book.epub)
+* [Download compiled B&W .epub version](https://www.the-bread-code.io/bw-book.epub)
 
-## Online HTML version (WIP)
+## Online HTML version
 
 Head over to [https://www.the-sourdough-framework.com](https://www.the-sourdough-framework.com)
 
