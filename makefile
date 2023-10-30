@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := build_pdf
+
 DOCKER_IMAGE := ghcr.io/hendricius/the-sourdough-framework
 DOCKER_CMD := docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c
 
