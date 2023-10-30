@@ -103,10 +103,10 @@ copy_ebook_files: build_ebook | bw-book-epub
 
 # We not convert SVG to B&W or lower res for now as they are super small
 # anyway
-bw-book-epub/OEBPS/%.jpg: %.jpg | bw-book-epub/OEBPS
+bw-book-epub/OEBPS/%.jpg: %.jpg copy_ebook_files
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw-book-epub/OEBPS/%.png: %.png | bw-book-epub/OEBPS
+bw-book-epub/OEBPS/%.png: %.png copy_ebook_files 
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
 epub/bw_book.epub: copy_ebook_files $(bw_images)
