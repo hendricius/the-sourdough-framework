@@ -106,6 +106,7 @@ bw-book-epub/OEBPS/%.png: %.png
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
 epub/bw_book.epub: copy_ebook_files $(bw_images)
+	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
 # Now with the rules
