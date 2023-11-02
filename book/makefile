@@ -279,7 +279,7 @@ website: html ../website/_bundle_install_done $(ruby_src)
 # Those 2 targets allow fast debug cycles but not resolving references etc
 # They also ignore dependencies and run each time you call them.
 quick:  # run latex only once no biber, no references etc...
-	$(LATEX) -e '$$max_repeat=1' -output-directory=book_serif book.tex
+	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft -f epub book.tex
