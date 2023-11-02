@@ -1,6 +1,6 @@
 # Macros for commands
 LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -synctex=1 -use-make
-EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
+EBOOK := tex4ebook --lua -d epub -f epub -c tex4ebook.cfg
 WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
@@ -90,7 +90,7 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 .PHONY: copy_ebook_files
 
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
-	$(EBOOK) -f epub $<
+	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
 	$(RSYNC) book-epub/ bw-book-epub/
@@ -282,7 +282,7 @@ quick:  # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
-	$(EBOOK) --mode draft -f epub book.tex
+	$(EBOOK) --mode draft book.tex
 
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
