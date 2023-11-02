@@ -1,45 +1,45 @@
+.DEFAULT_GOAL := build_pdf
+
 DOCKER_IMAGE := ghcr.io/hendricius/the-sourdough-framework
+DOCKER_CMD := docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c
 
-.PHONY: build_pdf
-build_pdf: mrproper
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make"
+.PHONY: bake build_pdf build_docker_image push_docker_image validate website
+.PHONY: print_os_version start_shell printvars show_tools_version mrproper
 
-.PHONY: bake
-bake: mrproper
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make bake"
-
-.PHONY: build_docker_image
+# Dockers targets
 build_docker_image:
 	docker build -t $(DOCKER_IMAGE) -f Dockerfile --progress=plain .
 
-.PHONY: push_docker_image
-push_docker_image:
+push_docker_image: build_docker_image
 	docker push $(DOCKER_IMAGE):latest
 
-.PHONY: website
-website: mrproper
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make website"
+# Books/website 
 
-.PHONY: validate
-validate: mrproper
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make -j build_pdf build_ebook"
+# Quicker run for each commit, shall catch most problems
+validate:
+	$(DOCKER_CMD) "cd /opt/repo/book && make -j build_serif_pdf build_ebook"
 
-.PHONY: mrproper
+build_pdf:
+	$(DOCKER_CMD)  "cd /opt/repo/book && make"
+
+bake:
+	$(DOCKER_CMD) "cd /opt/repo/book && make -j bake"
+
+website:
+	$(DOCKER_CMD) "cd /opt/repo/book && make website"
+
 mrproper:
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make mrproper"
+	$(DOCKER_CMD) "cd /opt/repo/book && make mrproper"
 
-.PHONY: show_tools_version
+# Debug helpers
 show_tools_version:
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make show_tools_version"
+	$(DOCKER_CMD) "cd /opt/repo/book && make show_tools_version"
 
-.PHONY: printvars
 printvars:
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cd /opt/repo/book && make printvars"
+	$(DOCKER_CMD) "cd /opt/repo/book && make printvars"
 
-.PHONY: print_os_version
 print_os_version:
-	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash -c "cat /etc/*release"
+	$(DOCKER_CMD) "cat /etc/*release"
 
-.PHONY: start_shell
 start_shell:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash

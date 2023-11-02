@@ -45,7 +45,7 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 
-# Black and White ebook, we will just re-zip directory after converting the 
+# Black and White ebook, we will just re-zip directory after converting the
 # images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
@@ -95,25 +95,25 @@ epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
 bw-book-epub:
 	mkdir -p bw-book-epub
 
+bw-book-epub/OEBPS: bw-book-epub
+	mkdir -p bw-book-epub/OEBPS
+
 copy_ebook_files: build_ebook | bw-book-epub
 	$(RSYNC) book-epub/ bw-book-epub/
 
 # We not convert SVG to B&W or lower res for now as they are super small
 # anyway
-bw-book-epub/OEBPS/%.jpg: %.jpg
+bw-book-epub/OEBPS/%.jpg: %.jpg copy_ebook_files
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw-book-epub/OEBPS/%.png: %.png
+bw-book-epub/OEBPS/%.png: %.png copy_ebook_files 
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw_ebook.zip: copy_ebook_files $(bw_images)
-	zip -qXr9D bw_ebook.zip bw-book-epub
-
-epub/bw_book.epub: bw_ebook.zip
-	mv bw_ebook.zip epub/bw_book.epub
+epub/bw_book.epub: copy_ebook_files $(bw_images)
+	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
 bw_epub: epub/bw_book.epub | bw-book-epub
-	
+
 # Now with the rules
 # Expected usual rules first
 .PHONY: all
@@ -291,7 +291,9 @@ quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
 	@echo ""
-	- ${SHELL} --version
+	- uname -a
+	@echo ""
+	- $(SHELL) --version
 	@echo ""
 	- latexmk --version
 	@echo ""
@@ -313,10 +315,9 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- ruby --version
 	@echo ""
-	- convert --version
+	- $(CONVERT_PIC) --version
 	@echo ""
 	- rsync --version
-
 
 # You can find the value of variable X with the following command:
 # make print-X
