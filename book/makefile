@@ -1,6 +1,6 @@
 # Macros for commands
 LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -synctex=1 -use-make
-EBOOK := tex4ebook --lua -d epub -c tex4ebook.cfg
+EBOOK := tex4ebook --lua -d epub -f epub -c tex4ebook.cfg
 WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
@@ -87,32 +87,27 @@ book_serif/book.pdf: $(src_all)
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-.PHONY: bw_epub copy_ebook_files
+.PHONY: copy_ebook_files
 
 epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
-	$(EBOOK) -f epub $<
+	$(EBOOK) $<
 
-bw-book-epub:
-	mkdir -p bw-book-epub
-
-bw-book-epub/OEBPS: bw-book-epub
-	mkdir -p bw-book-epub/OEBPS
-
-copy_ebook_files: build_ebook | bw-book-epub
+copy_ebook_files: build_ebook
 	$(RSYNC) book-epub/ bw-book-epub/
 
 # We not convert SVG to B&W or lower res for now as they are super small
 # anyway
-bw-book-epub/OEBPS/%.jpg: %.jpg copy_ebook_files
+bw-book-epub/OEBPS/%.jpg: %.jpg
+	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw-book-epub/OEBPS/%.png: %.png copy_ebook_files 
+bw-book-epub/OEBPS/%.png: %.png
+	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
 epub/bw_book.epub: copy_ebook_files $(bw_images)
+	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
-
-bw_epub: epub/bw_book.epub | bw-book-epub
 
 # Now with the rules
 # Expected usual rules first
@@ -279,14 +274,15 @@ website: html ../website/_bundle_install_done $(ruby_src)
 	cd ../website && ruby modify_build.rb
 
 # Debug Stuff from now on
-.PHONY: quick show_tools_version printvars
+.PHONY: quick quick_ebook show_tools_version printvars
 
 # Those 2 targets allow fast debug cycles but not resolving references etc
+# They also ignore dependencies and run each time you call them.
 quick:  # run latex only once no biber, no references etc...
-	$(LATEX) -e '$$max_repeat=1' -output-directory=book_serif book.tex
+	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
-	$(EBOOK) --mode draft -f epub book.tex
+	$(EBOOK) --mode draft book.tex
 
 show_tools_version:  # Show version of tools used on the build machine
 	- git log -n 1
