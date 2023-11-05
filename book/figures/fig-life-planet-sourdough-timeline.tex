@@ -7,7 +7,8 @@
 
   % Draw lines for the events, higher up so that they don't overflow the text
   % Placing the lines has been a bit manual work of trying different values
-  % Maritime bacteria
+  % Maritime bacteria.
+
   \draw[line width=1pt] (2.8*\segmentwidth,1) -- (2.8*\segmentwidth,0.2);
   % Eukaryotes
   \draw[line width=1pt] (5.8*\segmentwidth,1.5) -- (5.8*\segmentwidth,0.2);
@@ -40,6 +41,7 @@
   \draw[line width=1pt] (\textwidth,0.1) -- (\textwidth,-0.1);
 
   % Place events on the timeline with dates using the timeline_event style
+  % As a calculation I used (4.54 billion years / 12 months = 0.3785 billion years/month.
   \node[timeline_event, above] at (2.0*\segmentwidth,1) {Mar 25 - First maritime bacteria and archae};
   \node[timeline_event, above] at (4.50*\segmentwidth,1.5) {June 25 - First organisms with nuklei (eukaryotes)};
   \node[timeline_event, above] at (7.8*\segmentwidth,-1.5) {Oct 4 - First bacteria on land};
