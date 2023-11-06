@@ -7,14 +7,13 @@
   \node [block, below of=spritz] (close) {Close DO};
   \node [block, left of=close] (back_oven) {Place DO back in oven};
   \node [block, left of=back_oven] (bake) {Bake 30~minutes at \qty{230}{\degreeCelsius} (\qty{446}{\degF})};
-  \node [block, below of=heat_oven] (wait_5_minutes) {Wait\\ 5 minutes};
-  \node [decision, below of=wait_5_minutes, node distance=4cm] (is_ready_check) {Core temperature \qty{92}{\degreeCelsius} (\qty{197}{\degF})?};
+  \node [decision, below right= 5cm and -1 cm of heat_oven]  (is_ready_check)
+        {Core temperature \qty{92}{\degreeCelsius} (\qty{197}{\degF})?};
+  \node [block, below of=is_ready_check, node distance=4cm] (wait_5_minutes) {Wait\\ 5 minutes};
   \node [block, right of=is_ready_check, node distance=4cm] (remove_do_lid) {Remove DO lid};
-  \node [block, right of=wait_5_minutes] (test_temperature_again) {Test core temperature again};
-  \node [decision, right of=remove_do_lid, node distance=4cm] (dark_enough_decision) {Crust color dark enough?};
-  \node [success, below of=dark_enough_decision] (finish_baking) {Bread is finished};
-  \node [block, below of=close] (test_crust_again) {Test crust color again};
-  \node [block, below of=test_crust_again] (bake_5_more_minutes) {Bake another 5~minutes};
+  \node [decision, right of=remove_do_lid, node distance=3.5cm] (dark_enough_decision) {Crust color dark enough?};
+  \node [success, below of=dark_enough_decision, node distance=4cm] (finish_baking) {Bread is finished};
+  \node [block, right of=dark_enough_decision, node distance=3.5cm] (bake_5_more_minutes) {Bake another 5~minutes};
   \path [line] (heat_oven) -- (remove_oven);
   \path [line] (remove_oven) -- (open_load_dough);
   \path [line] (open_load_dough) -- (score);
@@ -22,14 +21,12 @@
   \path [line] (spritz) -- (close);
   \path [line] (close) -- (back_oven);
   \path [line] (back_oven) -- (bake);
-  \path [line] (bake) -- (is_ready_check);
+  \path [line] (bake.west) -- node{} ++(-2, 0) -| (is_ready_check.north);
   \path [line] (is_ready_check) -- node{yes} (remove_do_lid);
   \path [line] (is_ready_check) -- node{no} (wait_5_minutes);
-  \path [line] (wait_5_minutes) -- (test_temperature_again);
-  \path [line] (test_temperature_again) -- (is_ready_check);
+  \path [line] (wait_5_minutes.west) -- node{} ++(-1.5, 0) |- (is_ready_check.west);
   \path [line] (remove_do_lid) -- (dark_enough_decision);
   \path [line] (dark_enough_decision) -- node{yes} (finish_baking);
   \path [line] (dark_enough_decision) -- node{no} (bake_5_more_minutes);
-  \path [line] (bake_5_more_minutes) -- (test_crust_again);
-  \path [line] (test_crust_again) -- (dark_enough_decision);
+  \path [line] (bake_5_more_minutes.east) -- node{} ++(1, 0) -- node{} ++(0, 2.3) -| (dark_enough_decision.north);
 \end{tikzpicture}
