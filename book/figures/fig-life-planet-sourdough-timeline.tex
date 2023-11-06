@@ -42,6 +42,16 @@
   }
   \draw[line width=1pt] (\textwidth,0.1) -- (\textwidth,-0.1);
 
+  % Full timeline width for billion years
+  \draw[line width=1pt] (0,-3.8) -- node[midway, fill=white] {4.45 billion years} (\textwidth,-3.8);
+  \draw[line width=1pt] (0,-3.7) -- (0,-3.9);
+  \draw[line width=1pt] (\textwidth,-3.7) -- (\textwidth,-3.9);
+
+  % Indicator for the period of 3 months = 1.1 billion years
+  \draw[line width=1pt] (0,-1.0) -- node[midway, fill=white] {1.11 billion years} ({\segmentwidth * 3},-1.0);
+  \draw[line width=1pt] (0,-0.9) -- (0,-1.1);
+  \draw[line width=1pt] ({\segmentwidth * 3},-0.9) -- ({\segmentwidth * 3},-1.1);
+
   % Place events on the timeline with dates using the timeline_event style
   % As a calculation I used (4.54 billion years / 12 months = 0.3785 billion years/month.
   \node[timeline_event, above] at (2.0*\segmentwidth,1) {Mar 25 - First maritime bacteria and archae};
