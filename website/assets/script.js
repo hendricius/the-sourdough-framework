@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add permalinks to headers
   var heads = document.querySelectorAll('.sectionHead');
   heads.forEach(function (head) {
-      let permalink = document.createElement("a");
-      permalink.href = '#' + head.id;
-      permalink.classList.add('permalink');
-      permalink.append('🔗');
-      head.append(permalink);
+    let permalink = document.createElement("a");
+    permalink.href = '#' + head.id;
+    permalink.classList.add('permalink');
+    permalink.append('🔗');
+    head.append(permalink);
   });
 });
