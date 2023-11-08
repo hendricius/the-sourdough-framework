@@ -62,6 +62,18 @@ main.main-content,main.titlepage,div.footnotes{
   padding:1rem;
 }
 
+.sectionHead a.permalink {
+  opacity: 0.5;
+  text-decoration: none;
+  font-size: 0.75rem;
+  vertical-align: top;
+  line-height: 0.8rem;
+  margin-left: 0.25rem;
+  padding-top: 0.2rem;
+  color: black;
+  display: inline-block;
+}
+
 p.indent, p.noindent{
   text-indent: 0;
   text-align: justify;
