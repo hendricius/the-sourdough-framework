@@ -35,7 +35,7 @@ book/book*.svg
 book/book_sans_serif/*
 book/book_serif/*
 book/static_website_html/*
-book/website/static_website_html/*
+website/static_website_html/*
 book/epub/
 book/book-epub/
 book/bw-book-epub/*
