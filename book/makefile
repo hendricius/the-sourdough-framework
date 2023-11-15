@@ -301,6 +301,8 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- tidy -version
 	@echo ""
+	- dvisvgm --version
+	@echo ""
 	- lacheck --version
 	@echo ""
 	- chktex --version
