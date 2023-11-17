@@ -15,6 +15,7 @@ RUN apt-get update && \
     make \
     tidy \
     pandoc \
+    dvisvgm \
     zip \
     git \
     wget \
