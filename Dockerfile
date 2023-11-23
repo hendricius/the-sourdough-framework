@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/islandoftex/images/texlive
+FROM debian:trixie
 
 LABEL "maintainer"="Hendrik Kleinwächter <hendrik.kleinwaechter@gmail.com>"
 LABEL "repository"="https://github.com/hendricius/the-sourdough-framework"
@@ -6,7 +6,7 @@ LABEL "homepage"="https://github.com/hendricius/the-sourdough-framework"
 LABEL org.opencontainers.image.source="https://github.com/hendricius/the-sourdough-framework"
 
 # Print release information if needed
-# RUN cat /etc/*release*
+RUN cat /etc/*release*
 
 # Install base depdendencies
 RUN apt-get update && \
@@ -23,6 +23,12 @@ RUN apt-get update && \
     ruby-dev \
     imagemagick \
     build-essential
+
+# Install TeX
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    texlive-full \
+    texlive-luatex
 
 WORKDIR /root
 
