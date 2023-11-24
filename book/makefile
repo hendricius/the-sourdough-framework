@@ -1,7 +1,7 @@
 # Macros for commands
 LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -synctex=1 -use-make
 EBOOK := tex4ebook --lua -d epub -f epub -c tex4ebook.cfg
-WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters+dvisvgm_hashes
+WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
 CHECK_2 := chktex
@@ -301,6 +301,8 @@ show_tools_version:  # Show version of tools used on the build machine
 	- make4ht --version
 	@echo ""
 	- tidy -version
+	@echo ""
+	- dvisvgm --version
 	@echo ""
 	- lacheck --version
 	@echo ""

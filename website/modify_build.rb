@@ -27,7 +27,7 @@ class ModifyBuild
       html_file_name = fn.split("/")[-1]
       content += "#{HOST}/#{html_file_name}\n"
     end
-    File.open("#{build_dir}/sitemap.txt", 'w') { |file| file.write(content) }
+    File.open("#{build_dir}/sitemap.txt", 'w:UTF-8') { |file| file.write(content) }
   end
 
   def build_latex_html
@@ -41,7 +41,7 @@ class ModifyBuild
   end
 
   def modify_file(filename)
-    orig_text = File.read(filename)
+    orig_text = File.read(filename, encoding: "UTF-8")
     text = fix_double_slashes(orig_text)
     text = fix_navigation_bar(text)
     text = fix_titles(text)
@@ -58,9 +58,10 @@ class ModifyBuild
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
+    text = add_anchors_to_headers(text)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
-    File.open(filename, "w") {|file| file.puts text }
+    File.open(filename, "w:UTF-8") {|file| file.puts text }
   end
 
   def is_cover_page?(filename)
@@ -370,15 +371,17 @@ class ModifyBuild
 
   def mark_menu_as_selected_if_on_page(text, filename)
     doc = build_doc(text)
+    return doc.to_html
+
     selected = doc.css(".menu-items .chapterToc > a").find do |el|
       el["href"] == ""
     end
 
     # Special case for index page
-    if ["index.html", "book.html"].include?(filename)
-      doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
-      return doc.to_html
-    end
+    #if ["index.html", "book.html"].include?(filename)
+    #  doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
+    #  return doc.to_html
+    #end
 
     # Special case for the flowcharts page which is added by us to the menu.
     # This needs to be done for future manually added pages too
@@ -560,6 +563,20 @@ class ModifyBuild
 
   def build_doc(text)
     Nokogiri::HTML(text)
+  end
+
+  def add_anchors_to_headers(text)
+    doc = build_doc(text)
+    content = doc.css(".sectionHead, .subsectionHead")
+    content.each do |el|
+      anchor = el.attribute("id").value
+      # No anchor for whatever reason
+      next unless anchor
+
+      copy_link = %Q{<a href="##{anchor}" class="permalink">🔗</a>}
+      el.inner_html = "#{el.inner_html}#{copy_link}"
+    end
+    doc.to_html
   end
 end
 
