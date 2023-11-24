@@ -1,23 +1,22 @@
-\begin{tikzpicture}[node distance = 3cm, auto]
+\begin{tikzpicture}[node distance = 4cm, auto]
   \node [start] (heat_oven) {Heat oven to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
-  \node [block, right of=heat_oven, node distance=3cm] (score_dough) {Score your dough};
+  \node [block, right of=heat_oven] (score_dough) {Score your dough};
   \node [decision, right of=score_dough, node distance=4cm] (decide_steam) {Choose your steaming method};
-  \node [block, below of=heat_oven, node distance=4cm] (inverted_tray_method) {Inverted tray method};
-  \node [block, right of=inverted_tray_method, node distance=3cm] (dutch_oven) {Dutch oven};
-  \node [block, right of=dutch_oven, node distance=3cm] (steam_injection) {Steam injection oven};
-  \node [block, below of=inverted_tray_method, node distance=3cm] (bake_30) {Bake dough for 30~minutes with steam};
-  \node [block, right of=bake_30, node distance=3cm] (remove_steam) {Remove source of steam};
-  \node [block, right of=remove_steam, node distance=3cm] (build_crust) {Build the crust};
-  \node [success, right of=build_crust, node distance=3cm] (finish_baking) {Stop baking 10--30~minutes later depending on crust preference};
+  \node [block, below of=decide_steam, node distance=3.5cm] (dutch_oven) {Dutch oven};
+  \node [block, left of=dutch_oven] (inverted_tray_method) {Inverted tray method};
+  \node [block, right of=dutch_oven] (steam_injection) {Steam injection oven};
+  \node [block, below of=dutch_oven, node distance=3cm] (bake_30) {Bake dough for 30~minutes with steam};
+  \node [block, below of=bake_30, node distance=3cm] (remove_steam) {Remove source of steam};
+  \node [success, right of=remove_steam] (finish_baking) {Stop baking 10--30~minutes later depending on crust preference};
   \path [line] (heat_oven) -- (score_dough);
   \path [line] (score_dough) -- (decide_steam);
-  \path [line] (decide_steam) -- (inverted_tray_method);
+  \path [line] (decide_steam) -- (inverted_tray_method.north east);
   \path [line] (decide_steam) -- (dutch_oven);
-  \path [line] (decide_steam) -- (steam_injection);
-  \path [line] (steam_injection) -- (bake_30);
-  \path [line] (inverted_tray_method) -- (bake_30);
+  \path [line] (decide_steam) -- (steam_injection.north west);
+  \path [line] (steam_injection.south west) -- (bake_30.north east);
+  \path [line] (inverted_tray_method.south east) -- (bake_30.north west);
   \path [line] (dutch_oven) -- (bake_30);
   \path [line] (bake_30) -- (remove_steam);
-  \path [line] (remove_steam) -- (build_crust);
-  \path [line] (build_crust) -- (finish_baking);
+  \path [line] (remove_steam) -- (finish_baking);
+  \draw[BC, decoration=mirror] (remove_steam.south west) ++(0, -0.3) -- node[below=1em]{Building crust}(finish_baking.south east);
 \end{tikzpicture}
