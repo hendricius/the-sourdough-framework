@@ -27,7 +27,7 @@ class ModifyBuild
       html_file_name = fn.split("/")[-1]
       content += "#{HOST}/#{html_file_name}\n"
     end
-    File.open("#{build_dir}/sitemap.txt", 'w') { |file| file.write(content) }
+    File.open("#{build_dir}/sitemap.txt", 'w:UTF-8') { |file| file.write(content) }
   end
 
   def build_latex_html
@@ -41,7 +41,7 @@ class ModifyBuild
   end
 
   def modify_file(filename)
-    orig_text = File.read(filename)
+    orig_text = File.read(filename, encoding: "UTF-8")
     text = fix_double_slashes(orig_text)
     text = fix_navigation_bar(text)
     text = fix_titles(text)
@@ -61,7 +61,7 @@ class ModifyBuild
     text = add_anchors_to_headers(text)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
-    File.open(filename, "w") {|file| file.puts text }
+    File.open(filename, "w:UTF-8") {|file| file.puts text }
   end
 
   def is_cover_page?(filename)
