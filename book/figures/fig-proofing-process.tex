@@ -1,22 +1,20 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [decision_start] (init) {Room temperature proofing?};
-  \node [decision, right of=init, node distance=9cm] (retard_bake_decision) {Bake in less than  \qty{10}{\hour} from now?};
+  \node [decision, right of=init, node distance=8cm] (retard_bake_decision) {Bake in less than  \qty{10}{\hour} from now?};
   \node [block, below of=init, node distance=4cm] (poke) {Poke the dough};
-  \node [block, right of=poke, node distance=4cm] (wait_poke) {Wait\\ 15~minutes};
-  \node [decision, below of=poke, node distance=3cm] (dent_visible_decision) {Dent still visible after 1~minute?};
+  \node [block, left of=poke] (wait_poke) {Wait\\ 15~minutes};
+  \node [decision, below of=poke] (dent_visible_decision) {Dent still visible after one~minute?};
   \node [success, right of=dent_visible_decision, node distance=4cm] (bake) {Score and bake};
-  \node [block, below of=retard_bake_decision, node distance=3cm] (wait_retard) {Wait\\ 15~minutes};
-  \node [block, below of=wait_retard, node distance=3cm] (retard) {Proof in fridge at  \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
-  \node [block, right of=wait_retard, node distance=3cm] (move_to_fridge) {Move dough directly to fridge};
+  \node [block] at (retard_bake_decision |- poke) (wait_retard) {Wait\\ 15~minutes};
+  \node [block] at (wait_retard |- bake) (retard) {Proof in fridge at \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
   \path [line] (init) -- node{yes} (poke);
   \path [line] (init) -- node{no} (retard_bake_decision);
   \path [line] (poke) -- (dent_visible_decision);
   \path [line] (dent_visible_decision) -- node{yes} (bake);
-  \path [line] (dent_visible_decision) -- node{no} (wait_poke);
+  \path [line] (dent_visible_decision.west) -- node{no} ++(-1.4, 0) -- node{} (wait_poke.south);
   \path [line] (wait_poke) -- (poke);
   \path [line] (retard_bake_decision) -- node{yes} (wait_retard);
-  \path [line] (retard_bake_decision) -- node{no} (move_to_fridge);
+  \path [line] (retard_bake_decision.east) -- node{no} ++(1, 0) |- node{} (retard.east);
   \path [line] (wait_retard) -- (retard);
-  \path [line] (move_to_fridge) -- (retard);
   \path [line] (retard) -- (bake);
 \end{tikzpicture}
