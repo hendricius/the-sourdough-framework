@@ -2,8 +2,8 @@
   \node [start] (init) {Dividing required?};
   \node [decision, right of=init, node distance=5cm] (more_than_one_loaf) {More than 1 loaf?};
   \node [success, right of=more_than_one_loaf, node distance=5cm] (yes) {Yes};
-  \node [success, below of=yes, node distance=3cm] (no) {No};
+  \node [success, below of=yes] (no) {No};
   \path [line] (init) -- (more_than_one_loaf);
   \path [line] (more_than_one_loaf) -- (yes);
-  \path [line] (more_than_one_loaf) -- (no);
+  \path [line] (more_than_one_loaf.south) -- node{} ++(0, -1) |- (no);
 \end{tikzpicture}

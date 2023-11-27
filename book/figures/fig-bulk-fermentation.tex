@@ -1,25 +1,28 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [start] (init) {Bulk fermentation};
-  \node [block, right of=init] (check_dough) {Check the dough};
+  \node [block, right of=init, node distance=4cm] (check_dough) {Check the dough};
   \node [block, right of=check_dough, node distance=4cm] (size_increase) {Check dough size increase};
   \node [block, below of=size_increase, node distance=2cm] (ph_value) {Check dough pH value};
   \node [block, below of=ph_value, node distance=2cm] (smell) {Check dough smell};
-  \node [decision, right of=ph_value, node distance=4cm] (dough_ready) {Dough ready?};
-  \node [success, below of=dough_ready] (divide_preshape) {Divide and preshape};
-  \node [decision, below of=smell] (dough_flattened) {Dough flattened out?};
-  \node [block, below of=check_dough, node distance=3cm] (wait_60_minutes) {Wait\\ 60~minutes};
-  \node [block, below of=wait_60_minutes, node distance=4cm] (stretch_fold) {Stretch and fold};
+  \node [decision, right of=size_increase, node distance=4cm] (dough_ready) {Dough ready?};
+  \node [success] at(dough_ready |- smell) (divide_preshape) {Divide and preshape};
+  \node [decision, above of=size_increase] (dough_flattened) {Dough flattened out?};
+  \node [block, above of=check_dough] (wait_60_minutes) {Wait\\ 60~minutes};
+  \node [block, above of=wait_60_minutes] (stretch_fold) {Stretch and fold};
 
   \path [line] (init) -- (check_dough);
   \path [line] (check_dough) -- (size_increase);
-  \path [line] (check_dough) -- node{or} (ph_value);
-  \path [line] (check_dough) -- node{or} (smell);
+  % Tricks not to get double lines
+  \path [line] (check_dough) ++(2, -2) -- node{or} (ph_value);
+  \path [line] (check_dough) ++(2, 0) -- node{} ++(0, -4) -- node{or} (smell);
+  \path [line] (check_dough) ++(2, -4) -- node{or} (smell);
   \path [line] (size_increase) -- (dough_ready);
-  \path [line] (ph_value) -- (dough_ready);
-  \path [line] (smell) -- (dough_ready);
+  % Same tricks not to get double lines and also we do _not_ want arrows
+  \path [draw, thick] (ph_value) -- node{} ++(2, 0);
+  \path [draw, thick] (smell) -| node{} ++(2, 4);
   \path [line] (dough_ready) -- node{yes} (divide_preshape);
-  \path [line] (dough_ready) -- node{no} (dough_flattened);
-  \path [line] (dough_flattened) -- node{yes} (stretch_fold);
+  \path [line] (dough_ready) |- node[right=3pt]{no} (dough_flattened);
+  \path [line] (dough_flattened) |- node[right=3pt]{yes} (stretch_fold);
   \path [line] (dough_flattened) -- node{no} (wait_60_minutes);
   \path [line] (stretch_fold) -- (wait_60_minutes);
   \path [line] (wait_60_minutes) -- (check_dough);
