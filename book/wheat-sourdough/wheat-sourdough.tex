@@ -18,14 +18,14 @@ making this type of bread requires a lot more effort, patience,
 and technique than other types of bread. You have to perfectly
 balance the fermentation process. You cannot ferment for too
 short and also not for too long. The techniques you need to
-learn to require a bit more skill. It took me several attempts
+learn also require a bit more skill. It took me several attempts
 to get this right. One of the challenges I~faced was that
 I~had the wrong flour. I~didn't properly know how to use my oven.
 When should I~stop the fermentation? There is a lot of information
 out there. I~dug through most of it and have tried almost everything.
 In many cases the information was wrong; in other cases, I~found another
 valuable puzzle piece. Aggregating all this
-information was one of my main motivations to start The Bread Code.
+information was one of my main motivations to start \texttt{The Bread Code}.
 My key learning was that there is no recipe that
 you can blindly follow. You will always have to adapt the recipe
 to your locally available tools and environment.
@@ -209,7 +209,8 @@ Find below an example recipe for 1 loaf including baker's math calculation:
 \begin{itemize}
   \item \qty{400}{\gram} of bread flour
   \item \qty{100}{\gram} of whole-wheat flour
-  \item \textbf{\qty{500}{\gram} of flour in total}
+  % Manual unit so we can use emphasis
+  \item \emph{500~g of flour in total}
   \item \qtyrange{300}{450}{\gram} of room temperature water (\qty{60}{\percent} up to \qty{90}{\percent}). More on
 this topic in the next chapter.
   \item \qty{50}{\gram} of stiff sourdough starter (\qty{10}{\percent})
@@ -223,7 +224,8 @@ recipe would look like this:
 \begin{itemize}
   \item \qty{1800}{\gram} of bread flour
   \item \qty{200}{\gram} of whole-wheat flour
-  \item \textbf{\qty{2000}{\gram} of flour, equaling 4 loaves}
+  % Manual unit so we can use emphasis again
+  \item \emph{2000 g of flour}, equaling 4 loaves
   \item \qty{1200}{\gram} up to \qty{1800}{\gram} of room temperature water (60 to \qty{90}{\percent})
   \item \qty{200}{\gram} of stiff sourdough starter (\qty{10}{\percent})
   \item \qty{40}{\gram} of salt (\qty{2}{\percent})
@@ -231,7 +233,7 @@ recipe would look like this:
 
 This is the beauty of baker's math. Simply recalculate the percentages, and you
 are good to go. If you are unsure about how this works, please check out the
-full Chapter~\ref{section:bakers-math} which looks at the topic in detail.
+full Section~\ref{section:bakers-math} which looks at the topic in detail.
 
 \section{Hydration}
 
@@ -390,8 +392,8 @@ difficulty.
 \section{How much starter?}
 
 Most bakers use around \qty{20}{\percent} sourdough starter based on the
-flour weight.  I~recommend going much lower,
-to around 5 to \qty{10}{\percent}.
+flour weight.  I~recommend going much lower, to around
+\qtyrange{5}{10}{\percent}.
 
 By adjusting the amount of pre-ferment you can influence the time your dough
 requires in the bulk fermentation stage. The more starter you use, the faster
@@ -787,7 +789,7 @@ this is not an option for an inexperienced baker. As
 you make more and more dough, you will be able to judge
 the dough's state by touching it.
 
-My go-to method for beginners is to use an \textbf{Aliquot jar}.
+My go-to method for beginners is to use an \emph{Aliquot jar}.
 The aliquot is a sample that you extract from your dough. The
 sample is extracted after creating the initial dough strength.
 You monitor the aliquot's size increase to judge the
@@ -1610,8 +1612,8 @@ banneton should now be facing you.
   \label{fig:artistic-scoring}
 \end{figure}
 
-The scoring cut for done at a \qty{45}{\angle} angle relative to the dough's
-surface slightly off the dough's center. With the \qty{45}{\angle} angle cut
+The scoring cut for done at a \ang{45}~angle relative to the dough's
+surface slightly off the dough's center. With the \ang{45}~angle cut
 the overlaying side will rise more in the oven than the other side.
 This way you will achieve a so-called \emph{ear} on the final bread.
 The ear is a thin crisp edge that offers intriguing texture
@@ -1621,7 +1623,7 @@ a good loaf into a great loaf.
 
 \begin{figure}[htb!]
   \includegraphics[width=\textwidth]{bread-scoring-angle}
-  \caption[Scoring angle]{The \qty{45}{\angle} angle at which you score the
+  \caption[Scoring angle]{The \ang{45}~angle at which you score the
       dough is relative to the surface of the dough.  When scoring more towards
       the side, you have to adjust the angle to achieve the ear on your
       bread.}%
