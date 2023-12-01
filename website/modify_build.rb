@@ -504,7 +504,9 @@ class ModifyBuild
 
     <p class="noindent">
       EPUB: <a href="https://www.the-bread-code.io/book.epub">https://www.the-bread-code.io/book.epub</a><br>
+      EPUB in Black & White, size optimized for screen readers : <a href="https://www.the-bread-code.io/bw-book.epub">https://www.the-bread-code.io/bw-book.epub</a><br>
     </p>
+
 
     <p class="noindent">
       The full source code of the book can be found here:
