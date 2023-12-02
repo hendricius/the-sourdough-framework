@@ -1,5 +1,11 @@
 name: Validate LaTeX Document
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - '**'  # All branches
+      - '!main' # But main as will do it anyway and more in release_book
+  pull_request:
+
 jobs:
   test_building_book:
     runs-on: ubuntu-latest
