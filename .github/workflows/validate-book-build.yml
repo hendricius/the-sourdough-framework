@@ -36,3 +36,24 @@ jobs:
           run: |
             cd /app/book
             make -j build_serif_pdf build_ebook
+      - name: Test building website
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make -j website
+      - name: Upload book Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: books
+          path: |
+            book/book_serif/book.log
+            book/book_serif/book.pdf
+            book/book-epub/book.epub
+      - name: Upload website Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: website/static_website_html
