@@ -1,9 +1,15 @@
 \begin{tikzpicture}
-  % Draw horizontal line
-  \draw[line width=1pt] (0,0) -- (\textwidth,0);
+  \pgfmathsetlengthmacro{\timelinewidth}{(\textwidth-0.5cm)}
 
   % Define the width of each segment
-  \pgfmathsetlengthmacro{\segmentwidth}{\textwidth/12}
+  \pgfmathsetlengthmacro{\segmentwidth}{\timelinewidth/12}
+
+  % Draw horizontal lines
+  \draw[line width=1pt, color=hlorange] (0,0) -- (\timelinewidth/2,0);
+  \draw[line width=1pt] (\timelinewidth/2,0) -- (\timelinewidth/2 +\segmentwidth/3,0);
+  \draw[line width=1pt] (\timelinewidth/2+\segmentwidth/3-5,-0.2) -- (\timelinewidth/2+\segmentwidth/3+5, 0.2);
+  \draw[line width=1pt] (\timelinewidth/2+2*\segmentwidth/3-5,-0.2) -- (\timelinewidth/2+2*\segmentwidth/3+5, 0.2);
+  \draw[line width=1pt] (\timelinewidth/2 + 2*\segmentwidth/3,0) --(\timelinewidth, 0);
 
   % Lines for periods
   \draw[stealth-stealth, line width=1pt] (0,-4.2)
@@ -49,8 +55,13 @@
 
   % Indicators for period
   % Draw millenary and century separators
-  \foreach \i/\century in {0/-12000, 1/-10000, 2/-8000, 3/-6000, 4/-4000, 5/-2000,
-  6/0, 7/1600, 8/1700, 9/1800, 10/1900, 11/2000, 12/2100} {
+  \foreach \i/\century in {0/-12000, 1/-10000, 2/-8000, 3/-6000, 4/-4000, 5/-2000}{
+      % Separators
+      \draw[line width=1pt, color=hlorange] (\i*\segmentwidth,0.1) -- (\i*\segmentwidth,-0.1);
+      % Events for timeline
+      \node[timeline_event, below, text=hlorange] at ({(\i)*\segmentwidth},-0.1) {\num{\century}};
+  }
+  \foreach \i/\century in {6/0, 7/1600, 8/1700, 9/1800, 10/1900, 11/2000, 12/2100}{
       % Separators
       \draw[line width=1pt] (\i*\segmentwidth,0.1) -- (\i*\segmentwidth,-0.1);
       % Events for timeline
