@@ -14,10 +14,11 @@ push_docker_image: build_docker_image
 	docker push $(DOCKER_IMAGE):latest
 
 # Books/website
+build_serif_pdf:
+	$(DOCKER_CMD) "cd /opt/repo/book && make build_serif_pdf"
 
-# Quicker run for each commit, shall catch most problems
-validate:
-	$(DOCKER_CMD) "cd /opt/repo/book && make -j build_serif_pdf build_ebook"
+build_ebook:
+	$(DOCKER_CMD) "cd /opt/repo/book && make build_ebook"
 
 build_pdf:
 	$(DOCKER_CMD) "cd /opt/repo/book && make"
