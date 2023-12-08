@@ -27,9 +27,13 @@
     node[at start, left, timeline_event] {70~BC:~First water mill};
 
   % Sourdough in Jordan
-  \draw[line width=1pt] (0,-1) -- (0,-0.3);
-  \draw[line width=1pt] (0,-1) -- (0.25,-1);
-  \node[timeline_event, below, anchor=west] at (0.25,-1) {\num{12000}~BC:~Sourdough in Jordan\\Cultivation of Einkorn};
+  \draw[line width=1pt] (0,-0.3) -- (0,-1.5);
+  \draw[line width=1pt] (0,-1.5) -- (0.25,-1.5);
+  \node[timeline_event, below, anchor=west] at (0.25,-1.5)
+  {\begin{tabular}{@{}l@{}l@{}}
+      \num{12000}~BC:&~Sourdough in Jordan\\
+                     &~Cultivation of Einkorn\\
+    \end{tabular}};
 
   % AD
   \draw[line width=1pt] ({\segmentwidth*10.50},1.0) -- ({\segmentwidth*10.50},0.3)
