@@ -12,46 +12,41 @@
   \draw[line width=1pt] (\timelinewidth/2+2*\segmentwidth/3-5,-0.2) -- (\timelinewidth/2+2*\segmentwidth/3+5, 0.2);
 
   % Lines for periods
-  \draw[stealth-stealth, line width=1pt] (0,-4.2)
-    -- node[midway, timeline_timespan] {Historic breadmaking} ({\segmentwidth * 7.8},-4.2);
-  \draw[stealth-stealth, line width=1pt] ({\segmentwidth * 7.8},-4.2)
-    -- node[midway, timeline_timespan] {Modern bread} ({\segmentwidth * 12},-4.2);
+  \draw[stealth-stealth, line width=1pt] (0,-3.7)
+    -- node[midway, timeline_timespan] {Historic breadmaking} ({\segmentwidth * 7.8},-3.7);
+  \draw[stealth-stealth, line width=1pt] ({\segmentwidth * 7.8},-3.7)
+    -- node[midway, timeline_timespan] {Modern bread} ({\segmentwidth * 12},-3.7);
 
   % Regularly placed events, not in chronological order
   % since should be placed on top of others on the timeline
-  \draw[line width=1pt] ({\segmentwidth*3},1.5) -- ({\segmentwidth*3},0.3)
-    node[at start, above, timeline_event] {6000~BC: First beer in Egypt};
-  \draw[line width=1pt] ({\segmentwidth*5.95},2.5) -- ({\segmentwidth*5.95},0.3)
-    node[at start, above, timeline_event] {70~BC:~First water mill};
 
-  \draw[line width=1pt] ({\segmentwidth*10.50},2.5) -- ({\segmentwidth*10.50},0.3);
-  \node[timeline_event, above, anchor=east] at ({\segmentwidth*12.50},2.5) {1950:~Modern Wheat};
-
-  \draw[line width=1pt] ({\segmentwidth*11.20},-3.25) -- ({\segmentwidth*11.20},-0.3);
-  \node[timeline_event, above, anchor=east] at ({\segmentwidth*12.20},-3.5) {2020:~COVID-19 Pandemic};
-
-    \draw[line width=1pt] ({\segmentwidth*9.60},1.5) -- ({\segmentwidth*9.60},0.3)
-    node[at start, above, timeline_event] {1868:~Commercial yeast};
-  \draw[line width=1pt] ({\segmentwidth*7.8},0.75) -- ({\segmentwidth*7.8},0.3)
-    node[at start, above, timeline_event] {1680:~Discovery of microorganisms};
-  \draw[line width=1pt] ({\segmentwidth*9.80},-2.5) -- ({\segmentwidth*9.80},-0.3)
-    node[at start, below, timeline_event] {1885:~Electrical mixer};
-  \draw[line width=1pt] ({\segmentwidth*9.57},-1.75) -- ({\segmentwidth*9.57},-0.3)
-    node[at start, below, timeline_event] {1857:~Isolated Yeast};
-  \draw[line width=1pt] ({\segmentwidth*8.80},-1.25) -- ({\segmentwidth*8.80},-0.3)
-    node[at start, above, timeline_event] {1785:~Steam mill};
-
-  % Lines to events
-  % Cultivation of Einkorn
-  \draw[line width=1pt] (0,1) -- (0,0.3);
-  \draw[line width=1pt] (0,1) -- (0.25,1);
-  \node[timeline_event, above, anchor=west] at (0.25,1) {\num{12000}~BC:~Cultivation of Einkorn};
+  % BC
+  \draw[line width=1pt] ({\segmentwidth*3},1.0) -- ({\segmentwidth*3},0.3)
+    node[at start, left, timeline_event] {6000~BC: First beer in Egypt};
+  \draw[line width=1pt] ({\segmentwidth*5.95},1.5) -- ({\segmentwidth*5.95},0.3)
+    node[at start, left, timeline_event] {70~BC:~First water mill};
 
   % Sourdough in Jordan
   \draw[line width=1pt] (0,-1) -- (0,-0.3);
   \draw[line width=1pt] (0,-1) -- (0.25,-1);
-  \node[timeline_event, above, anchor=west] at (0.25,-1) {\num{12000}~BC:~Sourdough in Jordan};
-  % Events
+  \node[timeline_event, below, anchor=west] at (0.25,-1) {\num{12000}~BC:~Sourdough in Jordan\\Cultivation of Einkorn};
+
+  % AD
+  \draw[line width=1pt] ({\segmentwidth*10.50},1.0) -- ({\segmentwidth*10.50},0.3)
+    node[at start, above, timeline_event] {\hspace{1.0cm}1950:~Modern Wheat};
+  \draw[line width=1pt] ({\segmentwidth*9.60},1.5) -- ({\segmentwidth*9.60},0.3)
+    node[at start, above, timeline_event] {1868:~Commercial yeast};
+  \draw[line width=1pt] ({\segmentwidth*7.8},2) -- ({\segmentwidth*7.8},0.3)
+    node[at start, above, timeline_event] {1680:~Discovery of microorganisms};
+
+  \draw[line width=1pt] ({\segmentwidth*8.80},-1.25) -- ({\segmentwidth*8.80},-0.3)
+    node[at start, left, timeline_event] {1785:~Steam mill};
+  \draw[line width=1pt] ({\segmentwidth*9.57},-1.75) -- ({\segmentwidth*9.57},-0.3)
+    node[at start, left, timeline_event] {1857:~Isolated Yeast};
+  \draw[line width=1pt] ({\segmentwidth*9.80},-2.25) -- ({\segmentwidth*9.80},-0.3)
+    node[at start, left, timeline_event] {1885:~Electrical mixer};
+  \draw[line width=1pt] ({\segmentwidth*11.20},-2.75) -- ({\segmentwidth*11.20},-0.3)
+    node[at start, left, timeline_event] {2020:~COVID-19 Pandemic};
 
   % Indicators for period
   % Draw millenary and century separators
