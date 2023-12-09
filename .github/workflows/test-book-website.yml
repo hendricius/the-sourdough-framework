@@ -1,13 +1,17 @@
-name: Validate LaTeX Document
+name: Test building book and website
+
 on:
-  push:
-    branches:
-      - '**'  # All branches
-      - '!main' # But main as will do it anyway and more in release_book
   pull_request:
 
+env:
+  IMAGE: ghcr.io/${{ github.repository }}:${{ github.event.pull_request.head.ref }}
+
 jobs:
-  test_building_book:
+  build-and-push-image:
+    uses: ./.github/workflows/docker-build-push.yml
+
+  test-building-book-website:
+    needs: build-and-push-image
     runs-on: ubuntu-latest
     steps:
       - name: Set up git repository
@@ -15,7 +19,7 @@ jobs:
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -23,7 +27,7 @@ jobs:
       - name: Print build variables
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -31,7 +35,7 @@ jobs:
       - name: Test baking the release versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -39,7 +43,7 @@ jobs:
       - name: Test building website
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
