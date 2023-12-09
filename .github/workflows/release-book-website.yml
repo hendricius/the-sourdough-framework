@@ -1,10 +1,18 @@
-name: Release the book
+name: Release the book and website
+
 on:
   push:
     branches:
       - main
+env:
+  IMAGE: ghcr.io/${{ github.repository }}:latest
+
 jobs:
-  build_and_release:
+  build-and-push-image:
+    uses: ./.github/workflows/docker-build-push.yml
+
+  release-book-website:
+    needs: build-and-push-image
     runs-on: ubuntu-latest
     steps:
       - name: Set up git repository
@@ -12,7 +20,7 @@ jobs:
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -20,7 +28,7 @@ jobs:
       - name: Print build variables
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -28,7 +36,7 @@ jobs:
       - name: Bake the book
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/hendricius/the-sourdough-framework:latest
+          image: ${{ env.IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -41,10 +49,38 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET_BOOK }}
           source_dir: book/release
           destination_dir: release
+      - name: Bake the website
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ env.IMAGE }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make website
+      - name: Release baked website to S3
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
+          source_dir: website/static_website_html
+          destination_dir: static_html_root
+  invalidate-book-website-cache:
+    needs: release-book-website
+    runs-on: ubuntu-latest
+    steps:
       - name: Invalidate Cloudfront book cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_BOOK }}
+          PATHS: "/*"
+          AWS_REGION: "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Invalidate Cloudfront website cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_WEBSITE }}
           PATHS: "/*"
           AWS_REGION: "us-east-1"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
