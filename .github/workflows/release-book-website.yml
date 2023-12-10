@@ -65,6 +65,19 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
           source_dir: website/static_website_html
           destination_dir: static_html_root
+      - name: Upload book Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: books
+          path: |
+            book/book_serif/book.log
+            book/book_serif/book.pdf
+            book/book-epub/book.epub
+      - name: Upload website Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: website/static_website_html
   invalidate-book-website-cache:
     needs: release-book-website
     runs-on: ubuntu-latest
