@@ -1,0 +1,69 @@
+\begin{tikzpicture}
+  \pgfmathsetlengthmacro{\timelinewidth}{(\textwidth-0.5cm)}
+
+  % Define the width of each segment
+  \pgfmathsetlengthmacro{\segmentwidth}{\timelinewidth/12}
+
+  % Draw horizontal lines
+  \draw[line width=1pt, color=hlorange] (0,0) -- (\timelinewidth/2,0);
+  \draw[line width=1pt] (\timelinewidth/2,0) -- (\timelinewidth/2 +1.5*\segmentwidth/3,0);
+  \draw[line width=1pt] (\timelinewidth/2 + 2*\segmentwidth/3,0) --(\timelinewidth, 0);
+  \draw[line width=1pt] (\timelinewidth/2+1.5*\segmentwidth/3-5,-0.2) -- (\timelinewidth/2+1.5*\segmentwidth/3+5, 0.2);
+  \draw[line width=1pt] (\timelinewidth/2+2*\segmentwidth/3-5,-0.2) -- (\timelinewidth/2+2*\segmentwidth/3+5, 0.2);
+
+  % Lines for periods
+  \draw[stealth-stealth, line width=1pt] (0,-3.7)
+    -- node[midway, timeline_timespan] {Historic breadmaking} ({\segmentwidth * 7.8},-3.7);
+  \draw[stealth-stealth, line width=1pt] ({\segmentwidth * 7.8},-3.7)
+    -- node[midway, timeline_timespan] {Modern bread} ({\segmentwidth * 12},-3.7);
+
+  % Regularly placed events, not in chronological order
+  % since should be placed on top of others on the timeline
+
+  % BC
+  \draw[line width=1pt] ({\segmentwidth*3},1.0) -- ({\segmentwidth*3},0.3)
+    node[at start, left, timeline_event] {6000~BC: First beer in Egypt};
+  \draw[line width=1pt] ({\segmentwidth*5.95},1.5) -- ({\segmentwidth*5.95},0.3)
+    node[at start, left, timeline_event] {70~BC:~First water mill};
+
+  % Sourdough in Jordan
+  \draw[line width=1pt] (0,-0.3) -- (0,-1.5);
+  \draw[line width=1pt] (0,-1.5) -- (0.25,-1.5);
+  \node[timeline_event, below, anchor=west] at (0.25,-1.5)
+  {\begin{tabular}{@{}l@{}l@{}}
+      \num{12000}~BC:&~Sourdough in Jordan\\
+                     &~Cultivation of Einkorn\\
+    \end{tabular}};
+
+  % AD
+  \draw[line width=1pt] ({\segmentwidth*10.50},1.0) -- ({\segmentwidth*10.50},0.3)
+    node[at start, above, timeline_event] {\hspace{1.0cm}1950:~Modern Wheat};
+  \draw[line width=1pt] ({\segmentwidth*9.60},1.5) -- ({\segmentwidth*9.60},0.3)
+    node[at start, above, timeline_event] {1868:~Commercial yeast};
+  \draw[line width=1pt] ({\segmentwidth*7.8},2) -- ({\segmentwidth*7.8},0.3)
+    node[at start, above, timeline_event] {1680:~Discovery of microorganisms};
+
+  \draw[line width=1pt] ({\segmentwidth*8.80},-1.25) -- ({\segmentwidth*8.80},-0.3)
+    node[at start, left, timeline_event] {1785:~Steam mill};
+  \draw[line width=1pt] ({\segmentwidth*9.57},-1.75) -- ({\segmentwidth*9.57},-0.3)
+    node[at start, left, timeline_event] {1857:~Isolated Yeast};
+  \draw[line width=1pt] ({\segmentwidth*9.80},-2.25) -- ({\segmentwidth*9.80},-0.3)
+    node[at start, left, timeline_event] {1885:~Electrical mixer};
+  \draw[line width=1pt] ({\segmentwidth*11.20},-2.75) -- ({\segmentwidth*11.20},-0.3)
+    node[at start, left, timeline_event] {2020:~COVID-19 Pandemic};
+
+  % Indicators for period
+  % Draw millenary and century separators
+  \foreach \i/\century in {0/-12000, 1/-10000, 2/-8000, 3/-6000, 4/-4000, 5/-2000}{
+      % Separators
+      \draw[line width=1pt, color=hlorange] (\i*\segmentwidth,0.1) -- (\i*\segmentwidth,-0.1);
+      % Events for timeline
+      \node[timeline_event, below, text=hlorange] at ({(\i)*\segmentwidth},-0.1) {\num{\century}};
+  }
+  \foreach \i/\century in {6/0, 7/1600, 8/1700, 9/1800, 10/1900, 11/2000, 12/2100}{
+      % Separators
+      \draw[line width=1pt] (\i*\segmentwidth,0.1) -- (\i*\segmentwidth,-0.1);
+      % Events for timeline
+      \node[timeline_event, below] at ({(\i)*\segmentwidth},-0.1) {\num{\century}};
+  }
+\end{tikzpicture}
