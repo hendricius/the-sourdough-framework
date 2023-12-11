@@ -49,22 +49,6 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET_BOOK }}
           source_dir: book/release
           destination_dir: release
-      - name: Bake the website
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.IMAGE }}
-          options: -v ${{ github.workspace }}:/app
-          run: |
-            cd /app/book
-            make website
-      - name: Release baked website to S3
-        uses: shallwefootball/s3-upload-action@master
-        with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
-          source_dir: website/static_website_html
-          destination_dir: static_html_root
       - name: Upload book Artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -73,6 +57,22 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
+      - name: Bake the website
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ env.IMAGE }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make mrproper && make website
+      - name: Release baked website to S3
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
+          source_dir: website/static_website_html
+          destination_dir: static_html_root
       - name: Upload website Artifacts
         uses: actions/upload-artifact@v3
         with:
