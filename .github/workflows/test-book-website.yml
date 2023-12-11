@@ -40,14 +40,6 @@ jobs:
           run: |
             cd /app/book
             make -j build_serif_pdf build_ebook
-      - name: Test building website
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.IMAGE }}
-          options: -v ${{ github.workspace }}:/app
-          run: |
-            cd /app/book
-            make -j website
       - name: Upload book Artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -56,6 +48,14 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
+      - name: Test building website
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ env.IMAGE }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make mrproper && make website
       - name: Upload website Artifacts
         uses: actions/upload-artifact@v3
         with:

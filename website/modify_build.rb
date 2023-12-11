@@ -5,6 +5,8 @@ require 'nokogiri'
 # several optimisations on the HTML. Nokogiri is used to facilitate the
 # modifications.
 
+class InvalidWebsiteFormat < StandardError; end
+
 class ModifyBuild
   HOST = "https://www.the-sourdough-framework.com".freeze
 
@@ -15,6 +17,8 @@ class ModifyBuild
   def build
     build_latex_html
     create_sitemap
+  rescue InvalidWebsiteFormat => e
+    raise e
   end
 
   private
@@ -42,6 +46,7 @@ class ModifyBuild
 
   def modify_file(filename)
     orig_text = File.read(filename, encoding: "UTF-8")
+    validate_file(orig_text)
     text = fix_double_slashes(orig_text)
     text = fix_navigation_bar(text)
     text = fix_titles(text)
@@ -99,6 +104,18 @@ class ModifyBuild
 
   def fix_double_slashes(text)
     text.gsub(/\/\//, "/")
+  end
+
+  # Sometimes for whatever reason the make4ht input produces files that are
+  # improperly formatted. This validator will go through the files and do a
+  # couple of basic checks to see if the files are in the format we expect. If
+  # not an exception is caused.
+  def validate_file(text)
+    doc = build_doc(text)
+    stylesheets = doc.css("link[rel='stylesheet']").map{|attr| attr["href"] }
+    has_all_styles = %w(book.css style.css).all? { |required_stylesheet| stylesheets.include?(required_stylesheet) }
+    raise InvalidWebsiteFormat.new("No style tag style.css found in the website") unless has_all_styles
+    true
   end
 
   def fix_navigation_bar(text)
