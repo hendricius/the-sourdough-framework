@@ -47,7 +47,7 @@ jobs:
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make -j website
+            make website
       - name: Upload book Artifacts
         uses: actions/upload-artifact@v3
         with:
