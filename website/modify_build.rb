@@ -76,7 +76,7 @@ class ModifyBuild
   end
 
   def is_list_figures_tables?(filename)
-    ["listfigurename.html", "listtablename.html", "listoflocname.html"].any? do |name|
+    ["listfigurename.html", "listtablename.html", "listoflocname.html", "bibname.html"].any? do |name|
       filename.include?(name)
     end
   end
@@ -258,6 +258,21 @@ class ModifyBuild
       <span class="chapterToc flowcharts-menu">
         <a href="listoflocname.html">
           <span class="link_text">List of Flowcharts</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="listtablename.html">
+          <span class="link_text">List of Tables</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="listfigurename">
+          <span class="link_text">List of Figures</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="bibname.html">
+          <span class="link_text">Bibliography</span>
         </a>
       </span>
       <span class="chapterToc">
