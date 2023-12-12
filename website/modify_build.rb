@@ -245,7 +245,9 @@ class ModifyBuild
   # Users are lost and can't easily access the root page of the book. This
   # adds a home menu item.
   def add_home_link_to_menu(text)
-    doc = build_doc(text)
+    # Remove duplicate menu entries first before building clean menu
+    doc = build_doc(remove_duplicate_entries_menu(text))
+
     menu = doc.css(".menu-items")[0]
     return text if menu.nil?
 
@@ -266,7 +268,7 @@ class ModifyBuild
         </a>
       </span>
       <span class="chapterToc">
-        <a href="listfigurename">
+        <a href="listfigurename.html">
           <span class="link_text">List of Figures</span>
         </a>
       </span>
@@ -289,6 +291,18 @@ class ModifyBuild
       </span>
     }
     menu.inner_html = "#{home_html} #{menu.inner_html} #{appendix_html}"
+    doc.to_html
+  end
+
+  # Some of the menu links are added in the wrong order. Remove them since we
+  # later on add them in the structure that we want.
+  def remove_duplicate_entries_menu(text)
+    doc = build_doc(text)
+    remove = ["List of Tables", "List of Figures"]
+    selected_elements = doc.css(".menu-items .chapterToc > a").select do |el|
+      remove.include?(el.text)
+    end
+    selected_elements.each(&:remove)
     doc.to_html
   end
 
