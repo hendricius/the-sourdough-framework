@@ -1,14 +1,14 @@
-\begin{tikzpicture}[node distance = 3cm, auto]
+\begin{tikzpicture}[node distance = 3.2cm, auto]
   \node [start] (init) {Ready starter};
-  \node [block, right of=init, node distance=3cm] (mix_ingredients) {Mix ingredients};
-  \node [block, right of=mix_ingredients, node distance=3cm] (dough_strength) {Create dough strength};
-  \node [block, right of=dough_strength, node distance=3cm] (bulk) {Bulk ferment};
-  \node [decision, below of=dough_strength, node distance=3cm] (divide_test) {Making 1 loaf?};
-  \node [block, left of=divide_test, node distance=3cm] (divide) {Divide};
-  \node [block, left of=divide, node distance=3cm] (preshape) {Preshape};
-  \node [block, below of=preshape, node distance=3cm] (shape) {Shape};
-  \node [block, right of=shape, node distance=3cm] (proof) {Proof};
-  \node [success, right of=proof, node distance=3cm] (bake) {Bake};
+  \node [block, right of=init] (mix_ingredients) {Mix ingredients};
+  \node [block, right of=mix_ingredients] (dough_strength) {Create dough strength};
+  \node [block, right of=dough_strength] (bulk) {Bulk ferment};
+  \node [decision, below of=bulk] (divide_test) {Making one loaf?};
+  \node [block, right of=divide_test] (divide) {Divide};
+  \node [block, below of=divide] (preshape) {Preshape};
+  \node [block, below of=divide_test] (shape) {Shape};
+  \node [block, left of=shape] (proof) {Proof};
+  \node [success, left of=proof] (bake) {Bake};
   \path [line] (init) -- (mix_ingredients);
   \path [line] (mix_ingredients) -- (dough_strength);
   \path [line] (dough_strength) -- (bulk);

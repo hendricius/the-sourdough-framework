@@ -5,6 +5,8 @@ require 'nokogiri'
 # several optimisations on the HTML. Nokogiri is used to facilitate the
 # modifications.
 
+class InvalidWebsiteFormat < StandardError; end
+
 class ModifyBuild
   HOST = "https://www.the-sourdough-framework.com".freeze
 
@@ -15,6 +17,8 @@ class ModifyBuild
   def build
     build_latex_html
     create_sitemap
+  rescue InvalidWebsiteFormat => e
+    raise e
   end
 
   private
@@ -27,7 +31,7 @@ class ModifyBuild
       html_file_name = fn.split("/")[-1]
       content += "#{HOST}/#{html_file_name}\n"
     end
-    File.open("#{build_dir}/sitemap.txt", 'w') { |file| file.write(content) }
+    File.open("#{build_dir}/sitemap.txt", 'w:UTF-8') { |file| file.write(content) }
   end
 
   def build_latex_html
@@ -41,7 +45,8 @@ class ModifyBuild
   end
 
   def modify_file(filename)
-    orig_text = File.read(filename)
+    orig_text = File.read(filename, encoding: "UTF-8")
+    validate_file(orig_text)
     text = fix_double_slashes(orig_text)
     text = fix_navigation_bar(text)
     text = fix_titles(text)
@@ -58,9 +63,10 @@ class ModifyBuild
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
+    text = add_anchors_to_headers(text)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
-    File.open(filename, "w") {|file| file.puts text }
+    File.open(filename, "w:UTF-8") {|file| file.puts text }
   end
 
   def is_cover_page?(filename)
@@ -70,7 +76,7 @@ class ModifyBuild
   end
 
   def is_list_figures_tables?(filename)
-    ["listfigurename.html", "listtablename.html", "listoflocname.html"].any? do |name|
+    ["listfigurename.html", "listtablename.html", "listoflocname.html", "bibname.html"].any? do |name|
       filename.include?(name)
     end
   end
@@ -98,6 +104,18 @@ class ModifyBuild
 
   def fix_double_slashes(text)
     text.gsub(/\/\//, "/")
+  end
+
+  # Sometimes for whatever reason the make4ht input produces files that are
+  # improperly formatted. This validator will go through the files and do a
+  # couple of basic checks to see if the files are in the format we expect. If
+  # not an exception is caused.
+  def validate_file(text)
+    doc = build_doc(text)
+    stylesheets = doc.css("link[rel='stylesheet']").map{|attr| attr["href"] }
+    has_all_styles = %w(book.css style.css).all? { |required_stylesheet| stylesheets.include?(required_stylesheet) }
+    raise InvalidWebsiteFormat.new("No style tag style.css found in the website") unless has_all_styles
+    true
   end
 
   def fix_navigation_bar(text)
@@ -227,7 +245,9 @@ class ModifyBuild
   # Users are lost and can't easily access the root page of the book. This
   # adds a home menu item.
   def add_home_link_to_menu(text)
-    doc = build_doc(text)
+    # Remove duplicate menu entries first before building clean menu
+    doc = build_doc(remove_duplicate_entries_menu(text))
+
     menu = doc.css(".menu-items")[0]
     return text if menu.nil?
 
@@ -240,6 +260,21 @@ class ModifyBuild
       <span class="chapterToc flowcharts-menu">
         <a href="listoflocname.html">
           <span class="link_text">List of Flowcharts</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="listtablename.html">
+          <span class="link_text">List of Tables</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="listfigurename.html">
+          <span class="link_text">List of Figures</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="bibname.html">
+          <span class="link_text">Bibliography</span>
         </a>
       </span>
       <span class="chapterToc">
@@ -256,6 +291,18 @@ class ModifyBuild
       </span>
     }
     menu.inner_html = "#{home_html} #{menu.inner_html} #{appendix_html}"
+    doc.to_html
+  end
+
+  # Some of the menu links are added in the wrong order. Remove them since we
+  # later on add them in the structure that we want.
+  def remove_duplicate_entries_menu(text)
+    doc = build_doc(text)
+    remove = ["List of Tables", "List of Figures"]
+    selected_elements = doc.css(".menu-items .chapterToc > a").select do |el|
+      remove.include?(el.text)
+    end
+    selected_elements.each(&:remove)
     doc.to_html
   end
 
@@ -370,15 +417,17 @@ class ModifyBuild
 
   def mark_menu_as_selected_if_on_page(text, filename)
     doc = build_doc(text)
+    return doc.to_html
+
     selected = doc.css(".menu-items .chapterToc > a").find do |el|
       el["href"] == ""
     end
 
     # Special case for index page
-    if ["index.html", "book.html"].include?(filename)
-      doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
-      return doc.to_html
-    end
+    #if ["index.html", "book.html"].include?(filename)
+    #  doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
+    #  return doc.to_html
+    #end
 
     # Special case for the flowcharts page which is added by us to the menu.
     # This needs to be done for future manually added pages too
@@ -501,7 +550,9 @@ class ModifyBuild
 
     <p class="noindent">
       EPUB: <a href="https://www.the-bread-code.io/book.epub">https://www.the-bread-code.io/book.epub</a><br>
+      EPUB in Black & White, size optimized for screen readers : <a href="https://www.the-bread-code.io/bw-book.epub">https://www.the-bread-code.io/bw-book.epub</a><br>
     </p>
+
 
     <p class="noindent">
       The full source code of the book can be found here:
@@ -560,6 +611,20 @@ class ModifyBuild
 
   def build_doc(text)
     Nokogiri::HTML(text)
+  end
+
+  def add_anchors_to_headers(text)
+    doc = build_doc(text)
+    content = doc.css(".sectionHead, .subsectionHead")
+    content.each do |el|
+      anchor = el.attribute("id").value
+      # No anchor for whatever reason
+      next unless anchor
+
+      copy_link = %Q{<a href="##{anchor}" class="permalink">🔗</a>}
+      el.inner_html = "#{el.inner_html}#{copy_link}"
+    end
+    doc.to_html
   end
 end
 
