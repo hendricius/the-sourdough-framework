@@ -8,7 +8,7 @@ DOCKER_CMD := docker run -it -v $(PWD):/opt/repo --platform linux/x86_64 $(DOCKE
 
 # Dockers targets
 build_docker_image:
-	docker build -t $(DOCKER_IMAGE) -f Dockerfile --progress=plain .
+	docker build -t $(DOCKER_IMAGE) -f Dockerfile --progress=plain --rm .
 
 push_docker_image: build_docker_image
 	docker push $(DOCKER_IMAGE):latest
