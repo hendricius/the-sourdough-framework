@@ -10,7 +10,7 @@ RUN cat /etc/*release*
 
 # Install base depdendencies
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install --yes -y --no-install-recommends \
+    apt-get install --yes -y --no-install-recommends \
     sudo \
     make \
     tidy \
@@ -42,7 +42,7 @@ RUN apt-get update && \
 
 # Install TeX
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
     texlive-full \
     texlive-luatex
 
