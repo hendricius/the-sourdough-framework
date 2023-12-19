@@ -1,0 +1,60 @@
+name: Test book and website for given image
+
+on:
+  workflow_call:
+    inputs:
+      docker-image:
+        required: true
+        type: string
+
+jobs:
+  test-book-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up git repository
+        uses: actions/checkout@v3
+      - name: Print dependency versions
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ inputs.docker-image }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make show_tools_version
+      - name: Print build variables
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ inputs.docker-image }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make printvars
+      - name: Test baking the release versions
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ inputs.docker-image }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make -j build_serif_pdf build_ebook
+      - name: Upload book Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: books
+          path: |
+            book/book_serif/book.log
+            book/book_serif/book.pdf
+            book/book-epub/book.epub
+      - name: Test building website
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ inputs.docker-image }}
+          options: -v ${{ github.workspace }}:/app
+          run: |
+            cd /app/book
+            make mrproper && make website
+      - name: Upload website Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: website/static_website_html
