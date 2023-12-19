@@ -1,17 +1,14 @@
-name: Test building book and website
+name: Test book and website for given image
 
 on:
-  pull_request:
-
-env:
-  IMAGE: ghcr.io/${{ github.repository }}:${{ github.event.pull_request.head.ref }}
+  workflow_call:
+    inputs:
+      docker-image:
+        required: true
+        type: string
 
 jobs:
-  build-and-push-image:
-    uses: ./.github/workflows/docker-build-push.yml
-
-  test-building-book-website:
-    needs: build-and-push-image
+  test-book-website:
     runs-on: ubuntu-latest
     steps:
       - name: Set up git repository
@@ -19,7 +16,7 @@ jobs:
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ inputs.docker-image }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -27,7 +24,7 @@ jobs:
       - name: Print build variables
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ inputs.docker-image }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -35,7 +32,7 @@ jobs:
       - name: Test baking the release versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ inputs.docker-image }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -51,7 +48,7 @@ jobs:
       - name: Test building website
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ inputs.docker-image }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
