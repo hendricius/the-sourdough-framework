@@ -251,7 +251,7 @@ class ModifyBuild
     menu = doc.css(".menu-items")[0]
     return text if menu.nil?
 
-    home_html = %Q{<span class="chapterToc home-link"><a href="/">Home</a></span>}
+    home_html = %Q{<span class="chapterToc home-link"><a href="/">The Sourdough Framework</a></span>}
     # Normally the flowcharts link should be automatically added, but there
     # seems to be a problem in the generation. See:
     # https://github.com/hendricius/the-sourdough-framework/pull/188 for more
@@ -278,15 +278,33 @@ class ModifyBuild
         </a>
       </span>
       <span class="chapterToc">
-        <a href="https://breadco.de/kofi">
-          <span class="chapter_number">⭐️</span>
-          <span class="link_text">Donate</span>
+        <a href="https://www.the-bread-code.io/book.pdf">
+          <span class="chapter_number">⬇️</span>
+          <span class="link_text">Book .PDF</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="https://www.the-bread-code.io/book.epub">
+          <span class="chapter_number">⬇️</span>
+          <span class="link_text">Book .EPUB</span>
         </a>
       </span>
       <span class="chapterToc">
         <a href="https://breadco.de/hardcover-book">
           <span class="chapter_number">📚</span>
           <span class="link_text">Hardcover Book</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="https://www.github.com/hendricius/the-sourdough-framework">
+          <span class="chapter_number">⚙️</span>
+          <span class="link_text">Source code</span>
+        </a>
+      </span>
+      <span class="chapterToc">
+        <a href="https://breadco.de/kofi">
+          <span class="chapter_number">⭐️</span>
+          <span class="link_text">Donate</span>
         </a>
       </span>
     }
