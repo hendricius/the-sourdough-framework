@@ -143,9 +143,7 @@ nav.TOC a, nav.TOC a:visited{
 
 
 body{
-  background-color:#F8F8F8;
-  background: url("bg.jpg") center center no-repeat;
-  background-size: cover;
+  background-color: var(--c-black);
 }
 
 a {
@@ -240,6 +238,14 @@ figcaption.caption {
   text-decoration: none;
 }
 
+.home-link {
+  display: block;
+}
+
+.home-title {
+  display: block;
+}
+
 @media (max-width: 768px) {
   .toggle-menu-label {
     display: block;
@@ -308,6 +314,10 @@ figcaption.caption {
 
   .chapterToc a, .sectionToc a, .subsectionToc a, .likechapterToc a {
     padding-left: 17px;
+  }
+
+  .menu-items .chapterToc.home-link {
+    display: none;
   }
 
   .home-title {
