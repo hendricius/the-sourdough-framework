@@ -64,6 +64,7 @@ class ModifyBuild
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
     text = add_anchors_to_headers(text)
+    text = fix_https_links(text)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w:UTF-8") {|file| file.puts text }
@@ -643,6 +644,12 @@ class ModifyBuild
       el.inner_html = "#{el.inner_html}#{copy_link}"
     end
     doc.to_html
+  end
+
+  # For some reason some of the links are broken in the conversion process.
+  # They have https:/www and are missing a slash.
+  def fix_https_links(text)
+    text.gsub("https:/www", "https://www")
   end
 end
 
