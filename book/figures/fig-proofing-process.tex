@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [decision_start] (init) {Room temperature proofing?};
+  \node [decision_start] (init) {Room temperature-proofing?};
   \node [decision, right of=init, node distance=8cm] (retard_bake_decision) {Bake in less than  \qty{10}{\hour} from now?};
   \node [block, below of=init, node distance=4cm] (poke) {Poke the dough};
   \node [block, left of=poke] (wait_poke) {Wait\\ 15~minutes};
