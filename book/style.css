@@ -11,6 +11,7 @@
   --fs-xl: 24px;
   --fs-l: 22px;
   --fs-m: 16px;
+  --padding-hamburger: 5px;
 }
 
 @media (min-width: 1200px){
@@ -62,16 +63,20 @@ main.main-content,main.titlepage,div.footnotes{
   padding:1rem;
 }
 
-.sectionHead a.permalink {
+.permalink {
   opacity: 0.5;
   text-decoration: none;
   font-size: 0.75rem;
-  vertical-align: top;
   line-height: 0.8rem;
   margin-left: 0.25rem;
-  padding-top: 0.2rem;
   color: black;
   display: inline-block;
+}
+
+.sectionHead, .subsectionHead {
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 
 p.indent, p.noindent{
@@ -139,9 +144,7 @@ nav.TOC a, nav.TOC a:visited{
 
 
 body{
-  background-color:#F8F8F8;
-  background: url("bg.jpg") center center no-repeat;
-  background-size: cover;
+  background-color: var(--c-black);
 }
 
 a {
@@ -236,6 +239,14 @@ figcaption.caption {
   text-decoration: none;
 }
 
+.home-link {
+  display: block;
+}
+
+.home-title {
+  display: block;
+}
+
 @media (max-width: 768px) {
   .toggle-menu-label {
     display: block;
@@ -245,7 +256,8 @@ figcaption.caption {
 
   .hamb{
     cursor: pointer;
-    padding: 5px;
+    padding: var(--padding-hamburger);
+    margin-right: calc(var(--padding-hamburger) * -1);
     display: flex;
     align-items: center;
     align-content: center;
@@ -280,7 +292,7 @@ figcaption.caption {
   .menu {
     background: var(--c-black);
     display: flex;
-    padding: 10px 0px;
+    padding: 10px 1rem;
     position: relative;
     align-items: center;
     justify-content: space-between;
@@ -299,11 +311,14 @@ figcaption.caption {
     color: #000;
     font-size: 20px;
     font-weight: bold;
-    padding-left: 17px;
   }
 
   .chapterToc a, .sectionToc a, .subsectionToc a, .likechapterToc a {
     padding-left: 17px;
+  }
+
+  .menu-items .chapterToc.home-link {
+    display: none;
   }
 
   .home-title {
