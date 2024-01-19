@@ -649,7 +649,7 @@ class ModifyBuild
   # For some reason some of the links are broken in the conversion process.
   # They have https:/www and are missing a slash.
   def fix_https_links(text)
-    text.gsub("https:/www", "https://www")
+    text.gsub(/https:\/(?!\/)/, 'https://')
   end
 end
 
