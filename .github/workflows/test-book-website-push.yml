@@ -1,0 +1,14 @@
+name: Test building book and website with default image
+
+on:
+  push:
+
+jobs:
+  build-and-push-image:
+    uses: ./.github/workflows/docker-build-push.yml
+
+  test-building-book-website:
+    needs: build-and-push-image
+    uses: ./.github/workflows/test-book-website.yml
+    with:
+      docker-image: ghcr.io/${{ github.repository }}:latest

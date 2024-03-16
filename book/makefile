@@ -49,9 +49,11 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 # images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
-src_all := $(src_tex) $(src_figures) $(src_tables) tex4ebook.cfg book.mk4 $(images)
+src_all := $(src_tex) $(src_figures) $(src_tables) $(images)
 
-website_src := $(src_all) website.cfg
+ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
+
+website_src := $(src_all) website.cfg style.css
 
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
@@ -89,7 +91,7 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 
 .PHONY: copy_ebook_files
 
-epub/%.epub: %.tex $(src_all) cover/cover-page.xbb
+epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook

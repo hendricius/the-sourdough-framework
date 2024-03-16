@@ -7,3 +7,12 @@
     object-fit: contain;
     width: auto;
 }
+.float {
+    max-width: 100%;
+}
+.float img {
+    max-width: 100% !important;
+    height: auto;
+    object-fit: contain;
+    width: auto;
+}
