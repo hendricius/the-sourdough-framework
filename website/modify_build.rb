@@ -64,6 +64,7 @@ class ModifyBuild
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
     text = add_anchors_to_headers(text)
+    text = add_anchors_to_glossary_items(text) if is_glossary_page?(filename)
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w:UTF-8") {|file| file.puts text }
@@ -73,6 +74,10 @@ class ModifyBuild
     ["book.html", "index.html"].any? do |name|
       filename.include?(name)
     end
+  end
+
+  def is_glossary_page?(filename)
+    filename.include?("Glossary.html")
   end
 
   def is_list_figures_tables?(filename)
@@ -477,6 +482,23 @@ class ModifyBuild
 
     content.add_class("main-content")
     content.inner_html = "#{build_cover_page_content} #{content.inner_html}"
+    doc.to_html
+  end
+
+  def add_anchors_to_glossary_items(text)
+    doc = build_doc(text)
+    content = doc.css("dt.description")
+    content.each do |el|
+      term = el.css("span")[0]
+      item_name = term&.text
+      # No anchor for whatever reason
+      next unless item_name
+
+      anchor = item_name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+      copy_link = %Q{<a href="#term-#{anchor}" class="permalink">🔗</a>}
+      el.set_attribute("id", "term-#{anchor}")
+      term.inner_html = "#{term.inner_html}#{copy_link}"
+    end
     doc.to_html
   end
 
