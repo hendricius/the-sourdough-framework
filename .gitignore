@@ -15,6 +15,7 @@
 *.dlog
 *.bak
 *.opf
+.DS_Store
 book/book.out
 .vscode/
 book/bookch*
