@@ -52,20 +52,25 @@ class ModifyBuild
     text = fix_titles(text)
     text = fix_menu(text)
     text = fix_cover_page(text) if is_cover_page?(filename)
+    text = add_header_banner(text)
     text = add_home_link_to_menu(text)
     text = fix_anchor_hyperlinks_menu(text)
     text = add_favicon(text)
     text = add_meta_tags(text, filename)
     text = remove_section_table_of_contents(text)
-    text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = add_canonical_for_duplicates(text, extract_file_from_path(filename))
     text = include_javascript(text)
     text = add_text_to_coverpage(text, extract_file_from_path(filename))
     text = fix_js_dependency_link(text)
     text = fix_list_of_tables_figures_duplicates(text)
     text = add_anchors_to_headers(text)
-    text = fix_https_links(text)
+    text = create_menu_groups(text)
+    text = fix_top_links(text)
+    text = fix_flowchart_background(text)
+    text = remove_empty_menu_links(text)
+    text = fix_bottom_cross_links(text)
     text = add_anchors_to_glossary_items(text) if is_glossary_page?(filename)
+    text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w:UTF-8") {|file| file.puts text }
@@ -150,6 +155,45 @@ class ModifyBuild
       n.inner_html = content
     end
     doc.to_html
+  end
+
+  def create_menu_groups(text)
+    doc = build_doc(text)
+    groups = build_groups(doc.css(".menu-items > span"))
+    menu_el = doc.css(".menu-items")[0]
+    html = ""
+    groups.each do |group|
+      out = ""
+      group.each do |g|
+        if g.to_html.length > 0
+          out += %Q{<div class="menu-entry">#{g.to_html}</div>}
+        end
+      end
+      html += %Q{<div class="menu-group">
+        <div class="menu-inner">
+          #{out}
+        </div>
+        <img class="menu-arrow" src="arrow.png" />
+      </div>}
+    end
+    menu_el.inner_html = html
+    doc.to_html
+  end
+
+  def build_groups(menu_items)
+    final_groups = []
+    tmp_groups = []
+    menu_items.each_with_index do |el, index|
+      # Get next item and check if it is a lower entry level in the menu.
+      next_item = menu_items[index + 1]
+      if next_item && next_item["class"].include?("chapterToc") || next_item.nil?
+        final_groups.push(tmp_groups.push(el))
+        tmp_groups = []
+      else
+        tmp_groups.push(el)
+      end
+    end
+    final_groups
   end
 
   # By default the titles look boring. This changes the titles of all the
@@ -257,7 +301,7 @@ class ModifyBuild
     menu = doc.css(".menu-items")[0]
     return text if menu.nil?
 
-    home_html = %Q{<span class="chapterToc home-link"><a href="/">The Sourdough Framework</a></span>}
+    home_html = %Q{<span class="chapterToc home-link"><a href="/">🍞 The Sourdough Framework</a></span>}
     # Normally the flowcharts link should be automatically added, but there
     # seems to be a problem in the generation. See:
     # https://github.com/hendricius/the-sourdough-framework/pull/188 for more
@@ -268,12 +312,12 @@ class ModifyBuild
           <span class="link_text">List of Flowcharts</span>
         </a>
       </span>
-      <span class="chapterToc">
+      <span class="chapterToc listtables-menu">
         <a href="listtablename.html">
           <span class="link_text">List of Tables</span>
         </a>
       </span>
-      <span class="chapterToc">
+      <span class="chapterToc listfigures-menu">
         <a href="listfigurename.html">
           <span class="link_text">List of Figures</span>
         </a>
@@ -316,6 +360,38 @@ class ModifyBuild
     }
     menu.inner_html = "#{home_html} #{menu.inner_html} #{appendix_html}"
     doc.to_html
+  end
+
+  # Adds a header banner to each page
+  def add_header_banner(text)
+    doc = build_doc(text)
+    body = doc.css("body")[0]
+    footnotes = doc.css(".footnotes")[0]
+    main = doc.css(".main-content")[0]
+    menu = doc.css(".menu")[0]
+    if main.nil? || menu.nil?
+      #raise ArgumentError.new("Don't know how to handle")
+      return doc.to_html
+    end
+    body.inner_html = %Q{
+      <div class='wrapper'>
+        #{build_header_html}
+        <div class='book-content'>
+          #{menu.to_html}
+          <main class='main-content'>
+            #{main.inner_html}
+            #{footnotes ? footnotes.to_html : ''}
+          </main>
+        </div>
+      </div>
+    }
+    return doc.to_html
+  end
+
+  def build_header_html
+    %Q{
+      <div class="header"><img src="banner.png"></div>
+    }
   end
 
   # Some of the menu links are added in the wrong order. Remove them since we
@@ -441,7 +517,6 @@ class ModifyBuild
 
   def mark_menu_as_selected_if_on_page(text, filename)
     doc = build_doc(text)
-    return doc.to_html
 
     selected = doc.css(".menu-items .chapterToc > a").find do |el|
       el["href"] == ""
@@ -456,7 +531,17 @@ class ModifyBuild
     # Special case for the flowcharts page which is added by us to the menu.
     # This needs to be done for future manually added pages too
     if "listoflocname.html" == filename
-      doc.css(".menu-items .chapterToc.flowcharts-menu")[0].add_class("selected")
+      doc.css(".menu-items .chapterToc.flowcharts-menu")[0].ancestors(".menu-group")[0].add_class("selected")
+      return doc.to_html
+    end
+
+    if "listtablename.html" == filename
+      doc.css(".menu-items .chapterToc.listtables-menu")[0].ancestors(".menu-group")[0].add_class("selected")
+      return doc.to_html
+    end
+
+    if "listfigurename.html" == filename
+      doc.css(".menu-items .chapterToc.listfigures-menu")[0].ancestors(".menu-group")[0].add_class("selected")
       return doc.to_html
     end
 
@@ -465,7 +550,7 @@ class ModifyBuild
     # Fix that when the menu is selected the href is empty. This way users can
     # click the menu and the page will reload.
     selected["href"] = filename
-    selected.parent.add_class("selected")
+    selected.ancestors(".menu-group")[0].add_class("selected")
     doc.to_html
   end
 
@@ -627,13 +712,10 @@ class ModifyBuild
   # this.
   def fix_menus_list_figures_tables(text)
     doc = build_doc(text)
-    content = doc.css(".menu-items > .subsectionToc, .menu-items > .sectionToc")
+    content = doc.css(".menu-group .subsectionToc, .menu-group .sectionToc")
     content.each do |node|
-      node.remove
+      node.ancestors(".menu-entry")[0].remove
     end
-    doc.css(".menu-items > .lotToc").each(&:remove)
-    doc.css(".menu-items > .lofToc").each(&:remove)
-    doc.css(".menu-items > br").each(&:remove)
     doc.to_html
   end
 
@@ -672,6 +754,56 @@ class ModifyBuild
   # They have https:/www and are missing a slash.
   def fix_https_links(text)
     text.gsub(/https:\/(?!\/)/, 'https://')
+  end
+
+  def fix_top_links(text)
+    doc = build_doc(text)
+    el = doc.css(".crosslinks-top")[0]
+    el.remove if el
+    doc.to_html
+  end
+
+  def remove_empty_menu_links(text)
+    doc = build_doc(text)
+    menus = doc.css(".menu-group")
+    menus.each do |m|
+      element = m.css("span.chapterToc")[0]
+      next unless element
+      if element.inner_html == "" || element.inner_html == " "
+        m.remove
+      end
+    end
+    doc.to_html
+  end
+
+  def fix_flowchart_background(text)
+    doc = build_doc(text)
+    images = doc.css("img")
+    images.each do |img|
+      src = img.attr("src")
+      is_flowchart = src.include?(".svg")
+      next unless is_flowchart
+      img.parent.add_class("flowchart-image-wrapper")
+
+    end
+    doc.to_html
+  end
+
+  def fix_bottom_cross_links(text)
+    doc = build_doc(text)
+    link_cont = doc.css(".crosslinks-bottom")[0]
+    return doc.to_html unless link_cont
+
+    links = doc.css(".crosslinks-bottom a")
+    prev_link = links.find {|l| l.inner_html == "prev" }
+    next_link = links.find {|l| l.inner_html == "next" }
+    prev_html = prev_link ? "<a class='prev' href='#{prev_link.attr('href')}'>Previous page</a>" : ''
+    next_html = next_link ? "<a class='next' href='#{next_link.attr('href')}'>Next page</a>" : ''
+    link_cont.inner_html = %Q{
+      #{prev_html}
+      #{next_html}
+    }
+    doc.to_html
   end
 end
 
