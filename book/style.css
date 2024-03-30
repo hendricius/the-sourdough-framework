@@ -429,6 +429,16 @@ body {
 .book-content {
   display: flex;
   padding: 0px 40px;
+  max-width: 1200px;
+}
+
+.TOC.menu {
+  width: 330px;
+}
+
+.main-content {
+  width: 100%;
+  margin-bottom: 40px;
 }
 
 nav.TOC, nav.TOC a, nav.TOC a:visited {
@@ -456,7 +466,7 @@ nav.TOC, nav.TOC a, nav.TOC a:visited {
 .menu-arrow {
   width: 14px;
   border: none;
-  border-radius: none;
+  border-radius: 0px;
 }
 
 nav.TOC span:hover, nav.TOC span:hover *, nav.TOC span.chapterToc.selected, nav.TOC span.chapterToc.selected a {
@@ -504,4 +514,75 @@ blockquote {
 
 .menu-group.selected .menu-inner {
   background-color: #c8c8c8;
+}
+
+.TOC.menu {
+  margin-bottom: 40px;
+}
+
+.mobile-banner {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    display: none;
+  }
+
+  .book-content {
+    padding: 0px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0px;
+    box-sizing: border-box;
+    padding: 0px 14px;
+    margin-top: 20px;
+    max-width: 100%;
+  }
+
+  .TOC.menu {
+    width: 100%;
+    max-width: 100%;
+    background: var(--c-black-background);
+    box-sizing: border-box;
+  }
+
+  nav.TOC, nav.TOC a, nav.TOC a:visited {
+    color: #fff;
+  }
+  .menu-arrow {
+    display: none;
+  }
+
+  .menu-inner {
+    border: none;
+    border-radius: 0px;
+  }
+
+  .menu-group.selected .menu-inner {
+    background: var(--c-black-background);
+  }
+
+  p.flowchart-image-wrapper {
+    padding: 0px;
+  }
+
+  .menu-entry:hover {
+    background-color: transparent;
+  }
+
+  .TOC.menu {
+    margin-bottom: 0px;
+  }
+
+  .mobile-banner {
+    display: block;
+    background-color: var(--c-black-background);
+    padding: 5px;
+  }
 }

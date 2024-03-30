@@ -69,6 +69,7 @@ class ModifyBuild
     text = fix_flowchart_background(text)
     text = remove_empty_menu_links(text)
     text = fix_bottom_cross_links(text)
+    text = insert_mobile_header_graphic(text)
     text = add_anchors_to_glossary_items(text) if is_glossary_page?(filename)
     text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
@@ -281,7 +282,7 @@ class ModifyBuild
     content = doc.css("body > .main-content")[0]
     menu = doc.css("body > nav")[0]
     content = %Q{
-      <main class="titlepage">
+      <main class="titlepage main-content">
         <a href="Thehistoryofsourdough.html">
           <img src="cover-page.jpg" />
           <div class="version"><p>#{version}</p></div>
@@ -354,7 +355,7 @@ class ModifyBuild
       <span class="chapterToc">
         <a href="https://breadco.de/kofi">
           <span class="chapter_number">⭐️</span>
-          <span class="link_text">Donate</span>
+          <span class="link_text">Support me</span>
         </a>
       </span>
     }
@@ -581,10 +582,7 @@ class ModifyBuild
   def add_text_to_coverpage(text, filename)
     return text unless is_cover_page?(filename)
     doc = build_doc(text)
-    content = doc.css(".titlepage")[0]
-    raise ArgumentError.new(".titlepage not found in HTML") if content.nil?
-
-    content.add_class("main-content")
+    content = doc.css(".main-content")[0]
     content.inner_html = "#{build_cover_page_content} #{content.inner_html}"
     doc.to_html
   end
@@ -773,6 +771,13 @@ class ModifyBuild
         m.remove
       end
     end
+    doc.to_html
+  end
+
+  def insert_mobile_header_graphic(text)
+    doc = build_doc(text)
+    content = doc.css(".TOC.menu")[0]
+    content.after('<div class="mobile-banner"><img src="banner.png" /></div>')
     doc.to_html
   end
 
