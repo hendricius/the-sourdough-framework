@@ -6,12 +6,15 @@
   --fw-bold: 800;
   --f-lh: 28px;
   --c-black: #282828;
+  --c-black-background: #1c1819;
   --fs-xxxl: 32px;
   --fs-xxl: 26px;
   --fs-xl: 24px;
   --fs-l: 22px;
   --fs-m: 16px;
   --padding-hamburger: 5px;
+  --c-beige: #F3EDE6;
+  --border-radius: 7px;
 }
 
 @media (min-width: 1200px){
@@ -38,6 +41,7 @@ body{
   font-family: var(--ff-sans);
   font-weight: var(--fw-regular);
   font-size: var(--fs-m);
+  color: var(--c-black);
 }
 
 @media screen and (min-width: 57rem) {
@@ -60,7 +64,6 @@ body{
 /* ****************** */
 
 main.main-content,main.titlepage,div.footnotes{
-  padding:1rem;
 }
 
 .permalink {
@@ -144,7 +147,7 @@ nav.TOC a, nav.TOC a:visited{
 
 
 body{
-  background-color: var(--c-black);
+  background-color: var(--c-beige);
 }
 
 a {
@@ -174,6 +177,7 @@ figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figu
 
 .main-content {
   line-height: var(--f-lh);
+  margin-left: 30px;
 }
 
 div.footnotes {
@@ -229,6 +233,7 @@ figcaption.caption {
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 300px;
 }
 
 .menu-items .chapterToc, .menu-items .likechapterToc {
@@ -331,7 +336,7 @@ div.center {
   margin-right: 0 !important;
 }
 
-main.titlepage h2.chapterHead {
+main.main-content h2.chapterHead, main.main-content h2.likechapterHead {
   margin-top: 0px;
 }
 
@@ -378,4 +383,206 @@ h4 {
 .home-bread {
   max-width: 100%;
   margin-top: 1em;
+}
+
+img[alt~="PIC"], iframe, a img {
+  border-radius: var(--border-radius);
+  border: 2px solid var(--c-black);
+}
+
+main.main-content, div.footnotes, main.titlepage {
+  background-color: var(--c-beige);
+}
+
+.main-content {
+  flex: 1;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  background-color: var(--c-black-background);
+  width: 100%;
+  height: 340px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.header img {
+  border-radius: 0px;
+  border: none;
+  width: 710px;
+}
+
+body {
+  display: block;
+}
+
+.book-content {
+  display: flex;
+  padding: 0px 40px;
+  max-width: 1200px;
+}
+
+.TOC.menu {
+  width: 330px;
+}
+
+.main-content {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+nav.TOC, nav.TOC a, nav.TOC a:visited {
+  background-color: transparent;
+  color: var(--c-black);
+}
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-inner {
+  border: 2px solid var(--c-black);
+  border-radius: var(--border-radius);
+  width: 100%;
+}
+
+.menu-entry {
+  padding: 1px;
+  border-radius: var(--border-radius);
+}
+
+.menu-arrow {
+  width: 14px;
+  border: none;
+  border-radius: 0px;
+}
+
+nav.TOC span:hover, nav.TOC span:hover *, nav.TOC span.chapterToc.selected, nav.TOC span.chapterToc.selected a {
+  background-color: transparent;
+}
+
+.menu-entry:hover {
+  background-color: #c8c8c8;
+}
+
+p.flowchart-image-wrapper {
+  background: white;
+  padding: 20px;
+}
+
+.menu-items .menu-group:last-of-type .menu-arrow {
+  display: none;
+}
+
+blockquote {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.crosslinks-bottom {
+  margin-top: 1em;
+}
+
+.crosslinks-bottom a {
+  display: inline-block;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--c-black);
+  color: var(--c-black);
+  padding: 4px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.crosslinks-bottom a.prev {
+  margin-right: 7px;
+}
+
+.crosslinks-bottom a:hover {
+  color: #444;
+}
+
+.menu-group.selected .menu-inner {
+  background-color: #c8c8c8;
+}
+
+.TOC.menu {
+  margin-bottom: 40px;
+}
+
+.mobile-banner {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    display: none;
+  }
+
+  .book-content {
+    padding: 0px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0px;
+    box-sizing: border-box;
+    padding: 0px 14px;
+    margin-top: 20px;
+    max-width: 100%;
+  }
+
+  .TOC.menu {
+    width: 100%;
+    max-width: 100%;
+    background: var(--c-black-background);
+    box-sizing: border-box;
+  }
+
+  nav.TOC, nav.TOC a, nav.TOC a:visited {
+    color: #fff;
+  }
+  .menu-arrow {
+    display: none;
+  }
+
+  .menu-inner {
+    border: none;
+    border-radius: 0px;
+  }
+
+  .menu-group.selected .menu-inner {
+    background: var(--c-black-background);
+  }
+
+  p.flowchart-image-wrapper {
+    padding: 0px;
+  }
+
+  .menu-entry:hover {
+    background-color: transparent;
+  }
+
+  .TOC.menu {
+    margin-bottom: 0px;
+  }
+
+  .mobile-banner {
+    display: block;
+    background-color: var(--c-black-background);
+    padding: 5px;
+  }
 }
