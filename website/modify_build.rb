@@ -512,7 +512,9 @@ class ModifyBuild
       "Sourdoughstartertypes.html" => "og_image_sourdough_starter_types.png",
       "Storingbread.html" => "og_image_storing_bread.png",
       "Thehistoryofsourdough.html" => "og_image_the_history_of_sourdough.png",
-      "Wheatsourdough.html" => "og_image_troubleshooting.png",
+      "Wheatsourdough.html" => "og_image_wheat_sourdough.png",
+      "Troubleshooting.html" => "og_image_troubleshooting.png",
+      "Mixins.html" => "og_image_mixins.png",
     }
   end
 
