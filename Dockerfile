@@ -55,6 +55,10 @@ RUN wget https://github.com/mgieseki/dvisvgm/releases/download/3.1.2/dvisvgm-3.1
     make && \
     make install
 
+RUN git clone https://github.com/michal-h21/make4ht.git && \
+  make && \
+  make install
+
 # Make sure everything is UTF-8
 RUN echo "export LC_ALL=en_US.UTF-8" >> /root/.bashrc && \
     echo "export LANG=en_US.UTF-8" >> /root/.bashrc
