@@ -56,6 +56,7 @@ RUN wget https://github.com/mgieseki/dvisvgm/releases/download/3.1.2/dvisvgm-3.1
     make install
 
 RUN git clone https://github.com/michal-h21/make4ht.git && \
+  cd make4ht && \
   make && \
   make install
 
