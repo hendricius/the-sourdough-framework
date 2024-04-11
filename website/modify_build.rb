@@ -70,6 +70,7 @@ class ModifyBuild
     text = remove_empty_menu_links(text)
     text = fix_bottom_cross_links(text)
     text = insert_mobile_header_graphic(text)
+    text = fix_https_links(text)
     text = add_anchors_to_glossary_items(text) if is_glossary_page?(filename)
     text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
