@@ -222,9 +222,9 @@ clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
 	-rm  book*/*.{bbl,loc,.run.xml}
-	-rm -rf book*-epub/META-INF
-	-rm -rf book*-epub/OEBPS
-	-rm  book*-epub/mimetype
+	-rm -rf *book-epub/META-INF
+	-rm -rf *book-epub/OEBPS
+	-rm  *book-epub/mimetype
 
 mrproper: clean
 	$(CLEAN) -C $(src_figures)
@@ -237,7 +237,7 @@ mrproper: clean
 	-rm -rf release/
 	-rm -rf book_serif/
 	-rm -rf book_sans_serif/
-	-rm -rf book-epub/
+	-rm -rf *book-epub/
 	-rm -rf $(website_dir)
 
 # top level releases rules
