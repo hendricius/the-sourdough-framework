@@ -1,11 +1,9 @@
 name: Test book and website for given image
 
-on:
-  workflow_call:
-    inputs:
-      docker-image:
-        required: true
-        type: string
+on: [push, pull_request]
+
+env:
+  DOCKER_IMAGE: ghcr.io/${{ github.repository }}:latest
 
 jobs:
   test-book-website:
@@ -16,7 +14,7 @@ jobs:
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ inputs.docker-image }}
+          image: ${{ env.DOCKER_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -24,7 +22,7 @@ jobs:
       - name: Print build variables
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ inputs.docker-image }}
+          image: ${{ env.DOCKER_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -32,7 +30,7 @@ jobs:
       - name: Test baking the release versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ inputs.docker-image }}
+          image: ${{ env.DOCKER_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -48,7 +46,7 @@ jobs:
       - name: Test building website
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ inputs.docker-image }}
+          image: ${{ env.DOCKER_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
