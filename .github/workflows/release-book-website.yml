@@ -34,7 +34,6 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-  
 
   release-book-website:
     needs: build-and-push-image
@@ -45,7 +44,7 @@ jobs:
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -53,7 +52,7 @@ jobs:
       - name: Print build variables
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -61,7 +60,7 @@ jobs:
       - name: Bake the book
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -85,7 +84,7 @@ jobs:
       - name: Bake the website
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
