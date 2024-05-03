@@ -480,6 +480,10 @@ nav.TOC span:hover, nav.TOC span:hover *, nav.TOC span.chapterToc.selected, nav.
 p.flowchart-image-wrapper {
   background: white;
   padding: 20px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--c-black);
+  display: flex;
+  justify-content: center;
 }
 
 .menu-items .menu-group:last-of-type .menu-arrow {
