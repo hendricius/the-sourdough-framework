@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {Make a starter};
+  \node [start] (init) {Create a starter};
   \node [decision, right of=init, node distance=3.5cm] (decision_start) {Starter last fed within 3~days?};
   \node [block, right of=decision_start, text width=7em, node distance=4cm] (feed_no_branch)
       {Feed starter twice:\par \qty{48}{\hour} before\par \qtyrange{6}{12}{\hour} before};
