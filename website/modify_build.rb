@@ -629,7 +629,9 @@ class ModifyBuild
        to everyone, I have decided to make it available as a free digital download.
     </p>
 
-    <img alt="One of my best Sourdough Breads" class="home-bread" src="bread.jpg" />
+    <a href="bread.jpg">
+      <img alt="One of my best Sourdough Breads" class="home-bread" src="bread.jpg" />
+    </a>
 
     <p class="noindent">
       However, producing and maintaining resources like this requires
