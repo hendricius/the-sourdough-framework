@@ -589,4 +589,8 @@ blockquote {
     background-color: var(--c-black-background);
     padding: 5px;
   }
+  .mobile-banner a img {
+    border: none;
+    border-radius: 0px;
+  }
 }
