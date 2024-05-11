@@ -87,7 +87,7 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.xbb: %.jpg
 	ebb -x $<
 
-booklet: booklet/booklet.pdf 
+booklet: booklet/booklet.pdf
 
 booklet/booklet.pdf: $(src_all) booklet.tex
 	$(LATEX) -output-directory=booklet booklet.tex
@@ -230,6 +230,7 @@ clean_website_build: clean_ebook_build
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+	$(CLEAN) -output-directory=booklet booklet.tex
 	-rm  book*/*.{bbl,loc,.run.xml}
 	-rm -rf *book-epub/META-INF
 	-rm -rf *book-epub/OEBPS
@@ -239,6 +240,7 @@ mrproper: clean
 	$(CLEAN) -C $(src_figures)
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
+	$(CLEAN) -C -output-directory=booklet booklet.tex
 	-rm figures/*.png
 	-rm *.html
 	-rm *.svg
@@ -246,6 +248,7 @@ mrproper: clean
 	-rm -rf release/
 	-rm -rf book_serif/
 	-rm -rf book_sans_serif/
+	-rm -rf booklet/
 	-rm -rf *book-epub/
 	-rm -rf $(website_dir)
 
@@ -291,6 +294,9 @@ website: html ../website/_bundle_install_done $(ruby_src)
 # They also ignore dependencies and run each time you call them.
 quick:  # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
+
+quick_booklet:
+	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=booklet booklet.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
