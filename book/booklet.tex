@@ -1,0 +1,80 @@
+\documentclass[draft, landscape, paper=a4, twoside=false,
+                fontsize=12pt]{scrbook}
+
+% General packages
+\usepackage{sourdough}
+\usepackage[Verbose]{parallel}
+\usepackage{typearea}
+\usepackage{showframe}
+
+\pagenumbering{gobble}
+% Basic attributes
+\author{Hendrik Kleinwächter}
+\title{The Sourdough Framework\\\texttt{tl;dr Version}}
+\begin{document}
+\maketitle
+
+\section*{Starter Maintenance}
+\begin{flowchart}[!htb]
+\input{figures/fig-starter-readiness.tex}
+\caption*{Preparing your starter for baking}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+\input{figures/fig-starter-maintenance.tex}
+\caption*{Maintaining your starter, change ratio as per starter hydration type}
+\end{flowchart}
+
+\clearpage{}
+\section*{Proofing}
+
+\begin{flowchart}[!htb]
+\input{figures/fig-bulk-fermentation.tex}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+\input{figures/fig-proofing-process.tex}
+\end{flowchart}
+
+\clearpage{}
+
+\section*{Flat Bread}
+\begin{Parallel}[v]{0.48\textwidth}{0.48\textwidth}
+\ParallelLText{\noindent
+\input{recipes/flat-bread.tex}
+}
+\ParallelRText{\noindent
+Some stuff}
+\end{Parallel}
+
+\section*{Kneading and shaping}
+\begin{flowchart}[!htb]
+\input{figures/fig-kneading-process.tex}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+\input{figures/fig-wheat-sourdough-process.tex}
+\end{flowchart}
+\clearpage{}
+
+\section*{Non wheat bread}
+\begin{flowchart}[!htb]
+\input{figures/fig-non-wheat-process.tex}
+\end{flowchart}
+\clearpage{}
+\section*{Baking}
+\begin{flowchart}[!htb]
+\input{figures/fig-baking-process.tex}
+\caption*{Summary of bread bakign process}
+\end{flowchart}
+
+\begin{flowchart*}[!htb]
+\input{figures/fig-dutch-oven-process.tex}
+\caption*{Bakign with a Dutch Oven}
+\end{flowchart*}
+
+\begin{flowchart}[!htb]
+\input{figures/fig-inverted-tray-method.tex}
+\caption*{Bakign with the inverted tray method}
+\end{flowchart}
+\end{document}
