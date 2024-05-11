@@ -55,6 +55,8 @@ ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
 
 website_src := $(src_all) website.cfg style.css
 
+booklet_src := $(src_all) booklet.tex
+
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
 ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
@@ -82,6 +84,11 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
 %.xbb: %.jpg
 	ebb -x $<
+
+booklet: booklet/booklet.pdf 
+
+booklet/booklet.pdf: $(src_all) booklet.tex
+	$(LATEX) -output-directory=booklet booklet.tex
 
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
