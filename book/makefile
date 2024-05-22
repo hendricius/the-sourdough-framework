@@ -87,8 +87,6 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.xbb: %.jpg
 	ebb -x $<
 
-booklet: booklet/booklet.pdf
-
 booklet/booklet.pdf: $(src_all) booklet.tex
 	$(LATEX) -output-directory=booklet booklet.tex
 
@@ -106,7 +104,7 @@ epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 copy_ebook_files: build_ebook
 	$(RSYNC) book-epub/ bw-book-epub/
 
-# We not convert SVG to B&W or lower res for now as they are super small
+# We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
 bw-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
@@ -149,6 +147,8 @@ help:
 	@echo ""
 	@echo "build_ebook: builds only the colour ebook"
 	@echo ""
+	@echo "build_booklet: builds only the short booklet"
+	@echo ""
 	@echo "build_bw_ebook: builds the low res black & white ebook"
 	@echo ""
 	@echo "build_sans_serif_pdf: build accessible pdf only"
@@ -169,6 +169,8 @@ help:
 	@echo ""
 	@echo "quick_ebook: compiles ebook but runs lulatex only once"
 	@echo ""
+	@echo "quick_booklet: compiles booklet but runs lulatex only once"
+	@echo ""
 	@echo "show_tools_version: Show version of tools used on the build machine"
 	@echo ""
 	@echo "print-X: print makefile variable X"
@@ -179,9 +181,11 @@ help:
 
 
 # Finally actual project  targets (i.e. build pdf and ebooks)
-.PHONY: build_pdf build_serif_pdf build_sans_serif_pdf build_ebook
+.PHONY: build_pdf build_booklet build_serif_pdf build_sans_serif_pdf build_ebook
 
 build_pdf: build_serif_pdf build_sans_serif_pdf
+
+build_booklet: booklet/booklet.pdf
 
 build_serif_pdf: book_serif/book.pdf
 
