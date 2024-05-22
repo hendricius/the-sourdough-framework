@@ -1,11 +1,19 @@
-\documentclass[draft, landscape, paper=a4, twoside=false,
-                fontsize=12pt]{scrbook}
+%\documentclass[draft, paper=a4, twoside=false, fontsize=12pt]{scrbook}
+\documentclass[paper=a4, twoside=false, fontsize=12pt]{scrbook}
 
 % General packages
 \usepackage{sourdough}
-\usepackage[Verbose]{parallel}
-\usepackage{typearea}
-\usepackage{showframe}
+\usepackage[
+  paperwidth=210mm,
+  paperheight=260mm,
+  top=10mm,
+  bottom=80mm,
+  inner=10mm,
+  outer=10mm,
+  marginparsep=7mm,
+  marginparwidth=48mm,
+]{geometry}
+%\usepackage{showframe}
 
 \pagenumbering{gobble}
 % Basic attributes
@@ -14,7 +22,7 @@
 \begin{document}
 \maketitle
 
-\section*{Starter Maintenance}
+\section*{Starter maintenance}
 \begin{flowchart}[!htb]
 \input{figures/fig-starter-readiness.tex}
 \caption*{Preparing your starter for baking}
@@ -26,42 +34,102 @@
 \end{flowchart}
 
 \clearpage{}
-\section*{Proofing}
+\section*{Baker math}
 
+\begin{table}[!htb]
+  \input{tables/table-bakers-math-example.tex}
+  \caption[Baker's math example]{An example table demonstrating how to
+      properly calculate using baker's math}
+\end{table}
+
+
+\section*{Dough \& proofing}
+\subsection*{Flat bread}
+\input{recipes/flat-bread.tex}
+\clearpage{}
+
+\subsection*{Freestanding bread}
+\begin{table}[!htb]
+\begin{tabular}{@{}lrrrcr@{}}
+\toprule
+\thead{Ingredient}&                   & \thead{Percentage}  & \thead{Calculation}                                  \\ \midrule
+Flour             & \qty{400}{g}      &  & \phantom{\qty{1000}{g} of \qty{1000}{g} \qty{100}{\percent}} \\ 
+Whole-wheat flour & \qty{100}{g}      &  & \phantom{\qty{1000}{g} of \qty{1000}{g} \qty{100}{\percent}} \\ 
+Total flour       &                   &\qty{100}{\percent}  & \qty{500}{g} \\
+Water             &                   &\qty{60}{\percent} &\qty{300}{g}& \\
+Sourdough starter &                   &\qty{10}{\percent} &\qty{50}{g}& \\
+Salt              &                   &\qty{2}{\percent}  &\qty10{}{g}& \\ \midrule
+Flour             & \phantom{\qty{1000}{g}} &\qty{100}{\percent}  & \phantom{\qty{1000}{g} of \qty{1000}{g} \qty{100}{\percent}} \\ 
+Water             & & & \\
+Sourdough starter & & & \\
+Salt              & & & \\ \midrule
+Flour             & \phantom{\qty{1000}{g}} &\qty{100}{\percent}  & \phantom{\qty{1000}{g} of \qty{1000}{g} \qty{100}{\percent}} \\ 
+                  & & & \\
+                  & & & \\
+                  & & & \\
+                  & & & \\ \bottomrule
+\end{tabular}
+  \caption[Own baker's math]{Table for your own calculation using baker's math}
+\end{table}
 \begin{flowchart}[!htb]
 \input{figures/fig-bulk-fermentation.tex}
 \end{flowchart}
-
-\begin{flowchart}[!htb]
-\input{figures/fig-proofing-process.tex}
-\end{flowchart}
-
-\clearpage{}
-
-\section*{Flat Bread}
-\begin{Parallel}[v]{0.48\textwidth}{0.48\textwidth}
-\ParallelLText{\noindent
-\input{recipes/flat-bread.tex}
-}
-\ParallelRText{\noindent
-Some stuff}
-\end{Parallel}
-
-\section*{Kneading and shaping}
 \begin{flowchart}[!htb]
 \input{figures/fig-kneading-process.tex}
 \end{flowchart}
+\begin{flowchart}[!htb]
+\input{figures/fig-proofing-process.tex}
+\end{flowchart}
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{stretch-and-fold-steps}
+  \caption[Stretch and fold steps]{An overview of the steps involved to perform
+      stretch and folds for wheat-based doughs.}%
+  \label{figure:stretch-and-fold-steps}
+\end{figure}
 
+\clearpage{}
+
+\section*{Shaping}
 \begin{flowchart}[!htb]
 \input{figures/fig-wheat-sourdough-process.tex}
 \end{flowchart}
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{preshape-direction}
+  \caption[Dragging direction]{Drag the dough in the direction of the rough
+      surface area. This way you minimize the movements required to complete
+      the step.}%
+  \label{fig:preshape-direction}
+\end{figure}
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{step-1-flour-applied}
+  \caption[Step 1 of shaping process]{A dough that has flour applied to its
+      surface. This is the first step of the shaping process.}%
+  \label{fig:shaping-flour-surface}
+\end{figure}
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{step-2-flipped-over}
+  \caption[Step 2 of shaping process]{A flipped-over dough. Note how the
+      sticky side is facing you while the floured side is facing the
+      countertop.  The sticky side is used as glue to hold the dough together.}
+\end{figure}
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{step-3-rectangular}
+  \caption[Step 3 of shaping process]{A flipped-over dough. Note how the
+      sticky side is facing you while the floured side is facing the
+      countertop.}%
+  \label{fig:shaping-rectangular-dough}
+\end{figure}
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{step-4-folding}
+  \caption[Step 4 of shaping process]{The process of folding a batard. Note
+      how the rectangle is first glued together and then rolled inwards to
+      create a dough roll. Ultimately the edges are sealed to create a more
+      uniform dough.}%
+  \label{fig:shaping-folding}
+\end{figure}
 \clearpage{}
 
-\section*{Non wheat bread}
-\begin{flowchart}[!htb]
-\input{figures/fig-non-wheat-process.tex}
-\end{flowchart}
-\clearpage{}
 \section*{Baking}
 \begin{flowchart}[!htb]
 \input{figures/fig-baking-process.tex}
@@ -77,4 +145,10 @@ Some stuff}
 \input{figures/fig-inverted-tray-method.tex}
 \caption*{Bakign with the inverted tray method}
 \end{flowchart}
+\clearpage{}
+\section*{Non wheat bread}
+\begin{flowchart}[!htb]
+\input{figures/fig-non-wheat-process.tex}
+\end{flowchart}
+\clearpage{}
 \end{document}
