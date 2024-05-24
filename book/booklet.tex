@@ -14,6 +14,7 @@
   marginparwidth=48mm,
 ]{geometry}
 \usepackage{showframe}
+\usepackage{subcaption}
 
 \pagenumbering{gobble}
 % Basic attributes
@@ -35,13 +36,11 @@
 
 \clearpage{}
 \section*{Baker math}
-
 \begin{table}[!htb]
   \input{tables/table-bakers-math-example.tex}
-  \caption[Baker's math example]{An example table demonstrating how to
-      properly calculate using baker's math}
+  \caption*{An example table demonstrating how to properly calculate using
+  baker's math}
 \end{table}
-
 
 \section*{Dough \& proofing}
 \subsection*{Flat bread}
@@ -69,7 +68,7 @@ Flour             & \phantom{\qty{1000}{g}} &\qty{100}{\percent}  & \phantom{\qt
                   & & & \\
                   & & & \\ \bottomrule
 \end{tabular}
-  \caption[Own baker's math]{Table for your own calculation using baker's math}
+  \caption*{Table for your own calculation using baker's math}
 \end{table}
 \begin{flowchart}[!htb]
 \input{figures/fig-bulk-fermentation.tex}
@@ -80,13 +79,12 @@ Flour             & \phantom{\qty{1000}{g}} &\qty{100}{\percent}  & \phantom{\qt
 \begin{flowchart}[!htb]
 \input{figures/fig-proofing-process.tex}
 \end{flowchart}
-\begin{figure}[!htb]
+\begin{figure*}[!htb]
   \includegraphics[width=\textwidth]{stretch-and-fold-steps}
-  \caption[Stretch and fold steps]{An overview of the steps involved to perform
-      stretch and folds for wheat-based doughs.}%
+  \caption*{An overview of the steps involved to perform stretch and folds for
+  wheat-based doughs.}%
   \label{figure:stretch-and-fold-steps}
-\end{figure}
-
+\end{figure*}
 \clearpage{}
 
 \section*{Shaping}
@@ -94,40 +92,40 @@ Flour             & \phantom{\qty{1000}{g}} &\qty{100}{\percent}  & \phantom{\qt
 \input{figures/fig-wheat-sourdough-process.tex}
 \end{flowchart}
 
-\begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{preshape-direction}
-  \caption[Dragging direction]{Drag the dough in the direction of the rough
-      surface area. This way you minimize the movements required to complete
-      the step.}%
+\begin{figure*}[!htb]
+\begin{subfigure}{.475\linewidth}
+  \includegraphics[width=\linewidth]{preshape-direction}
+  \caption*{Preshaping: Drag the dough in the direction of the rough surface
+  area.}%
   \label{fig:preshape-direction}
-\end{figure}
-\begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{step-1-flour-applied}
-  \caption[Step 1 of shaping process]{A dough that has flour applied to its
-      surface. This is the first step of the shaping process.}%
+\end{subfigure}
+\begin{subfigure}{.475\linewidth}
+  \includegraphics[width=\linewidth]{step-1-flour-applied}
+  \caption*{Step 1: Apply flpour to the dough's surface.}%
   \label{fig:shaping-flour-surface}
-\end{figure}
-\begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{step-2-flipped-over}
-  \caption[Step 2 of shaping process]{A flipped-over dough. Note how the
-      sticky side is facing you while the floured side is facing the
-      countertop.  The sticky side is used as glue to hold the dough together.}
-\end{figure}
-\begin{figure}[htb!]
-  \includegraphics[width=\textwidth]{step-3-rectangular}
-  \caption[Step 3 of shaping process]{A flipped-over dough. Note how the
-      sticky side is facing you while the floured side is facing the
-      countertop.}%
+\end{subfigure}\hfill % <-- "\hfill"
+\medskip % create some *vertical* separation between the graphs
+\begin{subfigure}{.475\linewidth}
+  \includegraphics[width=\linewidth]{step-2-flipped-over}
+  \caption*{Step 2: Flipp-over dough. Note how the sticky side is facing you
+  while the floured side is facing the countertop.}
+\end{subfigure}\hfill % <-- "\hfill"
+\begin{subfigure}{.475\linewidth}
+  \includegraphics[width=\linewidth]{step-3-rectangular}
+  \caption*{Step 3: Make the dough rectangular, keep the sticky side facing
+  you while the floured side is facing the countertop.}%
   \label{fig:shaping-rectangular-dough}
-\end{figure}
-\begin{figure}[htb!]
+\end{subfigure}
+\caption*{First steps of shaping process}
+\end{figure*}
+
+\begin{figure*}[htb!]
   \includegraphics[width=\textwidth]{step-4-folding}
-  \caption[Step 4 of shaping process]{The process of folding a batard. Note
-      how the rectangle is first glued together and then rolled inwards to
-      create a dough roll. Ultimately the edges are sealed to create a more
-      uniform dough.}%
+  \caption*{Step 4: The process of folding a batard.  Note how the rectangle
+  is first glued together and then rolled inwards to create a dough roll.
+  Utimately the edges are sealed to create a more uniform dough.}%
   \label{fig:shaping-folding}
-\end{figure}
+\end{figure*}
 \clearpage{}
 
 \section*{Baking}
