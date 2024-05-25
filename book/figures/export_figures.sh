@@ -10,6 +10,7 @@ if [ "$#" -ne 1 ]; then
     done
 else
     target=figures/`basename $1 .png.pdf`.png
+    echo ${target}
     echo "Converting: " $1 " to: " ${target}
     convert -density 900 -trim $1 -quality 100 ${target}
 fi

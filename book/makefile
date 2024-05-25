@@ -74,11 +74,18 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.png: %.tex
 	@echo "\input{./vars.tex}" > $@.in
 	# \b is backspace..
-	@echo "\\\begin{document}" >> $@.in
+	@echo "\\begin{document}" >> $@.in
 	@cat $< >> $@.in
-	@echo "\\\end{document}" >> $@.in
+	@echo "\\end{document}" >> $@.in
 	$(LATEX) $@.in
 	figures/export_figures.sh $@.pdf
+
+
+figures/fig-ethanol-oxidation-external.pdf: figures/fig-ethanol-oxidation-external.tex
+	$(LATEX) $<
+
+figures/fig-life-planet-sourdough-timeline-external.pdf: figures/fig-life-planet-sourdough-timeline-external.tex
+	$(LATEX) $<
 
 %.xbb: %.jpg
 	ebb -x $<
@@ -91,7 +98,10 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 
 .PHONY: copy_ebook_files
 
-epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
+epub/%.epub: %.tex $(src_all) cover/cover-page.xbb\
+	figures/fig-life-planet-sourdough-timeline-external.pdf\
+	figures/fig-ethanol-oxidation-external.pdf
+
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook

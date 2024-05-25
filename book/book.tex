@@ -39,6 +39,7 @@ At around  \qty{60}{\degreeCelsius} (\qty{140}{\degF}) the microbes in your
 dough start to die.  There are rumors that until this happens the microbes
 produce a lot of \ch{CO2}.
 
+% Does not work
 \begin{figure}[!htb]
 \begin{center}
   \input{figures/fig-ethanol-oxidation.tex}
@@ -46,7 +47,31 @@ produce a lot of \ch{CO2}.
       acid~\cite{acetic+acid+production}.}%
   \label{fig:ethanol-oxidation}
 \end{center}
+\end{figure}
 
+% Works
+% Generate first with: cd figures && pdflatex fig-ethanol-oxidation-external.tex
+\begin{figure}[!htb]
+  \begin{center}
+    \includegraphics{figures/fig-ethanol-oxidation-external.png}
+    \caption[Acetic acid creation]{Oxygen is required to create acetic
+        acid~\cite{acetic+acid+production}.}%
+  \end{center}
+\end{figure}
+
+% Does not work
+\begin{figure}[!htb]
+\begin{center}
+  \input{figures/fig-life-planet-sourdough-timeline.tex}
+  \caption[Sourdough microbiology timeline]{Timeline giberrish on website}%
+\end{center}
+\end{figure}
+
+% Works
+% Generate first with: cd figures && pdflatex fig-life-planet-sourdough-timeline-external.pdf
+\begin{figure}[!htb]
+  \includegraphics{figures/fig-life-planet-sourdough-timeline-external.png}
+  \caption[Sourdough microbiology timeline]{Timeline works embedded as png}%
 \end{figure}
 
 \begin{figure}[!htb]
@@ -72,7 +97,6 @@ a sample of your brew and checking the color.
             different baking methods.}
     \end{center}
 \end{table}
-\printbibliography
 {%
 \hypersetup{hidelinks}
 \listofflowcharts
