@@ -392,7 +392,7 @@ class ModifyBuild
 
   def build_header_html
     %Q{
-      <div class="header"><img src="banner.png"></div>
+      <div class="header"><a href="/"><img src="banner.png"></a></div>
     }
   end
 
@@ -629,7 +629,9 @@ class ModifyBuild
        to everyone, I have decided to make it available as a free digital download.
     </p>
 
-    <img alt="One of my best Sourdough Breads" class="home-bread" src="bread.jpg" />
+    <a href="bread.jpg">
+      <img alt="One of my best Sourdough Breads" class="home-bread" src="bread.jpg" />
+    </a>
 
     <p class="noindent">
       However, producing and maintaining resources like this requires
@@ -780,7 +782,7 @@ class ModifyBuild
   def insert_mobile_header_graphic(text)
     doc = build_doc(text)
     content = doc.css(".TOC.menu")[0]
-    content.after('<div class="mobile-banner"><img src="banner.png" /></div>')
+    content.after('<div class="mobile-banner"><a href="/"><img src="banner.png" /></a></div>')
     doc.to_html
   end
 
