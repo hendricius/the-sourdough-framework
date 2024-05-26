@@ -259,7 +259,7 @@ mrproper: clean
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
 
-bake: release_serif release_sans_serif
+bake: release_serif release_sans_serif release_booklet
 
 release:
 	mkdir -p release
@@ -271,6 +271,9 @@ release_serif: build_serif_pdf build_ebook build_bw_ebook | release
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
+
+release_booklet: build_booklet | release
+	cp booklet/booklet.pdf release/TheBreadCode-The-Sourdough-Framework-booklet.pdf
 
 # Website stuff
 .PHONY: html website
