@@ -312,6 +312,9 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- $(SHELL) --version
 	@echo ""
+	- @echo "PATH:"
+	- @echo $(PATH) | tr ':' '\n'
+	@echo ""
 	- latexmk --version
 	@echo ""
 	- lualatex --version
