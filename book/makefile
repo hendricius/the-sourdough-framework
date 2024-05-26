@@ -57,7 +57,10 @@ ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
 
 website_src := $(src_all) website.cfg style.css
 
-booklet_src := $(src_all) booklet.tex
+# This is more than what is actually needed but keeps the makefile simple
+# and latexmk will handle the rest
+booklet_src := $(src_figures) $(src_tables) $(src_recipes) $(images)
+booklet_src += booklet.tex
 
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
