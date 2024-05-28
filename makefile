@@ -29,6 +29,9 @@ bake:
 website:
 	$(DOCKER_CMD) "cd /opt/repo/book && make website"
 
+booklet:
+	$(DOCKER_CMD) "cd /opt/repo/book && make build_booklet"
+
 mrproper:
 	$(DOCKER_CMD) "cd /opt/repo/book && make mrproper"
 
