@@ -90,7 +90,7 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.xbb: %.jpg
 	ebb -x $<
 
-booklet/booklet.pdf: $(src_all) booklet.tex
+booklet/booklet.pdf: $(booklet_src)
 	$(LATEX) -output-directory=booklet booklet.tex
 
 book_serif/book.pdf: $(src_all)
