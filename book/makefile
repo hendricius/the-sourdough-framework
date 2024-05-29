@@ -31,10 +31,12 @@ chapters = baking basics bread-types cover flour-types history intro mix-ins\
 
 src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
+src_recipes := $(wildcard recipes/*.tex)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
 src_tex += supporters.csv sourdough.sty colors.tex
+scr_tex += $(src_recipes)
 
 images := $(wildcard images/*/*.jpg)
 images += $(wildcard images/*.jpg)
@@ -54,6 +56,11 @@ src_all := $(src_tex) $(src_figures) $(src_tables) $(images)
 ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
 
 website_src := $(src_all) website.cfg style.css
+
+# This is more than what is actually needed but keeps the makefile simple
+# and latexmk will handle the rest
+booklet_src := $(src_figures) $(src_tables) $(src_recipes) $(images)
+booklet_src += booklet.tex
 
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
@@ -83,6 +90,9 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.xbb: %.jpg
 	ebb -x $<
 
+booklet/booklet.pdf: $(src_all) booklet.tex
+	$(LATEX) -output-directory=booklet booklet.tex
+
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
 
@@ -97,7 +107,7 @@ epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 copy_ebook_files: build_ebook
 	$(RSYNC) book-epub/ bw-book-epub/
 
-# We not convert SVG to B&W or lower res for now as they are super small
+# We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
 bw-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
@@ -140,6 +150,8 @@ help:
 	@echo ""
 	@echo "build_ebook: builds only the colour ebook"
 	@echo ""
+	@echo "build_booklet: builds only the short booklet"
+	@echo ""
 	@echo "build_bw_ebook: builds the low res black & white ebook"
 	@echo ""
 	@echo "build_sans_serif_pdf: build accessible pdf only"
@@ -160,6 +172,8 @@ help:
 	@echo ""
 	@echo "quick_ebook: compiles ebook but runs lulatex only once"
 	@echo ""
+	@echo "quick_booklet: compiles booklet but runs lulatex only once"
+	@echo ""
 	@echo "show_tools_version: Show version of tools used on the build machine"
 	@echo ""
 	@echo "print-X: print makefile variable X"
@@ -170,9 +184,11 @@ help:
 
 
 # Finally actual project  targets (i.e. build pdf and ebooks)
-.PHONY: build_pdf build_serif_pdf build_sans_serif_pdf build_ebook
+.PHONY: build_pdf build_booklet build_serif_pdf build_sans_serif_pdf build_ebook
 
 build_pdf: build_serif_pdf build_sans_serif_pdf
+
+build_booklet: booklet/booklet.pdf
 
 build_serif_pdf: book_serif/book.pdf
 
@@ -221,6 +237,7 @@ clean_website_build: clean_ebook_build
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
+	$(CLEAN) -output-directory=booklet booklet.tex
 	-rm  book*/*.{bbl,loc,.run.xml}
 	-rm -rf *book-epub/META-INF
 	-rm -rf *book-epub/OEBPS
@@ -230,6 +247,7 @@ mrproper: clean
 	$(CLEAN) -C $(src_figures)
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
+	$(CLEAN) -C -output-directory=booklet booklet.tex
 	-rm figures/*.png
 	-rm *.html
 	-rm *.svg
@@ -237,13 +255,14 @@ mrproper: clean
 	-rm -rf release/
 	-rm -rf book_serif/
 	-rm -rf book_sans_serif/
+	-rm -rf booklet/
 	-rm -rf *book-epub/
 	-rm -rf $(website_dir)
 
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
 
-bake: release_serif release_sans_serif
+bake: release_serif release_sans_serif release_booklet
 
 release:
 	mkdir -p release
@@ -255,6 +274,9 @@ release_serif: build_serif_pdf build_ebook build_bw_ebook | release
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
+
+release_booklet: build_booklet | release
+	cp booklet/booklet.pdf release/TheBreadCode-The-Sourdough-Framework-booklet.pdf
 
 # Website stuff
 .PHONY: html website
@@ -282,6 +304,9 @@ website: html ../website/_bundle_install_done $(ruby_src)
 # They also ignore dependencies and run each time you call them.
 quick:  # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
+
+quick_booklet:
+	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=booklet booklet.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
