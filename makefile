@@ -24,7 +24,7 @@ build_pdf:
 	$(DOCKER_CMD) "cd /opt/repo/book && make"
 
 bake:
-	$(DOCKER_CMD) "cd /opt/repo/book && make -j bake"
+	$(DOCKER_CMD) "cd /opt/repo/book && make bake"
 
 website:
 	$(DOCKER_CMD) "cd /opt/repo/book && make website"
