@@ -5,6 +5,7 @@ DOCKER_CMD := docker run --rm -it -v $(PWD):/opt/repo --platform linux/x86_64 $(
 
 .PHONY: bake build_pdf build_docker_image push_docker_image validate website
 .PHONY: print_os_version start_shell printvars show_tools_version mrproper
+.PHONY: build_serif_pdf build_ebook booklet
 
 # Dockers targets
 build_docker_image:
