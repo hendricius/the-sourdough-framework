@@ -36,7 +36,7 @@ src_recipes := $(wildcard recipes/*.tex)
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
 src_tex += supporters.csv sourdough.sty colors.tex
-scr_tex += $(src_recipes)
+src_tex += $(src_recipes)
 
 images := $(wildcard images/*/*.jpg)
 images += $(wildcard images/*.jpg)
