@@ -17,11 +17,11 @@
 \pagenumbering{gobble}
 % Basic attributes
 \author{Hendrik Kleinwächter}
-\title{The Sourdough Framework\\\texttt{tl;dr Version}}
+\title{The Sourdough Framework\\\texttt{tl;dr Booklet Version}}
 \begin{document}
 \maketitle
 
-\section*{Starter maintenance}
+\section*{Sourdough starter}
 \begin{flowchart}[!htb]
     \centering
     \input{figures/fig-starter-process.tex}
@@ -47,15 +47,16 @@
   \centering
   \input{tables/table-bakers-math-example.tex}
   \caption*{An example table demonstrating how to properly calculate using
-  baker's math}
+  baker's math. All the ingredients are calculated as a percentage of the
+flour quantity.}
 \end{table}
 
-\section*{Dough \& proofing}
+\section*{Basic recipes}
 \subsection*{Flat bread}
 \input{recipes/flat-bread.tex}
 \clearpage{}
 
-\subsection*{Freestanding bread}
+\subsection*{Freestanding \& sandwich wheat-based breads}
 \begin{table}[!htb]
 \centering
     \begin{tabular}{@{}lrrrp{0.4\linewidth}@{}}
@@ -83,31 +84,31 @@
 \begin{flowchart}[!htb]
     \centering
     \input{figures/fig-wheat-sourdough-process.tex}
+    \caption*{The whole process of making wheat based sourdough breads}
 \end{flowchart}
 
 \begin{flowchart}[!htb]
     \centering
     \input{figures/fig-kneading-process.tex}
+    \caption*{The kneading process to create dough strength}
 \end{flowchart}
 
 \begin{flowchart}[!htb]
     \centering
     \input{figures/fig-bulk-fermentation.tex}
+    \caption*{How to properly manage bulk fermentation}
 \end{flowchart}
 
 \begin{figure*}[!htb]
   \centering
   \includegraphics[width=\textwidth]{stretch-and-fold-steps}
   \caption*{An overview of the steps involved to perform stretch and folds for
-  wheat-based doughs.}%
+  wheat-based doughs. They are optional and should only be done when the dough
+flattened out a lot.}%
 \end{figure*}
 \clearpage{}
 
 \section*{Shaping}
-\begin{flowchart}[!htb]
-  \centering
-  \input{figures/fig-proofing-process.tex}
-\end{flowchart}
 
 \begin{figure*}[!htb]
 \centering
@@ -143,11 +144,25 @@
 \end{figure*}
 \clearpage{}
 
+\section*{Proofing}
+\begin{flowchart}[!htb]
+  \centering
+  \input{figures/fig-proofing-process.tex}
+\end{flowchart}
+\clearpage{}
+
 \section*{Baking}
 \begin{flowchart}[!htb]
     \centering
     \input{figures/fig-baking-process.tex}
-    \caption*{Summary of bread baking process}
+    \caption*{Summary of different bread baking processes}
+\end{flowchart}
+
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-inverted-tray-method.tex}
+    \caption*{Baking with the inverted tray method}
 \end{flowchart}
 
 \begin{flowchart*}[!htb]
@@ -155,11 +170,5 @@
     \input{figures/fig-dutch-oven-process.tex}
     \caption*{Baking with a Dutch Oven}
 \end{flowchart*}
-
-\begin{flowchart}[!htb]
-    \centering
-    \input{figures/fig-inverted-tray-method.tex}
-    \caption*{Bakign with the inverted tray method}
-\end{flowchart}
 \clearpage{}
 \end{document}
