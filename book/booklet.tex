@@ -1,0 +1,174 @@
+\documentclass[paper=a4, twoside=false, fontsize=12pt]{scrbook}
+
+% General packages
+\usepackage{sourdough}
+\usepackage[
+  paperwidth=210mm,
+  paperheight=260mm,
+  top=10mm,
+  bottom=80mm,
+  inner=10mm,
+  outer=10mm,
+  marginparsep=7mm,
+  marginparwidth=48mm,
+]{geometry}
+\usepackage{subcaption}
+
+\pagenumbering{gobble}
+% Basic attributes
+\author{Hendrik Kleinwächter}
+\title{The Sourdough Framework\\\texttt{tl;dr Booklet Version}}
+\begin{document}
+\maketitle
+
+\section*{Sourdough starter}
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-starter-process.tex}
+    \caption*{How to setup a sourdough starter}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-starter-readiness.tex}
+    \caption*{Preparing your starter for baking}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-starter-maintenance.tex}
+    \caption*{Maintaining your starter, change ratio as per starter hydration
+    type}
+\end{flowchart}
+
+\clearpage{}
+\section*{Baker's math}
+\begin{table}[!htb]
+  \centering
+  \input{tables/table-bakers-math-example.tex}
+  \caption*{An example table demonstrating how to properly calculate using
+  baker's math. All the ingredients are calculated as a percentage of the
+flour quantity.}
+\end{table}
+
+\section*{Basic recipes}
+\subsection*{Flat bread}
+\input{recipes/flat-bread.tex}
+\clearpage{}
+
+\subsection*{Freestanding \& sandwich wheat-based breads}
+\begin{table}[!htb]
+\centering
+    \begin{tabular}{@{}lrrrp{0.4\linewidth}@{}}
+    \toprule
+    \thead{Ingredient}&                   & \thead{Percentage}  & \thead{Calculation} & \thead{Comments} \\ \midrule
+    Flour             & \qty{400}{g}      &                     &                     & \\ 
+    Whole-wheat flour & \qty{100}{g}      &                     &                     & \\ 
+    Total flour       &                   & \qty{100}{\percent} & \qty{500}{g}        & \\
+    Water             &                   & \qty{60}{\percent}  & \qty{300}{g}        & \\
+    Sourdough starter &                   & \qty{10}{\percent}  & \qty{50}{g}         & \\
+    Salt              &                   & \qty{2}{\percent}   & \qty{10}{g}         & \\ \midrule
+    Flour             &                   & \qty{100}{\percent} &                     & \\ 
+    Water             & & & & \\
+    Sourdough starter & & & & \\
+    Salt              & & & & \\ \midrule
+    Flour             & & & & \\ 
+                      & & & & \\
+                      & & & & \\
+                      & & & & \\
+                      & & & & \\ \bottomrule
+    \end{tabular}
+\caption*{Table for your own calculation using baker's math}
+\end{table}
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-wheat-sourdough-process.tex}
+    \caption*{The whole process of making wheat based sourdough breads}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-kneading-process.tex}
+    \caption*{The kneading process to create dough strength}
+\end{flowchart}
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-bulk-fermentation.tex}
+    \caption*{How to properly manage bulk fermentation}
+\end{flowchart}
+
+\begin{figure*}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{stretch-and-fold-steps}
+  \caption*{An overview of the steps involved to perform stretch and folds for
+  wheat-based doughs. They are optional and should only be done when the dough
+flattened out a lot.}%
+\end{figure*}
+\clearpage{}
+
+\section*{Shaping}
+
+\begin{figure*}[!htb]
+\centering
+    \begin{subfigure}{.475\linewidth}
+      \includegraphics[width=\linewidth]{preshape-direction}
+      \caption*{Preshaping: Drag the dough in the direction of the rough
+      surface area.}%
+    \end{subfigure}
+    \begin{subfigure}{.475\linewidth}
+      \includegraphics[width=\linewidth]{step-1-flour-applied}
+      \caption*{Step 1: Apply flpour to the dough's surface.}%
+    \end{subfigure}\hfill % <-- "\hfill"
+    \medskip % create some *vertical* separation between the graphs
+    \begin{subfigure}{.475\linewidth}
+      \includegraphics[width=\linewidth]{step-2-flipped-over}
+      \caption*{Step 2: Flipp-over dough. Note how the sticky side is facing
+      you while the floured side is facing the countertop.}
+    \end{subfigure}\hfill % <-- "\hfill"
+    \begin{subfigure}{.475\linewidth}
+      \includegraphics[width=\linewidth]{step-3-rectangular}
+      \caption*{Step 3: Make the dough rectangular, keep the sticky side
+      facing you while the floured side is facing the countertop.}%
+    \end{subfigure}
+    \caption*{First steps of shaping process}
+\end{figure*}
+
+\begin{figure*}[htb!]
+  \centering
+  \includegraphics[width=\textwidth]{step-4-folding}
+  \caption*{Step 4: The process of folding a batard.  Note how the rectangle
+  is first glued together and then rolled inwards to create a dough roll.
+  Utimately the edges are sealed to create a more uniform dough.}%
+\end{figure*}
+\clearpage{}
+
+\section*{Proofing}
+\begin{flowchart}[!htb]
+  \centering
+  \input{figures/fig-proofing-process.tex}
+\end{flowchart}
+\clearpage{}
+
+\section*{Baking}
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-baking-process.tex}
+    \caption*{Summary of different bread baking processes}
+\end{flowchart}
+
+
+\begin{flowchart}[!htb]
+    \centering
+    \input{figures/fig-inverted-tray-method.tex}
+    \caption*{Baking with the inverted tray method}
+\end{flowchart}
+
+\begin{flowchart*}[!htb]
+    \centering
+    \input{figures/fig-dutch-oven-process.tex}
+    \caption*{Baking with a Dutch Oven}
+\end{flowchart*}
+\clearpage{}
+\end{document}
