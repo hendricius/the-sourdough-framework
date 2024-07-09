@@ -730,7 +730,7 @@ class ModifyBuild
     doc.to_html
   end
 
-  # For some reason the depdency is missing a // in the url.
+  # For some reason the dependency is missing a // in the url.
   def fix_js_dependency_link(text)
     text.gsub("https:/cdn.jsdelivr.net", "https://cdn.jsdelivr.net")
   end
