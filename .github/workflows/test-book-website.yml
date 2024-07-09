@@ -6,6 +6,17 @@ env:
   DOCKER_IMAGE: ghcr.io/${{ github.repository }}:latest
 
 jobs:
+  links:
+    name: Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up git repository
+        uses: actions/checkout@v4
+      - name: Run Lychee
+        uses: lycheeverse/lychee-action@v1.10.0
+        with:
+          output: "${{ runner.temp }}/lychee/out.md"
+          fail: true
   test-book-website:
     runs-on: ubuntu-latest
     steps:
