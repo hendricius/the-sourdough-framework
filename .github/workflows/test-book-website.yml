@@ -15,6 +15,7 @@ jobs:
       - name: Run Lychee
         uses: lycheeverse/lychee-action@v1.10.0
         with:
+          args: "'**/*.md' '**/*.bib' '**/*.tex'"
           output: "${{ runner.temp }}/lychee/out.md"
           fail: true
   test-book-website:
