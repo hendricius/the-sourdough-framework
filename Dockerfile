@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.source="https://github.com/hendricius/the-sourdou
 # Print release information if needed
 RUN cat /etc/*release*
 
-# Install base depdendencies
+# Install base dependencies
 RUN apt-get update && \
     apt-get install --yes -y --no-install-recommends \
     sudo \

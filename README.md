@@ -85,7 +85,7 @@ size. This shrinks the book from more than 50MB down to ~5MB:
 * [Download compiled B&W .epub version](https://www.the-bread-code.io/bw-book.epub)
 
 If you prefer a very short version (about 10 pages) with main flowcharts and
-crucial informations needed while you are in the kitchen, we also provide a
+crucial information needed while you are in the kitchen, we also provide a
 "too long;didn't read" version you could print.  Having read the full book is
 highly recommended to understand this leaflet:
 
