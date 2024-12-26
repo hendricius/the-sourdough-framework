@@ -10,6 +10,8 @@ REDUCE_PIC := -resize '800x800>' \
 	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
+GIT := git --no-pager 
+SPELL_CHECK := hunspell -t -l -d en_US
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -131,54 +133,54 @@ help:
 	@echo ""
 	@echo "default: builds the book in pdf format (serif)"
 	@echo ""
-	@echo "all: pdf serif and sans-serif accessible version, as well as ebooks"
-	@echo "     in colour and black&white versions"
+	@echo "Releases:"
+	@echo "  all: pdf serif and sans-serif accessible version, ebooks in colours"
+	@echo "     and black&white versions and the website"
 	@echo ""
-	@echo "bake: same as build all"
+	@echo "  bake: same as build all"
 	@echo ""
-	@echo "check: runs static analysis checker on LaTeX source to spot"
-	@echo "       programming or typographic mistakes"
+	@echo "  release_serif: build serif only version of pdf and ebook"
+	@echo "  release_sans_serif: build sans-serif/accessible version of pdf"
 	@echo ""
-	@echo "clean: delete all intermediate files keep targets (pdf/ebooks/website)"
+	@echo "Portable Document Format (pdf):"
+	@echo "  build_sans_serif_pdf: build accessible pdf only (same as release_sans_serif)"
+	@echo "  build_serif_pdf: build serif pdf only"
+	@echo "  build_pdf: builds both serif and accessible pdf"
 	@echo ""
-	@echo "mrproper: delete all generated files intermediate and pdf/ebooks/website"
+	@echo "Ebooks (epub):"
+	@echo "  build_ebook: builds only the colour ebook"
+	@echo "  build_bw_ebook: builds the low res black & white ebook"
+	@echo ""
+	@echo "Website:"
+	@echo "  website: build the static website from LaTeX sources and post-process it"
+	@echo "  html: build the static website from LaTeX sources _without_ post-processing"
+	@echo ""
+	@echo "Cleanup:"
+	@echo "  mrproper: delete all generated files intermediate and pdf/ebooks/website"
+	@echo "  clean: delete all intermediate files keep targets (pdf/ebooks/website)"
 	@echo "  clean_figures: delete intermediate TikZ files"
 	@echo "  clean_website_build: delete intermediate website files"
 	@echo "  clean_ebook_build: delete intermediate ebook files"
 	@echo ""
-	@echo "build_pdf: builds both serif and accessible pdf"
-	@echo ""
-	@echo "build_ebook: builds only the colour ebook"
-	@echo ""
-	@echo "build_booklet: builds only the short booklet"
-	@echo ""
-	@echo "build_bw_ebook: builds the low res black & white ebook"
-	@echo ""
-	@echo "build_sans_serif_pdf: build accessible pdf only"
-	@echo ""
-	@echo "build_serif_pdf: build serif pdf only"
-	@echo ""
-	@echo "figures: build TikZ figures"
-	@echo ""
-	@echo "release_serif: build serif only version of pdf and ebooks"
-	@echo "release_sans_serif: build sans-serif/accessible version of pdf"
-	@echo ""
-	@echo "website: build the static website from LaTeX sources and post-process it"
-	@echo "html: build the static website from LaTeX sources _without_ post-processing"
-	@echo ""
 	@echo "Debug targets:"
 	@echo ""
-	@echo "quick: compiles serif_pdf but runs lulatex only once"
+	@echo "figures: build TikZ figures only"
 	@echo ""
-	@echo "quick_ebook: compiles ebook but runs lulatex only once"
+	@echo "Quick builds:"
+	@echo "  quick: compiles serif_pdf but runs lulatex only once"
+	@echo "  quick_ebook: compiles ebook but runs lulatex only once"
+	@echo "  quick_booklet: compiles booklet but runs lulatex only once"
 	@echo ""
-	@echo "quick_booklet: compiles booklet but runs lulatex only once"
+	@echo "Checks:"
+	@echo "  tex-check: runs static analysis checker on LaTeX source to spot"
+	@echo "       programming or typographic mistakes"
+	@echo "  spell-check: runs a spell checker"
+	@echo "  check: runs both checkers"
 	@echo ""
-	@echo "show_tools_version: Show version of tools used on the build machine"
-	@echo ""
-	@echo "print-X: print makefile variable X"
-	@echo ""
-	@echo "printvars: print all variables in the makefile"
+	@echo "Dump informations:"
+	@echo "  show_tools_version: Show version of tools used on the build machine"
+	@echo "  printvars: print all variables in the makefile"
+	@echo "  print-X: print makefile variable X"
 	@echo ""
 	@echo "set DEBUG i.e make DEBUG=1 build_ebook to add debug flags to commands"
 
@@ -198,19 +200,26 @@ build_ebook: epub/book.epub
 
 build_bw_ebook: epub/bw_book.epub
 
-.PHONY: export_figures check
+.PHONY: export_figures check tex-check spell-check
 # Requires that you have docker running on your computer.
 export_figures: build_pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 
 # Goal is not really to have 0 warning reported but we should check we don't
 # add many and if we do, we know they are false positive
-check: $(SRC_TEX)
+check: spell-check tex-check 
+
+tex-check: $(src_tex)
 	@echo "Running: " $(CHECK_1)
 	$(CHECK_1) book.tex
 	@echo ""
 	@echo "Running: " $(CHECK_2)
 	$(CHECK_2) book.tex
+
+spell-check: $(src_tex) spelling_exceptions.txt
+	# Generate exceptions this way to avoid false positives
+	# hunspell -t -l -d en_US **/*.tex *.csv *.sty *.sty | cut -f 2 -d ':' | sort -u > spelling_exceptions.txt
+	$(SPELL_CHECK) -p spelling_exceptions.txt $(src_tex)
 
 
 # Clean up and delete generated files
@@ -312,7 +321,7 @@ quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
 
 show_tools_version:  # Show version of tools used on the build machine
-	- git log -n 1
+	- $(GIT) log -1 --pretty=%B
 	@echo ""
 	- uname -a
 	@echo ""
@@ -333,7 +342,7 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- dvisvgm --version
 	@echo ""
-	- lacheck --version
+	- lacheck | head -5 | tail -1
 	@echo ""
 	- chktex --version
 	@echo ""
