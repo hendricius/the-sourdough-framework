@@ -84,6 +84,13 @@ size. This shrinks the book from more than 50MB down to ~5MB:
 
 * [Download compiled B&W .epub version](https://www.the-bread-code.io/bw-book.epub)
 
+If you prefer a very short version (about 10 pages) with main flowcharts and
+crucial information needed while you are in the kitchen, we also provide a
+"too long;didn't read" version you could print.  Having read the full book is
+highly recommended to understand this leaflet:
+
+* [Download a condensed version](https://www.the-bread-code.io/booklet.pdf)
+
 ## Online HTML version
 
 Head over to [https://www.the-sourdough-framework.com](https://www.the-sourdough-framework.com)

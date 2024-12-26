@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.source="https://github.com/hendricius/the-sourdou
 # Print release information if needed
 RUN cat /etc/*release*
 
-# Install base depdendencies
+# Install base dependencies
 RUN apt-get update && \
     apt-get install --yes -y --no-install-recommends \
     sudo \
@@ -54,6 +54,11 @@ RUN wget https://github.com/mgieseki/dvisvgm/releases/download/3.1.2/dvisvgm-3.1
     ./configure && \
     make && \
     make install
+
+RUN git clone https://github.com/michal-h21/make4ht.git && \
+  cd make4ht && \
+  make && \
+  make install
 
 # Make sure everything is UTF-8
 RUN echo "export LC_ALL=en_US.UTF-8" >> /root/.bashrc && \
