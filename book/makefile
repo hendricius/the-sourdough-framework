@@ -11,6 +11,7 @@ REDUCE_PIC := -resize '800x800>' \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
 GIT := git --no-pager 
+SPELL_CHECK := hunspell -t -l -d en_US
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -154,9 +155,6 @@ help:
 	@echo "  website: build the static website from LaTeX sources and post-process it"
 	@echo "  html: build the static website from LaTeX sources _without_ post-processing"
 	@echo ""
-	@echo "check: runs static analysis checker on LaTeX source to spot"
-	@echo "       programming or typographic mistakes"
-	@echo ""
 	@echo "Cleanup:"
 	@echo "  mrproper: delete all generated files intermediate and pdf/ebooks/website"
 	@echo "  clean: delete all intermediate files keep targets (pdf/ebooks/website)"
@@ -172,6 +170,12 @@ help:
 	@echo "  quick: compiles serif_pdf but runs lulatex only once"
 	@echo "  quick_ebook: compiles ebook but runs lulatex only once"
 	@echo "  quick_booklet: compiles booklet but runs lulatex only once"
+	@echo ""
+	@echo "Checks:"
+	@echo "  tex-check: runs static analysis checker on LaTeX source to spot"
+	@echo "       programming or typographic mistakes"
+	@echo "  spell-check: runs a spell checker"
+	@echo "  check: runs both checkers"
 	@echo ""
 	@echo "Dump informations:"
 	@echo "  show_tools_version: Show version of tools used on the build machine"
@@ -196,24 +200,27 @@ build_ebook: epub/book.epub
 
 build_bw_ebook: epub/bw_book.epub
 
-.PHONY: export_figures check
+.PHONY: export_figures check tex-check spell-check
 # Requires that you have docker running on your computer.
 export_figures: build_pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 
 # Goal is not really to have 0 warning reported but we should check we don't
 # add many and if we do, we know they are false positive
-check: tex-check spell-check
+check: spell-check tex-check 
 
-tex-check: $(SRC_TEX)
+tex-check: $(src_tex)
 	@echo "Running: " $(CHECK_1)
 	$(CHECK_1) book.tex
 	@echo ""
 	@echo "Running: " $(CHECK_2)
 	$(CHECK_2) book.tex
 
-spell-check: $(SRC_TEX)
-	#  cat $(git ls-files '*.tex')|sed 's/\\[a-z{}]\+//g'|hunspell-en_US|sort -f|uniq -i|grep -v '^[0-9]'
+spell-check: $(src_tex) spelling_exceptions.txt
+	# Generate exceptions this way to avoid false positives
+	# hunspell -t -l -d en_US **/*.tex *.csv *.sty *.sty | cut -f 2 -d ':' | sort -u > spelling_exceptions.txt
+	$(SPELL_CHECK) -p spelling_exceptions.txt $(src_tex)
+
 
 # Clean up and delete generated files
 .PHONY: clean_figures clean_ebook_build clean_website_build clean mrproper
