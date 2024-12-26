@@ -203,13 +203,17 @@ export_figures: build_pdf $(tgt_figures)
 
 # Goal is not really to have 0 warning reported but we should check we don't
 # add many and if we do, we know they are false positive
-check: $(SRC_TEX)
+check: tex-check spell-check
+
+tex-check: $(SRC_TEX)
 	@echo "Running: " $(CHECK_1)
 	$(CHECK_1) book.tex
 	@echo ""
 	@echo "Running: " $(CHECK_2)
 	$(CHECK_2) book.tex
 
+spell-check: $(SRC_TEX)
+	#  cat $(git ls-files '*.tex')|sed 's/\\[a-z{}]\+//g'|hunspell-en_US|sort -f|uniq -i|grep -v '^[0-9]'
 
 # Clean up and delete generated files
 .PHONY: clean_figures clean_ebook_build clean_website_build clean mrproper
