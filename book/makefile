@@ -330,7 +330,7 @@ show_tools_version:  # Show version of tools used on the build machine
 	@echo ""
 	- dvisvgm --version
 	@echo ""
-	- lacheck --version
+	- lacheck | head -5 | tail -1
 	@echo ""
 	- chktex --version
 	@echo ""
