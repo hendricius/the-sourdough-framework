@@ -24,11 +24,14 @@
   types=flowcharts,%  ,
   float,
   floattype=4,%
+  counterwithin=chapter,
   name=Flowchart,%
   listname = {List of Flowcharts}
 ]{loc}
 \setuptoc{loc}{chapteratlist}
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
+\DeclareTOCStyleEntry[numwidth=3em]{tocline}{flowchart}
+\DeclareTOCStyleEntry[numwidth=3em]{tocline}{table}
 
 % Common abbreviations
 \newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
