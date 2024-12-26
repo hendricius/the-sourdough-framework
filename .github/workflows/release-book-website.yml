@@ -4,12 +4,36 @@ on:
   push:
     branches:
       - main
+
 env:
-  IMAGE: ghcr.io/${{ github.repository }}:latest
+  LATEST_IMAGE: ghcr.io/${{ github.repository }}:latest
 
 jobs:
   build-and-push-image:
-    uses: ./.github/workflows/docker-build-push.yml
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      # Buildx for caching
+      - uses: docker/setup-buildx-action@v3
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   release-book-website:
     needs: build-and-push-image
@@ -20,7 +44,7 @@ jobs:
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -28,7 +52,7 @@ jobs:
       - name: Print build variables
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
@@ -36,11 +60,11 @@ jobs:
       - name: Bake the book
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make -j bake
+            make bake
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
@@ -60,7 +84,7 @@ jobs:
       - name: Bake the website
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ env.IMAGE }}
+          image: ${{ env.LATEST_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
