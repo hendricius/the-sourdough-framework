@@ -10,6 +10,7 @@ REDUCE_PIC := -resize '800x800>' \
 	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
+GIT := git --no-pager 
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -309,7 +310,7 @@ quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
 
 show_tools_version:  # Show version of tools used on the build machine
-	- git log -n 1
+	- $(GIT) log -1 --pretty=%B
 	@echo ""
 	- uname -a
 	@echo ""
