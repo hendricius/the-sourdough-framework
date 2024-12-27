@@ -9,6 +9,7 @@ CONVERT_PIC := convert
 REDUCE_PIC := -resize '800x800>' \
 	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
+REDUCE_PIC_COLOR := -quality 80\%
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
 GIT := git --no-pager 
 SPELL_CHECK := hunspell -t -l -d en_US
@@ -52,6 +53,10 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 # Black and White ebook, we will just re-zip directory after converting the
 # images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
+
+# Reduced ebook, we will just re-zip directory after converting the
+# images to lower resolution
+cl_images := $(addprefix cl-book-epub/OEBPS/, $(images))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) $(images)
 
@@ -101,13 +106,16 @@ book_serif/book.pdf: $(src_all)
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-.PHONY: copy_ebook_files
+.PHONY: copy_ebook_files copy_ebook_files_cl
 
 epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
 	$(RSYNC) book-epub/ bw-book-epub/
+
+copy_ebook_files_cl: build_ebook
+	$(RSYNC) book-epub/ cl-book-epub/
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
@@ -119,9 +127,22 @@ bw-book-epub/OEBPS/%.png: %.png
 	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
+cl-book-epub/OEBPS/%.jpg: %.jpg
+	mkdir -p $(dir $@)
+	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
+
+cl-book-epub/OEBPS/%.png: %.png
+	mkdir -p $(dir $@)
+	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
+
+
 epub/bw_book.epub: copy_ebook_files $(bw_images)
 	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
+
+epub/cl_book.epub: copy_ebook_files_cl $(cl_images)
+	cd cl-book-epub; zip -q0X ../epub/cl_book.epub mimetype
+	cd cl-book-epub; zip -q9XrD ../epub/cl_book.epub ./
 
 # Now with the rules
 # Expected usual rules first
@@ -200,6 +221,8 @@ build_ebook: epub/book.epub
 
 build_bw_ebook: epub/bw_book.epub
 
+build_cl_ebook: epub/cl_book.epub
+
 .PHONY: export_figures check tex-check spell-check
 # Requires that you have docker running on your computer.
 export_figures: build_pdf $(tgt_figures)
@@ -276,10 +299,11 @@ bake: release_serif release_sans_serif release_booklet
 release:
 	mkdir -p release
 
-release_serif: build_serif_pdf build_ebook build_bw_ebook | release
+release_serif: build_serif_pdf build_ebook build_bw_ebook build_cl_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
+	cp epub/cl_book.epub release/TheBreadCode-The-Sourdough-Framework-reduced-size.epub
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
