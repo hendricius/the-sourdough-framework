@@ -56,7 +56,7 @@ bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
 # Reduced ebook, we will just re-zip directory after converting the
 # images to lower resolution
-cl_images := $(addprefix cl-book-epub/OEBPS/, $(images))
+low_res_images := $(addprefix low-res-book-epub/OEBPS/, $(images))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) $(images)
 
@@ -115,7 +115,7 @@ copy_ebook_files: build_ebook
 	$(RSYNC) book-epub/ bw-book-epub/
 
 copy_ebook_files_cl: build_ebook
-	$(RSYNC) book-epub/ cl-book-epub/
+	$(RSYNC) book-epub/ low-res-book-epub/
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
@@ -127,22 +127,21 @@ bw-book-epub/OEBPS/%.png: %.png
 	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-cl-book-epub/OEBPS/%.jpg: %.jpg
+low-res-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
 
-cl-book-epub/OEBPS/%.png: %.png
+low-res-book-epub/OEBPS/%.png: %.png
 	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
-
 
 epub/bw_book.epub: copy_ebook_files $(bw_images)
 	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
-epub/cl_book.epub: copy_ebook_files_cl $(cl_images)
-	cd cl-book-epub; zip -q0X ../epub/cl_book.epub mimetype
-	cd cl-book-epub; zip -q9XrD ../epub/cl_book.epub ./
+epub/low_res_book.epub: copy_ebook_files_cl $(low_res_images)
+	cd low-res-book-epub; zip -q0X ../epub/low_res_book.epub mimetype
+	cd low-res-book-epub; zip -q9XrD ../epub/low_res_book.epub ./
 
 # Now with the rules
 # Expected usual rules first
@@ -221,7 +220,7 @@ build_ebook: epub/book.epub
 
 build_bw_ebook: epub/bw_book.epub
 
-build_cl_ebook: epub/cl_book.epub
+build_low_res_ebook: epub/low_res_book.epub
 
 .PHONY: export_figures check tex-check spell-check
 # Requires that you have docker running on your computer.
@@ -299,11 +298,11 @@ bake: release_serif release_sans_serif release_booklet
 release:
 	mkdir -p release
 
-release_serif: build_serif_pdf build_ebook build_bw_ebook build_cl_ebook | release
+release_serif: build_serif_pdf build_ebook build_bw_ebook build_low_res_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
-	cp epub/cl_book.epub release/TheBreadCode-The-Sourdough-Framework-reduced-size.epub
+	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework-reduced-size.epub
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
