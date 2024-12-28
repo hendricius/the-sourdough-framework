@@ -81,14 +81,6 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-      - name: Bake the website
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.LATEST_IMAGE }}
-          options: -v ${{ github.workspace }}:/app
-          run: |
-            cd /app/book
-            make mrproper && make website
       - name: Release baked website to S3
         uses: shallwefootball/s3-upload-action@master
         with:
