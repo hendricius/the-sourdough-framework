@@ -1,6 +1,8 @@
 name: Test book and website for given image
 
-on: [push, pull_request]
+on: [push, pull_request]:
+  branches-ignore:
+    - main
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.repository }}:latest
