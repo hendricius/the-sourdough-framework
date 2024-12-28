@@ -247,35 +247,32 @@ spell-check: $(src_tex) spelling_exceptions.txt
 # Clean up and delete generated files
 .PHONY: clean_figures clean_ebook_build clean_website_build clean mrproper
 clean_figures:
-	- $(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
-	- rm $(patsubst %.tex, %.png.pdf, $(src_figures))
-	- rm $(patsubst %.tex, %.png.in, $(src_figures))
-	- rm $(wildcard figures/*.png.*)
-	- rm cover/cover-page.xbb
+	-$(CLEAN) $(patsubst %.tex, %.png.in, $(src_figures))
+	-rm $(patsubst %.tex, %.png.pdf, $(src_figures))
+	-rm $(patsubst %.tex, %.png.in, $(src_figures))
+	-rm $(wildcard figures/*.png.*)
+	-rm cover/cover-page.xbb
 
 clean_ebook_build:
-	-rm  epub_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
-	-rm  epub_build/book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
-	-rm  epub_build/book*x.svg
-	-rm  epub_build/book.css
-	-rm  epub_build/content.opf
+	-rm epub_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
+	-rm epub_build/book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
+	-rm epub_build/book*x.svg
+	-rm epub_build/book.css
+	-rm epub_build/content.opf
+	-rm epub_build/book-epub/mimetype
+	-rm -rf epub_build/book-epub/META-INF
+	-rm -rf epub_build/book-epub/OEBPS
 
 clean_website_build:
-	-rm website_build/book-*.svg
+	-rm website_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
+	-rm website_build/book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
 	-rm website_build/book.{loc,dlog}
-	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
 	$(CLEAN) -output-directory=booklet booklet.tex
-	-rm  book*/*.{bbl,loc,.run.xml}
-	-rm -rf *book-epub/META-INF
-	-rm -rf *book-epub/OEBPS
-	-rm  *book-epub/mimetype
-	-rm -rf epub_build/book-epub/META-INF
-	-rm -rf epub_build/book-epub/OEBPS
-	-rm  epub_build/book-epub/mimetype
+	-rm book*/*.{bbl,loc,run.xml}
 
 mrproper: clean
 	$(CLEAN) -C $(src_figures)
@@ -283,8 +280,6 @@ mrproper: clean
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
 	$(CLEAN) -C -output-directory=booklet booklet.tex
 	-rm figures/*.png
-	-rm *.html
-	-rm *.svg
 	-rm -rf epub/
 	-rm -rf release/
 	-rm -rf book_serif/
@@ -326,7 +321,7 @@ html: $(website_dir)/book.html
 # Because packages will be installed in hard to predict places use a file as
 # marker..
 ../website/_bundle_install_done: $(ruby_pkg)
-	- rm ../website/$@
+	-rm ../website/$@
 	cd ../website && bundle install
 	touch ../website/$@
 
