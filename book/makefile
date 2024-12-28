@@ -1,7 +1,7 @@
 # Macros for commands
 LATEX := latexmk -cd -pdflua -lualatex="lualatex -interaction=nonstopmode" -synctex=1 -use-make
-EBOOK := tex4ebook --lua -d epub -f epub -c tex4ebook.cfg
-WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters
+EBOOK := tex4ebook --lua -d epub -f epub -c tex4ebook.cfg -B epub_build
+WEBSITE := make4ht --lua -c website.cfg -a debug -uf html5+tidy+common_domfilters -B website_build
 CLEAN := latexmk -cd -lualatex -c -use-make
 CHECK_1 := lacheck
 CHECK_2 := chktex
@@ -11,7 +11,7 @@ REDUCE_PIC := -resize '800x800>' \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 REDUCE_PIC_COLOR := -quality 80\%
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
-GIT := git --no-pager 
+GIT := git --no-pager
 SPELL_CHECK := hunspell -t -l -d en_US
 
 # We want bash as shell
@@ -112,10 +112,10 @@ epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
-	$(RSYNC) book-epub/ bw-book-epub/
+	$(RSYNC) epub_build/book-epub/ bw-book-epub/
 
 copy_ebook_files_cl: build_ebook
-	$(RSYNC) book-epub/ low-res-book-epub/
+	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
@@ -229,7 +229,7 @@ export_figures: build_pdf $(tgt_figures)
 
 # Goal is not really to have 0 warning reported but we should check we don't
 # add many and if we do, we know they are false positive
-check: spell-check tex-check 
+check: spell-check tex-check
 
 tex-check: $(src_tex)
 	@echo "Running: " $(CHECK_1)
@@ -254,15 +254,15 @@ clean_figures:
 	- rm cover/cover-page.xbb
 
 clean_ebook_build:
-	-rm  book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
-	-rm  book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
-	-rm  book*x.svg
-	-rm  book.css
-	-rm  content.opf
+	-rm  epub_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
+	-rm  epub_build/book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
+	-rm  epub_build/book*x.svg
+	-rm  epub_build/book.css
+	-rm  epub_build/content.opf
 
-clean_website_build: clean_ebook_build
-	-rm book-*.svg
-	-rm book.{loc,dlog}
+clean_website_build:
+	-rm website_build/book-*.svg
+	-rm website_build/book.{loc,dlog}
 	-rm $(subst $(website_dir)/,, $(wildcard $(website_dir)/*.html))
 
 clean: clean_ebook_build clean_figures clean_website_build
@@ -273,6 +273,9 @@ clean: clean_ebook_build clean_figures clean_website_build
 	-rm -rf *book-epub/META-INF
 	-rm -rf *book-epub/OEBPS
 	-rm  *book-epub/mimetype
+	-rm -rf epub_build/book-epub/META-INF
+	-rm -rf epub_build/book-epub/OEBPS
+	-rm  epub_build/book-epub/mimetype
 
 mrproper: clean
 	$(CLEAN) -C $(src_figures)
@@ -288,12 +291,14 @@ mrproper: clean
 	-rm -rf book_sans_serif/
 	-rm -rf booklet/
 	-rm -rf *book-epub/
+	-rm -rf epub_build/
+	-rm -rf website_build/
 	-rm -rf $(website_dir)
 
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
 
-bake: release_serif release_sans_serif release_booklet
+bake: release_serif release_sans_serif release_booklet website
 
 release:
 	mkdir -p release
