@@ -98,7 +98,7 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 	ebb -x $<
 
 booklet/booklet.pdf: $(booklet_src)
-	$(LATEX) -output-directory=booklet booklet.tex
+	$(LATEX) -nobibtex -output-directory=booklet booklet.tex
 
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
