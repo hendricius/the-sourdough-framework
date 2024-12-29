@@ -64,7 +64,7 @@ jobs:
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make bake
+            make -j -O bake
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
