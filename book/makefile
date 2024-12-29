@@ -97,8 +97,11 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.xbb: %.jpg
 	ebb -x $<
 
+# We don't want to use latexmk as there is no biber nor references and it
+# seems to make it somehow unhappy
 booklet/booklet.pdf: $(booklet_src)
-	$(LATEX) -nobibtex -output-directory=booklet booklet.tex
+	mkdir -p booklet
+	lualatex --output-directory=booklet booklet.tex
 
 book_serif/book.pdf: $(src_all)
 	$(LATEX) -output-directory=book_serif book.tex
