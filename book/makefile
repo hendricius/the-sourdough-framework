@@ -10,8 +10,7 @@ REDUCE_PIC := -resize '800x800>' \
 	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 REDUCE_PIC_COLOR := -quality 80\%
-RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
-RSYNC_INC_PNG := rsync -au --exclude 'book.epub' --exclude '*.jpg'
+RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg'
 GIT := git --no-pager
 SPELL_CHECK := hunspell -t -l -d en_US
 
@@ -116,10 +115,10 @@ epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
-	$(RSYNC) epub_build/book-epub/ bw-book-epub/
+	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
 
 copy_ebook_files_low_res: build_ebook
-	$(RSYNC_INC_PNG) epub_build/book-epub/ low-res-book-epub/
+	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
