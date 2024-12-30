@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+    \tikzstyle{every node}+=[font=\normalsize\rmfamily]
+    \begin{axis}[
+        title style={align=center},
+        title={Gluten development of a sourdough and yeast based dough\\
+                \qty{22}{\degreeCelsius} (\qty{72}{\degF}) and
+                \qty{60}{\percent}~hydration},
+        axis x line=middle,
+        axis y line=middle,
+        xmax=44, xmin=-0.1,
+        ymax=12, ymin=-0.1,
+        every axis y label/.style={%
+            at={(ticklabel cs:0.5)},rotate=90,anchor=near ticklabel}, 
+        every axis x label/.style={%
+            at={(ticklabel cs:0.5)},anchor=near ticklabel}, 
+        every axis legend/.append style={%
+            at={(0.9,0.3)}, anchor=south east},
+        xtick distance=6,
+        ytick style={draw=none},
+        yticklabels={empty},
+        legend style={draw=none},
+        legend cell align={left},
+        xlabel=Duration (hours), ylabel=Dough strength
+        ]
+        \addplot [color=redpic,smooth,ultra thick] table {plots/yeast.table};
+        \addplot [color=codeblue,smooth,ultra thick] table {plots/sourdough.table};
+
+        \node at (axis cs:18,8) [anchor=south west] {%
+            \begin{tabular}{@{}lll@{}} \textbf{Dough type}&
+            \textbf{Kneading} & \textbf{Stretch \& Fold}\\
+            \midrule
+            \textcolor{redpic}{Yeast}  & \textcolor{redpic}{None}&
+            \textcolor{redpic}{None}  \\ \textcolor{codeblue}{Sourdough}&
+            \textcolor{codeblue}{None} & \textcolor{codeblue}{None} \\
+            \end{tabular}
+        };
+        \node at (axis cs:8,8.3) [anchor=south] {Peak stage};
+        \node at (axis cs:1,1) [anchor=west] {Development stage};
+        \node at (axis cs:9.5,5) [anchor=west] {Extensibility stage};
+        \node at (axis cs:25.8,4) [anchor=west] {Decay stage};
+    \end{axis}
+\end{tikzpicture}
