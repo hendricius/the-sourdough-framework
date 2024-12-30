@@ -34,7 +34,9 @@ chapters = baking basics bread-types cover flour-types history intro mix-ins\
 
 src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
+src_figures += $(wildcard plots/fig-*.tex)
 src_recipes := $(wildcard recipes/*.tex)
+src_plots   := $(wildcard plots/*.table)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
@@ -58,7 +60,7 @@ bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 # images to lower resolution
 low_res_images := $(addprefix low-res-book-epub/OEBPS/, $(images))
 
-src_all := $(src_tex) $(src_figures) $(src_tables) $(images)
+src_all := $(src_tex) $(src_figures) $(src_tables) $(images) $(src_plots)
 
 ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
 
