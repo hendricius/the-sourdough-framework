@@ -57,9 +57,10 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 # images to lower resolution and greyscale
 bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
 
-# Reduced ebook, we will just re-zip directory after converting the
-# images to lower resolution
+# For lower res colour ebook we would not convert png as it only get worst
+# we will copy them instead... so remove them as a dependency.
 low_res_images := $(addprefix low-res-book-epub/OEBPS/, $(images))
+low_res_images := $(filter-out %.png, $(low_res_images))
 
 src_all := $(src_tex) $(src_figures) $(src_tables) $(images) $(src_plots)
 
