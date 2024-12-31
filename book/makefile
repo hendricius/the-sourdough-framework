@@ -295,7 +295,7 @@ mrproper: clean
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
 
-bake: release_serif enforceepubsize release_sans_serif release_booklet website
+bake: release_serif release_sans_serif release_booklet website
 
 release:
 	mkdir -p release
@@ -304,6 +304,10 @@ release_serif: build_serif_pdf build_ebook build_bw_ebook build_low_res_ebook | 
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	@if [ $(EPUBSIZE) -gt 49500000 ]; then \
+		echo "ERROR: epub File too big"; \
+		exit 1; \
+	fi	
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
@@ -388,11 +392,3 @@ printvars:  # Print all variables in the makefile
 	@$(foreach V,$(sort $(.VARIABLES)), \
 	$(if $(filter-out environ% default automatic, \
 	$(origin $V)),$(info $V=$($V) ($(value $V)))))
-
-.PHONY: enforceepubsize
-
-enforceepubsize: 
-	@if [ $(EPUBSIZE) -gt 50000000 ]; then \
-		echo "ERROR: epub File too big"; \
-		exit 1; \
-	fi
