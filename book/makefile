@@ -13,6 +13,7 @@ REDUCE_PIC_COLOR := -quality 80\%
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg'
 GIT := git --no-pager
 SPELL_CHECK := hunspell -t -l -d en_US
+EPUBSIZE := `du -sb epub/low_res_book.epub | cut -f1`
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -294,7 +295,7 @@ mrproper: clean
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
 
-bake: release_serif release_sans_serif release_booklet website
+bake: release_serif enforceepubsize release_sans_serif release_booklet website
 
 release:
 	mkdir -p release
@@ -387,3 +388,11 @@ printvars:  # Print all variables in the makefile
 	@$(foreach V,$(sort $(.VARIABLES)), \
 	$(if $(filter-out environ% default automatic, \
 	$(origin $V)),$(info $V=$($V) ($(value $V)))))
+
+.PHONY: enforceepubsize
+
+enforceepubsize: 
+	@if [ $(EPUBSIZE) -gt 50000000 ]; then \
+		echo "ERROR: epub File too big"; \
+		exit 1; \
+	fi
