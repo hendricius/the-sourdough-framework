@@ -10,9 +10,10 @@ REDUCE_PIC := -resize '800x800>' \
 	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 REDUCE_PIC_COLOR := -quality 80\%
-RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg' --exclude '*.png'
+RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg'
 GIT := git --no-pager
 SPELL_CHECK := hunspell -t -l -d en_US
+EPUBSIZE := `du -sb epub/low_res_book.epub | cut -f1`
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -111,15 +112,15 @@ book_serif/book.pdf: $(src_all)
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
 
-.PHONY: copy_ebook_files copy_ebook_files_cl
+.PHONY: copy_ebook_files copy_ebook_files_low_res
 
 epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
-	$(RSYNC) epub_build/book-epub/ bw-book-epub/
+	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
 
-copy_ebook_files_cl: build_ebook
+copy_ebook_files_low_res: build_ebook
 	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
 
 # We do not convert SVG to B&W or lower res for now as they are super small
@@ -136,15 +137,11 @@ low-res-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
 
-low-res-book-epub/OEBPS/%.png: %.png
-	mkdir -p $(dir $@)
-	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
-
 epub/bw_book.epub: copy_ebook_files $(bw_images)
 	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
-epub/low_res_book.epub: copy_ebook_files_cl $(low_res_images)
+epub/low_res_book.epub: copy_ebook_files_low_res $(low_res_images)
 	cd low-res-book-epub; zip -q0X ../epub/low_res_book.epub mimetype
 	cd low-res-book-epub; zip -q9XrD ../epub/low_res_book.epub ./
 
@@ -305,9 +302,12 @@ release:
 
 release_serif: build_serif_pdf build_ebook build_bw_ebook build_low_res_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
-	cp epub/book.epub release/TheBreadCode-The-Sourdough-Framework.epub
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
-	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework-reduced-size.epub
+	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	@if [ $(EPUBSIZE) -gt 49500000 ]; then \
+		echo "ERROR: epub File too big"; \
+		exit 1; \
+	fi	
 
 release_sans_serif: build_sans_serif_pdf | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
