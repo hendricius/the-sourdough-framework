@@ -1,7 +1,7 @@
 \begin{tikzpicture}
     \tikzstyle{every node}+=[font=\normalsize\rmfamily]
     \begin{axis}[
-        title=Ambient temperatures,
+        title=Ambient temperature,
         grid=both,
         major grid style={line width=.2pt,draw=gray!30},
         axis x line=middle,
@@ -18,11 +18,11 @@
         legend cell align={left},
         xlabel=Duration (minutes), ylabel=Temperature (\SI{}{\degree} C)
         ]
-        \addplot [color=redpic,smooth,ultra thick] table {plots/icecube_ambient.table};
-        \addplot [color=codeblack,smooth,ultra thick]  table {plots/preheated_ambient.table};
-        \addplot [color=codeblue,smooth,ultra thick]   table {plots/non-preheated_ambient.table};
+        \addplot [color=redpic,smooth,ultra thick]    table {plots/icecube_ambient.table};
+        \addplot [color=codeblack,smooth,ultra thick] table {plots/preheated_ambient.table};
+        \addplot [color=codeblue,smooth,ultra thick]  table {plots/non-preheated_ambient.table};
         \addplot [color=yellowpic,smooth,ultra thick] table {plots/preheated_bottom_ambient.table};
-        \addplot [color=pinkpic,smooth,ultra thick] table {plots/spritzing_ambient.table};
-        \legend{ice cube, pre-heated, non-preheated, pre-heated bottom, spritzing};
+        \addplot [color=pinkpic,smooth,ultra thick]   table {plots/spritzing_ambient.table};
+        \legend{Ice cube, Preheated, Non-preheated, Preheated bottom, Spritzing};
     \end{axis}
 \end{tikzpicture}
