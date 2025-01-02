@@ -7,14 +7,14 @@
                 \qty{60}{\percent}~hydration},
         axis x line=middle,
         axis y line=middle,
+        width=\textwidth,
+        height=0.5\textwidth,
         xmax=44, xmin=-0.1,
         ymax=12, ymin=-0.1,
         every axis y label/.style={%
             at={(ticklabel cs:0.5)},rotate=90,anchor=near ticklabel}, 
         every axis x label/.style={%
             at={(ticklabel cs:0.5)},anchor=near ticklabel}, 
-        every axis legend/.append style={%
-            at={(0.9,0.3)}, anchor=south east},
         xtick distance=6,
         ytick style={draw=none},
         yticklabels={empty},
@@ -25,7 +25,7 @@
         \addplot [color=redpic,smooth,ultra thick] table {plots/yeast.table};
         \addplot [color=codeblue,smooth,ultra thick] table {plots/sourdough.table};
 
-        \node at (axis cs:18,8) [anchor=south west] {%
+        \node at (axis cs:18,7) [anchor=south west] {%
             \begin{tabular}{@{}lll@{}} \textbf{Dough type}&
             \textbf{Kneading} & \textbf{Stretch \& Fold}\\
             \midrule

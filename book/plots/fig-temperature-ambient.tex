@@ -6,14 +6,15 @@
         major grid style={line width=.2pt,draw=gray!30},
         axis x line=middle,
         axis y line=middle,
+        width=\textwidth,
+        height=0.5\textwidth,
         xmax=35, xmin=-0.1,
         ymax=205, ymin=-0.1,
         every axis y label/.style={%
             at={(ticklabel cs:0.5)},rotate=90,anchor=near ticklabel}, 
         every axis x label/.style={%
             at={(ticklabel cs:0.5)},anchor=near ticklabel}, 
-        every axis legend/.append style={%
-            at={(0.9,0.3)}, anchor=south east},
+        legend pos = south east,
         legend style={draw=none},
         legend cell align={left},
         xlabel=Duration (minutes), ylabel=Temperature (\SI{}{\degree} C)
