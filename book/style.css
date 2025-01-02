@@ -15,6 +15,8 @@
   --padding-hamburger: 5px;
   --c-beige: #F3EDE6;
   --border-radius: 7px;
+  --image-padding: 14px;
+  --image-background: #ffffff;
 }
 
 @media (min-width: 1200px){
@@ -385,11 +387,6 @@ h4 {
   margin-top: 1em;
 }
 
-img[alt~="PIC"], iframe, a img {
-  border-radius: var(--border-radius);
-  border: 2px solid var(--c-black);
-}
-
 main.main-content, div.footnotes, main.titlepage {
   background-color: var(--c-beige);
 }
@@ -478,10 +475,6 @@ nav.TOC span:hover, nav.TOC span:hover *, nav.TOC span.chapterToc.selected, nav.
 }
 
 p.flowchart-image-wrapper {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  border: 2px solid var(--c-black);
   display: flex;
   justify-content: center;
 }
@@ -528,6 +521,19 @@ blockquote {
   display: none;
 }
 
+figure.float, div.figure, figure.figure {
+  padding: var(--image-padding);
+  background: var(--image-background);
+}
+
+figure.figure p.noindent {
+  text-align: center;
+}
+
+.flowchart-image-wrapper {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .header {
     display: none;
@@ -572,10 +578,6 @@ blockquote {
     background: var(--c-black-background);
   }
 
-  p.flowchart-image-wrapper {
-    padding: 5px;
-  }
-
   .menu-entry:hover {
     background-color: transparent;
   }
@@ -592,5 +594,9 @@ blockquote {
   .mobile-banner a img {
     border: none;
     border-radius: 0px;
+  }
+
+  figure.float, div.figure, figure.figure {
+    padding: calc(var(--image-padding) / 2);
   }
 }
