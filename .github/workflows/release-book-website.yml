@@ -74,7 +74,7 @@ jobs:
           source_dir: book/release
           destination_dir: release
       - name: Upload book Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: books
           path: |
@@ -90,7 +90,7 @@ jobs:
           source_dir: website/static_website_html
           destination_dir: static_html_root
       - name: Upload website Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: website
           path: website/static_website_html

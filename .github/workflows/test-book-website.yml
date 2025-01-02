@@ -42,7 +42,7 @@ jobs:
             cd /app/book
             make -j -O build_serif_pdf build_ebook website
       - name: Upload book Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: books
           path: |
@@ -50,7 +50,7 @@ jobs:
             book/book_serif/book.pdf
             book/book-epub/book.epub
       - name: Upload website Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: website
           path: website/static_website_html
