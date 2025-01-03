@@ -10,7 +10,7 @@ REDUCE_PIC := -resize '800x800>' \
 	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
 	    -set colorspace Gray -separate -evaluate-sequence Mean
 REDUCE_PIC_COLOR := -quality 80\%
-RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg'
+RSYNC := rsync -au --exclude 'book_sans_serif.epub' --exclude '*.jpg'
 GIT := git --no-pager
 SPELL_CHECK := hunspell -t -l -d en_US
 EPUBSIZE := `du -sb epub/low_res_book.epub | cut -f1`
@@ -119,10 +119,10 @@ epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
-	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
+	$(RSYNC) --exclude '*.png' epub_build/book_sans_serif-epub/ bw-book-epub/
 
 copy_ebook_files_low_res: build_ebook
-	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
+	$(RSYNC) epub_build/book_sans_serif-epub/ low-res-book-epub/
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
@@ -219,7 +219,7 @@ build_serif_pdf: book_serif/book.pdf
 
 build_sans_serif_pdf: book_sans_serif/book_sans_serif.pdf
 
-build_ebook: epub/book.epub
+build_ebook: epub/book_sans_serif.epub
 
 build_bw_ebook: epub/bw_book.epub
 
@@ -318,10 +318,10 @@ release_booklet: build_booklet | release
 
 # Website stuff
 .PHONY: html website
-$(website_dir)/book.html: $(website_src) cover/cover-page.xbb
-	$(WEBSITE) -d $(website_dir) book.tex
+$(website_dir)/book_sans_serif.html: $(website_src) cover/cover-page.xbb
+	$(WEBSITE) -d $(website_dir) book_sans_serif.tex
 
-html: $(website_dir)/book.html
+html: $(website_dir)/book_sans_serif.html
 	cp $< $(website_dir)/index.html
 
 # Because packages will be installed in hard to predict places use a file as
@@ -347,7 +347,7 @@ quick_booklet:
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=booklet booklet.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
-	$(EBOOK) --mode draft book.tex
+	$(EBOOK) --mode draft book_sans_serif.tex
 
 show_tools_version:  # Show version of tools used on the build machine
 	- $(GIT) log -1 --pretty=%B
