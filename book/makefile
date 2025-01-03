@@ -91,10 +91,9 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 # TODO: check if it works on github CI
 %.png: %.tex
 	@echo "\input{./vars.tex}" > $@.in
-	# \b is backspace..
-	@echo "\\\begin{document}" >> $@.in
+	@echo "\begin{document}" >> $@.in
 	@cat $< >> $@.in
-	@echo "\\\end{document}" >> $@.in
+	@echo "\end{document}" >> $@.in
 	$(LATEX) $@.in
 	figures/export_figures.sh $@.pdf
 
