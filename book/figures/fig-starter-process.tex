@@ -16,4 +16,14 @@
   \path [line] (decide) -- node{no} (timeout);
   \path [line] (wait2) -- (feed);
   \path [line] (decide) -- node{yes} (use);
+
+  \node [right of=discard2, node distance=3.5cm] (details1) [shape=rectangle,draw]{
+        \begin{tabular}{c c c}
+            \multicolumn{3}{c}{{Stuff in details 1}} \\
+            foo & bar & thing \\
+            and yet & another
+        \end{tabular}
+  
+  };
+
 \end{tikzpicture}
