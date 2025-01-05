@@ -1,28 +1,58 @@
 \begin{tikzpicture}[node distance = 3.5cm, auto]
+  \node [start] (init) {Mix \qty{50}{\gram} flour + \qty{50}{\gram} water, stir};
+  \node [block, right of=init] (wait2) {Wait\\ \qty{24}{\hour}};
+  \path [line] (init) -- (wait2);
+  \node [block, below of=wait2, node distance=3.5cm] (feed) {\qty{10}{\gram} of previous day + \qty{50}{\gram} water + \qty{50}{\gram} flour, stir};
+  \path [line] (wait2) -- (feed);
+  \node [block, below of=feed] (discard) {Discard the rest};
+  \path [line] (feed) -- (discard);
+  \node [decision, right of=feed, node distance=3.5cm] (decide) {Is good?};
+  \node [decision, above of=decide, node distance=3.5cm] (timeout) {Less than 10 feeds?};
+  \node [fail, right of=timeout, node distance=3.5cm] (discard2) {Batch failed};
+  \path [line] (timeout) -- node{no} (discard2);
+  \path [line] (timeout) -- node{yes} (wait2);
+  \path [line] (feed) -- (decide);
+  \node [success, right of=decide, node distance=3.5cm] (use) {Ready to use};
+  \path [line] (decide) -- node{no} (timeout);
+  \path [line] (wait2) -- (feed);
+  \path [line] (decide) -- node{yes} (use);
 
-  \node [start] (start) { Start with Initial Mixture };
-  \node [block, right of=start, node distance = 3.2cm] (wait) { Wait\\ \qty{24}{\hour} };
-  \node [decision, right of=wait, node distance = 3.2cm] (readycheck) { Ready? };
-  \node [block, below of=wait, node distance = 3cm] (feed) { Feed the Mixture };
-  \node [decision, right of=feed, node distance = 3.2cm] (limitcheck) { Failed? };
-  \node [fail, right of=limitcheck, node distance = 3.2cm] (abort) { Discard All, Start Over };
-  \node [success, right of=readycheck, node distance = 3.2cm] (final) { Done };
+  \node [start, below of=discard, left of=discard] (start_n) { Start with Initial Mixture };
+  \node [block, right of=start_n, node distance = 3.2cm] (wait_n) { Wait\\ \qty{24}{\hour} };
+  \node [decision, right of=wait_n, node distance = 3.2cm] (readycheck_n) { Ready? };
+  \node [block, below of=wait_n, node distance = 3cm] (feed_n) { Feed the Mixture };
+  \node [decision, right of=feed_n, node distance = 3.2cm] (limitcheck_n) { Failed? };
+  \node [fail, right of=limitcheck_n, node distance = 3.2cm] (abort_n) { Discard All, Start Over };
+  \node [success, right of=readycheck_n, node distance = 3.2cm] (final_n) { Done };
 
-  \draw [thick, -{Latex}] (start) -- (wait);
-  \draw [thick, -{Latex}] (wait) -- (readycheck);
-  \draw [thick, -{Latex}] (feed) -- (wait);
-  \draw [thick, -{Latex}] (readycheck) -- node { No } (limitcheck);
-  \draw [thick, -{Latex}] (limitcheck) -- node (feedok) { No } (feed) ;
-  \draw [thick, -{Latex}] (limitcheck) -- node { Yes } (abort);
-  \draw [thick, -{Latex}] (readycheck) -- node { Yes } (final);
+  \draw [thick, -{Latex}] (start_n) -- (wait_n);
+  \draw [thick, -{Latex}] (wait_n) -- (readycheck_n);
+  \draw [thick, -{Latex}] (feed_n) -- (wait_n);
+  \draw [thick, -{Latex}] (readycheck_n) -- node { No } (limitcheck_n);
+  \draw [thick, -{Latex}] (limitcheck_n) -- node (feedok_n) { No } (feed_n) ;
+  \draw [thick, -{Latex}] (limitcheck_n) -- node { Yes } (abort_n);
+  \draw [thick, -{Latex}] (readycheck_n) -- node { Yes } (final_n);
 
-  \node [below of=feedok, node distance=2.5cm] (details1) [shape=rectangle,draw,fill=white!90!black]{
-        \begin{tabular}{c}
+  \node [below of=feedok_n, node distance=4.5cm] (details1) [shape=rectangle,draw,fill=white!90!black]{
+        \begin{tabular}{l}
 	    \fontsize{7}{9}\selectfont For the \emph{Initial Mixture}, mix \qty{50}{\gram} flour/\qty{50}{\gram} water. \\
             \fontsize{7}{9}\selectfont The Mixture is \emph{Ready} when it has \emph{grown}, has \emph{bubbles}, and \emph{smells} vinegary/yoghurty. \\
             \fontsize{7}{9}\selectfont The Mixture has \emph{Failed} when you have fed it too many (eg 10) times without success. \\
 	    \fontsize{7}{9}\selectfont To \emph{Feed the Mixture}, discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water.
         \end{tabular}
-  
+    };
+
+  \node [below of=details1, node distance=4.5cm, align=left] (details2) [shape=rectangle,draw,fill=white!90!black]{
+	    \fontsize{7}{9}\selectfont For the \emph{Initial Mixture}, mix
+        \qty{50}{\gram} flour/\qty{50}{\gram} water.\\
+            \fontsize{7}{9}\selectfont The Mixture is \emph{Ready} when it has
+            \emph{grown}, has \emph{bubbles}, and \emph{smells}
+            vinegary/yoghurty. \\
+
+            \fontsize{7}{9}\selectfont The Mixture has \emph{Failed} when you
+            have fed it too many (eg 10) times without success.\\
+
+	    \fontsize{7}{9}\selectfont To \emph{Feed the Mixture}, discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water.
+
   };
 \end{tikzpicture}
