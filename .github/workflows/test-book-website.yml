@@ -1,6 +1,12 @@
 name: Test book and website for given image
 
-on: [push, pull_request]
+on: 
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - '**'
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.repository }}:latest
@@ -27,32 +33,24 @@ jobs:
           run: |
             cd /app/book
             make printvars
-      - name: Test baking the release versions
+      - name: Test baking the release versions and website
         uses: addnab/docker-run-action@v3
         with:
           image: ${{ env.DOCKER_IMAGE }}
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make -j build_serif_pdf build_ebook
+            make -j -O build_serif_pdf build_ebook website
       - name: Upload book Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: books
           path: |
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-      - name: Test building website
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.DOCKER_IMAGE }}
-          options: -v ${{ github.workspace }}:/app
-          run: |
-            cd /app/book
-            make mrproper && make website
       - name: Upload website Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: website
           path: website/static_website_html

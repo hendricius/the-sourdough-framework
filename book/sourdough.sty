@@ -1,11 +1,11 @@
 \ProvidesPackage{sourdough}
 \usepackage{blindtext}
 \usepackage{graphicx}
+\usepackage{pgfplots}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{chemformula}
 \usepackage{chemfig}
-\usepackage{booktabs}
 \usepackage{makecell}
 \usepackage[mode=match, reset-text-family=false]{siunitx}
 \usepackage{fontspec}
@@ -24,15 +24,19 @@
   types=flowcharts,%  ,
   float,
   floattype=4,%
+  counterwithin=chapter,
   name=Flowchart,%
   listname = {List of Flowcharts}
 ]{loc}
 \setuptoc{loc}{chapteratlist}
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
+\DeclareTOCStyleEntry[numwidth=3em]{tocline}{flowchart}
+\DeclareTOCStyleEntry[numwidth=3em]{tocline}{table}
 
 % Common abbreviations
 \newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
 \newcommand{\eg}{\emph{e.g.}\@ifnextchar.{\!\@gobble}{}}
+\newcommand{\etc}{etc\@ifnextchar.{}{.\@}}
 
 % Consistent pH values
 \newcommand{\pHvalue}[1]{pH~\SI{#1}{}}
@@ -71,10 +75,11 @@
 \addbibresource{references.bib}
 
 % Clickable links in the table of contents
-\usepackage[ocgcolorlinks]{hyperref}
+\usepackage{hyperref}
 \usepackage{bookmark}
 \hypersetup{%
     linktoc=all,
+    colorlinks = true,
     linkcolor = hlorange,
     urlcolor  = codeblue,
     citecolor = hlocre,

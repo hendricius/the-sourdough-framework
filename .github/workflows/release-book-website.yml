@@ -64,7 +64,7 @@ jobs:
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make -j bake
+            make -j -O bake
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
@@ -74,21 +74,13 @@ jobs:
           source_dir: book/release
           destination_dir: release
       - name: Upload book Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: books
           path: |
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-      - name: Bake the website
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.LATEST_IMAGE }}
-          options: -v ${{ github.workspace }}:/app
-          run: |
-            cd /app/book
-            make mrproper && make website
       - name: Release baked website to S3
         uses: shallwefootball/s3-upload-action@master
         with:
@@ -98,7 +90,7 @@ jobs:
           source_dir: website/static_website_html
           destination_dir: static_html_root
       - name: Upload website Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: website
           path: website/static_website_html
