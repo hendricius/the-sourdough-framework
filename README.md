@@ -53,7 +53,7 @@ make
 ```
 
 If you want to 🍞 bake all the versions including ebook variants (.pdf, .epub
-in colour and size optimized Black&White), run:
+in colour and size optimized Black&White, as well as website), run:
 
 ```console
 cd book/
@@ -80,7 +80,7 @@ There's an additional enhanced accessibility version using a sans-serif font:
 * [Download compiled sans-serif .pdf version](https://www.the-bread-code.io/book-sans-serif.pdf)
 
 An additional black and white ebook is provided with a greatly reduced file
-size. This shrinks the book from more than 50MB down to ~5MB:
+size. This shrinks the book from more than 20MB down to ~5MB:
 
 * [Download compiled B&W .epub version](https://www.the-bread-code.io/bw-book.epub)
 
