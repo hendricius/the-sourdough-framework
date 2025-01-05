@@ -42,17 +42,26 @@
         \end{tabular}
     };
 
-  \node [below of=details1, node distance=4.5cm, align=left] (details2) [shape=rectangle,draw,fill=white!90!black]{
-	    \fontsize{7}{9}\selectfont For the \emph{Initial Mixture}, mix
-        \qty{50}{\gram} flour/\qty{50}{\gram} water.\\
-            \fontsize{7}{9}\selectfont The Mixture is \emph{Ready} when it has
-            \emph{grown}, has \emph{bubbles}, and \emph{smells}
-            vinegary/yoghurty. \\
+%  Feel free to comment out and see how it looks similar to above
+%  \node [below of=details1, node distance=1.5cm, align=left] (details2) [shape=rectangle,draw,fill=white!90!black]{
+%	    \fontsize{7}{9}\selectfont For the \emph{Initial Mixture}, mix
+%        \qty{50}{\gram} flour/\qty{50}{\gram} water.\\
+%            \fontsize{7}{9}\selectfont The Mixture is \emph{Ready} when it has
+%            \emph{grown}, has \emph{bubbles}, and \emph{smells}
+%            vinegary/yoghurty. \\
+%
+%            \fontsize{7}{9}\selectfont The Mixture has \emph{Failed} when you
+%            have fed it too many (eg 10) times without success.\\
+%
+%	    \fontsize{7}{9}\selectfont To \emph{Feed the Mixture}, discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water.
+%  };
 
-            \fontsize{7}{9}\selectfont The Mixture has \emph{Failed} when you
-            have fed it too many (eg 10) times without success.\\
-
-	    \fontsize{7}{9}\selectfont To \emph{Feed the Mixture}, discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water.
-
-  };
+  \node [below of=details1, node distance=2.5cm] (detailsced) [shape=rectangle,draw,fill=white!90!black]{
+      \begin{tabular}{@{}ll@{}}
+          \textbf{Initial Mixture}:& Mix \qty{50}{\gram} flour/\qty{50}{\gram} water. \\
+          \textbf{Feed the Mixture}:& Discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water\\
+          \textbf{Ready}:& The mixture has \emph{grown}, has \emph{bubbles}, and \emph{smells} vinegary/yoghurty. \\
+          \textbf{Failed}: & The mixture has been fed too many (eg 10) times without success. \\
+        \end{tabular}
+    };
 \end{tikzpicture}
