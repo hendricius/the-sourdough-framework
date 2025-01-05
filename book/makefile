@@ -79,9 +79,9 @@ ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
-# Default target is not all becuse most of the time we just want a pdf...
-# ebook take a long time to build.
-.DEFAULT_GOAL := build_ebook
+# Default target is not all because most of the time we just want a pdf...
+# and ebook take a long time to build.
+.DEFAULT_GOAL := build_serif_pdf
 
 # Default rules for pdf and ebooks, getting overwritten when built in a
 # sub-directory
@@ -92,18 +92,11 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 %.png: %.tex
 	@echo "\input{./vars.tex}" > $@.in
 	# \b is backspace..
-	@echo "\\begin{document}" >> $@.in
+	@echo "\\\begin{document}" >> $@.in
 	@cat $< >> $@.in
-	@echo "\\end{document}" >> $@.in
+	@echo "\\\end{document}" >> $@.in
 	$(LATEX) $@.in
 	figures/export_figures.sh $@.pdf
-
-
-figures/fig-ethanol-oxidation-external.pdf: figures/fig-ethanol-oxidation-external.tex
-	$(LATEX) $<
-
-figures/fig-life-planet-sourdough-timeline-external.pdf: figures/fig-life-planet-sourdough-timeline-external.tex
-	$(LATEX) $<
 
 %.xbb: %.jpg
 	ebb -x $<
@@ -122,10 +115,7 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 
 .PHONY: copy_ebook_files copy_ebook_files_low_res
 
-epub/%.epub: %.tex $(src_all) cover/cover-page.xbb\
-	figures/fig-life-planet-sourdough-timeline-external.pdf\
-	figures/fig-ethanol-oxidation-external.pdf
-
+epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
 copy_ebook_files: build_ebook
@@ -158,7 +148,6 @@ epub/low_res_book.epub: copy_ebook_files_low_res $(low_res_images)
 
 # Now with the rules
 # Expected usual rules first
-
 .PHONY: all
 all: bake
 
