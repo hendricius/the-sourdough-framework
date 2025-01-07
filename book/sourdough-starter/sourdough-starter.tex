@@ -1,6 +1,15 @@
 \chapter{Making a sourdough starter}%
 \label{chapter:sourdough-starter}
 \begin{quoting}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{sourdough-starter-activity-indicators}
+  \caption[Very active sourdough]{A very active sourdough starter shown by the
+      bubbles in the dough.}%
+  \label{fig:sourdough-starter}
+\end{figure}
+
 In this chapter you will learn how to make your
 own sourdough starter, but before doing so you will
 quickly learn about baker's math. Don't worry,
@@ -11,6 +20,8 @@ You will learn to understand the signs indicating
 your starter's readiness, as well as
 how to prepare your starter for long-term storage.
 \end{quoting}
+
+\iffalse
 
 \section{Baker's math}%
 \label{section:bakers-math}
@@ -80,20 +91,23 @@ hungry family arrives. You are tasked with making pasta
 for \num{20} people. How would you calculate the amount of sauce
 you need? You go to the internet and check a recipe and then
 are completely lost when trying to scale it up.
+\fi
 
 \section{The process of making a starter}
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{sourdough-starter-activity-indicators}
-  \caption[Very active sourdough]{A very active sourdough starter shown by the
-      bubbles in the dough.}%
-  \label{fig:sourdough-starter}
-\end{figure}
-
 Making a sourdough starter is very easy, all you need
 is a little bit of patience. It is in fact so easy that it can be summarized
-in a simple flowchart~\ref{fig:sourdough-starter-process} The flour you should
+in a simple flowchart~\ref{fig:sourdough-starter-process}.
+
+\begin{flowchart}[!htb]
+\centering
+  \input{figures/fig-starter-process.tex}
+  \caption[The full sourdough starter process]{The process of making a sourdough
+      starter from scratch.}%
+  \label{fig:sourdough-starter-process}
+\end{flowchart}
+
+The flour you should
 use to bootstrap your starter is ideally a whole flour.
 You could use whole-wheat, whole-rye, whole-spelt or
 any other flour you have. In fact gluten free flours such
@@ -131,14 +145,6 @@ not airtight. You still want some gas exchange to be possible.
 I~like to use a glass and place another
 inverted one on top.
 
-\begin{flowchart}[!htb]
-\centering
-  \input{figures/fig-starter-process.tex}
-  \caption[The full sourdough starter process]{The process of making a sourdough
-      starter from scratch.}%
-  \label{fig:sourdough-starter-process}
-\end{flowchart}
-
 Now an epic battle begins. In one study~\cite{yeasts+biocontrol+agent}
 scientists have identified more than \num{150}~different yeast species living
 on a single leaf of a plant.
@@ -146,6 +152,20 @@ All of the different yeasts and bacteria are trying to get
 the upper hand in this battle. Other pathogens such as mold
 are also being activated as we added water. Only the strongest
 most adaptable microorganisms will survive.
+
+\begin{figure}[!htb]
+  \includegraphics[width=\textwidth]{sourdough-starter-microbial-war}
+  \caption[Microbial warfare during sourdough early days]{A simple
+      visualization of the microbial warfare that happens during the making of
+      a sourdough starter. The wild spores on the plant and flour become
+      activated the moment flour and water is mixed.  Only the most adapted
+      flour-fermenting microbes will survive. Because of unwanted microbial
+      fermentation it is advised to discard the feeding-leftovers of the first
+      days. The surviving yeast and bacteria continuously try to outcompete
+      each other for resources. New microbes have a hard time entering the
+      starter and are eliminated.}%
+  \label{fig:sourdough-starter-microbial-war}
+\end{figure}
 
 By adding water to the
 flour the starches start to degrade. The seedling tries to
@@ -187,20 +207,6 @@ starter the whole process is quite quick for me. After a few
 days my new starter seems to be quite alive already. This might
 be due to previous contamination of flour fermenting microbes in
 my kitchen.
-
-\begin{figure}[!htb]
-  \includegraphics[width=\textwidth]{sourdough-starter-microbial-war}
-  \caption[Microbial warfare during sourdough early days]{A simple
-      visualization of the microbial warfare that happens during the making of
-      a sourdough starter. The wild spores on the plant and flour become
-      activated the moment flour and water is mixed.  Only the most adapted
-      flour-fermenting microbes will survive. Because of unwanted microbial
-      fermentation it is advised to discard the feeding-leftovers of the first
-      days. The surviving yeast and bacteria continuously try to outcompete
-      each other for resources. New microbes have a hard time entering the
-      starter and are eliminated.}%
-  \label{fig:sourdough-starter-microbial-war}
-\end{figure}
 
 Wait for around 24~hours and observe what happens to your starter.
 You might see some early signs of fermentation already. Use your nose
