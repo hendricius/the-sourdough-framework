@@ -11,7 +11,7 @@
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_again) -- (feed_new_ratio);
   \path [line] (next_day) -- (ready_signs);
-  \path [line] (ready_signs) -- node{no} (feed_again |- last_feed) |- (feed_again.south);
+  \path [line] (ready_signs) -- node{no} (feed_again |- last_feed) -| (feed_again.south);
   \path [line] (ready_signs) -- node{yes} (last_feed);
   \path [line] (last_feed) -- node{after \qtyrange{6}{12}{\hour}} (bread_dough);
   \path [line] (feed_new_ratio) -- (too_dry);
