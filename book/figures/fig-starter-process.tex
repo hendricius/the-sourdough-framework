@@ -33,15 +33,15 @@
   \draw [line] (limitcheck_n) -- node { Yes } (abort_n);
   \draw [line] (readycheck_n) -- node { Yes } (final_n);
 
-  \node [below of=feedok_n, node distance=2cm, align=left] (details2) [shape=rectangle,draw,fill=white!90!black]{
-    \fontsize{7}{9}\selectfont For the \emph{Initial Mixture}, mix \qty{50}{\gram} flour/\qty{50}{\gram} water.\\
-    \fontsize{7}{9}\selectfont The Mixture is \emph{Ready} when it has
+  \node [below of=feedok_n, node distance=2cm, align=left] (details2) [shape=rectangle,draw,fill=maingray]{
+    For the \emph{Initial Mixture}, mix \qty{50}{\gram} flour/\qty{50}{\gram} water.\\
+    The Mixture is \emph{Ready} when it has
     \emph{grown}, has \emph{bubbles}, and \emph{smells}
     vinegary/yoghurty. \\
 
-    \fontsize{7}{9}\selectfont The Mixture has \emph{Failed} when you
-    have fed it too many (eg 10) times without success.\\
+    The Mixture has \emph{Failed} when you
+    have fed it too many (\eg~10) times without success.\\
 
-    \fontsize{7}{9}\selectfont To \emph{Feed the Mixture}, discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water.
+    To \emph{Feed the Mixture}, discard all but \qty{10}{\gram}, mix in \qty{50}{\gram} flour and \qty{50}{\gram} water.
   };
 \end{tikzpicture}
