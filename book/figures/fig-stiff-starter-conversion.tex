@@ -19,6 +19,7 @@
   \path [line] (too_dry) -- node{no} (next_day);
   \path [line] (too_dry) -- node{yes} (add_water);
   \path [line] (ready_signs) -- node{yes} (last_feed);
-  \draw [thick, <-] ($ (feed_again.east) +(2.1cm, 0.7cm)$) arc (-45:220:1cm);
-  \node [anchor=north, text width=5em] at ($(feed_again.east)+(2cm, 2cm)$) {Repeat 3~times};
+  % TODO: find a better way to position the Repeat 3 times text and arrow. Hard-coded values are finicky and don't work well across media.
+  \draw [line] ($ (feed_again.east) +(0.7cm, 0.9cm)$) arc (220:-45:1cm);
+  \node [anchor=north, text width=5em] at ($(feed_again.east)+(1.9cm, 2cm)$) {Repeat 3~times};
 \end{tikzpicture}

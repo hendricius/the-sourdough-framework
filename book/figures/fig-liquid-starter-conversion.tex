@@ -11,7 +11,7 @@
   \path [line] (ready_signs) -- node{no} (feed_again);
   \path [line] (ready_signs) -- node[above=2pt]{~yes} (last_feed);
   \path [line] (last_feed) -- node{after \qtyrange{6}{12}{\hour}} (bread_dough);
-  \draw [thick, ->] ($ (feed_again.north) +(0.7cm, 1cm)$) arc (-45:220:1cm);
-  \node [anchor=north, text width=5em] at ($(feed_again.north west)+(1.8cm, 2.3cm)$) {Repeat 3~times};
-  
+  % TODO: find a better way to position the Repeat 3 times text and arrow. Hard-coded values are finicky and don't work well across media.
+  \draw [line] ($ (feed_again.north) +(0.7cm, 1cm)$) arc (-45:220:1cm);
+  \node [anchor=north, text width=5em] at ($(feed_again.north west)+(1.55cm, 2.2cm)$) {Repeat 3~times};
 \end{tikzpicture}
