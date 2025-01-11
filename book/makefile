@@ -13,7 +13,6 @@ REDUCE_PIC_COLOR := -quality 80\%
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg'
 GIT := git --no-pager
 SPELL_CHECK := hunspell -t -l -d en_US
-EPUBSIZE := `du -sb epub/low_res_book.epub | cut -f1`
 
 # We want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
@@ -304,7 +303,8 @@ release_serif: build_serif_pdf build_ebook build_bw_ebook build_low_res_ebook | 
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework.epub
-	@if [ $(EPUBSIZE) -gt 49500000 ]; then \
+	# Kindle does not allow files larger than 50 MB... so let's check
+	@if [ `du -sb epub/low_res_book.epub | cut -f1` -gt 49500000 ]; then \
 		echo "ERROR: epub File too big"; \
 		exit 1; \
 	fi	
