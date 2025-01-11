@@ -24,7 +24,7 @@
 
   \path [line] (init) -- (decision_start);
   \path [line] (decision_start) -- node{No} (feed_no_branch);
-  \path [line] (decision_start) -- node[below=2pt]{yes} (feed_yes_branch.north west);
+  \path [line] (decision_start) -- node[below=2pt]{Yes} (feed_yes_branch.north west);
   \path [line] (feed_yes_branch) -- (low_ratio);
   \path [line] (feed_no_branch) -- (high_ratio);
   \path [line] (high_ratio) -- node[anchor=east, above=2pt] {} ++(2.2,0) |-(size_check);
