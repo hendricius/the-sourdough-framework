@@ -8,8 +8,8 @@
   \node [block, right of=flour] (banneton) {Place upside down in banneton};
   \node [success, right of=banneton] (proof) {Begin proofing};
   \path [line] (init) -- (overfermented_decision);
-  \path [line] (overfermented_decision) -- node{yes} (overfermented);
-  \path [line] (overfermented_decision) -- node{no} (shaping_technique);
+  \path [line] (overfermented_decision) -- node{Yes} (overfermented);
+  \path [line] (overfermented_decision) -- node{No} (shaping_technique);
   \path [line] (shaping_technique) -- (flour);
   \path [line] (flour) -- (banneton);
   \path [line] (banneton) -- (proof);

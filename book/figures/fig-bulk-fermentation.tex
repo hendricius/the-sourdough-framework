@@ -20,10 +20,10 @@
   % Same tricks not to get double lines and also we do _not_ want arrows
   \path [draw, thick] (ph_value) -- node{} ++(2, 0);
   \path [draw, thick] (smell) -| node{} ++(2, 4);
-  \path [line] (dough_ready) -- node{yes} (divide_preshape);
+  \path [line] (dough_ready) -- node{Yes} (divide_preshape);
   \path [line] (dough_ready) |- node[right=3pt]{no} (dough_flattened);
   \path [line] (dough_flattened) |- node[right=3pt]{yes} (stretch_fold);
-  \path [line] (dough_flattened) -- node{no} (wait_60_minutes);
+  \path [line] (dough_flattened) -- node{No} (wait_60_minutes);
   \path [line] (stretch_fold) -- (wait_60_minutes);
   \path [line] (wait_60_minutes) -- (check_dough);
 \end{tikzpicture}

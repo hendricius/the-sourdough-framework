@@ -1,0 +1,54 @@
+\begin{tikzpicture}[node distance=1cm]
+
+% Left Side: Antifungal metabolites
+% Bacteria
+\draw[thick, fill=gray!20] (-2, 2.5) ellipse (1.2cm and 0.5cm);
+\node at (-2, 3.2) {Antifungal metabolites};
+
+% Arrows for antifungal metabolites
+\foreach \x in {-2.5, -2, -1.5}
+  \draw[thick, ->] (\x, 2) -- (\x, 1.2);
+
+% Antifungal metabolites (triangles)
+\foreach \x in {-2.5, -2, -1.5}
+  \node[fill=red!80!black, regular polygon, regular polygon sides=3, draw, scale=0.7] at (\x, 1.2) {};
+
+% Fungi (left)
+\draw[thick, fill=gray!50] (-2, 0.5) circle (0.5cm);
+\node at (-2, -0.2) {Fungi};
+
+% Right Side: Nutrient Competition
+% Bacteria
+\draw[thick, fill=gray!20] (3, 2.5) ellipse (1.2cm and 0.5cm);
+\node at (3, 3.2) {Competition for nutrients};
+
+% Arrows for nutrients
+\foreach \x in {2.5, 3, 3.5}
+  \draw[thick, <-] (\x, 2) -- (\x, 1.2);
+
+% Available nutrients (triangles)
+\foreach \x in {2.5, 3, 3.5}
+  \node[fill=green!80!black, regular polygon, regular polygon sides=3, draw, scale=0.7, rotate=180] at (\x, 1.2) {};
+
+% Fungi (right)
+\draw[thick, fill=gray!50] (3, 0.5) circle (0.5cm);
+\node at (3, -0.2) {Fungi};
+
+% Legends
+% Bacteria legend
+\draw[thick, fill=gray!20] (-5.5, -2) ellipse (0.8cm and 0.3cm);
+\node[anchor=west] at (-5, -2) {Bacteria};
+
+% Fungi legend
+\draw[thick, fill=gray!50] (-5.5, -3) circle (0.3cm);
+\node[anchor=west] at (-5, -3) {Fungi};
+
+% Antifungal metabolites legend
+\node[fill=red!80!black, regular polygon, regular polygon sides=3, draw, scale=0.7] at (-5.5, -4) {};
+\node[anchor=west] at (-5, -4) {Antifungal metabolites};
+
+% Available nutrients legend
+\node[fill=green!80!black, regular polygon, regular polygon sides=3, draw, scale=0.7, rotate=180] at (-5.5, -5) {};
+\node[anchor=west] at (-5, -5) {Available nutrients};
+
+\end{tikzpicture}
