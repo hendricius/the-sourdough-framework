@@ -28,7 +28,7 @@ endif
 
 # Default target is not all because most of the time we just want a pdf...
 # and building everything take a long time.
-.DEFAULT_GOAL := build_serif_pdf
+.DEFAULT_GOAL := serif
 
 # List all files that are dependencies {{{
 chapters = baking basics bread-types cover flour-types history intro mix-ins\
@@ -149,8 +149,8 @@ epub/bw_book.epub: copy_ebook_files $(bw_images)
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
 # Now the low res
-copy_ebook_files: build_ebook
-	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
+copy_ebook_files_low_res: ebook
+	$(RSYNC) epub_build/book_sans_serif-epub/ low-res-book-epub/
 
 low-res-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
@@ -186,48 +186,45 @@ website: html ../website/_bundle_install_done $(ruby_src)
 ###################################
 .PHONY: export_figures
 # Requires that you have docker running on your computer.
-export_figures: build_pdf $(tgt_figures)
+export_figures: pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 # }}}
 
-# Now with the rules {{{
-# Expected usual rules first
+# Now with the targets {{{
+# Expected usual targets first
 .PHONY: all
 all: bake
 
 # Finally actual project  targets (i.e. build pdf and ebooks)
-.PHONY: build_pdf build_booklet build_serif_pdf build_sans_serif_pdf build_ebook
+.PHONY: pdf booklet serif sans_serif ebook
 
-pdf: build_serif_pdf build_sans_serif_pdf
-build_pdf: pdf
+pdf: serif sans_serif
 
 booklet: booklet/booklet.pdf
-build_booklet: booklet
-
 serif: book_serif/book.pdf
-build_serif_pdf: serif
-
 sans_serif: book_sans_serif/book_sans_serif.pdf
-build_sans_serif_pdf: sans_serif
 
 ebook: epub/book_sans_serif.epub
-build_ebook: ebook
-
 bw_ebook: epub/bw_book.epub
-build_bw_ebook: bw_ebook
-
 low_res_ebook: epub/low_res_book.epub
+
+# We keep the old target names for backward compatibility
+build_pdf: pdf
+build_booklet: booklet
+build_serif_pdf: serif
+build_sans_serif_pdf: sans_serif
+build_ebook: ebook
+build_bw_ebook: bw_ebook
 build_low_res_ebook: low_res_ebook
 
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
-
 bake: release_serif release_sans_serif release_booklet website
 
 release:
 	mkdir -p release
 
-release_serif: build_serif_pdf build_ebook build_bw_ebook build_low_res_ebook | release
+release_serif: serif ebook bw_ebook low_res_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework.epub
@@ -237,10 +234,10 @@ release_serif: build_serif_pdf build_ebook build_bw_ebook build_low_res_ebook | 
 		exit 1; \
 	fi	
 
-release_sans_serif: build_sans_serif_pdf | release
+release_sans_serif: sans_serif | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
 
-release_booklet: build_booklet | release
+release_booklet: booklet | release
 	cp booklet/booklet.pdf release/TheBreadCode-The-Sourdough-Framework-booklet.pdf
 # }}}
 
@@ -303,7 +300,7 @@ help:
 	@echo ""
 	@echo "Releases:"
 	@echo "  all: pdf serif and sans-serif accessible version, ebooks in colours"
-	@echo "     and black&white versions and the website"
+	@echo "     and black&white versions as well as the website"
 	@echo ""
 	@echo "  bake: same as build all"
 	@echo ""
@@ -311,13 +308,14 @@ help:
 	@echo "  release_sans_serif: build sans-serif/accessible version of pdf"
 	@echo ""
 	@echo "Portable Document Format (pdf):"
-	@echo "  build_sans_serif_pdf: build accessible pdf only (same as release_sans_serif)"
-	@echo "  build_serif_pdf: build serif pdf only"
-	@echo "  build_pdf: builds both serif and accessible pdf"
+	@echo "  sans_serif: build accessible pdf only (same as release_sans_serif)"
+	@echo "  serif: build serif pdf only"
+	@echo "  pdf: builds both serif and accessible pdf"
 	@echo ""
 	@echo "Ebooks (epub):"
-	@echo "  build_ebook: builds only the colour ebook"
-	@echo "  build_bw_ebook: builds the low res black & white ebook"
+	@echo "  ebook: builds only the colour ebook"
+	@echo "  low_res_ebook: builds the colour ebook in lower resolution"
+	@echo "  bw_ebook: builds the low res black & white ebook"
 	@echo ""
 	@echo "Website:"
 	@echo "  website: build the static website from LaTeX sources and post-process it"
@@ -350,7 +348,7 @@ help:
 	@echo "  printvars: print all variables in the makefile"
 	@echo "  print-X: print makefile variable X"
 	@echo ""
-	@echo "set DEBUG i.e make DEBUG=1 build_ebook to add debug flags to commands"
+	@echo "set DEBUG i.e make DEBUG=1 ebook to add debug flags to commands"
 # }}}
 
 # Debug Stuff from now on {{{
