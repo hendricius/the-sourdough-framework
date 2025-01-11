@@ -40,7 +40,7 @@ jobs:
           options: -v ${{ github.workspace }}:/app
           run: |
             cd /app/book
-            make -j -O build_serif_pdf build_ebook website
+            make -j -O serif ebook website
       - name: Upload book Artifacts
         uses: actions/upload-artifact@v4
         with:
