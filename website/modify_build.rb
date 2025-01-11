@@ -79,7 +79,7 @@ class ModifyBuild
   end
 
   def is_cover_page?(filename)
-    ["book.html", "index.html"].any? do |name|
+    ["book_sans_serif.html", "index.html"].any? do |name|
       filename.include?(name)
     end
   end
