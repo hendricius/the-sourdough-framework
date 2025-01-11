@@ -7,14 +7,14 @@
   \node [success, right of=dent_visible_decision, node distance=4cm] (bake) {Score and bake};
   \node [block] at (retard_bake_decision |- poke) (wait_retard) {Wait\\ 15~minutes};
   \node [block] at (wait_retard |- bake) (retard) {Proof in fridge at \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
-  \path [line] (init) -- node{yes} (poke);
-  \path [line] (init) -- node{no} (retard_bake_decision);
+  \path [line] (init) -- node{Yes} (poke);
+  \path [line] (init) -- node{No} (retard_bake_decision);
   \path [line] (poke) -- (dent_visible_decision);
-  \path [line] (dent_visible_decision) -- node{yes} (bake);
-  \path [line] (dent_visible_decision.west) -- node{no} ++(-1.4, 0) -- node{} (wait_poke.south);
+  \path [line] (dent_visible_decision) -- node{Yes} (bake);
+  \path [line] (dent_visible_decision.west) -- node{No} ++(-1.4, 0) -- node{} (wait_poke.south);
   \path [line] (wait_poke) -- (poke);
-  \path [line] (retard_bake_decision) -- node{yes} (wait_retard);
-  \path [line] (retard_bake_decision.east) -- node{no} ++(1, 0) |- node{} (retard.east);
+  \path [line] (retard_bake_decision) -- node{Yes} (wait_retard);
+  \path [line] (retard_bake_decision.east) -- node{No} ++(1, 0) |- node{} (retard.east);
   \path [line] (wait_retard) -- (retard);
   \path [line] (retard) -- (bake);
 \end{tikzpicture}

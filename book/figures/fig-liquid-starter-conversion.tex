@@ -8,7 +8,7 @@
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_new_ratio) -- node{Wait \qty{24}{\hour}} (ready_signs);
   \path [line] (feed_again) -- node[anchor=east]  {} ++(2.2,0) |- (feed_new_ratio);
-  \path [line] (ready_signs) -- node{no} (feed_again);
+  \path [line] (ready_signs) -- node{No} (feed_again);
   \path [line] (ready_signs) -- node[above=2pt]{~yes} (last_feed);
   \path [line] (last_feed) -- node{after \qtyrange{6}{12}{\hour}} (bread_dough);
   % TODO: find a better way to position the Repeat 3 times text and arrow. Hard-coded values are finicky and don't work well across media.

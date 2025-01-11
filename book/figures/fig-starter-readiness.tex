@@ -23,16 +23,16 @@
     {Prepare dough};
 
   \path [line] (init) -- (decision_start);
-  \path [line] (decision_start) -- node{no} (feed_no_branch);
+  \path [line] (decision_start) -- node{No} (feed_no_branch);
   \path [line] (decision_start) -- node[below=2pt]{yes} (feed_yes_branch.north west);
   \path [line] (feed_yes_branch) -- (low_ratio);
   \path [line] (feed_no_branch) -- (high_ratio);
   \path [line] (high_ratio) -- node[anchor=east, above=2pt] {} ++(2.2,0) |-(size_check);
   \path [line] (low_ratio) -- (size_check);
-  \path [line] (size_check) -- node{no} (feed_yes_branch.south east);
-  \path [line] (size_check) -- node{yes} (smell_check);
-  \path [line] (smell_check) -- node{no} (feed_yes_branch.south west);
-  \path [line] (smell_check) -- node{yes} (make_dough);
+  \path [line] (size_check) -- node{No} (feed_yes_branch.south east);
+  \path [line] (size_check) -- node{Yes} (smell_check);
+  \path [line] (smell_check) -- node{No} (feed_yes_branch.south west);
+  \path [line] (smell_check) -- node{Yes} (make_dough);
 
   % braces
   \draw[BC]   (size_check.south) -- 
