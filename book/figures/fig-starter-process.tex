@@ -1,5 +1,5 @@
 \begin{tikzpicture}[node distance = 3.5cm, auto]
-  \node [start, below of=discard, left of=discard] (start_n) {Mix \qty{50}{\gram} flour + \qty{50}{\gram} water, stir};
+  \node [start] (start_n) {Mix \qty{50}{\gram} flour + \qty{50}{\gram} water, stir};
   \node [block, right of=start_n, node distance = 3.5cm] (wait_n) {Wait\\ \qty{24}{\hour}};
   \node [decision, right of=wait_n, node distance = 3.5cm] (readycheck_n) {Ready?};
   \node [block, below of=wait_n, node distance = 3.2cm] (feed_n) {Feed the mixture };
