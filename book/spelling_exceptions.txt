@@ -483,8 +483,6 @@ poolish
 pre
 preshape
 preshaping
-puré
-puréd
 purée
 pâte
 raffaella

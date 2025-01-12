@@ -35,13 +35,13 @@ chapters = baking basics bread-types cover flour-types history intro mix-ins\
 
 src_tables  := $(wildcard tables/table-*.tex)
 src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
-src_figures += $(wildcard plots/fig-*.tex)
+src_figures += $(wildcard plots/fig-*.tex) abbreviations.tex colors.tex
 src_recipes := $(wildcard recipes/*.tex)
 src_plots   := $(wildcard plots/*.table)
 
 src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
 src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
-src_tex += supporters.csv sourdough.sty colors.tex
+src_tex += supporters.csv sourdough.sty colors.tex abbreviations.tex
 src_tex += $(src_recipes)
 
 images := $(wildcard images/*/*.jpg)
@@ -90,11 +90,10 @@ tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
 
 # TODO: check if it works on github CI
 %.png: %.tex
-	@echo "\input{./vars.tex}" > $@.in
-	# \b is backspace..
-	@echo "\\\begin{document}" >> $@.in
+	@printf '%s\n' "\input{./vars.tex}" > $@.in
+	@printf '%s\n' "\begin{document}" >> $@.in
 	@cat $< >> $@.in
-	@echo "\\\end{document}" >> $@.in
+	@printf '%s\n' "\end{document}" >> $@.in
 	$(LATEX) $@.in
 	figures/export_figures.sh $@.pdf
 

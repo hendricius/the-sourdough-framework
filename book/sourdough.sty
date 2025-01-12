@@ -34,9 +34,7 @@
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{table}
 
 % Common abbreviations
-\newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
-\newcommand{\eg}{\emph{e.g.}\@ifnextchar.{\!\@gobble}{}}
-\newcommand{\etc}{etc\@ifnextchar.{}{.\@}}
+\input{abbreviations.tex}
 
 % Consistent pH values
 \newcommand{\pHvalue}[1]{pH~\SI{#1}{}}
