@@ -22,11 +22,11 @@
   \path [line] (close) -- (back_oven);
   \path [line] (back_oven) -- (bake);
   \path [line] (bake.west) -- node{} ++(-2, 0) -| (is_ready_check.north);
-  \path [line] (is_ready_check) -- node{yes} (remove_do_lid);
-  \path [line] (is_ready_check) -- node{no} (wait_5_minutes);
+  \path [line] (is_ready_check) -- node{Yes} (remove_do_lid);
+  \path [line] (is_ready_check) -- node{No} (wait_5_minutes);
   \path [line] (wait_5_minutes.west) -- node{} ++(-1.5, 0) |- (is_ready_check.west);
   \path [line] (remove_do_lid) -- (dark_enough_decision);
-  \path [line] (dark_enough_decision) -- node{yes} (finish_baking);
-  \path [line] (dark_enough_decision) -- node{no} (bake_5_more_minutes);
+  \path [line] (dark_enough_decision) -- node{Yes} (finish_baking);
+  \path [line] (dark_enough_decision) -- node{No} (bake_5_more_minutes);
   \path [line] (bake_5_more_minutes.east) -- node{} ++(1, 0) -- node{} ++(0, 2.3) -| (dark_enough_decision.north);
 \end{tikzpicture}

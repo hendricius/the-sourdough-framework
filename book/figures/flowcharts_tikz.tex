@@ -1,5 +1,5 @@
 \tikzstyle{every picture}+=[font=\footnotesize\sffamily]
-\usetikzlibrary{calc, shapes, arrows, decorations.pathreplacing, calligraphy,
+\usetikzlibrary{calc, shapes, arrows.meta, decorations.pathreplacing, calligraphy,
                 positioning}
 \tikzstyle{decision} = [diamond, draw=codeblack, fill=codeblack, text=white,
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt,
@@ -19,7 +19,8 @@
 \tikzstyle{fail} = [rectangle, draw=codeblack, fill=redpic,  text=black,
     text width=5em, text centered, rounded corners, minimum height=4em,
     line width=0.4mm]
-\tikzstyle{line} = [draw, -latex', thick, ->,>=to]
+% The arrowed connector line between nodes
+\tikzstyle{line} = [draw, thick, ->, >={Latex}]
 
 \tikzstyle{BC} =  [decorate,  % Brace Calligraphic
                  decoration={calligraphic brace, amplitude=3mm, raise=1mm},
