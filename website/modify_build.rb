@@ -126,8 +126,8 @@ class ModifyBuild
   def validate_file(text)
     doc = build_doc(text)
     stylesheets = doc.css("link[rel='stylesheet']").map{|attr| attr["href"] }
-    has_all_styles = %w(book.css style.css).all? { |required_stylesheet| stylesheets.include?(required_stylesheet) }
-    raise InvalidWebsiteFormat.new("No style tag style.css found in the website") unless has_all_styles
+    has_all_styles = %w(book_sans_serif.css style.css).all? { |required_stylesheet| stylesheets.include?(required_stylesheet) }
+    raise InvalidWebsiteFormat.new("No style tag style.css or book_sans_serif.css found in the website") unless has_all_styles
     true
   end
 
@@ -456,7 +456,7 @@ class ModifyBuild
     doc.to_html
   end
 
-  # Takes a name like "static_website_html/book.html" and returns "book.html"
+  # Takes a name like "static_website_html/book_sans_serif.html" and returns "book_sans_serif.html"
   def extract_file_from_path(filename)
     result = filename.split("/")
     return filename if result.length == 1
@@ -483,6 +483,7 @@ class ModifyBuild
     index_text = "The Sourdough Framework goes beyond just recipes and provides a solid knowledge foundation, covering the science of sourdough, the basics of bread making, and advanced techniques for achieving the perfect sourdough bread at home."
     data = {
       "book.html" => index_text,
+      "book_sans_serif.html" => index_text,
       "index.html" => index_text
     }
     data[filename]
@@ -526,12 +527,6 @@ class ModifyBuild
       el["href"] == ""
     end
 
-    # Special case for index page
-    #if ["index.html", "book.html"].include?(filename)
-    #  doc.css(".menu-items .chapterToc.home-link")[0].add_class("selected")
-    #  return doc.to_html
-    #end
-
     # Special case for the flowcharts page which is added by us to the menu.
     # This needs to be done for future manually added pages too
     if "listoflocname.html" == filename
@@ -561,7 +556,7 @@ class ModifyBuild
   def add_canonical_for_duplicates(text, filename)
     # Only applies to book.html which is a duplicate for index.html. The file
     # is still needed though for proper display.
-    canonical_pages = ["book.html", "index.html"]
+    canonical_pages = ["book_sans_serif.html", "index.html"]
     return text unless canonical_pages.include?(filename)
     doc = build_doc(text)
     head = doc.css("head")[0]
