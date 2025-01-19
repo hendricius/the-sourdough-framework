@@ -127,6 +127,9 @@ booklet/booklet.pdf: $(booklet_src)
 epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
+copy_ebook_files: build_ebook
+	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
+
 #  Now that we have built the ebook we will generate 2 more versions
 #
 #  1) With kindle app on phone we want a colour version with size < 50 MB
@@ -150,7 +153,7 @@ epub/bw_book.epub: copy_ebook_files $(bw_images)
 
 # Now the low res
 copy_ebook_files_low_res: ebook
-	$(RSYNC) epub_build/book_sans_serif-epub/ low-res-book-epub/
+	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
 
 low-res-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
@@ -164,10 +167,10 @@ epub/low_res_book.epub: copy_ebook_files_low_res $(low_res_images)
 # Website {{{
 ###################################
 .PHONY: html website
-$(website_dir)/book_sans_serif.html: $(website_src) cover/cover-page.xbb
-	$(WEBSITE) -d $(website_dir) book_sans_serif.tex
+$(website_dir)/book.html: $(website_src) cover/cover-page.xbb
+	$(WEBSITE) -d $(website_dir) book.tex
 
-html: $(website_dir)/book_sans_serif.html
+html: $(website_dir)/book.html
 	cp $< $(website_dir)/index.html
 
 # Because packages will be installed in hard to predict places use a file as
@@ -204,7 +207,7 @@ booklet: booklet/booklet.pdf
 serif: book_serif/book.pdf
 sans_serif: book_sans_serif/book_sans_serif.pdf
 
-ebook: epub/book_sans_serif.epub
+ebook: epub/book.epub
 bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
 
@@ -232,7 +235,7 @@ release_serif: serif ebook bw_ebook low_res_ebook | release
 	@if [ `du -sb epub/low_res_book.epub | cut -f1` -gt 49500000 ]; then \
 		echo "ERROR: epub File too big"; \
 		exit 1; \
-	fi	
+	fi
 
 release_sans_serif: sans_serif | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
