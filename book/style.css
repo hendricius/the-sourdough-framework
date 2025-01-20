@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
-
 :root{
   --ff-sans: 'Open Sans', sans-serif;
   --fw-regular: 400;
@@ -147,7 +145,6 @@ nav.TOC a, nav.TOC a:visited{
 /* *** Colors *** */
 /* ************** */
 
-
 body{
   background-color: var(--c-beige);
 }
@@ -254,6 +251,10 @@ figcaption.caption {
   display: block;
 }
 
+.chapterToc a, .chapterToc, .likechapterToc a, .likechapterToc, .appendixToc a, .appendixToc, .addchapToc a {
+  font-weight: var(--fw-bold);
+}
+
 @media (max-width: 768px) {
   .toggle-menu-label {
     display: block;
@@ -317,7 +318,7 @@ figcaption.caption {
     display: block;
     color: #000;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: var(--fw-bold);
   }
 
   .chapterToc a, .sectionToc a, .subsectionToc a, .likechapterToc a {
@@ -498,7 +499,7 @@ blockquote {
   border: 2px solid var(--c-black);
   color: var(--c-black);
   padding: 4px;
-  font-weight: bold;
+  font-weight: var(--fw-bold);
   text-decoration: none;
 }
 .crosslinks-bottom a.prev {
