@@ -15,13 +15,13 @@ push_docker_image: build_docker_image
 	docker push $(DOCKER_IMAGE):latest
 
 # Books/website
-build_serif_pdf:
-	$(DOCKER_CMD) "cd /opt/repo/book && make build_serif_pdf"
+serif_pdf:
+	$(DOCKER_CMD) "cd /opt/repo/book && make serif_pdf"
 
-build_ebook:
-	$(DOCKER_CMD) "cd /opt/repo/book && make build_ebook"
+ebook:
+	$(DOCKER_CMD) "cd /opt/repo/book && make ebook"
 
-build_pdf:
+pdf:
 	$(DOCKER_CMD) "cd /opt/repo/book && make"
 
 bake:
@@ -31,7 +31,7 @@ website:
 	$(DOCKER_CMD) "cd /opt/repo/book && make website"
 
 booklet:
-	$(DOCKER_CMD) "cd /opt/repo/book && make build_booklet"
+	$(DOCKER_CMD) "cd /opt/repo/book && make booklet"
 
 mrproper:
 	$(DOCKER_CMD) "cd /opt/repo/book && make mrproper"
@@ -48,3 +48,8 @@ print_os_version:
 
 start_shell:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash
+
+# Old names for backward compatibility
+build_serif_pdf: serif_pdf
+build_ebook: ebook
+build_pdf: pdf
