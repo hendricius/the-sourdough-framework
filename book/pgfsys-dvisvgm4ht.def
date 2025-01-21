@@ -1,0 +1,75 @@
+% Copyright 2021-2024 by Michal Hoftich
+% Copyright 2006 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/generic/pgf/licenses/LICENSE for more details.
+
+\ProvidesFileRCS{pgfsys-dvisvgm4ht.def}
+
+% Driver commands for tex4ht
+
+%
+% Load common pdf commands:
+%
+
+% we switched to dvisvgm driver by default. it supports patterns and other features 
+% dvips driver is available through the tikz+ option. It doesn't support everything, 
+% but it worked better with nested pictures in the past.
+\ifdefined\ifOption
+\ifOption{tikz+}{\input pgfsys-dvips.def}{\input pgfsys-dvisvgm.def}
+\else
+% load the dvips driver by default
+\input pgfsys-dvisvgm.def
+\fi
+
+
+\catcode`\:=11%
+
+% we must call most of these redefinitions in \AtBeginDocument, because \HLet is available 
+% only at that moment
+\AtBeginDocument{%
+ % configure the output picture format to svg, as it will require dvisvgm
+ % post processing. 
+ \Configure{Picture}{.svg}%
+
+ % insert picture hooks to pgfsys commands 
+ % these redefinitions are usually called only with the \tikz command, 
+ % they are ignored in tikzpicture environment
+ \def\:tempa#1{%
+     \texfourht@tikz@begin%
+     \csname o:pgfsys@typesetpicturebox:\endcsname{#1}
+     \texfourht@tikz@end%
+ }
+ \HLet\pgfsys@typesetpicturebox\:tempa
+
+ % we must remove Picture-alt in \pgfsys@beginpicture, because it can result in alt text included in the image
+ \def\:tempa{\Configure{Picture-alt}{}\texfourht@tikz@begin\o:pgfsys@beginpicture:}
+ \HLet\pgfsys@beginpicture\:tempa
+ \let\o:pgfsys@endpicture:\pgfsys@endpicture
+ \def\:tempa{\o:pgfsys@endpicture:}
+ \HLet\pgfsys@endpicture\:tempa
+
+ %  start picture around TikZ and PGF environments
+ \ConfigureEnv{tikzpicture}{\begingroup\texfourht@tikz@begin}{\texfourht@tikz@end\endgroup}{}{}%
+ \ConfigureEnv{pgfpicture}{\begingroup\texfourht@tikz@begin}{\texfourht@tikz@end\endgroup}{}{}%
+}
+
+\def\texfourht@tikz@begin{
+  \protect\csname nested:math\endcsname% support display math
+  \Picture*[\csname a:Picture-alt\endcsname]{}%
+}
+\def\texfourht@tikz@end{\EndPicture}
+
+\catcode`\:=12%
+
+
+\endinput
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% End:
