@@ -8,10 +8,10 @@
   \path [line] (init) -- (feed_new_ratio);
   \path [line] (feed_new_ratio) -- node{Wait \qty{24}{\hour}} (ready_signs);
   \path [line] (feed_again) -- node[anchor=east]  {} ++(2.2,0) |- (feed_new_ratio);
-  \path [line] (ready_signs) -- node{no} (feed_again);
-  \path [line] (ready_signs) -- node[above=2pt]{~yes} (last_feed);
+  \path [line] (ready_signs) -- node{No} (feed_again);
+  \path [line] (ready_signs) -- node[above=2pt]{~Yes} (last_feed);
   \path [line] (last_feed) -- node{after \qtyrange{6}{12}{\hour}} (bread_dough);
-  \draw [thick, ->] ($ (feed_again.north) +(0.7cm, 1cm)$) arc (-45:220:1cm);
-  \node [anchor=north, text width=5em] at ($(feed_again.north west)+(1.8cm, 2.3cm)$) {Repeat 3~times};
   
+  \node [above of=feed_again, text width=5em, align=center, node distance=3cm] (repeat_text) {Repeat 3~times};
+  \draw [line] ($(repeat_text) +(0, 1 cm)$) arc (90:420:1cm);
 \end{tikzpicture}

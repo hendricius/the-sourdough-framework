@@ -34,9 +34,7 @@
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{table}
 
 % Common abbreviations
-\newcommand{\ie}{\emph{i.e.}\@ifnextchar.{\!\@gobble}{}}
-\newcommand{\eg}{\emph{e.g.}\@ifnextchar.{\!\@gobble}{}}
-\newcommand{\etc}{etc\@ifnextchar.{}{.\@}}
+\input{abbreviations.tex}
 
 % Consistent pH values
 \newcommand{\pHvalue}[1]{pH~\SI{#1}{}}
@@ -54,8 +52,9 @@
 \DeclareRobustCommand\sbseries{\fontseries{sb}\selectfont}
 % Fonts for accessibility
 \ifdefined\isaccessible
-    \setmainfont{Open Sans}[
-    Scale=MatchLowercase]
+    \usepackage[mathrm=sym]{unicode-math}
+    \setmathfont{Fira Math}[Scale=MatchLowercase]
+    \setmainfont{Open Sans}[Scale=MatchLowercase]
 \else
     \setmainfont{TeX Gyre Pagella}[Scale=1.0] % Or Palatino Linotype, etc.
     % TODO not available on github CI
