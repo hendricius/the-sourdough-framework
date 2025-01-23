@@ -92,8 +92,7 @@ It provides the key information you need without reading the complete book.
 * [Read TL;DR version on your device](https://the-bread-code.io/book-tldr-print.pdf)
 * [Download TL;DR version for printing](https://the-bread-code.io/book-tldr-digital.pdf)
 
-For printing, we recommend using double-sided printing if your printer supports it. Else you
-have to print page by page and then flip them. You can use a stapler to bind the pages.
+We recommend using double-sided printing if your printer supports it.
 
 ## Online HTML version
 
