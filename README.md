@@ -84,12 +84,15 @@ size. This shrinks the book from more than 20MB down to ~5MB:
 
 * [Download compiled B&W .epub version](https://www.the-bread-code.io/bw-book.epub)
 
-If you prefer a very short version (about 10 pages) with main flowcharts and
-crucial information needed while you are in the kitchen, we also provide a
-"too long;didn't read" version you could print.  Having read the full book is
-highly recommended to understand this leaflet:
+For those who prefer a concise reference (about 15 pages), we offer a "too long;didn't read" (TL;DR)
+version. This condensed guide contains the essential flowcharts, crucial information,
+and space for your notes - perfect for quick kitchen reference.
+It provides the key information you need without reading the complete book.
 
-* [Download a condensed version](https://www.the-bread-code.io/booklet.pdf)
+* [Read TL;DR version on your device](https://the-bread-code.io/book-tldr-print.pdf)
+* [Download TL;DR version for printing](https://the-bread-code.io/book-tldr-digital.pdf)
+
+We recommend using double-sided printing if your printer supports it.
 
 ## Online HTML version
 

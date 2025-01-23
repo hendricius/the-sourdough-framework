@@ -535,6 +535,22 @@ figure.figure p.noindent {
   text-align: center;
 }
 
+main.main-content h2.chapterHead.home-content-title {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.5em;
+}
+
+.download-description {
+  font-weight: var(--fw-bold);
+}
+
+.download-links {
+  p.indent, p.noindent {
+    text-align: unset;
+  }
+}
+
 @media (max-width: 768px) {
   .header {
     display: none;
