@@ -84,11 +84,6 @@ website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
 ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 
-# This is more than what is actually needed but keeps the makefile simple
-booklet_src := $(src_figures) $(src_tables) $(src_recipes) $(images)
-booklet_src += booklet.tex
-# }}}
-
 # Flowcharts {{{
 # TODO: check if it works on github CI
 %.png: %.tex
@@ -113,12 +108,6 @@ book_serif/book.pdf: $(src_all)
 
 book_sans_serif/book_sans_serif.pdf: $(src_all)
 	$(LATEX) -output-directory=book_sans_serif book_sans_serif.tex
-
-# We don't want to use latexmk as there is no biber nor references and it
-# seems to make it somehow unhappy
-booklet/booklet.pdf: $(booklet_src)
-	mkdir -p booklet
-	lualatex --output-directory=booklet booklet.tex
 # }}}
 
 # Ebook {{{
@@ -199,11 +188,10 @@ export_figures: pdf $(tgt_figures)
 all: bake
 
 # Finally actual project  targets (i.e. build pdf and ebooks)
-.PHONY: pdf booklet serif sans_serif ebook
+.PHONY: pdf serif sans_serif ebook
 
 pdf: serif sans_serif
 
-booklet: booklet/booklet.pdf
 serif: book_serif/book.pdf
 sans_serif: book_sans_serif/book_sans_serif.pdf
 
@@ -213,7 +201,6 @@ low_res_ebook: epub/low_res_book.epub
 
 # We keep the old target names for backward compatibility
 build_pdf: pdf
-build_booklet: booklet
 build_serif_pdf: serif
 build_sans_serif_pdf: sans_serif
 build_ebook: ebook
@@ -222,7 +209,7 @@ build_low_res_ebook: low_res_ebook
 
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
-bake: release_serif release_sans_serif release_booklet website
+bake: release_serif release_sans_serif website
 
 release:
 	mkdir -p release
@@ -239,9 +226,6 @@ release_serif: serif ebook bw_ebook low_res_ebook | release
 
 release_sans_serif: sans_serif | release
 	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
-
-release_booklet: booklet | release
-	cp booklet/booklet.pdf release/TheBreadCode-The-Sourdough-Framework-booklet.pdf
 # }}}
 
 # Clean up {{{
@@ -274,20 +258,17 @@ clean_website_build:
 clean: clean_ebook_build clean_figures clean_website_build
 	$(CLEAN) -output-directory=book_serif book.tex
 	$(CLEAN) -output-directory=book_sans_serif book_sans_serif.tex
-	$(CLEAN) -output-directory=booklet booklet.tex
 	-rm book*/*.{bbl,loc,run.xml}
 
 mrproper: clean
 	$(CLEAN) -C $(src_figures)
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
-	$(CLEAN) -C -output-directory=booklet booklet.tex
 	-rm figures/*.png
 	-rm -rf epub/
 	-rm -rf release/
 	-rm -rf book_serif/
 	-rm -rf book_sans_serif/
-	-rm -rf booklet/
 	-rm -rf *book-epub/
 	-rm -rf epub_build/
 	-rm -rf website_build/
@@ -338,7 +319,6 @@ help:
 	@echo "Quick builds:"
 	@echo "  quick: compiles serif_pdf but runs lulatex only once"
 	@echo "  quick_ebook: compiles ebook but runs lulatex only once"
-	@echo "  quick_booklet: compiles booklet but runs lulatex only once"
 	@echo ""
 	@echo "Checks:"
 	@echo "  tex-check: runs static analysis checker on LaTeX source to spot"
@@ -382,9 +362,6 @@ spell-check: $(src_tex) spelling_exceptions.txt
 # They also ignore dependencies and run each time you call them.
 quick:  # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
-
-quick_booklet:
-	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=booklet booklet.tex
 
 quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
