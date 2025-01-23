@@ -626,15 +626,16 @@ class ModifyBuild
        Creating this book has been a labor of love. My
        main goal has always been to spread the joy of baking and empower bread
        enthusiasts like yourself. To ensure that the book remains accessible
-       to everyone, I have decided to make it available as a free digital download.
+       to everyone, I have decided to make it available free of charge.
     </p>
 
     <a href="bread.jpg">
       <img alt="One of my best Sourdough Breads" class="home-bread" src="bread.jpg" />
     </a>
 
+    <h2 class="chapterHead home-content-title">⭐ Support this project</h2>
     <p class="noindent">
-      However, producing and maintaining resources like this requires
+      Producing and maintaining resources like this requires
       considerable time, effort, and financial investment. If you find value
       in "The Sourdough Framework" and appreciate the effort that went into
       creating it, I kindly request your support <a href="https://breadco.de/book">
@@ -646,18 +647,7 @@ class ModifyBuild
     <p class="noindent">
       Your generous contribution will not only help me cover the costs associated
       with this project but will also enable me to continue creating more valuable
-      content in the future.
-    </p>
-
-    <p class="noindent">
-      If you feel inspired to contribute, please consider making a donation of
-      any amount through <a href="https://breadco.de/book">my donation page</a>.
-      Your support will go a long way in ensuring
-      that this knowledge can reach even more bread enthusiasts worldwide.
-    </p>
-
-    <p class="noindent">
-      Remember, your donation is entirely voluntary and any amount you
+      content in the future. Your donation is entirely voluntary and any amount you
       contribute is deeply appreciated. If you are unable to make a donation at
       this time, please know that your readership and support in spreading the
       word about "The Sourdough Framework" are invaluable contributions as well.
@@ -669,29 +659,33 @@ class ModifyBuild
       Together, we can continue to share the love of baking and cultivate a
       community passionate about the art of sourdough.
     </p>
+
+    <h2 class="chapterHead home-content-title">⬇️ Versions</h2>
     <p class="noindent">
-      You can either browse through this page or download the full book directly:
-    </p>
-    <p class="noindent">
-      PDF: <a href="https://www.the-bread-code.io/book.pdf">https://www.the-bread-code.io/book.pdf</a><br>
-      PDF (no serif): <a href="https://www.the-bread-code.io/book-sans-serif.pdf">https://www.the-bread-code.io/book-sans-serif.pdf</a>
+      You can either browse through this website or download the full book to read it on your preferred device:
     </p>
 
-    <p class="noindent">
-      EPUB: <a href="https://www.the-bread-code.io/book.epub">https://www.the-bread-code.io/book.epub</a><br>
-      EPUB in Black & White, size optimized for screen readers : <a href="https://www.the-bread-code.io/bw-book.epub">https://www.the-bread-code.io/bw-book.epub</a><br>
-    </p>
+    <div class="download-links">
+      <p class="noindent">
+        <span class="download-description">PDF:</span> <a href="https://www.the-bread-code.io/book.pdf">https://www.the-bread-code.io/book.pdf</a><br>
+        <span class="download-description">PDF (no serif):</span> <a href="https://www.the-bread-code.io/book-sans-serif.pdf">https://www.the-bread-code.io/book-sans-serif.pdf</a>
+      </p>
 
+      <p class="noindent">
+        <span class="download-description">EPUB:</span> <a href="https://www.the-bread-code.io/book.epub">https://www.the-bread-code.io/book.epub</a><br>
+        <span class="download-description">EPUB black & white:</span> <a href="https://www.the-bread-code.io/bw-book.epub">https://www.the-bread-code.io/bw-book.epub</a><br>
+      </p>
 
-    <p class="noindent">
-      The full source code of the book can be found here:
-      <a href="https://www.github.com/hendricius/the-sourdough-framework">https://www.github.com/hendricius/the-sourdough-framework</a>
-    </p>
+      <p class="noindent">
+        <span class="download-description">Short TL;DR version:</span> <a href="https://the-bread-code.io/book-tldr-digital.pdf">https://the-bread-code.io/book-tldr-digital.pdf</a><br>
+        <span class="download-description">Short TL;DR version (print):</span> <a href="https://the-bread-code.io/book-tldr-print.pdf">https://the-bread-code.io/book-tldr-print.pdf</a><br>
+      </p>
 
-    <p class="noindent">
-      There's also a hardcover version of the book available featuring an even more awesome design. You can read more information here:
-      <a href="https://www.breadco.de/hardcover-book">https://www.breadco.de/hardcover-book</a>
-    </p>
+      <p class="noindent">
+        <span class="download-description">Sauce code:</span>
+        <a href="https://www.github.com/hendricius/the-sourdough-framework">https://www.github.com/hendricius/the-sourdough-framework</a>. Contributions and improvements are highly appreciated!
+      </p>
+    </div>
 
     <p class="noindent">
       Thank you and may the gluten be strong with you,<br>
