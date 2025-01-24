@@ -342,6 +342,12 @@ class ModifyBuild
         </a>
       </span>
       <span class="chapterToc">
+        <a href="https://www.the-bread-code.io/book.epub">
+          <span class="chapter_number">⬇️</span>
+          <span class="link_text">Short TL;DR .PDF</span>
+        </a>
+      </span>
+      <span class="chapterToc">
         <a href="https://breadco.de/hardcover-book">
           <span class="chapter_number">📚</span>
           <span class="link_text">Hardcover Book</span>
