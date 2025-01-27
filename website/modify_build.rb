@@ -342,7 +342,7 @@ class ModifyBuild
         </a>
       </span>
       <span class="chapterToc">
-        <a href="https://www.the-bread-code.io/book.epub">
+        <a href="https://the-bread-code.io/book-tldr-digital.pdf">
           <span class="chapter_number">⬇️</span>
           <span class="link_text">Short TL;DR .PDF</span>
         </a>
