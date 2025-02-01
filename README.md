@@ -89,8 +89,8 @@ version. This condensed guide contains the essential flowcharts, crucial informa
 and space for your notes - perfect for quick kitchen reference.
 It provides the key information you need without reading the complete book.
 
-* [Read TL;DR version on your device](https://the-bread-code.io/book-tldr-print.pdf)
-* [Download TL;DR version for printing](https://the-bread-code.io/book-tldr-digital.pdf)
+* [Read TL;DR version on your device](https://the-bread-code.io/book-tldr-digital.pdf)
+* [Download TL;DR version for printing](https://the-bread-code.io/book-tldr-print.pdf)
 
 We recommend using double-sided printing if your printer supports it.
 
