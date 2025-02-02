@@ -164,7 +164,6 @@ Krawontka
 Krzysztof
 Kuchengnom
 Kuriyama
-Labelling
 Lausuch
 Lecloux
 Leeuwen
@@ -199,7 +198,6 @@ Mitelski
 Moj
 Monicaks
 MqH3GVfjfBc
-NONINFRINGEMENT
 Napoli
 Nic
 Nirpf
@@ -326,7 +324,6 @@ caco
 cagno
 calc
 captionsetup
-caramelise
 carbonarius
 cerevisiae
 chapappifchapterprefix
@@ -343,12 +340,10 @@ citecolor
 codeblack
 codeblue
 coeliac
-colour
 countertop
 crum
 defaultfontfeatures
 degF
-dependant
 diastatic
 dimexpr
 discard2
