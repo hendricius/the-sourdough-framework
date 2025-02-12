@@ -164,7 +164,6 @@ Krawontka
 Krzysztof
 Kuchengnom
 Kuriyama
-Labelling
 Lausuch
 Lecloux
 Leeuwen
@@ -199,7 +198,6 @@ Mitelski
 Moj
 Monicaks
 MqH3GVfjfBc
-NONINFRINGEMENT
 Napoli
 Nic
 Nirpf
@@ -326,7 +324,6 @@ caco
 cagno
 calc
 captionsetup
-caramelise
 carbonarius
 cerevisiae
 chapappifchapterprefix
@@ -343,12 +340,10 @@ citecolor
 codeblack
 codeblue
 coeliac
-colour
 countertop
 crum
 defaultfontfeatures
 degF
-dependant
 diastatic
 dimexpr
 discard2
@@ -404,7 +399,6 @@ hscale
 hspace
 htb
 htp
-hydrations
 hyperref
 hypersetup
 ie
@@ -413,7 +407,6 @@ ifnextchar
 ifthenelse
 ifwidelayout
 includegraphics
-industrialisation
 injera
 isaccessible
 jalapeño
@@ -422,7 +415,6 @@ kao
 karl
 keepaspectratio
 kitchenaid
-labelled
 lacto
 le
 leavevmode
@@ -500,7 +492,6 @@ scandinavia
 scorings
 selectfont
 semibold
-sep
 setchapterimage
 setchapterpreamble
 setchapterstyle
@@ -557,7 +548,6 @@ vspace
 wahlfeld
 wait1
 wait2
-wetted
 xsep
 xshift
 yYkTrGHNW2w

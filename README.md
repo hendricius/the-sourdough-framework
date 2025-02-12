@@ -62,6 +62,8 @@ make -j bake
 
 You can check the files in the folder `book/release/`
 
+Please note that while everyhting should build without any errors but you will get a fair amount of warnings, especially when building the ebook/website. 
+
 You can get some help on building various versions with:
 
 ```console
