@@ -113,10 +113,8 @@
 }
 
 % Caption and figure size below images
-\usepackage{caption}
-\captionsetup[figure]{font=footnotesize}
-\captionsetup[flowchart]{font=footnotesize}
-\captionsetup[table]{font=footnotesize}
+\addtokomafont{captionlabel}{\textbf}
+\addtokomafont{caption}{\small}
 
 \DeclareSIUnit\degF{\text{°}F}
 
