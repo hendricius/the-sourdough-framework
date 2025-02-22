@@ -18,7 +18,7 @@ RUN apt-get update && \
     zip \
     git \
     wget \
-    ruby3.1 \
+    ruby3.3 \
     ruby-dev \
     imagemagick \
     rsync \
