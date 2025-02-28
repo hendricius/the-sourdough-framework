@@ -2,14 +2,7 @@
                 bibliography=totoc, listof=totoc]{scrbook}
 
 % General packages
-\usepackage{blindtext}
-\usepackage{booktabs}
-\usepackage{longtable}
 \usepackage{chemformula}
-\usepackage{chemfig}
-\usepackage[mode=match, reset-text-family=false]{siunitx}
-\usepackage{fontspec}
-\usepackage[font={sffamily, sbseries}]{quoting}
 
 % style=nextline breaks on make4ht
 \ifdefined\HCode\else
@@ -17,19 +10,6 @@
 \setlist[description]{style=nextline, leftmargin=0cm}
 \fi
 
-\DeclareNewTOC[
-  type=flowchart,%
-  types=flowcharts,%  ,
-  float,
-  floattype=4,%
-  counterwithin=chapter,
-  name=Flowchart,%
-  listname = {List of Flowcharts}
-]{loc}
-\setuptoc{loc}{chapteratlist}
-\DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
-\DeclareTOCStyleEntry[numwidth=3em]{tocline}{flowchart}
-\DeclareTOCStyleEntry[numwidth=3em]{tocline}{table}
 
 % Clickable links in the table of contents
 \usepackage{hyperref}
