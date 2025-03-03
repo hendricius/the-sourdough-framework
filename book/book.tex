@@ -1,44 +1,8 @@
-\documentclass[paper=a4, twoside=false, fontsize=12pt, parskip=half,
-                bibliography=totoc, listof=totoc]{scrbook}
-
-% General packages
-\usepackage{chemformula}
-
-% style=nextline breaks on make4ht
-\ifdefined\HCode\else
-\usepackage{enumitem}
-\setlist[description]{style=nextline, leftmargin=0cm}
-\fi
-
+%\documentclass{scrbook}  This  shows the bug
+\documentclass{book}
 
 % Clickable links in the table of contents
 \usepackage{hyperref}
-\usepackage{bookmark}
-\hypersetup{%
-    linktoc=all,
-    colorlinks = true,
-    linkcolor = hlorange,
-    urlcolor  = codeblue,
-    citecolor = hlocre,
-    breaklinks = true,
-    pdfinfo={%
-        Title={The Sourdough Framework},
-        Author={Hendrik Kleinw\"achter},
-        Subject={The sourdough bread baking bible},
-        Keywords={Sourdough, dough, bread, wheat, baking, bake, home-baking,
-            yeast, rye, crumb, debug, gluten, dough strength, crust, DIY,
-            framework, https://the-sourdough-framework.com,
-            https://www.the-bread-code.io/,
-            https://github.com/hendricius/the-sourdough-framework,
-            open-source, CC-BY-SA}
-    }
-}
-
-
-% Basic attributes
-\author{Hendrik Kleinwächter}
-\title{The Sourdough Framework}
-
 \begin{document}
 \input{bread-types/bread-types}
 
