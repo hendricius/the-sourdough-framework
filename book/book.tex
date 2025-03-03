@@ -1,11 +1,14 @@
-%\documentclass{scrbook}  This  shows the bug
-\documentclass{book}
+\documentclass{scrbook} % !!! This  shows the bug !!!
+%\documentclass{book}
 
-% Clickable links in the table of contents
 \usepackage{hyperref}
-\begin{document}
-\input{bread-types/bread-types}
 
-\input{wheat-sourdough/wheat-sourdough}
+\begin{document}
+\chapter{Bread types}%
+\section{Free standing bread}
+dedicated \nameref{ch:wheat-sourdough} chapter.
+
+\chapter{Wheat sourdough}%
+\label{ch:wheat-sourdough}
 
 \end{document}
