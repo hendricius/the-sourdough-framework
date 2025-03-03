@@ -7,8 +7,8 @@ CHECK_1 := lacheck
 CHECK_2 := chktex
 CONVERT_PIC := convert
 REDUCE_PIC := -resize '800x800>' \
-	    -strip -interlace Plane  -gaussian-blur 0.05 -quality 85\% \
-	    -set colorspace Gray -separate -evaluate-sequence Mean
+		-strip -interlace Plane -gaussian-blur 0.05 -quality 85\% \
+		-set colorspace Gray -separate -evaluate-sequence Mean
 REDUCE_PIC_COLOR := -quality 80\%
 RSYNC := rsync -au --exclude 'book.epub' --exclude '*.jpg'
 GIT := git --no-pager
@@ -75,14 +75,15 @@ low_res_images := $(filter-out %.png, $(low_res_images))
 # All together.
 src_all := $(src_tex) $(src_figures) $(src_tables) $(images) $(src_plots)
 
-# And format specific configurations
+# Format specific configuration files
 ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
 
 website_src := $(src_all) website.cfg style.css
 website_dir := static_website_html
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
-ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
+ruby_pkg := ../website/Gemfile ../website/Gemfile.lock
+#}}}
 
 # Flowcharts {{{
 # TODO: check if it works on github CI
@@ -98,7 +99,7 @@ ruby_pkg := ../website/Gemfile  ../website/Gemfile.lock
 	ebb -x $<
 # }}}
 
-# pdf {{{
+# Pdf {{{
 # Default rules for pdf, getting overwritten when built in a sub-directory
 %.pdf: %.tex
 	$(LATEX) $<
@@ -119,12 +120,12 @@ epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 copy_ebook_files: build_ebook
 	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
 
-#  Now that we have built the ebook we will generate 2 more versions
+# Now that we have built the ebook we will generate 2 more versions
 #
-#  1) With kindle app on phone we want a colour version with size < 50 MB
-#  2) A black-white version for actual eink readers
+# 1) With kindle app on phone we want a colour version with size < 50 MB
+# 2) A black-white version for actual eink readers
 #
-#  In both cases we just convert images and repack the ebpub
+# In both cases we just convert images and repack the ebpub
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
@@ -187,7 +188,7 @@ export_figures: pdf $(tgt_figures)
 .PHONY: all
 all: bake
 
-# Finally actual project  targets (i.e. build pdf and ebooks)
+# Finally actual project targets (i.e. build pdf and ebooks)
 .PHONY: pdf serif sans_serif ebook
 
 pdf: serif sans_serif
@@ -200,12 +201,24 @@ bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
 
 # We keep the old target names for backward compatibility
-build_pdf: pdf
-build_serif_pdf: serif
-build_sans_serif_pdf: sans_serif
-build_ebook: ebook
-build_bw_ebook: bw_ebook
-build_low_res_ebook: low_res_ebook
+build_pdf:
+	@echo "build_pdf target is not supported anymore, please use make pdf"
+	@exit
+build_serif_pdf:
+	@echo "build_serif_pdf target is not supported anymore, please use make serif"
+	@exit
+build_sans_serif_pdf:
+	@echo "build_sans_serif_pdf target is not supported anymore, please use make sans_serif"
+	@exit
+build_ebook:
+	@echo "build_ebook target is not supported anymore, please use make ebook"
+	@exit
+build_bw_ebook:
+	@echo "build_bw_ebook target is not supported anymore, please use make bw_ebook"
+	@exit
+build_low_res_ebook:
+	@echo "build_low_res_ebook target is not supported anymore, please use make low_res_ebook"
+	@exit
 
 # top level releases rules
 .PHONY: bake release_serif release_sans_serif
@@ -225,7 +238,7 @@ release_serif: serif ebook bw_ebook low_res_ebook | release
 	fi
 
 release_sans_serif: sans_serif | release
-	cp book_sans_serif/book_sans_serif.pdf  release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
+	cp book_sans_serif/book_sans_serif.pdf release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
 # }}}
 
 # Clean up {{{
@@ -243,12 +256,9 @@ clean_figures:
 clean_ebook_build:
 	-rm epub_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
 	-rm epub_build/book*.{idv,lg,loc,log,ncx,run.xml,tmp,xref}
+	-rm epub_build/{book.css,content.opf} epub_build/book-epub/mimetype
 	-rm epub_build/book*x.svg
-	-rm epub_build/book.css
-	-rm epub_build/content.opf
-	-rm epub_build/book-epub/mimetype
-	-rm -rf epub_build/book-epub/META-INF
-	-rm -rf epub_build/book-epub/OEBPS
+	-rm -rf epub_build/book-epub/META-INF epub_build/book-epub/OEBPS
 
 clean_website_build:
 	-rm website_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
@@ -265,14 +275,10 @@ mrproper: clean
 	$(CLEAN) -C -output-directory=book_serif book.tex
 	$(CLEAN) -C -output-directory=book_sans_serif book_sans_serif.tex
 	-rm figures/*.png
-	-rm -rf epub/
 	-rm -rf release/
-	-rm -rf book_serif/
-	-rm -rf book_sans_serif/
-	-rm -rf *book-epub/
-	-rm -rf epub_build/
-	-rm -rf website_build/
-	-rm -rf $(website_dir)
+	-rm -rf book_serif/ book_sans_serif/
+	-rm -rf epub/ epub_build/ bw-book-epub/ low-res-book-epub/
+	-rm -rf website_build/ $(website_dir)
 #}}}
 
 # Help {{{
@@ -360,54 +366,54 @@ spell-check: $(src_tex) spelling_exceptions.txt
 .PHONY: quick quick_ebook show_tools_version printvars
 # Those 2 targets allow fast debug cycles but not resolving references etc
 # They also ignore dependencies and run each time you call them.
-quick:  # run latex only once no biber, no references etc...
+quick: # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
 
-quick_ebook: cover/cover-page.xbb  # run latex only once no biber, ref etc...
+quick_ebook: cover/cover-page.xbb # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
 
-show_tools_version:  # Show version of tools used on the build machine {{{
-	- $(GIT) log -1 --pretty=%B
+show_tools_version: # Show version of tools used on the build machine {{{
+	-$(GIT) log -1 --pretty=%B
 	@echo ""
-	- uname -a
+	-uname -a
 	@echo ""
-	- $(SHELL) --version
+	-$(SHELL) --version
 	@echo ""
-	- @echo "PATH:"
-	- @echo $(PATH) | tr ':' '\n'
+	-@echo "PATH:"
+	-@echo $(PATH) | tr ':' '\n'
 	@echo ""
-	- latexmk --version
+	-latexmk --version
 	@echo ""
-	- lualatex --version
+	-lualatex --version
 	@echo ""
-	- tex4ebook --version
+	-tex4ebook --version
 	@echo ""
-	- make4ht --version
+	-make4ht --version
 	@echo ""
-	- tidy -version
+	-tidy -version
 	@echo ""
-	- dvisvgm --version
+	-dvisvgm --version
 	@echo ""
-	- lacheck | head -5 | tail -1
+	-lacheck | head -5 | tail -1
 	@echo ""
-	- chktex --version
+	-chktex --version
 	@echo ""
-	- make --version
+	-make --version
 	@echo ""
-	- biber -version
+	-biber -version
 	@echo ""
-	- ruby --version
+	-ruby --version
 	@echo ""
-	- $(CONVERT_PIC) --version
+	-$(CONVERT_PIC) --version
 	@echo ""
-	- rsync --version
+	-rsync --version
 # }}}
 
 # You can find the value of variable X with the following command:
 # make print-X
-print-%: ; @echo $* = $($*)  # Print a makefile variable
+print-%: ; @echo $* = $($*) # Print a makefile variable
 
-printvars:  # Print all variables in the makefile
+printvars: # Print all variables in the makefile
 	@$(foreach V,$(sort $(.VARIABLES)), \
 	$(if $(filter-out environ% default automatic, \
 	$(origin $V)),$(info $V=$($V) ($(value $V)))))
