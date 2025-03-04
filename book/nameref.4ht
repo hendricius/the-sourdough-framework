@@ -1,0 +1,238 @@
+% nameref.4ht (2024-06-15-13:36), generated from tex4ht-4ht.tex
+% Copyright 2005-2009 Eitan M. Gurari
+% Copyright 2009-2024 TeX Users Group
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.3c of this license or (at your option) any
+% later version. The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions
+% of LaTeX version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+%
+% The Current Maintainer of this work
+% is the TeX4ht Project <http://tug.org/tex4ht>.
+%
+% If you modify this program, changing the
+% version identification would be appreciated.
+\immediate\write-1{version 2024-06-15-13:36}
+
+   \let\NR:Type\relax
+\let\ltx@label\label
+\def\prf:label{{\ifx \NR:Title\:UnDef \a:newlabel{\@currentlabelname}\else \NR:Title\fi}%
+               {\ifx \NR:Type\relax \else \NR:Type .1\fi}{}}%
+
+\append:defI\label{\let\NR:Title\undefined}
+
+\let\NR:StartSec\:StartSec
+\let\NR:no@sect\no@sect
+\def\no@sect#1#2#3#4#5#6[#7]#8{\gdef\NR:Title{\a:newlabel{#7}}%
+    \gdef\NR:Type{#1}%
+    \NR:no@sect{#1}{#2}{#3}{#4}{#5}{#6}[{#7}]{#8}}
+\def\:StartSec#1#2#3{%
+   \gdef\NR:Title{\a:newlabel{#3}}%
+   \gdef\NR:Type{#1}%
+   \NR:StartSec{#1}{#2}{#3}%
+}
+
+\def\:tempc#1#2#3#4#5#6[#7]#8{%
+   \gdef\NR:Title{\a:newlabel{#7}}%
+   \gdef\NR:Type{#1}%
+   \o:NR@sect:{#1}{#2}{#3}{#4}{#5}{#6}[{#7}]{#8}}
+\HLet\NR@sect\:tempc
+
+\def\:tempc#1#2#3#4#5{%
+   \gdef\NR:Title{\a:newlabel\ssect:ttl}%
+   \gdef\NR:Type{#1}%
+   \o:NR@ssect:{#1}{#2}{#3}{#4}{#5}%
+}
+\HLet\NR@ssect\:tempc
+
+\def\:tempc[#1]#2{%
+   \gdef\NR:Title{\a:newlabel{#1}}%
+   \gdef\NR:Type{part}%
+   \o:no@part:[{#1}]{#2}}
+
+% this definition clashes with asmart and amsproc classes, so we
+% need to skip if these are active
+\@ifundefined{opt@amsart.cls}{%
+\@ifundefined{opt@amsproc.cls}{%
+\HLet\no@part\:tempc
+}{}}{}
+
+
+\def\:tempc#1{%
+   \gdef\NR:Title{\a:newlabel{#1}}%
+   \gdef\NR:Type{part}%
+   \o:no@spart:{#1}}
+\HLet\no@spart\:tempc
+
+\def\:tempc[#1]#2{%
+   \gdef\NR:Title{\a:newlabel{#1}}%
+   \gdef\NR:Type{chapter}%
+   \o:NR@chapter:[{#1}]{#2}}
+\HLet\NR@chapter\:tempc
+
+\def\:tempc#1{%
+   \gdef\NR:Title{\a:newlabel\sch:ttl}%
+   \o:NR@schapter:{#1}%
+   \gdef\NR:Type{chapter}%
+}
+\HLet\NR@schapter\:tempc
+
+\let\o:NR@@caption\@caption
+
+\ifdefined\scr@makechapterhead
+% fixes for Komascript
+\def\:tempa[#1]#2{%
+  \gdef\NR:Title{\a:newlabel{#1}}%
+  \gdef\NR:Type{chapter}%
+  \o:@chapter:[#1]{#2}%
+}
+\HLet\@chapter\:tempa
+
+\def\:tempa#1{%
+  \gdef\NR:Title{\a:newlabel{#1}}%
+  \gdef\NR:Type{chapter}%
+  \o:@schapter:{#1}%
+}
+\HLet\@schapter\:tempa
+
+\fi
+%
+%
+% Keith Andrews <kandrews@iicm.edu> reported that \@captype as
+% \NR:Type threw an undefined control sequence error. I think
+% \@currenvir is safe, there is nothing special about \@captype.
+%
+% use of \index and \label inside caption results in a fatal error
+% we need to disable them in \NR:Title
+
+% there can be more problematic commands, so we provide a configuration
+% that can be used multiple times - the default value fixes known commands
+% but a user can add more of them
+
+\def\a:captioncommandsfix{}
+\NewConfigure{CaptionCommandsFix}[1]{\concat:config\a:captioncommandsfix{#1}}
+\Configure{CaptionCommandsFix}{
+  \let\index\:gobble%
+  \let\label\:gobble%
+  \let\\\relax% causes issues when \centering is active
+}
+
+\long\def\@caption#1[#2]{%
+    \gdef\NR:Type{\@currenvir}%
+    \begingroup%
+    \a:captioncommandsfix
+    \protected@xdef\NR:Title{\a:newlabel{#2}}%
+    \endgroup%
+   \o:NR@@caption{#1}[{#2}]%
+}
+
+\let\o:NRorg@opargbegintheorem\@opargbegintheorem
+  \def\@opargbegintheorem#1#2#3{%
+    \gdef\NR:Title{\a:newlabel{#3}}%
+    \gdef\NR:Type{\@currenvir}%
+    \NR@gettitle{#3}%
+    \defineautorefname{\@currenvir}{#1}%
+    \o:NRorg@opargbegintheorem{#1}{#2}{#3}%
+  }%
+
+\let\o:NRorg@begintheorem\@begintheorem
+  \def\@begintheorem#1#2{%
+    \gdef\NR:Title{\a:newlabel{#1 #2}}%
+    \gdef\NR:Type{\@currenvir}%
+    \defineautorefname{\@currenvir}{#1}%
+    \NR@gettitle{}%
+    \o:NRorg@begintheorem{#1}{#2}%
+  }%
+
+% I don't know if this was useful for anything
+% but we cannot use it anymore
+% \AtBeginDocument{%
+\@ifpackageloaded{listings}{%
+      \def\:tempc#1{%
+         \gdef\NR:Title{\a:newlabel{listing}}%
+         \gdef\NR:Type{lstlisting}%
+         \o:NROrg@lst@MakeCaption:{#1}%
+         \gdef\@currentlabelname{listing}}
+      \HLet\NROrg@lst@MakeCaption\:tempc
+}{}%
+  % bug [348]
+\def\:tempams{%
+    \gdef\NR:Title{\a:newlabel{equation}}%
+    \gdef\NR:Type{equation}%
+    \gdef\@currentlabelname{equation}%
+}
+
+% https://tex.stackexchange.com/a/581856/2891
+\@ifpackageloaded{caption}{
+  \pend:defIII\caption@beginex{%
+    \gdef\NR:Type{\@currenvir}%
+    % handle \label and \index in Caption's package
+    % version of \caption
+    \begingroup%
+    \a:captioncommandsfix
+    \protected@xdef\NR:Title{\a:newlabel{##2}}%
+    \endgroup%
+  }
+}{}
+
+
+\@ifpackageloaded{amsmath}{%
+     \Configure{@begin}{align}{\:tempams}
+     \Configure{@begin}{multline}{\:tempams}
+     \Configure{@begin}{equation}{\:tempams}
+     \Configure{@begin}{boxed}{\:tempams}
+     \Configure{@begin}{equations}{\:tempams}
+     \Configure{@begin}{equation}{\:tempams}
+     \Configure{@begin}{gather*}{\:tempams}
+     \Configure{@begin}{gather}{\:tempams}
+     \Configure{@begin}{genfrac}{\:tempams}
+     \Configure{@begin}{measure@}{\:tempams}
+     \Configure{@begin}{multline*}{\:tempams}
+     \Configure{@begin}{multline}{\:tempams}
+     \Configure{@begin}{overset}{\:tempams}
+     \Configure{@begin}{smallmatrix}{\:tempams}
+     \Configure{@begin}{split}{\:tempams}
+     \Configure{@begin}{subarray}{\:tempams}
+     \Configure{@begin}{substack}{\:tempams}
+     \Configure{@begin}{underset}{\:tempams}
+     \Configure{@begin}{xleftarrow}{\:tempams}
+     \Configure{@begin}{xrightarrow}{\:tempams}
+  }{
+     \Configure{@begin}{equation}{\:tempams}
+}
+
+\let\T:ref=\::ref
+\def\::ref{\@ifstar{\protect\T@ref}{\protect\T@ref}}
+\def\T@ref#1{%
+  \@safe@activestrue%
+  \let\::ref\T:ref%
+  \expandafter\@setref\csname r@#1\endcsname\@firstoffive{#1}%
+  \def\::ref{\@ifstar{\protect\T@ref}{\protect\T@ref}}%
+  \@safe@activesfalse%
+}
+
+\gdef\defineautorefname#1#2{%
+    \expandafter\gdef\csname #1autorefname\endcsname{#2}}
+\defineautorefname{theorem}{Theorem}
+
+\Configure{newlabel}
+   {\csname cur:th\endcsname \csname :currentlabel\endcsname}
+   {\string\csname\space :autoref\string\endcsname
+     {\NR:Type}#1}
+
+\ifx \@currentlabelname\:UnDef
+   \let\@currentlabelname\empty
+\fi
+
+\pend:defIII\@setref{\edef\RefArg{##3}}
+\append:defIII\@setref{\let\:autoref\:gobble}
+\let\:autoref\:gobble
+
+
+\Hinput{nameref}
+\endinput
