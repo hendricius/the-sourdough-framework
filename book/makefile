@@ -130,25 +130,22 @@ copy_ebook_files: ebook
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
-bw-book-epub-dir:
-	mkdir -p bw-book-epub/OEBPS
-
-bw-book-epub/OEBPS/%.jpg: %.jpg | bw-book-epub-dir
+bw-book-epub/OEBPS/%.jpg: %.jpg
+	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw-book-epub/OEBPS/%.png: %.png  | bw-book-epub-dir
+bw-book-epub/OEBPS/%.png: %.png
+	mkdir -p $(dir $@)
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
 epub/bw_book.epub: copy_ebook_files $(bw_images)
 	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
-# Now the low res | low-res-book-epub-dir
-low-res-book-epub-dir:
-	mkdir -p low-res-book-epub/OEBPS
-
+# Now the low res
 copy_ebook_files_low_res: ebook
-	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
+	mkdir -p $(dir $@)
+	$(RSYNC) epub_build/book-epub/
 
 low-res-book-epub/OEBPS/%.jpg: %.jpg | low-res-book-epub-dir
 	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
