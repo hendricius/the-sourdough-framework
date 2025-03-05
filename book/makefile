@@ -83,7 +83,7 @@ website_dir := static_website_html
 website_assets := $(wildcard ../website/assets/*)
 ruby_src := ../website/modify_build.rb $(website_assets)
 ruby_pkg := ../website/Gemfile ../website/Gemfile.lock
-#}}}
+# }}}
 
 # Internal build rules {{{
 # Flowcharts {{{
@@ -118,7 +118,7 @@ book_sans_serif/book_sans_serif.pdf: $(src_all)
 epub/%.epub: %.tex $(ebook_src) cover/cover-page.xbb
 	$(EBOOK) $<
 
-copy_ebook_files: build_ebook
+copy_ebook_files: ebook
 	$(RSYNC) --exclude '*.png' epub_build/book-epub/ bw-book-epub/
 
 # Now that we have built the ebook we will generate 2 more versions
@@ -130,30 +130,33 @@ copy_ebook_files: build_ebook
 
 # We do not convert SVG to B&W or lower res for now as they are super small
 # anyway
-bw-book-epub/OEBPS/%.jpg: %.jpg
-	mkdir -p $(dir $@)
+bw-book-epub-dir:
+	mkdir -p bw-book-epub/OEBPS
+
+bw-book-epub/OEBPS/%.jpg: %.jpg | bw-book-epub-dir
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
-bw-book-epub/OEBPS/%.png: %.png
-	mkdir -p $(dir $@)
+bw-book-epub/OEBPS/%.png: %.png  | bw-book-epub-dir
 	$(CONVERT_PIC) $< $(REDUCE_PIC) $@
 
 epub/bw_book.epub: copy_ebook_files $(bw_images)
 	cd bw-book-epub; zip -q0X ../epub/bw_book.epub mimetype
 	cd bw-book-epub; zip -q9XrD ../epub/bw_book.epub ./
 
-# Now the low res
+# Now the low res | low-res-book-epub-dir
+low-res-book-epub-dir:
+	mkdir -p low-res-book-epub/OEBPS
+
 copy_ebook_files_low_res: ebook
 	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
 
-low-res-book-epub/OEBPS/%.jpg: %.jpg
-	mkdir -p $(dir $@)
+low-res-book-epub/OEBPS/%.jpg: %.jpg | low-res-book-epub-dir
 	$(CONVERT_PIC) $< $(REDUCE_PIC_COLOR) $@
 
 epub/low_res_book.epub: copy_ebook_files_low_res $(low_res_images)
 	cd low-res-book-epub; zip -q0X ../epub/low_res_book.epub mimetype
 	cd low-res-book-epub; zip -q9XrD ../epub/low_res_book.epub ./
-#}}}
+# }}}
 
 # Website {{{
 ###################################
@@ -186,7 +189,7 @@ export_figures: pdf $(tgt_figures)
 # }}}
 
 # User level targets {{{
-# Build targets{{{
+# Build targets {{{
 .PHONY: all
 all: bake
 
@@ -200,9 +203,9 @@ sans_serif: book_sans_serif/book_sans_serif.pdf
 ebook: epub/book.epub
 bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
-#}}}
+# }}}
 
-# Old target names are disabled with helpful help message #{{{
+# Old target names are disabled with helpful help message {{{
 build_pdf:
 	@echo "build_pdf target is not supported anymore, please use make pdf"
 	@exit
@@ -221,7 +224,7 @@ build_bw_ebook:
 build_low_res_ebook:
 	@echo "build_low_res_ebook target is not supported anymore, please use make low_res_ebook"
 	@exit
-#}}}
+# }}}
 
 # Top level releases rules {{{
 .PHONY: bake release_serif release_sans_serif
@@ -282,7 +285,7 @@ mrproper: clean
 	-rm -rf book_serif/ book_sans_serif/
 	-rm -rf epub/ epub_build/ bw-book-epub/ low-res-book-epub/
 	-rm -rf website_build/ $(website_dir)
-#}}}
+# }}}
 
 # Help {{{
 ###################################
