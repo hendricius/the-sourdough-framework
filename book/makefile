@@ -30,7 +30,7 @@ endif
 # and building everything take a long time.
 .DEFAULT_GOAL := serif
 
-# List all files that are dependencies {{{
+# Dependencies {{{
 chapters = baking basics bread-types cover flour-types history intro mix-ins\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough glossary
@@ -85,6 +85,7 @@ ruby_src := ../website/modify_build.rb $(website_assets)
 ruby_pkg := ../website/Gemfile ../website/Gemfile.lock
 #}}}
 
+# Internal build rules {{{
 # Flowcharts {{{
 # TODO: check if it works on github CI
 %.png: %.tex
@@ -182,9 +183,10 @@ website: html ../website/_bundle_install_done $(ruby_src)
 export_figures: pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 # }}}
+# }}}
 
-# Define user level targets {{{
-# Expected usual targets first
+# User level targets {{{
+# Build targets{{{
 .PHONY: all
 all: bake
 
@@ -198,6 +200,7 @@ sans_serif: book_sans_serif/book_sans_serif.pdf
 ebook: epub/book.epub
 bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
+#}}}
 
 # Old target names are disabled with helpful help message #{{{
 build_pdf:
@@ -239,7 +242,6 @@ release_serif: serif ebook bw_ebook low_res_ebook | release
 
 release_sans_serif: sans_serif | release
 	cp book_sans_serif/book_sans_serif.pdf release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
-# }}}
 # }}}
 
 # Clean up {{{
@@ -340,8 +342,9 @@ help:
 	@echo ""
 	@echo "set DEBUG i.e make DEBUG=1 ebook to add debug flags to commands"
 # }}}
+# }}}
 
-# Debug Stuff from now on {{{
+# Debug Stuff {{{
 ###################################
 
 # Verify your spelling and TeX warnings {{{
