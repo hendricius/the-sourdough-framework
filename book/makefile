@@ -183,7 +183,7 @@ export_figures: pdf $(tgt_figures)
 	cd figures/ && bash export_figures.sh
 # }}}
 
-# Now with the targets {{{
+# Define user level targets {{{
 # Expected usual targets first
 .PHONY: all
 all: bake
@@ -192,7 +192,6 @@ all: bake
 .PHONY: pdf serif sans_serif ebook
 
 pdf: serif sans_serif
-
 serif: book_serif/book.pdf
 sans_serif: book_sans_serif/book_sans_serif.pdf
 
@@ -200,7 +199,7 @@ ebook: epub/book.epub
 bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
 
-# We keep the old target names for backward compatibility
+# Old target names are disabled with helpful help message #{{{
 build_pdf:
 	@echo "build_pdf target is not supported anymore, please use make pdf"
 	@exit
@@ -219,8 +218,9 @@ build_bw_ebook:
 build_low_res_ebook:
 	@echo "build_low_res_ebook target is not supported anymore, please use make low_res_ebook"
 	@exit
+#}}}
 
-# top level releases rules
+# Top level releases rules {{{
 .PHONY: bake release_serif release_sans_serif
 bake: release_serif release_sans_serif website
 
@@ -239,6 +239,7 @@ release_serif: serif ebook bw_ebook low_res_ebook | release
 
 release_sans_serif: sans_serif | release
 	cp book_sans_serif/book_sans_serif.pdf release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
+# }}}
 # }}}
 
 # Clean up {{{
@@ -373,7 +374,7 @@ quick_ebook: cover/cover-page.xbb # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
 
 show_tools_version: # Show version of tools used on the build machine {{{
-	-$(GIT) log -1 --pretty=%B
+	-$(GIT) log -5 --pretty="%h: %s by %an on %as"
 	@echo ""
 	-uname -a
 	@echo ""
