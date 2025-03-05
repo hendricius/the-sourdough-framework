@@ -144,7 +144,7 @@ epub/bw_book.epub: copy_ebook_files $(bw_images)
 
 # Now the low res
 copy_ebook_files_low_res: ebook
-	$(RSYNC) epub_build/book-epub/
+	$(RSYNC) epub_build/book-epub/ low-res-book-epub/
 
 low-res-book-epub/OEBPS/%.jpg: %.jpg
 	mkdir -p $(dir $@)
