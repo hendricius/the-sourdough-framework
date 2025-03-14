@@ -65,7 +65,7 @@ jobs:
           run: |
             cd /app/book
             make -j -O bake
-      - name: copy book to downloads server
+      - name: Copy book to downloads server
         uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: "-avzr"
@@ -74,15 +74,7 @@ jobs:
           remote_key: ${{ secrets.SSH_KEY }}
           path: "book/release/*"
           remote_path: "~/downloads/the-sourdough-framework/"
-      - name: Release baked book to S3
-        uses: shallwefootball/s3-upload-action@master
-        with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET_BOOK }}
-          source_dir: book/release
-          destination_dir: release
-      - name: Upload book Artifacts
+      - name: Upload book artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: books
@@ -90,36 +82,17 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-      - name: Release baked website to S3
-        uses: shallwefootball/s3-upload-action@master
+      - name: Copy book to downloads server
+        uses: burnett01/rsync-deployments@7.0.2
         with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET_WEBSITE }}
-          source_dir: website/static_website_html
-          destination_dir: static_html_root
-      - name: Upload website Artifacts
+          switches: "-avzr --delete"
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USERNAME }}
+          remote_key: ${{ secrets.SSH_KEY }}
+          path: "website/static_website_html/*"
+          remote_path: "~/the-sourdough-framework/"
+      - name: Upload website artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: website
           path: website/static_website_html
-  invalidate-book-website-cache:
-    needs: release-book-website
-    runs-on: ubuntu-latest
-    steps:
-      - name: Invalidate Cloudfront book cache
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_BOOK }}
-          PATHS: "/*"
-          AWS_REGION: "us-east-1"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Invalidate Cloudfront website cache
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_WEBSITE }}
-          PATHS: "/*"
-          AWS_REGION: "us-east-1"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
