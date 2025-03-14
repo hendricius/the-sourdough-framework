@@ -66,13 +66,14 @@ jobs:
             cd /app/book
             make -j -O bake
       - name: copy book to downloads server
-        uses: appleboy/scp-action@v0.1.7
+        uses: burnett01/rsync-deployments@7.0.2
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "book/release/*.pdf,book/release/*.epub"
-          target: "~/downloads/the-sourdough-framework"
+          switches: "-avzr"
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USERNAME }}
+          remote_key: ${{ secrets.SSH_KEY }}
+          path: "book/release/*"
+          remote_path: "~/downloads/the-sourdough-framework/"
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
