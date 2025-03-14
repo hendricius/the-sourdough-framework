@@ -41,7 +41,7 @@ jobs:
           run: |
             cd /app/book
             make -j -O serif ebook website
-      - name: Upload book Artifacts
+      - name: Upload book artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: books
@@ -49,7 +49,7 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-      - name: Upload website Artifacts
+      - name: Upload website artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: website

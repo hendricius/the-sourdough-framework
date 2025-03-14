@@ -82,7 +82,7 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-      - name: Copy book to downloads server
+      - name: Copy website to downloads server
         uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: "-avzr --delete"
