@@ -65,6 +65,14 @@ jobs:
           run: |
             cd /app/book
             make -j -O bake
+      - name: copy book to downloads server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "book/release/*"
+          target: "~/downloads/the-sourdough-framework/
       - name: Release baked book to S3
         uses: shallwefootball/s3-upload-action@master
         with:
