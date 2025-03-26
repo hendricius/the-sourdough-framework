@@ -35,19 +35,19 @@ chapters = baking basics bread-types cover flour-types history intro mix-ins\
 		non-wheat-sourdough sourdough-starter storing-bread troubleshooting\
 		wheat-sourdough glossary
 
-# Actual book text and LaTeX code {{{
-src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
-src_tex += book.tex book_sans_serif.tex references.bib figures/vars.tex
-src_tex += supporters.csv sourdough.sty colors.tex abbreviations.tex
-src_tex += $(src_recipes)
-# }}}
-
 # Tables and TikZ flowcharts/plots/drawings... {{{
 src_tables  := $(wildcard tables/table-*.tex)
-src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex
+src_figures := $(wildcard figures/fig-*.tex) figures/flowcharts_tikz.tex figures/vars.tex
 src_figures += $(wildcard plots/fig-*.tex) abbreviations.tex colors.tex
 src_recipes := $(wildcard recipes/*.tex)
 src_plots   := $(wildcard plots/*.table)
+# }}}
+
+# Actual book text and LaTeX code {{{
+src_tex := $(foreach directory, $(chapters), $(wildcard $(directory)/*.tex))
+src_tex += book.tex book_sans_serif.tex colors.tex abbreviations.tex
+src_tex += $(src_recipes) supporters.csv references.bib
+src_tex += sourdough.sty
 # }}}
 
 tgt_figures := $(patsubst %.tex, %.png,$(src_figures))
@@ -76,7 +76,7 @@ low_res_images := $(filter-out %.png, $(low_res_images))
 src_all := $(src_tex) $(src_figures) $(src_tables) $(images) $(src_plots)
 
 # Format specific configuration files
-ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css
+ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css nameref.4ht
 
 website_src := $(src_all) website.cfg style.css
 website_dir := static_website_html
