@@ -23,7 +23,7 @@ DEPENDENCIES
   pry
 
 RUBY VERSION
-   ruby 3.3.7p123
+   ruby 3.3.8
 
 BUNDLED WITH
    2.4.12
