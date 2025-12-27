@@ -1,11 +1,11 @@
-.DEFAULT_GOAL := build_pdf
+.DEFAULT_GOAL := pdf
 
 DOCKER_IMAGE := ghcr.io/hendricius/the-sourdough-framework
 DOCKER_CMD := docker run --rm -it -v $(PWD):/opt/repo --platform linux/x86_64 $(DOCKER_IMAGE) /bin/bash -c
 
-.PHONY: bake build_pdf build_docker_image push_docker_image validate website
+.PHONY: build_docker_image push_docker_image
 .PHONY: print_os_version start_shell printvars show_tools_version mrproper
-.PHONY: build_serif_pdf build_ebook
+.PHONY: ebook serif website bake
 
 # Dockers targets
 build_docker_image:
@@ -15,8 +15,8 @@ push_docker_image: build_docker_image
 	docker push $(DOCKER_IMAGE):latest
 
 # Books/website
-serif_pdf:
-	$(DOCKER_CMD) "cd /opt/repo/book && make serif_pdf"
+serif:
+	$(DOCKER_CMD) "cd /opt/repo/book && make serif"
 
 ebook:
 	$(DOCKER_CMD) "cd /opt/repo/book && make ebook"
@@ -45,8 +45,3 @@ print_os_version:
 
 start_shell:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash
-
-# Old names for backward compatibility
-build_serif_pdf: serif_pdf
-build_ebook: ebook
-build_pdf: pdf
