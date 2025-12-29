@@ -97,7 +97,7 @@ ruby_pkg := ../website/Gemfile ../website/Gemfile.lock
 	figures/export_figures.sh $@.pdf
 
 %.xbb: %.jpg
-	ebb -x $<
+	extractbb -x $<
 # }}}
 
 # Pdf {{{
