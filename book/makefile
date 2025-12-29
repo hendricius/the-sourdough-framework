@@ -202,27 +202,6 @@ bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
 # }}}
 
-# Old target names are disabled with helpful help message {{{
-build_pdf:
-	@echo "build_pdf target is not supported anymore, please use make pdf"
-	@exit
-build_serif_pdf:
-	@echo "build_serif_pdf target is not supported anymore, please use make serif"
-	@exit
-build_sans_serif_pdf:
-	@echo "build_sans_serif_pdf target is not supported anymore, please use make sans_serif"
-	@exit
-build_ebook:
-	@echo "build_ebook target is not supported anymore, please use make ebook"
-	@exit
-build_bw_ebook:
-	@echo "build_bw_ebook target is not supported anymore, please use make bw_ebook"
-	@exit
-build_low_res_ebook:
-	@echo "build_low_res_ebook target is not supported anymore, please use make low_res_ebook"
-	@exit
-# }}}
-
 # Top level releases rules {{{
 .PHONY: bake release_serif release_sans_serif
 bake: release_serif release_sans_serif website
@@ -326,7 +305,8 @@ help:
 	@echo "figures: build TikZ figures only"
 	@echo ""
 	@echo "Quick builds:"
-	@echo "  quick: compiles serif_pdf but runs lulatex only once"
+	@echo "  quick: compiles serif but runs lulatex only once"
+	@echo "         will halt on first error"
 	@echo "  quick_ebook: compiles ebook but runs lulatex only once"
 	@echo ""
 	@echo "Checks:"
