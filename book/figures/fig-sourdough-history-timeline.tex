@@ -13,44 +13,44 @@
 
   % Lines for periods
   \draw[stealth-stealth, line width=1pt] (0,-3.7)
-    -- node[midway, timeline_timespan] {Historic breadmaking} ({\segmentwidth * 7.8},-3.7);
+    -- node[midway, timeline_timespan] {Historisches Brotbacken} ({\segmentwidth * 7.8},-3.7);
   \draw[stealth-stealth, line width=1pt] ({\segmentwidth * 7.8},-3.7)
-    -- node[midway, timeline_timespan] {Modern bread} ({\segmentwidth * 12},-3.7);
+    -- node[midway, timeline_timespan] {Modernes Brot} ({\segmentwidth * 12},-3.7);
 
   % Regularly placed events, not in chronological order
   % since should be placed on top of others on the timeline
 
   % BC
   \draw[line width=1pt] ({\segmentwidth*3},1.0) -- ({\segmentwidth*3},0.3)
-    node[at start, left, timeline_event] {6000~BC: First beer in Egypt};
+    node[at start, left, timeline_event] {6000~v.\,Chr.: Erstes Bier in Ägypten};
   \draw[line width=1pt] ({\segmentwidth*5.95},1.5) -- ({\segmentwidth*5.95},0.3)
-    node[at start, left, timeline_event] {70~BC:~First water mill};
+    node[at start, left, timeline_event] {70~v.\,Chr.:~Erste Wassermühle};
 
   % Sourdough in Jordan
   \draw[line width=1pt] (0,-0.3) -- (0,-1.5);
   \draw[line width=1pt] (0,-1.5) -- (0.25,-1.5);
   \node[timeline_event, below, anchor=west] at (0.25,-1.5)
   {\begin{tabular}{@{}l@{}l@{}}
-      \num{12000}~BC:&~Sourdough in Jordan\\
-                     &~Cultivation of Einkorn\\
+      \num{12000}~v.\,Chr.:&~Sauerteig in Jordanien\\
+                     &~Kultivierung von Einkorn\\
     \end{tabular}};
 
   % AD
   \draw[line width=1pt] ({\segmentwidth*10.50},1.0) -- ({\segmentwidth*10.50},0.3)
-    node[at start, above, timeline_event] {\hspace{1.0cm}1950:~Modern Wheat};
+    node[at start, above, timeline_event] {\hspace{1.0cm}1950:~Moderner Weizen};
   \draw[line width=1pt] ({\segmentwidth*9.60},1.5) -- ({\segmentwidth*9.60},0.3)
-    node[at start, above, timeline_event] {1868:~Commercial yeast};
+    node[at start, above, timeline_event] {1868:~Kommerzielle Hefe};
   \draw[line width=1pt] ({\segmentwidth*7.8},2) -- ({\segmentwidth*7.8},0.3)
-    node[at start, above, timeline_event] {1680:~Discovery of microorganisms};
+    node[at start, above, timeline_event] {1680:~Entdeckung der Mikroorganismen};
 
   \draw[line width=1pt] ({\segmentwidth*8.80},-1.25) -- ({\segmentwidth*8.80},-0.3)
-    node[at start, left, timeline_event] {1785:~Steam mill};
+    node[at start, left, timeline_event] {1785:~Dampfmühle};
   \draw[line width=1pt] ({\segmentwidth*9.57},-1.75) -- ({\segmentwidth*9.57},-0.3)
-    node[at start, left, timeline_event] {1857:~Isolated Yeast};
+    node[at start, left, timeline_event] {1857:~Isolierte Hefe};
   \draw[line width=1pt] ({\segmentwidth*9.80},-2.25) -- ({\segmentwidth*9.80},-0.3)
-    node[at start, left, timeline_event] {1885:~Electrical mixer};
+    node[at start, left, timeline_event] {1885:~Elektrischer Mixer};
   \draw[line width=1pt] ({\segmentwidth*11.20},-2.75) -- ({\segmentwidth*11.20},-0.3)
-    node[at start, left, timeline_event] {2020:~COVID-19 Pandemic};
+    node[at start, left, timeline_event] {2020:~COVID-19-Pandemie};
 
   % Indicators for period
   % Draw millenary and century separators

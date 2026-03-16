@@ -1,4 +1,5 @@
 \ProvidesPackage{sourdough}
+\usepackage[ngerman]{babel}
 \usepackage{blindtext}
 \usepackage{graphicx}
 \usepackage{pgfplots}
@@ -25,8 +26,8 @@
   float,
   floattype=4,%
   counterwithin=chapter,
-  name=Flowchart,%
-  listname = {List of Flowcharts}
+  name=Flussdiagramm,%
+  listname = {Verzeichnis der Flussdiagramme}
 ]{loc}
 \setuptoc{loc}{chapteratlist}
 \DeclareTOCStyleEntry[numwidth=3em]{tocline}{figure}
@@ -84,15 +85,15 @@
     citecolor = hlocre,
     breaklinks = true,
     pdfinfo={%
-        Title={The Sourdough Framework},
+        Title={Das Sauerteig-Framework},
         Author={Hendrik Kleinw\"achter},
-        Subject={The sourdough bread baking bible},
-        Keywords={Sourdough, dough, bread, wheat, baking, bake, home-baking,
-            yeast, rye, crumb, debug, gluten, dough strength, crust, DIY,
-            framework, https://the-sourdough-framework.com,
+        Subject={Die Bibel des Sauerteigbrotbackens},
+        Keywords={Sauerteig, Teig, Brot, Weizen, Backen, Heimbacken,
+            Hefe, Roggen, Krume, Gluten, Teigst\"arke, Kruste, DIY,
+            Framework, https://the-sourdough-framework.com,
             https://www.the-bread-code.io/,
             https://github.com/hendricius/the-sourdough-framework,
-            open-source, CC-BY-SA}
+            Open-Source, CC-BY-SA}
     }
 }
 

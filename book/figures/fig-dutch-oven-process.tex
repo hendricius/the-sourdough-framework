@@ -1,19 +1,19 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (heat_oven) {Preheat DO to \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
-  \node [block, right of=heat_oven] (remove_oven) {Remove DO from oven };
-  \node [block, right of=remove_oven] (open_load_dough) {Open DO \& load your dough};
-  \node [block, right of=open_load_dough] (score) {Score your dough};
-  \node [block, right of=score] (spritz) {Spritz dough with water};
-  \node [block, below of=spritz] (close) {Close DO};
-  \node [block, left of=close] (back_oven) {Place DO back in oven};
-  \node [block, left of=back_oven] (bake) {Bake 30~minutes at \qty{230}{\degreeCelsius} (\qty{446}{\degF})};
+  \node [start] (heat_oven) {Topf auf \qty{230}{\degreeCelsius} (\qty{446}{\degF}) für 30~Minuten vorheizen};
+  \node [block, right of=heat_oven] (remove_oven) {Topf aus dem Ofen nehmen};
+  \node [block, right of=remove_oven] (open_load_dough) {Topf öffnen \& Teig einlegen};
+  \node [block, right of=open_load_dough] (score) {Teig einschneiden};
+  \node [block, right of=score] (spritz) {Teig mit Wasser besprühen};
+  \node [block, below of=spritz] (close) {Topf schließen};
+  \node [block, left of=close] (back_oven) {Topf zurück in den Ofen};
+  \node [block, left of=back_oven] (bake) {30~Minuten bei \qty{230}{\degreeCelsius} (\qty{446}{\degF}) backen};
   \node [decision, below right= 5cm and -1 cm of heat_oven]  (is_ready_check)
-        {Core temperature \qty{92}{\degreeCelsius} (\qty{197}{\degF})?};
-  \node [block, below of=is_ready_check, node distance=4cm] (wait_5_minutes) {Wait\\ 5 minutes};
-  \node [block, right of=is_ready_check, node distance=4cm] (remove_do_lid) {Remove DO lid};
-  \node [decision, right of=remove_do_lid, node distance=3.5cm] (dark_enough_decision) {Crust color dark enough?};
-  \node [success, below of=dark_enough_decision, node distance=4cm] (finish_baking) {Bread is finished};
-  \node [block, right of=dark_enough_decision, node distance=3.5cm] (bake_5_more_minutes) {Bake another 5~minutes};
+        {Kerntemperatur \qty{92}{\degreeCelsius} (\qty{197}{\degF})?};
+  \node [block, below of=is_ready_check, node distance=4cm] (wait_5_minutes) {5 Minuten warten};
+  \node [block, right of=is_ready_check, node distance=4cm] (remove_do_lid) {Deckel entfernen};
+  \node [decision, right of=remove_do_lid, node distance=3.5cm] (dark_enough_decision) {Krusten\-farbe dunkel genug?};
+  \node [success, below of=dark_enough_decision, node distance=4cm] (finish_baking) {Brot ist fertig};
+  \node [block, right of=dark_enough_decision, node distance=3.5cm] (bake_5_more_minutes) {Weitere 5~Minuten backen};
   \path [line] (heat_oven) -- (remove_oven);
   \path [line] (remove_oven) -- (open_load_dough);
   \path [line] (open_load_dough) -- (score);
@@ -22,11 +22,11 @@
   \path [line] (close) -- (back_oven);
   \path [line] (back_oven) -- (bake);
   \path [line] (bake.west) -- node{} ++(-2, 0) -| (is_ready_check.north);
-  \path [line] (is_ready_check) -- node{Yes} (remove_do_lid);
-  \path [line] (is_ready_check) -- node{No} (wait_5_minutes);
+  \path [line] (is_ready_check) -- node{Ja} (remove_do_lid);
+  \path [line] (is_ready_check) -- node{Nein} (wait_5_minutes);
   \path [line] (wait_5_minutes.west) -- node{} ++(-1.5, 0) |- (is_ready_check.west);
   \path [line] (remove_do_lid) -- (dark_enough_decision);
-  \path [line] (dark_enough_decision) -- node{Yes} (finish_baking);
-  \path [line] (dark_enough_decision) -- node{No} (bake_5_more_minutes);
+  \path [line] (dark_enough_decision) -- node{Ja} (finish_baking);
+  \path [line] (dark_enough_decision) -- node{Nein} (bake_5_more_minutes);
   \path [line] (bake_5_more_minutes.east) -- node{} ++(1, 0) -- node{} ++(0, 2.3) -| (dark_enough_decision.north);
 \end{tikzpicture}

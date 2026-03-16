@@ -1,10 +1,10 @@
 \begin{tikzpicture}[node distance = 3.8cm, auto]
-  \node [start] (init) {Mix \\ingredients};
-  \node [block, below of=init, node distance = 3cm] (bulk_ferment) {Bulk ferment};
-  \node [block, right of=init] (divide) {Divide};
-  \node [block] at (divide |- bulk_ferment) (shape) {Shape};
-  \node [block, right of=divide] (proof) {Proof};
-  \node [success] at (proof |- bulk_ferment) (bake) {Bake};
+  \node [start] (init) {Zutaten\\mischen};
+  \node [block, below of=init, node distance = 3cm] (bulk_ferment) {Stockgare};
+  \node [block, right of=init] (divide) {Teilen};
+  \node [block] at (divide |- bulk_ferment) (shape) {Formen};
+  \node [block, right of=divide] (proof) {Stückgare};
+  \node [success] at (proof |- bulk_ferment) (bake) {Backen};
   \path [line] (init) -- (bulk_ferment);
   \path [line] (bulk_ferment.north east) -- (divide.south west);
   \path [line] (divide) -- (shape);

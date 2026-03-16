@@ -1,20 +1,20 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [decision_start] (init) {Room temperature-proofing?};
-  \node [decision, right of=init, node distance=8cm] (retard_bake_decision) {Bake in less than  \qty{10}{\hour} from now?};
-  \node [block, below of=init, node distance=4cm] (poke) {Poke the dough};
-  \node [block, left of=poke] (wait_poke) {Wait\\ 15~minutes};
-  \node [decision, below of=poke] (dent_visible_decision) {Dent still visible after one~minute?};
-  \node [success, right of=dent_visible_decision, node distance=4cm] (bake) {Score and bake};
-  \node [block] at (retard_bake_decision |- poke) (wait_retard) {Wait\\ 15~minutes};
-  \node [block] at (wait_retard |- bake) (retard) {Proof in fridge at \qty{4}{\degreeCelsius} (\qty{40}{\degF})};
-  \path [line] (init) -- node{Yes} (poke);
-  \path [line] (init) -- node{No} (retard_bake_decision);
+  \node [decision_start] (init) {Stückgare bei Raumtemperatur?};
+  \node [decision, right of=init, node distance=8cm] (retard_bake_decision) {Innerhalb von \qty{10}{\hour} backen?};
+  \node [block, below of=init, node distance=4cm] (poke) {Teig eindrücken};
+  \node [block, left of=poke] (wait_poke) {15~Minuten warten};
+  \node [decision, below of=poke] (dent_visible_decision) {Delle nach einer~Minute noch sichtbar?};
+  \node [success, right of=dent_visible_decision, node distance=4cm] (bake) {Einschneiden und backen};
+  \node [block] at (retard_bake_decision |- poke) (wait_retard) {15~Minuten warten};
+  \node [block] at (wait_retard |- bake) (retard) {Im Kühlschrank bei \qty{4}{\degreeCelsius} (\qty{40}{\degF}) gären lassen};
+  \path [line] (init) -- node{Ja} (poke);
+  \path [line] (init) -- node{Nein} (retard_bake_decision);
   \path [line] (poke) -- (dent_visible_decision);
-  \path [line] (dent_visible_decision) -- node{Yes} (bake);
-  \path [line] (dent_visible_decision.west) -- node{No} ++(-1.4, 0) -- node{} (wait_poke.south);
+  \path [line] (dent_visible_decision) -- node{Ja} (bake);
+  \path [line] (dent_visible_decision.west) -- node{Nein} ++(-1.4, 0) -- node{} (wait_poke.south);
   \path [line] (wait_poke) -- (poke);
-  \path [line] (retard_bake_decision) -- node{Yes} (wait_retard);
-  \path [line] (retard_bake_decision.east) -- node{No} ++(1, 0) |- node{} (retard.east);
+  \path [line] (retard_bake_decision) -- node{Ja} (wait_retard);
+  \path [line] (retard_bake_decision.east) -- node{Nein} ++(1, 0) |- node{} (retard.east);
   \path [line] (wait_retard) -- (retard);
   \path [line] (retard) -- (bake);
 \end{tikzpicture}

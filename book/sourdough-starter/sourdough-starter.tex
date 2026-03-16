@@ -1,486 +1,486 @@
-\chapter{Making a sourdough starter}%
+\chapter{Einen Sauerteig-Starter herstellen}%
 \label{ch:sourdough-starter}
 \begin{quoting}
-In this chapter you will learn how to make your
-own sourdough starter, but before doing so you will
-quickly learn about baker's math. Don't worry,
-it's a very simple way to write a recipe which
-is cleaner and more scalable. Once you get the hang
-of it you will want to write every recipe this way.
-You will learn to understand the signs indicating
-your starter's readiness, as well as
-how to prepare your starter for long-term storage.
+In diesem Kapitel lernen Sie, wie Sie Ihr eigenes
+Anstellgut herstellen. Zuvor werden Sie jedoch
+kurz die Bäckermathematik kennenlernen. Keine Sorge,
+es ist eine sehr einfache Art, ein Rezept zu schreiben,
+die übersichtlicher und besser skalierbar ist. Wenn Sie den Dreh
+einmal raus haben, werden Sie jedes Rezept so schreiben wollen.
+Sie werden lernen, die Anzeichen für die Reife
+Ihres Starters zu erkennen und erfahren,
+wie Sie Ihren Starter für die Langzeitlagerung vorbereiten.
 \end{quoting}
 
-\section{Baker's math}%
+\section{Bäckermathematik}%
 \label{sec:bakers-math}
 
-In a large bakery, a determining factor is how
-much flour you have at hand. Based on the amount
-of flour you have, you can calculate how many
-loaves or buns you can make. To make it easy
-for bakers, the quantity of each ingredient
-is calculated as a percentage based on how much flour you have.
-Let me demonstrate this with a small example from
-a pizzeria. In the morning you check and you realize you
-have around \qty{1}{\kg} of flour.
-Your default recipe calls for around \qty{600}{\gram} of water.
-That would be a typical pizza dough, not too dry but
-also not too wet. Then you would be using around \qty{20}{\gram}
-of salt and around \qty{100}{\gram} of sourdough starter\footnote{This is my go to
-pizza dough recipe. In Napoli modern pizzerias would use fresh or dry yeast.
-However traditionally pizza has always been made with sourdough.}.
-The next day you suddenly have \qty{1.4}{\kg} of flour
-at hand and thus can make more pizza dough. What do you do?
-Do you multiply all the ingredients by \num{1.4}? Yes you could,
-but there is an easier way. This is where baker's math
-comes in handy. Let's look at the default recipe with baker's
-math and then adjust it for the \qty{1.4}{\kg} flour quantity.
+In einer großen Bäckerei ist ein bestimmender Faktor, wie
+viel Mehl man zur Verfügung hat. Basierend auf der Mehlmenge
+kann man berechnen, wie viele Brote oder Brötchen man herstellen kann.
+Um es den Bäckern einfach zu machen, wird die Menge jeder Zutat
+als Prozentsatz bezogen auf die vorhandene Mehlmenge berechnet.
+Lassen Sie mich das mit einem kleinen Beispiel aus
+einer Pizzeria veranschaulichen. Am Morgen prüfen Sie und stellen fest, dass Sie
+etwa \qty{1}{\kg} Mehl haben.
+Ihr Standardrezept verlangt etwa \qty{600}{\gram} Wasser.
+Das wäre ein typischer Pizzateig, nicht zu trocken, aber
+auch nicht zu feucht. Dann würden Sie etwa \qty{20}{\gram}
+Salz und etwa \qty{100}{\gram} Sauerteig-Starter verwenden\footnote{Das ist mein
+Lieblings-Pizzateig-Rezept. In Neapel verwenden moderne Pizzerien Frisch- oder Trockenhefe.
+Traditionell wurde Pizza jedoch immer mit Sauerteig hergestellt.}.
+Am nächsten Tag haben Sie plötzlich \qty{1,4}{\kg} Mehl
+zur Verfügung und können somit mehr Pizzateig herstellen. Was tun Sie?
+Multiplizieren Sie alle Zutaten mit \num{1,4}? Ja, das könnten Sie,
+aber es gibt einen einfacheren Weg. Hier kommt die Bäckermathematik
+ins Spiel. Schauen wir uns das Standardrezept mit Bäckermathematik
+an und passen es dann an die \qty{1,4}{\kg} Mehlmenge an.
 
 \begin{table}[!htb]
 \centering
   \input{tables/table-bakers-math-example.tex}
-  \caption[Baker's math example]{An example table demonstrating how to
-      properly calculate using baker's math}
+  \caption[Beispiel Bäckermathematik]{Eine Beispieltabelle, die zeigt, wie man
+      korrekt mit Bäckermathematik rechnet}
 \end{table}
 
-Note how each of the ingredients is calculated as a percentage
-based on the flour. The \qty{100}{\percent} is the baseline and represents the absolute
-amount of flour that you have at hand. In this case that's
+Beachten Sie, dass jede Zutat als Prozentsatz
+basierend auf dem Mehl berechnet wird. Die \qty{100}{\percent} sind die Bezugsgröße und
+stellen die absolute Mehlmenge dar, die Sie zur Verfügung haben. In diesem Fall sind das
 \qty{1000}{\gram}~(\qty{1}{\kg}).
 
-Now let's go back to our example and adjust the flour, as we have
-more flour available the next day. As mentioned the next day
-we have \qty{1.4}{\kg} at hand (\qty{1400}{\gram}).
+Kehren wir nun zu unserem Beispiel zurück und passen das Mehl an, da wir am
+nächsten Tag mehr Mehl zur Verfügung haben. Wie erwähnt haben wir am nächsten Tag
+\qty{1,4}{\kg} zur Hand (\qty{1400}{\gram}).
 
 \begin{table}[!htb]
     \centering
         \input{tables/table-recipe-bakers-math.tex}
-        \caption[Another baker's math example]{An example recipe that uses
-            \qty{1400}{\gram} as its baseline and is then calculated using
-            baker's math.}
+        \caption[Ein weiteres Beispiel der Bäckermathematik]{Ein Beispielrezept, das
+            \qty{1400}{\gram} als Bezugsgröße verwendet und dann mit
+            Bäckermathematik berechnet wird.}
 \end{table}
 
-For each ingredient we calculate the percentage
-based on the flour available (\qty{1400}{\gram}). So for the water
-we calculate \qty{60}{\percent} based on \num{1400}. Open up your
-calculator and type in \numproduct{1400 x 0.6} and you have
-the exact value in grams that you should be using.
-For the second day, that is \qty{840}{\gram}. Proceed to do the same
-thing for all the other ingredients and you will know
-your recipe.
+Für jede Zutat berechnen wir den Prozentsatz
+basierend auf dem verfügbaren Mehl (\qty{1400}{\gram}). Für das Wasser
+berechnen wir also \qty{60}{\percent} von \num{1400}. Öffnen Sie Ihren
+Taschenrechner und tippen Sie \numproduct{1400 x 0,6} ein, und Sie erhalten
+den exakten Wert in Gramm, den Sie verwenden sollten.
+Für den zweiten Tag sind das \qty{840}{\gram}. Verfahren Sie genauso
+mit allen anderen Zutaten und Sie kennen
+Ihr Rezept.
 
-Let's say you would want to use \qty{50}{\kg} of flour
-the next day. What would you do? You would simply proceed
-to calculate the percentages one more time. I~like this
-way of writing recipes a lot. Imagine you wanted to make
-some pasta. You would like to know how much sauce you should
-be making. Now rather than making a recipe just for you, a
-hungry family arrives. You are tasked with making pasta
-for \num{20} people. How would you calculate the amount of sauce
-you need? You go to the internet and check a recipe and then
-are completely lost when trying to scale it up.
+Nehmen wir an, Sie möchten am nächsten Tag \qty{50}{\kg} Mehl
+verwenden. Was würden Sie tun? Sie würden einfach
+die Prozentsätze noch einmal berechnen. Ich mag diese
+Art, Rezepte zu schreiben, sehr. Stellen Sie sich vor, Sie möchten
+Pasta kochen. Sie möchten wissen, wie viel Sauce Sie zubereiten sollten.
+Anstatt ein Rezept nur für sich zu machen, kommt
+eine hungrige Familie zu Besuch. Sie sollen Pasta
+für \num{20} Personen kochen. Wie würden Sie die Saucenmenge
+berechnen? Sie gehen ins Internet, schauen sich ein Rezept an und sind dann
+völlig verloren, wenn Sie es hochskalieren wollen.
 
-\section{The process of making a starter}
+\section{Der Prozess der Starter-Herstellung}
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{sourdough-starter-activity-indicators}
-  \caption[Very active sourdough]{A very active sourdough starter shown by the
-      bubbles in the dough.}%
+  \caption[Sehr aktiver Sauerteig]{Ein sehr aktiver Sauerteig-Starter, erkennbar an den
+      Blasen im Teig.}%
   \label{fig:sourdough-starter}
 \end{figure}
 
-Making a sourdough starter is very easy, all you need
-is a little bit of patience. It is in fact so easy that it can be summarized
-in a simple Flowchart~\ref{fig:sourdough-starter-process} The flour you should
-use to bootstrap your starter is ideally a whole flour.
-You could use whole-wheat, whole-rye, whole-spelt or
-any other flour you have. In fact gluten free flours such
-as rice or corn would also work. Don't worry, you can always
-change the flour later. Use whatever whole flour you
-already have at hand.
+Einen Sauerteig-Starter herzustellen ist sehr einfach, man braucht nur
+ein wenig Geduld. Es ist tatsächlich so einfach, dass es sich in einem
+einfachen Flussdiagramm~\ref{fig:sourdough-starter-process} zusammenfassen lässt. Das Mehl,
+das Sie zum Starten Ihres Anstellguts verwenden, sollte idealerweise ein Vollkornmehl sein.
+Sie können Vollkornweizen, Vollkornroggen, Vollkorndinkel oder
+jedes andere Mehl verwenden, das Sie haben. Tatsächlich würden auch glutenfreie Mehle wie
+Reis- oder Maismehl funktionieren. Keine Sorge, Sie können das
+Mehl später jederzeit wechseln. Verwenden Sie einfach das Vollkornmehl,
+das Sie bereits zur Hand haben.
 
 \begin{flowchart}[!htb]
 \centering
   \input{figures/fig-starter-process.tex}
-  \caption[The full sourdough starter process]{The process of making a sourdough
-      starter from scratch.}%
+  \caption[Der vollständige Sauerteig-Starter-Prozess]{Der Prozess der Herstellung eines
+      Sauerteig-Starters von Grund auf.}%
   \label{fig:sourdough-starter-process}
 \end{flowchart}
 
-Your flour is contaminated with millions of microbes. As explained
-before in the chapter about wild yeast and bacteria, these
-microbes live on the surface of the plant. That's why
-a whole flour works better because you have more natural
-contamination from the microbes you are trying to cultivate
-in your starter. More of them live on the hull compared to the
-endophytes living in the grain.
+Ihr Mehl ist mit Millionen von Mikroben kontaminiert. Wie zuvor
+im Kapitel über wilde Hefe und Bakterien erklärt, leben diese
+Mikroben auf der Oberfläche der Pflanze. Deshalb
+funktioniert ein Vollkornmehl besser, weil Sie eine stärkere natürliche
+Kontamination durch die Mikroben haben, die Sie in
+Ihrem Starter kultivieren möchten. Mehr von ihnen leben auf der Schale im Vergleich zu den
+Endophyten, die im Korn leben.
 
-Start by measuring approximately \qty{50}{\gram} of both flour and
-water. The measurements don't have to be exact; you can use
-less or more, or just eyeball the proportions. These
-values are just shown as a reference.
+Beginnen Sie damit, ungefähr \qty{50}{\gram} Mehl und ebenso viel
+Wasser abzumessen. Die Mengen müssen nicht exakt sein; Sie können
+weniger oder mehr nehmen oder die Proportionen einfach nach Augenmaß bestimmen. Diese
+Werte dienen nur als Referenz.
 
-Don't use chlorinated water when setting up your starter.
-Ideally, you should use bottled water. In certain regions
-like Germany, tap water is perfectly fine. Chlorine is added
-to water as a disinfectant to kill microorganisms; you will
-not be able to grow a starter with chlorinated water.
+Verwenden Sie kein gechlortes Wasser beim Ansetzen Ihres Starters.
+Idealerweise sollten Sie Flaschenwasser verwenden. In bestimmten Regionen
+wie Deutschland ist Leitungswasser völlig in Ordnung. Chlor wird
+dem Wasser als Desinfektionsmittel zugesetzt, um Mikroorganismen abzutöten; mit
+gechlortem Wasser können Sie keinen Starter züchten.
 
-In this process, the hydration of your starter is \qty{100}{\percent}.
-This means you're using equal amount of flour and
-water. Stir everything together so that all the flour is
-properly hydrated. This step activates the microbial spores
-in your mixture, drawing them out of hibernation and
-reviving them.
-Finally, cover your mixture but make sure the covering is
-not airtight. You still want some gas exchange to be possible.
-I~like to use a glass and place another
-inverted one on top.
+Bei diesem Verfahren beträgt die Hydration Ihres Starters \qty{100}{\percent}.
+Das bedeutet, Sie verwenden gleiche Mengen von Mehl und
+Wasser. Rühren Sie alles zusammen, bis das gesamte Mehl
+richtig hydratisiert ist. Dieser Schritt aktiviert die mikrobiellen Sporen
+in Ihrer Mischung, holt sie aus dem Ruhezustand und
+belebt sie wieder.
+Bedecken Sie Ihre Mischung zum Schluss, aber stellen Sie sicher, dass die Abdeckung
+nicht luftdicht ist. Sie möchten, dass ein gewisser Gasaustausch möglich bleibt.
+Ich verwende gerne ein Glas und stelle ein weiteres
+umgedreht obendrauf.
 
-Now an epic battle begins, as visualized in
-Figure~\ref{fig:sourdough-starter-microbial-war}. In one
-study~\cite{yeasts+biocontrol+agent} scientists have identified
-more than \num{150}~different yeast species living
-on a single leaf of a plant.
-All of the different yeasts and bacteria are trying to get
-the upper hand in this battle. Other pathogens such as mold
-are also being activated as we added water. Only the strongest
-most adaptable microorganisms will survive.
+Nun beginnt ein epischer Kampf, wie in
+Abbildung~\ref{fig:sourdough-starter-microbial-war} dargestellt. In einer
+Studie~\cite{yeasts+biocontrol+agent} haben Wissenschaftler
+mehr als \num{150}~verschiedene Hefearten identifiziert, die
+auf einem einzigen Blatt einer Pflanze leben.
+Alle verschiedenen Hefen und Bakterien versuchen, in diesem Kampf die
+Oberhand zu gewinnen. Andere Krankheitserreger wie Schimmel
+werden ebenfalls aktiviert, da wir Wasser hinzugefügt haben. Nur die stärksten
+und anpassungsfähigsten Mikroorganismen werden überleben.
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{sourdough-starter-microbial-war}
-  \caption[Microbial warfare during sourdough early days]{A simple
-      visualization of the microbial warfare that happens during the making of
-      a sourdough starter. The wild spores on the plant and flour become
-      activated the moment flour and water is mixed.  Only the most adapted
-      flour-fermenting microbes will survive. Because of unwanted microbial
-      fermentation it is advised to discard the feeding-leftovers of the first
-      days. The surviving yeast and bacteria continuously try to outcompete
-      each other for resources. New microbes have a hard time entering the
-      starter and are eliminated.}%
+  \caption[Mikrobielle Kriegsführung in den ersten Tagen des Sauerteigs]{Eine einfache
+      Darstellung der mikrobiellen Kriegsführung, die während der Herstellung eines
+      Sauerteig-Starters stattfindet. Die wilden Sporen auf der Pflanze und im Mehl werden
+      in dem Moment aktiviert, in dem Mehl und Wasser gemischt werden. Nur die am besten
+      angepassten mehlfermentierenden Mikroben werden überleben. Wegen unerwünschter
+      mikrobieller Gärung wird empfohlen, die Fütterungsreste der ersten
+      Tage zu verwerfen. Die überlebenden Hefen und Bakterien versuchen kontinuierlich,
+      sich gegenseitig um Ressourcen zu übertrumpfen. Neue Mikroben haben es schwer,
+      in den Starter einzudringen, und werden eliminiert.}%
   \label{fig:sourdough-starter-microbial-war}
 \end{figure}
 
-By adding water to the
-flour the starches start to degrade. The seedling tries to
-sprout but it no longer can. Essential for this process is the
-amylase enzyme. The compact starch is broken down to more
-digestible sugars to fuel plant growth. Glucose is what the
-plant needs in order to grow. The microorganisms that survive
-this frenzy are adapted to consuming glucose.
+Durch die Zugabe von Wasser zum
+Mehl beginnt die Stärke abgebaut zu werden. Der Keimling versucht zu
+sprießen, kann es aber nicht mehr. Wesentlich für diesen Prozess ist das
+Enzym Amylase. Die kompakte Stärke wird in leichter
+verdauliche Zucker aufgespalten, um das Pflanzenwachstum anzutreiben. Glucose ist das, was die
+Pflanze zum Wachsen braucht. Die Mikroorganismen, die diesen
+Kampf überleben, sind darauf angepasst, Glucose zu verwerten.
 
-Luckily for us
-bakers, the yeast and bacteria know very well how to metabolize
-glucose. This is what they have been fed in the wild by the plants.
-By forming patches on the leaf and protecting the plant from
-pathogens they received glucose in return for their services.
-Each of the microbes tries to defeat the other by consuming the
-food fastest, producing agents to inhibit food uptake by others or by producing
-bactericides and/or fungicides. This early stage of the starter
-is very interesting as more research could possibly reveal
-new fungicides or antibiotics.
+Zum Glück für uns
+Bäcker wissen die Hefe und die Bakterien sehr gut, wie man
+Glucose verstoffwechselt. Das ist es, was sie in der freien Natur von den Pflanzen
+als Nahrung erhalten haben. Indem sie Kolonien auf dem Blatt bildeten und die Pflanze vor
+Krankheitserregern schützten, erhielten sie Glucose als Gegenleistung für ihre Dienste.
+Jede Mikrobe versucht, die andere zu besiegen, indem sie die
+Nahrung am schnellsten verwertet, Stoffe produziert, die die Nahrungsaufnahme anderer hemmen, oder
+Bakterizide und/oder Fungizide erzeugt. Dieses frühe Stadium des Starters
+ist sehr interessant, da weitere Forschung möglicherweise
+neue Fungizide oder Antibiotika aufdecken könnte.
 
-Depending on where your flour
-is from, the starting microbes of your starter might be different
-than the ones from another starter. Some people have also reported
-how the microbes from your hand or air can influence your starter's
-microorganisms. This makes sense to a certain extent. Your
-hand's microbes might be good at fermenting your sweat, but
-probably not so good at metabolizing glucose. The contamination
-of your hands or air might play a minor role in the initial epic
-battle. But only the fittest microbes fitting the sourdough's
-niche are going to survive.
+Je nachdem, woher Ihr Mehl
+stammt, können die Ausgangsmikroben Ihres Starters anders sein
+als die eines anderen Starters. Manche Menschen berichten auch,
+wie die Mikroben von Ihrer Hand oder aus der Luft die Mikroorganismen Ihres Starters
+beeinflussen können. Dies ergibt bis zu einem gewissen Grad Sinn. Die Mikroben
+Ihrer Hände sind möglicherweise gut darin, Ihren Schweiß zu fermentieren, aber
+wahrscheinlich nicht so gut darin, Glucose zu verstoffwechseln. Die Kontamination
+durch Ihre Hände oder die Luft spielt möglicherweise eine untergeordnete Rolle im anfänglichen
+epischen Kampf. Aber nur die fittesten Mikroben, die zur Nische des Sauerteigs
+passen, werden überleben.
 
-This means the microorganisms knowing
-how to convert maltose or glucose will have the upper hand. Or the
-microbes fermenting the waste of the other microbes. Ethanol created
-by the yeast is metabolized by the bacteria in your sourdough. That's
-why a sourdough has no alcohol. I~can confirm the role of aerial
-contamination to a certain extent, when setting up a new sourdough
-starter the whole process is quite quick for me. After a few
-days my new starter seems to be quite alive already. This might
-be due to previous contamination of flour fermenting microbes in
-my kitchen.
+Das bedeutet, die Mikroorganismen, die wissen,
+wie man Maltose oder Glucose umwandelt, werden die Oberhand haben. Oder die
+Mikroben, die die Abfallprodukte der anderen Mikroben fermentieren. Ethanol, das
+von der Hefe erzeugt wird, wird von den Bakterien in Ihrem Sauerteig verstoffwechselt. Deshalb
+enthält ein Sauerteig keinen Alkohol. Ich kann die Rolle der Luftkontamination
+bis zu einem gewissen Grad bestätigen: Wenn ich einen neuen Sauerteig-Starter
+ansetze, geht der ganze Prozess bei mir recht schnell. Nach ein paar
+Tagen scheint mein neuer Starter schon recht lebendig zu sein. Dies könnte
+an einer vorherigen Kontamination mit mehlfermentierenden Mikroben in
+meiner Küche liegen.
 
-Wait for around 24~hours and observe what happens to your starter.
-You might see some early signs of fermentation already. Use your nose
-to smell the dough. Look for bubbles in the dough. Your dough
-might already have increased in size a little bit. Whatever
-you see and notice is a sign of the first battle.
+Warten Sie etwa 24~Stunden und beobachten Sie, was mit Ihrem Starter passiert.
+Möglicherweise sehen Sie schon erste Anzeichen der Gärung. Riechen Sie mit Ihrer Nase
+am Teig. Suchen Sie nach Blasen im Teig. Ihr Teig
+könnte bereits etwas an Volumen zugenommen haben. Was auch immer
+Sie sehen und bemerken, ist ein Zeichen des ersten Kampfes.
 
-Some microbes have already been outperformed. Others have won the first
-battle.  After around \qty{24}{hours} most of the starch has been broken down
-and your microbes are hungry for additional sugars. With a spoon take around
-\qty{10}{\gram} from the previous day's mixture and place it in a new
-container. Again---you could also simply eye ball all the quantities. It does
-not matter that much. Mix the \qty{10}{\gram} from the previous day with
-another \qty{50}{\gram} of flour and \qty{50}{\gram} of water.
+Einige Mikroben wurden bereits verdrängt. Andere haben den ersten
+Kampf gewonnen. Nach etwa \qty{24}{Stunden} ist der Großteil der Stärke abgebaut
+und Ihre Mikroben sind hungrig nach zusätzlichem Zucker. Nehmen Sie mit einem Löffel etwa
+\qty{10}{\gram} von der Mischung des Vortags und geben Sie sie in einen neuen
+Behälter. Auch hier können Sie alle Mengen einfach nach Augenmaß abschätzen. Es kommt
+nicht so genau darauf an. Mischen Sie die \qty{10}{\gram} vom Vortag mit
+weiteren \qty{50}{\gram} Mehl und \qty{50}{\gram} Wasser.
 
-Note the ratio of 1:5. I~very often use
-1~part of old culture with 5~parts of flour and 5~parts of water.
-This is also very often the same ratio I~use when making a dough.
-A dough is nothing else than a giant sourdough starter with slightly different
-properties. I'd always be using around \qtyrange{100}{200}{\gram} of starter
-for around \qty{1000}{\gram} of flour (baker's math: \qtyrange{10}{20}{\percent}).
+Beachten Sie das Verhältnis von 1:5. Ich verwende sehr oft
+1~Teil alte Kultur mit 5~Teilen Mehl und 5~Teilen Wasser.
+Das ist auch sehr oft dasselbe Verhältnis, das ich bei der Teigherstellung verwende.
+Ein Teig ist nichts anderes als ein riesiger Sauerteig-Starter mit etwas anderen
+Eigenschaften. Ich verwende immer etwa \qtyrange{100}{200}{\gram} Starter
+für etwa \qty{1000}{\gram} Mehl (Bäckermathematik: \qtyrange{10}{20}{\percent}).
 
-Homogenize your new mixture again with a spoon. Then cover
-the mix again with a glass or a lid. If you notice the top of
-your mixture dries out a lot consider using another cover. The
-dried-out parts will be composted by more adapted microbes such as
-mold. In many user reports, I~saw mold being able to damage
-the starter when the starter itself dried out a lot.
+Homogenisieren Sie Ihre neue Mischung erneut mit einem Löffel. Dann bedecken
+Sie die Mischung wieder mit einem Glas oder einem Deckel. Wenn Sie bemerken, dass die
+Oberfläche Ihrer Mischung stark austrocknet, verwenden Sie eine andere Abdeckung. Die
+ausgetrockneten Stellen werden von anpassungsfähigeren Mikroben wie
+Schimmel kompostiert. In vielen Nutzerberichten habe ich gesehen, dass Schimmel den
+Starter beschädigen konnte, wenn der Starter selbst stark ausgetrocknet war.
 
-You will
-still have some mixture left from your first day. As this contains
-possibly dangerous pathogens that have been activated make sure you discard
-this mixture. A rule of thumb is to begin keeping the discard,
-the moment you made your first successful bread. At that point
-your discard is long-fermented flour that is an excellent addon
-used to make crackers, pancakes or delicious hearty sandwich
-bread\ldots I~also frequently dry it and use it as a rolling agent
-for pizzas that I~am making.\footnote{Discarding starter when preparing
-a new batch can be frustrating. With experience, bread-making
-becomes more efficient, and excess discard is rarely produced. It is
-possible to prepare just the right amount of starter
-needed for bread dough. In fact, a fully depleted starter can even be revived
-using a small portion of bread dough. Any leftover discard, rich in spores,
-can also serve as a backup to create a new sourdough starter. Simply mix the
-discard with a little flour and water, and it will spring back to life. That is a
-great option if the starter was accidentally depleted. A practical approach
-is to store all discard in a single jar in the fridge, adding new discard on
-top as needed and using it whenever required.}
+Von der Mischung des ersten Tages wird noch etwas übrig sein. Da diese möglicherweise
+gefährliche Krankheitserreger enthält, die aktiviert wurden, stellen Sie sicher, dass Sie
+diese Mischung verwerfen. Als Faustregel gilt, den Abwurf aufzubewahren,
+sobald Sie Ihr erstes erfolgreiches Brot gebacken haben. Zu diesem Zeitpunkt
+ist Ihr Abwurf lang fermentiertes Mehl, das eine hervorragende Zutat
+für Cracker, Pfannkuchen oder köstliches herzhaftes Sandwichbrot
+ist\ldots Ich trockne ihn auch häufig und verwende ihn als Ausrollmehl
+für Pizzen, die ich mache.\footnote{Starter bei der Vorbereitung
+einer neuen Charge zu verwerfen, kann frustrierend sein. Mit Erfahrung wird die Brotherstellung
+effizienter und überschüssiger Abwurf entsteht selten. Es ist
+möglich, genau die richtige Menge Starter vorzubereiten,
+die für den Brotteig benötigt wird. Tatsächlich kann ein vollständig verbrauchter Starter sogar
+mit einem kleinen Stück Brotteig wiederbelebt werden. Jeder übrig gebliebene Abwurf, reich an Sporen,
+kann auch als Backup dienen, um einen neuen Sauerteig-Starter herzustellen. Mischen Sie den
+Abwurf einfach mit etwas Mehl und Wasser, und er wird wieder zum Leben erwachen. Das ist eine
+großartige Option, falls der Starter versehentlich aufgebraucht wurde. Ein praktischer Ansatz
+ist, allen Abwurf in einem einzigen Glas im Kühlschrank aufzubewahren, neuen Abwurf nach
+Bedarf obendrauf zu geben und ihn bei Bedarf zu verwenden.}
 
-You should hopefully again see some bubbles, the starter increasing
-in size and/or the starter changing its smell. Some people give
-up after the second or third day, because the signs might no longer
-be as dominant as they were on day one. The reason for this lies in only a few
-select microbes starting to take over the whole sourdough starter. The most
-adaptable ones are going to win, they are very small in quantity and will
-grow in population with each subsequent feeding. Even if you see no signs
-of activity directly, do not worry, there is activity in
-your starter at a microscopic level.
+Sie sollten hoffentlich wieder einige Blasen sehen, der Starter nimmt
+an Volumen zu und/oder der Starter verändert seinen Geruch. Manche Menschen geben
+nach dem zweiten oder dritten Tag auf, weil die Anzeichen möglicherweise nicht mehr
+so deutlich sind wie am ersten Tag. Der Grund dafür liegt darin, dass nur wenige
+ausgewählte Mikroben beginnen, den gesamten Sauerteig-Starter zu übernehmen. Die
+anpassungsfähigsten werden gewinnen, sie sind in sehr geringer Menge vorhanden und werden
+mit jeder weiteren Fütterung in der Population wachsen. Selbst wenn Sie keine Anzeichen
+von Aktivität direkt sehen, machen Sie sich keine Sorgen, es gibt Aktivität in
+Ihrem Starter auf mikroskopischer Ebene.
 
-24~hours later again we will repeat the same thing again until
-we see that our sourdough starter is active. More on that in the
-next section of this book.
+24~Stunden später wiederholen wir dasselbe noch einmal, bis
+wir sehen, dass unser Sauerteig-Starter aktiv ist. Mehr dazu im
+nächsten Abschnitt dieses Buches.
 
-\section{Determining starter readiness}
+\section{Bestimmung der Starter-Reife}
 
-For some people the whole process of setting up a starter takes
-only 4~days. For others it can take 7~days, for some even 20~days.
-This depends on several factors including how good your wild microbes
-are at fermenting flour. Generally speaking, with each feeding
-your starter becomes more adapted to its environment. Your
-starter will become better at fermenting flour. That's why
-a very old and mature starter you receive from a friend might
-be stronger than your own starter initially. Over time
-your sourdough starter will catch up. Similarly, modern baking
-yeast has been isolated like this from century old sourdough
-starters.
+Für manche Menschen dauert der gesamte Prozess des Starter-Ansetzens
+nur 4~Tage. Für andere kann es 7~Tage dauern, für einige sogar 20~Tage.
+Dies hängt von mehreren Faktoren ab, unter anderem davon, wie gut Ihre wilden Mikroben
+darin sind, Mehl zu fermentieren. Generell wird Ihr Starter mit jeder Fütterung
+besser an seine Umgebung angepasst. Ihr
+Starter wird besser darin, Mehl zu fermentieren. Deshalb kann
+ein sehr alter und reifer Starter, den Sie von einem Freund erhalten,
+anfangs stärker sein als Ihr eigener. Mit der Zeit
+wird Ihr Sauerteig-Starter aufholen. In ähnlicher Weise wurde moderne Backhefe
+auf diese Weise aus jahrhundertealten Sauerteig-Startern
+isoliert.
 
 \begin{flowchart}[!htb]
 \centering
   \input{figures/fig-starter-readiness.tex}
-  \caption[Determining sourdough starter readiness]{A flow chart showing you how to
-      determine if your sourdough starter is ready to be used. Make sure to
-      wait at least \qtyrange{6}{12}{\hour} after feeding your
-      starter to check its readiness. To evaluate it, look at your starter's size
-      increase, airy texture and take note of its smell.
-      All three factors are important to properly evaluate your starter's activity level.
-      An active starter is an important foundation for a successful dough fermentation}%
+  \caption[Bestimmung der Sauerteig-Starter-Reife]{Ein Flussdiagramm, das Ihnen zeigt, wie Sie
+      feststellen können, ob Ihr Sauerteig-Starter bereit zur Verwendung ist. Stellen Sie sicher,
+      dass Sie mindestens \qtyrange{6}{12}{\hour} nach der Fütterung Ihres
+      Starters warten, um seine Reife zu prüfen. Um ihn zu beurteilen, achten Sie auf die
+      Volumenzunahme Ihres Starters, die luftige Textur und den Geruch.
+      Alle drei Faktoren sind wichtig, um das Aktivitätsniveau Ihres Starters richtig einzuschätzen.
+      Ein aktiver Starter ist eine wichtige Grundlage für eine erfolgreiche Teiggärung}%
   \label{fig:sourdough-starter-readiness}
 \end{flowchart}
 
-The key sign to look at is bubbles that you see in your starter
-jar. This is a sign that the yeast is metabolizing your
-dough and creates \ch{CO2}. The \ch{CO2} is trapped in your dough
-matrix and then visualized on the edges of the container.
+Das wichtigste Zeichen, auf das Sie achten sollten, sind Blasen, die Sie in Ihrem
+Starter-Glas sehen. Dies ist ein Zeichen dafür, dass die Hefe Ihren
+Teig verstoffwechselt und \ch{CO2} erzeugt. Das \ch{CO2} wird in Ihrer Teigmatrix
+eingeschlossen und dann an den Rändern des Behälters sichtbar.
 
-Also note the size increase of your dough. The amount the dough increases
-in size is irrelevant. Some bakers claim it doubles, triples or quadruples.
-The amount of size increase depends on your microbes, but also on
-the flour that you use to make the starter. Wheat flour contains
-more gluten and will thus result in a larger size increase. At
-the same time the microbes are probably not more active compared
-to when living in rye sourdough. You could only argue that
-wheat microbes might be better at breaking down gluten compared
-to rye microbes. That's one of the reasons why I~decided to change
-the flour of my sourdough starter quite often. I~had hoped to create
-an all-around starter that can ferment all sorts of different
-flour\footnote{Whether this is working, I~can't scientifically say.
-Typically the microbes that have once taken place are very strong
-and won't allow other microbes to enter. My starter has initially
-been made with rye flour. So chances are that the majority of
-my microorganisms are from a rye source.}.
+Beachten Sie auch die Volumenzunahme Ihres Teigs. Wie stark der Teig an
+Volumen zunimmt, ist nebensächlich. Manche Bäcker behaupten, er verdoppelt, verdreifacht oder
+vervierfacht sich. Das Ausmaß der Volumenzunahme hängt von Ihren Mikroben ab, aber auch von
+dem Mehl, das Sie für den Starter verwenden. Weizenmehl enthält
+mehr Gluten und führt daher zu einer größeren Volumenzunahme. Gleichzeitig
+sind die Mikroben wahrscheinlich nicht aktiver als in
+einem Roggensauerteig. Man könnte nur argumentieren, dass
+Weizenmikroben besser im Glutenabbau sein könnten als
+Roggenmikroben. Das ist einer der Gründe, warum ich beschlossen habe, das
+Mehl meines Sauerteig-Starters recht häufig zu wechseln. Ich hatte gehofft, einen
+Allround-Starter zu schaffen, der alle möglichen verschiedenen
+Mehlsorten fermentieren kann\footnote{Ob das funktioniert, kann ich wissenschaftlich nicht sagen.
+Typischerweise sind die Mikroben, die sich einmal etabliert haben, sehr stark
+und lassen keine anderen Mikroben eindringen. Mein Starter wurde ursprünglich
+mit Roggenmehl hergestellt. Die Chancen stehen also gut, dass die Mehrheit
+meiner Mikroorganismen aus einer Roggenquelle stammt.}.
 
-Your nose is also
-a great tool to determine starter readiness. Depending on
-your starter's microbiome you should notice either the smell
-of lactic acid or acetic acid. Lactic acid has dairy yogurty notes.
-The acetic acid has very strong pungent vinegary notes. Some
-describe the smell as glue or acetone. Combining the visual clues
-of size increase and pockets plus the smell is the best way
-to determine starter readiness.
+Ihre Nase ist ebenfalls
+ein großartiges Werkzeug, um die Starter-Reife zu bestimmen. Je nach
+dem Mikrobiom Ihres Starters sollten Sie entweder den Geruch
+von Milchsäure oder Essigsäure wahrnehmen. Milchsäure hat milchige, joghurtartige Noten.
+Die Essigsäure hat sehr starke, stechende, essigartige Noten. Manche
+beschreiben den Geruch als Klebstoff oder Aceton. Die Kombination der visuellen Hinweise
+aus Volumenzunahme und Lufteinschlüssen mit dem Geruch ist die beste Methode,
+um die Starter-Reife zu bestimmen.
 
-In rare events your flour might be treated and prevent microbe growth.
-This can happen if the flour is not organic and a lot of biochemical
-agents have been used by the farmer. In that case simply try again
-with different flour. Ten~days is a good period of time to wait before
-trying again.
+In seltenen Fällen kann Ihr Mehl behandelt sein und das Mikrobenwachstum verhindern.
+Dies kann passieren, wenn das Mehl nicht biologisch ist und viele biochemische
+Mittel vom Landwirt eingesetzt wurden. In diesem Fall versuchen Sie es einfach
+mit einem anderen Mehl. Zehn~Tage sind eine gute Wartezeit, bevor
+Sie es erneut versuchen.
 
-Another methodology used by some bakers is the so called \emph{float test}.
-The idea is to take a piece of your sourdough starter and place it
-on top of some water, if the dough is full with gas it will float
-on top of the water. If it's not ready, it can't float and will
-sink to the bottom. This test does not work with every flour,
-rye flour for instance can't retain the gas as well as wheat flour
-and thus in some cases will not float. That's why I~personally
-don't use this test and can't recommend it.
+Eine andere Methode, die von manchen Bäckern verwendet wird, ist der sogenannte \emph{Schwimmtest}.
+Die Idee ist, ein Stück Ihres Sauerteig-Starters zu nehmen und es
+auf etwas Wasser zu setzen. Wenn der Teig voller Gas ist, schwimmt er
+auf dem Wasser. Wenn er nicht bereit ist, kann er nicht schwimmen und sinkt
+auf den Boden. Dieser Test funktioniert nicht mit jedem Mehl;
+Roggenmehl zum Beispiel kann das Gas nicht so gut halten wie Weizenmehl
+und schwimmt daher in manchen Fällen nicht. Deshalb verwende ich
+diesen Test persönlich nicht und kann ihn nicht empfehlen.
 
-Once you see your starter is ready I~would recommend giving it
-one last feeding and then you are ready to make your dough in the
-evening or the next day. For the instructions on how to make your
-first dough please refer to the next chapters (\ref{ch:wheat-sourdough}
-and~\ref{ch:non-wheat-sourdough}) in this book.
+Sobald Sie sehen, dass Ihr Starter bereit ist, empfehle ich, ihm
+eine letzte Fütterung zu geben, und dann sind Sie bereit, Ihren Teig am
+Abend oder am nächsten Tag herzustellen. Für die Anleitung, wie Sie Ihren
+ersten Teig herstellen, verweisen wir auf die nächsten Kapitel (\ref{ch:wheat-sourdough}
+und~\ref{ch:non-wheat-sourdough}) in diesem Buch.
 
-If your first bread failed, chances are your fermentation hasn't
-worked as expected. In many cases the reason is your sourdough starter. Maybe
-the balance of bacteria and yeast isn't optimal yet. In that case a good
-solution is to keep feeding your starter once per day. With each feeding your
-starter becomes better at fermenting flour. The microbes will adapt more and
-more to the environment. Please also consider reading the stiff sourdough starter
-chapter in this book. The stiff sourdough starter helps to boost the
-yeast part of your sourdough and balance the fermentation.
+Wenn Ihr erstes Brot nicht gelungen ist, hat wahrscheinlich die Gärung nicht
+wie erwartet funktioniert. In vielen Fällen liegt der Grund bei Ihrem Sauerteig-Starter. Vielleicht
+ist das Gleichgewicht von Bakterien und Hefe noch nicht optimal. In diesem Fall ist eine gute
+Lösung, Ihren Starter weiterhin einmal täglich zu füttern. Mit jeder Fütterung wird Ihr
+Starter besser darin, Mehl zu fermentieren. Die Mikroben werden sich immer mehr
+an die Umgebung anpassen. Bitte lesen Sie auch das Kapitel über den festen Sauerteig-Starter
+in diesem Buch. Der feste Sauerteig-Starter hilft, den
+Hefeanteil Ihres Sauerteigs zu stärken und die Gärung auszubalancieren.
 
-\section{Maintenance}
+\section{Pflege}
 
 \begin{flowchart}[!htb]
 \centering
   \input{figures/fig-starter-maintenance.tex}
-  \caption[Sourdough starter maintenance flowchart]{A full flowchart showing
-      you how to conduct proper sourdough starter maintenance. You can use a
-      piece of your dough as the next starter. You can also use left-over
-      starter and feed it again. Choose an option that works best for your own
-      schedule. The chart assumes that you are using a starter at a
-      \qty{100}{\percent} hydration level. Adjust the water content
-      accordingly when you use a stiff starter.}%
+  \caption[Flussdiagramm zur Sauerteig-Starter-Pflege]{Ein vollständiges Flussdiagramm, das
+      Ihnen zeigt, wie Sie eine ordnungsgemäße Sauerteig-Starter-Pflege durchführen. Sie können ein
+      Stück Ihres Teigs als nächsten Starter verwenden. Sie können auch übrig gebliebenen
+      Starter erneut füttern. Wählen Sie die Option, die am besten zu Ihrem
+      Zeitplan passt. Das Diagramm geht davon aus, dass Sie einen Starter mit einer
+      Hydration von \qty{100}{\percent} verwenden. Passen Sie den Wassergehalt
+      entsprechend an, wenn Sie einen festen Starter verwenden.}%
   \label{fig:sourdough-maintenance-process}
 \end{flowchart}
 
-You have made your sourdough starter and your first bread. How do you perform
-maintenance for your starter? There are countless different maintenance
-methods out there. Some people go completely crazy about their starter and
-perform daily feedings of the starter. The key to understanding how to properly
-conduct maintenance is to understand what happens to your starter after you
-used it to make a dough. Whatever starter you have left, or a tiny piece of
-your bread dough can serve to make your next starter\footnote{I~very often use all my
-starter to make a dough. So if the recipe calls for \qty{50}{\gram} of starter I~make
-exactly \qty{50}{\gram} starter in advance. This means I~have no starter left. In that
-case I~would proceed to take tiny bit of the dough at the end of the
-fermentation period. This piece I~would use to regrow my starter again.}.
+Sie haben Ihren Sauerteig-Starter hergestellt und Ihr erstes Brot gebacken. Wie pflegen Sie
+Ihren Starter? Es gibt unzählige verschiedene Pflegemethoden.
+Manche Menschen werden geradezu verrückt mit ihrem Starter und
+füttern ihn täglich. Der Schlüssel zum Verständnis einer ordnungsgemäßen
+Pflege liegt darin, zu verstehen, was nach der Verwendung Ihres Starters
+für einen Teig mit ihm geschieht. Was auch immer an Starter übrig bleibt, oder ein kleines Stück
+Ihres Brotteigs, kann als Grundlage für Ihren nächsten Starter dienen\footnote{Ich verwende sehr oft
+meinen gesamten Starter für einen Teig. Wenn das Rezept also \qty{50}{\gram} Starter verlangt, stelle ich
+genau \qty{50}{\gram} Starter im Voraus her. Das bedeutet, dass ich keinen Starter übrig habe. In diesem
+Fall würde ich ein kleines Stück des Teigs am Ende der
+Gärungsperiode nehmen. Dieses Stück würde ich verwenden, um meinen Starter wieder aufzuziehen.}.
 
-As explained earlier your starter is adapted
-to fermenting flour. The microbes in your starter are very resilient. They
-block external pathogens and other microbes. That is the reason why, when
-buying a sourdough starter, you will preserve the original microbes. It is
-likely that they are not going to change in your starter. They are outcompeting other
-microbes when it comes to fermenting flour. Normally everything in nature
-starts to decompose after a while. However, the microbes of your starter have
-very strong defense mechanisms. In the end, your sourdough starter can be
-compared to pickled food. Pickled food has been shown to stay good for a very
-long period of time~\cite{pickled+foods+expiration}. The acidity of your sourdough starter is quite
-toxic to other microbes. The yeast and bacteria though have adapted to living
-in the high-acid environment. Compare this to your stomach, the acidity
-neutralizes many possible pathogens. As long as your starter has sufficient
-food available it will outcompete other microbes. When the starter runs out of
-food the microbes will start to sporulate. They prepare for a period of no
-food and will then reactivate the moment new food is present. The
-spores are very resilient and can survive under extreme conditions.
-Scientists have claimed they found 250 million-year-old spores that are still
-active~\cite{old+spores}. While being spores
-they are however more vulnerable to external pathogens such as mold.
-Under ideal conditions though the spores can survive for a
-long time.
+Wie bereits erklärt, ist Ihr Starter darauf angepasst,
+Mehl zu fermentieren. Die Mikroben in Ihrem Starter sind sehr widerstandsfähig. Sie
+blockieren externe Krankheitserreger und andere Mikroben. Das ist der Grund, warum
+beim Kauf eines Sauerteig-Starters die ursprünglichen Mikroben erhalten bleiben. Es ist
+wahrscheinlich, dass sie sich in Ihrem Starter nicht verändern werden. Sie übertrumpfen andere
+Mikroben, wenn es um die Fermentation von Mehl geht. Normalerweise beginnt in der Natur alles
+nach einer Weile zu zerfallen. Die Mikroben Ihres Starters haben jedoch
+sehr starke Abwehrmechanismen. Letztlich kann Ihr Sauerteig-Starter
+mit eingelegtem Essen verglichen werden. Eingelegtes Essen bleibt nachweislich über einen sehr
+langen Zeitraum haltbar~\cite{pickled+foods+expiration}. Die Säure Ihres Sauerteig-Starters ist recht
+giftig für andere Mikroben. Die Hefe und Bakterien haben sich jedoch an das Leben
+in der säurereichen Umgebung angepasst. Vergleichen Sie dies mit Ihrem Magen, dessen Säure
+viele mögliche Krankheitserreger neutralisiert. Solange Ihr Starter ausreichend
+Nahrung zur Verfügung hat, wird er andere Mikroben verdrängen. Wenn dem Starter die
+Nahrung ausgeht, beginnen die Mikroben zu sporulieren. Sie bereiten sich auf eine Phase ohne
+Nahrung vor und reaktivieren sich, sobald neue Nahrung vorhanden ist. Die
+Sporen sind sehr widerstandsfähig und können unter extremen Bedingungen überleben.
+Wissenschaftler behaupten, 250~Millionen Jahre alte Sporen gefunden zu haben, die noch
+aktiv sind~\cite{old+spores}. Während sie als Sporen vorliegen,
+sind sie jedoch anfälliger für externe Krankheitserreger wie Schimmel.
+Unter idealen Bedingungen können die Sporen jedoch lange
+überleben.
 
-But as long as they stay in the environment of your starter they live
-in a very protected environment. Other fungi and bacteria have a hard time decomposing your left over starter mass.
-I~have seen only very few cases where the starter actually died. It is almost impossible
-to kill a starter.
+Aber solange sie in der Umgebung Ihres Starters bleiben, leben sie
+in einer sehr geschützten Umgebung. Andere Pilze und Bakterien haben es schwer, Ihre übrig gebliebene Startermasse zu zersetzen.
+Ich habe nur sehr wenige Fälle gesehen, in denen der Starter tatsächlich gestorben ist. Es ist fast unmöglich,
+einen Starter zu töten.
 
-What happens though is that the balance of yeast and
-bacteria changes in your starter. The bacteria is more fitted to living
-in an acidic environment. This is a problem when you make another dough.
-You want to have the proper balance of fluffiness and sour notes.
-When a starter has hibernated for a long period, chances are that
-you do not have a desirable balance of microbes.
-Furthermore, depending on the time your starter hibernated you might only have
-sporulated microbes left. So a couple of feedings will help to get your
-sourdough starter into the right shape again.
+Was jedoch passiert, ist, dass sich das Gleichgewicht von Hefe und
+Bakterien in Ihrem Starter verschiebt. Die Bakterien sind besser an das Leben
+in einer sauren Umgebung angepasst. Das ist ein Problem, wenn Sie einen weiteren Teig herstellen.
+Sie möchten das richtige Gleichgewicht aus Lockerheit und sauren Noten.
+Wenn ein Starter über einen langen Zeitraum geruht hat, stehen die Chancen, dass
+Sie kein wünschenswertes Gleichgewicht der Mikroben haben.
+Darüber hinaus, je nachdem wie lange Ihr Starter geruht hat, können Sie nur noch
+sporulierte Mikroben übrig haben. Einige Fütterungen helfen also, Ihren
+Sauerteig-Starter wieder in die richtige Form zu bringen.
 
-The following are a couple of scenarios that will help you to conduct proper
-starter maintenance, depending on when you want to bake the next time.
+Im Folgenden finden Sie einige Szenarien, die Ihnen helfen, eine ordnungsgemäße
+Starter-Pflege durchzuführen, je nachdem, wann Sie das nächste Mal backen möchten.
 
 \begin{description}
-\item[I~would like to bake again the next day:]
-Simply take whatever starter you have left and feed it again. If you depleted
-all your starter you can cut a piece of your dough. The dough itself is
-nothing different than a gigantic starter. I~recommend a 1:5:5 ratio like
-mentioned before. So take 1 piece of starter, feed with 5 parts of flour and 5
-parts of water. If it is very hot where you live, or if you want to make the
-bread around 24~hours later after your last feeding, change the ratio. In that
-case I~would go for a 1:10:10 ratio. Sometimes I~don't have enough starter.
-Then I~even use a ratio of 1:50:50 or 1:100:100. Depending on how much new
-flour you feed it takes longer for your starter to be ready again.
+\item[Ich möchte am nächsten Tag wieder backen:]
+Nehmen Sie einfach den übrig gebliebenen Starter und füttern Sie ihn erneut. Wenn Sie Ihren
+gesamten Starter verbraucht haben, können Sie ein Stück Ihres Teigs abschneiden. Der Teig selbst ist
+nichts anderes als ein riesiger Starter. Ich empfehle ein 1:5:5-Verhältnis wie
+zuvor erwähnt. Nehmen Sie also 1~Teil Starter und füttern Sie mit 5~Teilen Mehl und 5~Teilen
+Wasser. Wenn es bei Ihnen sehr heiß ist oder Sie das Brot etwa 24~Stunden nach der
+letzten Fütterung machen möchten, ändern Sie das Verhältnis. In diesem
+Fall würde ich ein 1:10:10-Verhältnis wählen. Manchmal habe ich nicht genug Starter.
+Dann verwende ich sogar ein Verhältnis von 1:50:50 oder 1:100:100. Je nachdem, wie viel neues
+Mehl Sie füttern, dauert es länger, bis Ihr Starter wieder bereit ist.
 
-\item[I~would like to take a break and bake next week:]
-Simply take your leftover starter and place it inside of your fridge. It will stay good
-for a very long period. The only thing I~see happening is the surface
-drying out in the fridge. So I~recommend drowning the starter in a little bit
-of water. This extra layer of water provides good protection from the top
-part drying out. As mold is aerobic it can not grow efficiently under
-water~\cite{mold+anaerobic}. Before using the starter again simply either stir
-the liquid into the dough or drain it. If you drain the liquid you can use it
-to make a lacto-fermented hot sauce for instance.
+\item[Ich möchte eine Pause einlegen und nächste Woche backen:]
+Nehmen Sie einfach Ihren übrig gebliebenen Starter und stellen Sie ihn in Ihren Kühlschrank. Er bleibt
+über einen sehr langen Zeitraum gut. Das Einzige, was ich beobachte, ist, dass die Oberfläche
+im Kühlschrank austrocknet. Deshalb empfehle ich, den Starter mit etwas
+Wasser zu bedecken. Diese zusätzliche Wasserschicht bietet einen guten Schutz davor, dass die
+Oberfläche austrocknet. Da Schimmel aerob ist, kann er unter
+Wasser nicht effizient wachsen~\cite{mold+anaerobic}. Bevor Sie den Starter wieder verwenden,
+rühren Sie die Flüssigkeit entweder in den Teig ein oder gießen Sie sie ab. Wenn Sie die
+Flüssigkeit abgießen, können Sie sie zum Beispiel
+für eine milchsäurefermentierte Chilisauce verwenden.
 
-The colder it is the longer you preserve a good balance of yeast and
-bacteria. Generally, the warmer it is the faster the fermentation process is,
-and the colder it is the slower the whole process becomes.
-Below~\qty{4}{\degreeCelsius} the starter fermentation almost completely stops. The
-fermentation speed at low temperatures depends on the
-strains of wild yeast and bacteria
-that you have cultivated.
+Je kälter es ist, desto länger bewahren Sie ein gutes Gleichgewicht von Hefe und
+Bakterien. Generell gilt: Je wärmer es ist, desto schneller ist der Gärungsprozess,
+und je kälter es ist, desto langsamer wird der gesamte Prozess.
+Unter~\qty{4}{\degreeCelsius} stoppt die Starter-Gärung fast vollständig. Die
+Gärgeschwindigkeit bei niedrigen Temperaturen hängt von den
+Stämmen wilder Hefe und Bakterien ab,
+die Sie kultiviert haben.
 
-\item[I~would like to take a several months break:]
-Drying your starter might be the best option to preserve it in this case. As
-you remove humidity and food your microbes will sporulate. As there is no
-humidity the spores can resist other pathogens very well. A dried starter can
-be good for years.
+\item[Ich möchte eine mehrmonatige Pause einlegen:]
+Das Trocknen Ihres Starters ist in diesem Fall möglicherweise die beste Option, um ihn zu konservieren. Da
+Sie Feuchtigkeit und Nahrung entziehen, sporulieren Ihre Mikroben. Da es keine
+Feuchtigkeit gibt, können die Sporen anderen Krankheitserregern sehr gut widerstehen. Ein getrockneter
+Starter kann Jahre lang haltbar sein.
 
-Simply take your starter and mix it with flour. Try to crumble the starter as
-much as possible. Add more flour continuously until you notice that there is no
-moisture left. Place the flour starter in a dry place in your house. Let it
-dry out even more. If you have a dehydrator you can use this to speed up the
-process. Set it to around~\qty{30}{\degreeCelsius} and dry the starter for 12--20~hours. The next
-day your starter has dried out a bit. It is in a vulnerable state as there is still a bit
-of humidity left. Add some more flour to speed up the drying process. Repeat
-for another 2 days until you feel that there is no humidity left. This is
-important or else it might start to grow mold. Once this is done simply store the
-starter in an airtight container. Or you can proceed and freeze
-the dried starter. Both options work perfectly fine. Your sporulated starter
-is now waiting for your next feeding. If available you can add some silica
-bags to the container to further absorb excess moisture.
+Nehmen Sie einfach Ihren Starter und mischen Sie ihn mit Mehl. Versuchen Sie, den Starter so
+gut wie möglich zu zerbröseln. Fügen Sie kontinuierlich mehr Mehl hinzu, bis Sie bemerken, dass keine
+Feuchtigkeit mehr vorhanden ist. Platzieren Sie den Mehl-Starter an einem trockenen Ort in Ihrem Haus.
+Lassen Sie ihn noch weiter austrocknen. Wenn Sie einen Dörrautomaten haben, können Sie diesen
+verwenden, um den Prozess zu beschleunigen. Stellen Sie ihn auf etwa~\qty{30}{\degreeCelsius} ein und
+trocknen Sie den Starter 12--20~Stunden. Am nächsten Tag ist Ihr Starter etwas ausgetrocknet.
+Er befindet sich in einem empfindlichen Zustand, da noch etwas Restfeuchtigkeit vorhanden ist.
+Fügen Sie etwas mehr Mehl hinzu, um den Trocknungsprozess zu beschleunigen. Wiederholen Sie dies
+weitere 2~Tage, bis Sie das Gefühl haben, dass keine Feuchtigkeit mehr vorhanden ist. Das ist
+wichtig, da er sonst anfangen könnte, Schimmel zu bilden. Sobald dies erledigt ist, lagern Sie den
+Starter einfach in einem luftdichten Behälter. Oder Sie können den
+getrockneten Starter einfrieren. Beide Optionen funktionieren einwandfrei. Ihr sporulierter Starter
+wartet nun auf Ihre nächste Fütterung. Wenn verfügbar, können Sie einige Silica-Beutel
+in den Behälter legen, um überschüssige Feuchtigkeit zusätzlich aufzunehmen.
 
-Initially, it would take about three~days for my starter to become alive again
-after drying and reactivating it. If I~do the same thing now my starter is
-sometimes ready after a single feeding. It seems that the microbes adapt. The ones
-that survive this shock become dominant subsequently.
+Anfänglich dauerte es etwa drei~Tage, bis mein Starter nach dem Trocknen
+und Reaktivieren wieder lebendig wurde. Wenn ich dasselbe jetzt mache, ist mein Starter
+manchmal schon nach einer einzigen Fütterung bereit. Es scheint, dass sich die Mikroben anpassen.
+Diejenigen, die diesen Schock überleben, werden anschließend dominant.
 \end{description}
 
-So in conclusion the maintenance mode you choose depends on when you want to bake next.
-The goal of each new feeding is to make sure your starter
-has a desired balance of yeast and bacteria when making a dough. There is no need to provide your
-starter with daily feedings, unless it is not mature yet. In that case, each
-subsequent feeding will help to make your starter more adept at fermenting
-flour.
+Zusammenfassend hängt der gewählte Pflegemodus davon ab, wann Sie als Nächstes backen möchten.
+Das Ziel jeder neuen Fütterung ist sicherzustellen, dass Ihr Starter
+ein gewünschtes Gleichgewicht von Hefe und Bakterien hat, wenn Sie einen Teig herstellen. Es ist
+nicht nötig, Ihren Starter täglich zu füttern, es sei denn, er ist noch nicht ausgereift. In
+diesem Fall hilft jede weitere Fütterung, Ihren Starter besser an die Fermentation von
+Mehl anzupassen.

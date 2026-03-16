@@ -1,13 +1,13 @@
 \begin{tikzpicture}[node distance = 4cm, auto]
-  \node [start] (heat_oven) {Heat oven to  \qty{230}{\degreeCelsius} (\qty{446}{\degF}) for 30~minutes};
-  \node [block, right of=heat_oven] (score_dough) {Score your dough};
-  \node [decision, right of=score_dough, node distance=4cm] (decide_steam) {Choose your steaming method};
-  \node [block, below of=decide_steam, node distance=3.5cm] (dutch_oven) {Dutch oven};
-  \node [block, left of=dutch_oven] (inverted_tray_method) {Inverted tray method};
-  \node [block, right of=dutch_oven] (steam_injection) {Steam injection oven};
-  \node [block, below of=dutch_oven, node distance=3cm] (bake_30) {Bake dough for 30~minutes with steam};
-  \node [block, below of=bake_30, node distance=3cm] (remove_steam) {Remove source of steam};
-  \node [success, right of=remove_steam] (finish_baking) {Stop baking 10--30~minutes later depending on crust preference};
+  \node [start] (heat_oven) {Ofen auf \qty{230}{\degreeCelsius} (\qty{446}{\degF}) für 30~Minuten vorheizen};
+  \node [block, right of=heat_oven] (score_dough) {Teig einschneiden};
+  \node [decision, right of=score_dough, node distance=4cm] (decide_steam) {Bedampfungs\-methode wählen};
+  \node [block, below of=decide_steam, node distance=3.5cm] (dutch_oven) {Guss\-eisentopf (Dutch Oven)};
+  \node [block, left of=dutch_oven] (inverted_tray_method) {Umgedrehtes Blech};
+  \node [block, right of=dutch_oven] (steam_injection) {Dampf\-einspritzung};
+  \node [block, below of=dutch_oven, node distance=3cm] (bake_30) {Teig 30~Minuten mit Dampf backen};
+  \node [block, below of=bake_30, node distance=3cm] (remove_steam) {Dampfquelle entfernen};
+  \node [success, right of=remove_steam] (finish_baking) {Backen je nach Krusten\-vorliebe 10--30~Minuten später beenden};
   \path [line] (heat_oven) -- (score_dough);
   \path [line] (score_dough) -- (decide_steam);
   \path [line] (decide_steam) -- (inverted_tray_method.north east);
@@ -18,5 +18,5 @@
   \path [line] (dutch_oven) -- (bake_30);
   \path [line] (bake_30) -- (remove_steam);
   \path [line] (remove_steam) -- (finish_baking);
-  \draw[BC, decoration=mirror] (remove_steam.south west) ++(0, -0.3) -- node[below=1em]{Building crust}(finish_baking.south east);
+  \draw[BC, decoration=mirror] (remove_steam.south west) ++(0, -0.3) -- node[below=1em]{Krustenbildung}(finish_baking.south east);
 \end{tikzpicture}

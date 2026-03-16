@@ -1,40 +1,40 @@
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [start] (init) {Create a starter};
-  \node [decision, right of=init, node distance=3.5cm] (decision_start) {Starter last fed within 3~days?};
+  \node [start] (init) {Anstellgut herstellen};
+  \node [decision, right of=init, node distance=3.5cm] (decision_start) {Anstellgut innerhalb der letzten 3~Tage gefüttert?};
   \node [block, right of=decision_start, text width=7em, node distance=4cm] (feed_no_branch)
-      {Feed starter twice:\par \qty{48}{\hour} before\par \qtyrange{6}{12}{\hour} before};
+      {Anstellgut zweimal füttern:\par \qty{48}{\hour} vorher\par \qtyrange{6}{12}{\hour} vorher};
   \node [block, below of=feed_no_branch, text width=7em, node distance=2.7cm] (feed_yes_branch)
-      {Feed starter \qtyrange{6}{12}{\hour} before making dough.};
+      {Anstellgut \qtyrange{6}{12}{\hour} vor der Teigherstellung füttern.};
   \node [block, right of=feed_no_branch, text width=7em, node distance=4cm] (high_ratio)
-    {Use a 1:10:10 ratio:\par \begin{tabular}{r@{}l}
-           10&~g starter,\\
-          100&~g flour, \\
-          100&~g water.\end{tabular}};
+    {Verhältnis 1:10:10 verwenden:\par \begin{tabular}{r@{}l}
+           10&~g Anstellgut,\\
+          100&~g Mehl, \\
+          100&~g Wasser.\end{tabular}};
   \node [block, right of=feed_yes_branch, text width=7em, node distance=4cm] (low_ratio)
-  {Use a 1:5:5 ratio:\par \begin{tabular}{r@{}l}
-          10&~g starter,\\
-          50&~g flour, \\
-          50&~g water.\end{tabular}};
+  {Verhältnis 1:5:5 verwenden:\par \begin{tabular}{r@{}l}
+          10&~g Anstellgut,\\
+          50&~g Mehl, \\
+          50&~g Wasser.\end{tabular}};
   \node [decision, below of=high_ratio, node distance=6cm] (size_check)
-    {Bubbly? Increased in size?};
+    {Blasig? An Größe zugenommen?};
   \node [decision, below of=decision_start, node distance=6cm] (smell_check)
-    {Vinegary or yogurty smell?};
+    {Essig- oder joghurtartiger Geruch?};
   \node [success, below of=init, node distance=6cm] (make_dough)
-    {Prepare dough};
+    {Teig herstellen};
 
   \path [line] (init) -- (decision_start);
-  \path [line] (decision_start) -- node{No} (feed_no_branch);
-  \path [line] (decision_start) -- node[below=2pt]{Yes} (feed_yes_branch.north west);
+  \path [line] (decision_start) -- node{Nein} (feed_no_branch);
+  \path [line] (decision_start) -- node[below=2pt]{Ja} (feed_yes_branch.north west);
   \path [line] (feed_yes_branch) -- (low_ratio);
   \path [line] (feed_no_branch) -- (high_ratio);
   \path [line] (high_ratio) -- node[anchor=east, above=2pt] {} ++(2.2,0) |-(size_check);
   \path [line] (low_ratio) -- (size_check);
-  \path [line] (size_check) -- node{No} (feed_yes_branch.south east);
-  \path [line] (size_check) -- node{Yes} (smell_check);
-  \path [line] (smell_check) -- node{No} (feed_yes_branch.south west);
-  \path [line] (smell_check) -- node{Yes} (make_dough);
+  \path [line] (size_check) -- node{Nein} (feed_yes_branch.south east);
+  \path [line] (size_check) -- node{Ja} (smell_check);
+  \path [line] (smell_check) -- node{Nein} (feed_yes_branch.south west);
+  \path [line] (smell_check) -- node{Ja} (make_dough);
 
   % braces
-  \draw[BC]   (size_check.south) -- 
-      node[below=1em]{Check if starter is ready to be used}(smell_check.south);
+  \draw[BC]   (size_check.south) --
+      node[below=1em]{Prüfen ob das Anstellgut einsatzbereit ist}(smell_check.south);
 \end{tikzpicture}
