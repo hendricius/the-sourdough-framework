@@ -2,9 +2,9 @@
     \tikzstyle{every node}+=[font=\normalsize\rmfamily]
     \begin{axis}[
         title style={align=center},
-        title={Gluten development of a sourdough and yeast based dough\\
-                \qty{22}{\degreeCelsius} (\qty{72}{\degF}) and
-                \qty{60}{\percent}~hydration},
+        title={Glutenentwicklung eines Sauerteig- und Hefeteigs\\
+                \qty{22}{\degreeCelsius} (\qty{72}{\degF}) und
+                \qty{60}{\percent}~Hydratation},
         axis x line=middle,
         axis y line=middle,
         axis line style={-Latex},
@@ -21,23 +21,23 @@
         yticklabels={empty},
         legend style={draw=none},
         legend cell align={left},
-        xlabel=Duration (hours), ylabel=Dough strength
+        xlabel=Dauer (Stunden), ylabel=Teigspannung
         ]
         \addplot [color=redpic,smooth,ultra thick] table {plots/yeast.table};
         \addplot [color=codeblue,smooth,ultra thick] table {plots/sourdough.table};
 
         \node at (axis cs:18,7) [anchor=south west] {%
-            \begin{tabular}{@{}lll@{}} \textbf{Dough type}&
-            \textbf{Kneading} & \textbf{Stretch \& Fold}\\
+            \begin{tabular}{@{}lll@{}} \textbf{Teigart}&
+            \textbf{Kneten} & \textbf{Dehnen \& Falten}\\
             \midrule
-            \textcolor{redpic}{Yeast}  & \textcolor{redpic}{None}&
-            \textcolor{redpic}{None}  \\ \textcolor{codeblue}{Sourdough}&
-            \textcolor{codeblue}{None} & \textcolor{codeblue}{None} \\
+            \textcolor{redpic}{Hefe}  & \textcolor{redpic}{Nein}&
+            \textcolor{redpic}{Nein}  \\ \textcolor{codeblue}{Sauerteig}&
+            \textcolor{codeblue}{Nein} & \textcolor{codeblue}{Nein} \\
             \end{tabular}
         };
-        \node at (axis cs:8,8.3) [anchor=south] {Peak stage};
-        \node at (axis cs:1,1) [anchor=west] {Development stage};
-        \node at (axis cs:9.5,5) [anchor=west] {Extensibility stage};
-        \node at (axis cs:25.8,4) [anchor=west] {Decay stage};
+        \node at (axis cs:8,8.3) [anchor=south] {Höhepunkt};
+        \node at (axis cs:1,1) [anchor=west] {Aufbauphase};
+        \node at (axis cs:9.5,5) [anchor=west] {Dehnbarkeitsphase};
+        \node at (axis cs:25.8,4) [anchor=west] {Abbauphase};
     \end{axis}
 \end{tikzpicture}
