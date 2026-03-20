@@ -11,7 +11,7 @@
   \path [line] (init) -- node{No} (retard_bake_decision);
   \path [line] (poke) -- (dent_visible_decision);
   \path [line] (dent_visible_decision) -- node{Yes} (bake);
-  \path [line] (dent_visible_decision.west) -- node{No} (dent_visible_decision.west -| wait_poke.south) -- (wait_poke.south);
+  \path [line] (dent_visible_decision.west) -- node{No} (dent_visible_decision.west -| wait_poke.south) -- node{} (wait_poke.south);
   \path [line] (wait_poke) -- (poke);
   \path [line] (retard_bake_decision) -- node{Yes} (wait_retard);
   \path [line] (retard_bake_decision.east) -- node{No} ++(1, 0) |- node{} (retard.east);
