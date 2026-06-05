@@ -16,7 +16,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Print dependency versions
         uses: addnab/docker-run-action@v3
         with:
@@ -66,7 +66,11 @@ jobs:
             cd /app/book
             make -j -O bake
       - name: Copy book to downloads server
-        uses: burnett01/rsync-deployments@7.0.2
+        # Best-effort: a temporarily unreachable downloads server must not
+        # fail the whole release. Book/website artifacts are still uploaded
+        # to GitHub below.
+        continue-on-error: true
+        uses: burnett01/rsync-deployments@v8
         with:
           switches: "-avzr"
           remote_host: ${{ secrets.SSH_HOST }}
@@ -83,7 +87,9 @@ jobs:
             book/book_serif/book.pdf
             book/book-epub/book.epub
       - name: Copy website to downloads server
-        uses: burnett01/rsync-deployments@7.0.2
+        # Best-effort, same rationale as the book deploy above.
+        continue-on-error: true
+        uses: burnett01/rsync-deployments@v8
         with:
           switches: "-avzr --delete"
           remote_host: ${{ secrets.SSH_HOST }}
