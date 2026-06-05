@@ -65,38 +65,20 @@ jobs:
           run: |
             cd /app/book
             make -j -O bake
-      - name: Copy book to downloads server
-        # Best-effort: a temporarily unreachable downloads server must not
-        # fail the whole release. Book/website artifacts are still uploaded
-        # to GitHub below.
-        continue-on-error: true
-        uses: burnett01/rsync-deployments@v8
-        with:
-          switches: "-avzr"
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USERNAME }}
-          remote_key: ${{ secrets.SSH_KEY }}
-          path: "book/release/*"
-          remote_path: "~/downloads/the-sourdough-framework/"
+      # The built PDFs/EPUBs are published to readers from the separate
+      # the-bread-code-downloads repository: a maintainer runs `make release`
+      # there to pull these artifacts and commit them (served at
+      # downloads.the-bread-code.io). CI here only builds and uploads them.
       - name: Upload book artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: books
-          path: |
-            book/book_serif/book.log
-            book/book_serif/book.pdf
-            book/book-epub/book.epub
-      - name: Copy website to downloads server
-        # Best-effort, same rationale as the book deploy above.
-        continue-on-error: true
-        uses: burnett01/rsync-deployments@v8
-        with:
-          switches: "-avzr --delete"
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USERNAME }}
-          remote_key: ${{ secrets.SSH_KEY }}
-          path: "website/static_website_html/*"
-          remote_path: "~/the-sourdough-framework/"
+          # The final, reader-facing release set produced by `make bake`:
+          #   TheBreadCode-The-Sourdough-Framework.pdf
+          #   TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
+          #   TheBreadCode-The-Sourdough-Framework.epub
+          #   TheBreadCode-The-Sourdough-Framework-black-and-white.epub
+          path: book/release
       - name: Upload website artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
