@@ -1,9 +1,24 @@
 local filter  = require "make4ht-filter"
+-- tex4ht wraps an \includegraphics of an .svg in <object data=...>, while every
+-- TikZ figure arrives as <img>. The website pipeline only ever touches <img>:
+-- modify_build.rb centres SVG figures through it, and the downstream tooling
+-- fills in alt texts there. So rewrite the tag here, after the conversion.
+--
+-- This deliberately does NOT go through \Configure{graphics*} in website.cfg.
+-- Taking over the picture macro that way stops make4ht from registering the
+-- file, and the .svg then never gets copied into the output directory: the
+-- build still succeeds and the page silently points at a missing image.
+-- make4ht quotes attributes with " or ' depending on whether tidy is in the
+-- pipeline, so the pattern has to accept both.
+local svgObjectToImg = function(s)
+  return (s:gsub([[<object[^>]-data=(["'])([^"']+%.svg)%1[^>]*>%s*</object>]],
+                 [[<img class="graphics" src="%2" alt="PIC" />]]))
+end
 local removeHeight = function(s) return s:gsub('height="%d+"', '') end
 local removeWidth = function(s) return s:gsub('width="%d+"', '') end
 local removeMaxWidth = function(s) return s:gsub(' max-width: %d+px;', '') end
 local removeFixedSettings = function(s) return removeMaxWidth(removeWidth(removeHeight(s))) end
-local process = filter{removeFixedSettings}
+local process = filter{removeFixedSettings, svgObjectToImg}
 local domfilter = require "make4ht-domfilter"
 
 
