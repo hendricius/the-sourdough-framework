@@ -1,30 +1,352 @@
 {
   "generated_by": "rake answers:book_links in Allonsygmbh/loafy",
   "chapters": {
+    "Baking.html": [
+      {
+        "question": "Does baking sourdough at lower temperature for longer time work well?",
+        "url": "https://loafy.ai/answers/low-temperature-long-bake-sourdough"
+      },
+      {
+        "question": "How can I bake sourdough bread without a Dutch oven?",
+        "url": "https://loafy.ai/answers/bake-sourdough-without-dutch-oven"
+      }
+    ],
+    "Breadtypes.html": [
+      {
+        "question": "Can I bake sourdough in a cast iron bread pan with a lid?",
+        "url": "https://loafy.ai/answers/bake-sourdough-cast-iron-bread-pan"
+      },
+      {
+        "question": "Can I let sourdough dough rest overnight before a second rest period?",
+        "url": "https://loafy.ai/answers/overnight-rest-second-fermentation-sourdough"
+      },
+      {
+        "question": "Can I make quick yeasted bread instead of sourdough?",
+        "url": "https://loafy.ai/answers/quick-yeasted-bread-instead-sourdough"
+      },
+      {
+        "question": "Can I use regular starter instead of liquid starter in sourdough recipes?",
+        "url": "https://loafy.ai/answers/using-regular-starter-in-sourdough-recipes"
+      },
+      {
+        "question": "Can I use sourdough starter directly from the refrigerator without feeding it?",
+        "url": "https://loafy.ai/answers/use-refrigerated-starter-without-feeding"
+      },
+      {
+        "question": "Can you bake sourdough starting from a cold oven?",
+        "url": "https://loafy.ai/answers/cold-oven-start-sourdough-baking"
+      },
+      {
+        "question": "Can you make sourdough bread in a toaster oven?",
+        "url": "https://loafy.ai/answers/sourdough-flatbread-toaster-oven"
+      },
+      {
+        "question": "Does water temperature matter when making sourdough starter in cold climates?",
+        "url": "https://loafy.ai/answers/water-temperature-sourdough-starter-cold-climate"
+      },
+      {
+        "question": "How do I use my senses to check if dough is ready?",
+        "url": "https://loafy.ai/answers/using-senses-check-dough-readiness"
+      },
+      {
+        "question": "How do you revive a sourdough starter that seems dead?",
+        "url": "https://loafy.ai/answers/revive-dead-sourdough-starter"
+      },
+      {
+        "question": "How long and at what temperature should I bake a freestanding sourdough loaf?",
+        "url": "https://loafy.ai/answers/baking-time-temperature-freestanding-sourdough"
+      },
+      {
+        "question": "How long do I bake sourdough at 230C after removing the lid?",
+        "url": "https://loafy.ai/answers/baking-time-after-removing-lid"
+      },
+      {
+        "question": "How long do you bake sourdough bread?",
+        "url": "https://loafy.ai/answers/sourdough-baking-time-temperature"
+      }
+    ],
     "Flourtypes.html": [
+      {
+        "question": "Can I use all-purpose flour instead of bread flour for sourdough?",
+        "url": "https://loafy.ai/answers/all-purpose-flour-instead-bread-flour"
+      },
+      {
+        "question": "How do I choose good flour for sourdough bread?",
+        "url": "https://loafy.ai/answers/choose-flour-sourdough-bread"
+      },
+      {
+        "question": "How do you bake soft bread with freshly milled whole wheat flour?",
+        "url": "https://loafy.ai/answers/soft-bread-freshly-milled-whole-wheat"
+      },
+      {
+        "question": "How do you determine flour strength for sourdough baking?",
+        "url": "https://loafy.ai/answers/determine-flour-strength-sourdough"
+      },
       {
         "question": "What if my flour is not strong enough for high hydration?",
         "url": "https://loafy.ai/answers/flour-not-strong-enough-for-high-hydration"
       }
     ],
+    "Glossary.html": [
+      {
+        "question": "Do I need to add fruit flies to create a sourdough starter?",
+        "url": "https://loafy.ai/answers/fruit-flies-needed-sourdough-starter"
+      },
+      {
+        "question": "How do I know when sourdough proofing is complete?",
+        "url": "https://loafy.ai/answers/finger-poke-test-proofing-complete"
+      },
+      {
+        "question": "What is autolyse in sourdough baking?",
+        "url": "https://loafy.ai/answers/what-is-autolyse-sourdough"
+      }
+    ],
+    "Howsourdoughworks.html": [
+      {
+        "question": "Can I autolyse dough overnight before adding starter?",
+        "url": "https://loafy.ai/answers/autolyse-overnight-before-adding-starter"
+      },
+      {
+        "question": "Does autolyse time matter for sourdough bread?",
+        "url": "https://loafy.ai/answers/autolyse-time-fermentolysis-alternative"
+      },
+      {
+        "question": "Does sourdough fermentation produce the bacteria that provide health benefits?",
+        "url": "https://loafy.ai/answers/sourdough-bacteria-health-benefits"
+      },
+      {
+        "question": "How do I add yeast during the autolysis process?",
+        "url": "https://loafy.ai/answers/adding-yeast-during-autolysis"
+      },
+      {
+        "question": "How do I get my sourdough bread to brown properly?",
+        "url": "https://loafy.ai/answers/sourdough-bread-browning-color"
+      },
+      {
+        "question": "When should I use autolysis versus fermentolysis in sourdough baking?",
+        "url": "https://loafy.ai/answers/autolysis-versus-fermentolysis-sourdough"
+      }
+    ],
     "Makingasourdoughstarter.html": [
+      {
+        "question": "Can I feed my starter with whole grain flour but bake bread with all-purpose flour?",
+        "url": "https://loafy.ai/answers/whole-grain-starter-white-flour-bread"
+      },
+      {
+        "question": "Can I make sourdough starter from regular flour without any special ingredients?",
+        "url": "https://loafy.ai/answers/make-sourdough-starter-regular-flour"
+      },
+      {
+        "question": "Can I refrigerate my new starter after 12 hours and feed it once before baking on the weekend?",
+        "url": "https://loafy.ai/answers/refrigerate-new-starter-weekend-baking"
+      },
+      {
+        "question": "Can I split my sourdough starter into two separate starters instead of discarding?",
+        "url": "https://loafy.ai/answers/split-sourdough-starter-instead-discard"
+      },
+      {
+        "question": "Can I start a sourdough starter with a mix of whole wheat and bread flour instead of only whole wheat?",
+        "url": "https://loafy.ai/answers/start-sourdough-whole-wheat-bread-flour-mix"
+      },
+      {
+        "question": "Can I start a sourdough starter with smaller amounts to avoid discarding?",
+        "url": "https://loafy.ai/answers/start-sourdough-smaller-amounts-avoid-discard"
+      },
+      {
+        "question": "Can I use a piece of dough as starter without feeding it first?",
+        "url": "https://loafy.ai/answers/use-dough-piece-as-starter-without-feeding"
+      },
+      {
+        "question": "Can I use a rye starter to ferment whole wheat dough?",
+        "url": "https://loafy.ai/answers/rye-starter-whole-wheat-dough"
+      },
+      {
+        "question": "Can I use all my starter without discarding any when making bread?",
+        "url": "https://loafy.ai/answers/use-all-starter-no-discard-bread"
+      },
+      {
+        "question": "Can you make a sourdough starter with whole wheat and dark rye flour?",
+        "url": "https://loafy.ai/answers/whole-wheat-dark-rye-starter"
+      },
+      {
+        "question": "Do you need commercial yeast for sourdough bread?",
+        "url": "https://loafy.ai/answers/commercial-yeast-needed-sourdough-bread"
+      },
+      {
+        "question": "Does freshly milled whole grain flour activate sourdough starter faster?",
+        "url": "https://loafy.ai/answers/whole-grain-flour-starter-activation"
+      },
+      {
+        "question": "Does it matter if I use a rye starter or wheat starter when baking wheat bread?",
+        "url": "https://loafy.ai/answers/rye-wheat-starter-wheat-bread"
+      },
+      {
+        "question": "How do I dry sourdough starter for storage without it molding?",
+        "url": "https://loafy.ai/answers/dry-sourdough-starter-storage-without-mold"
+      },
+      {
+        "question": "How do I get enough dough to make a loaf if I only keep small amounts of starter?",
+        "url": "https://loafy.ai/answers/scale-up-small-starter-for-baking"
+      },
+      {
+        "question": "How do I maintain a sourdough starter if I only bake once a week?",
+        "url": "https://loafy.ai/answers/weekly-sourdough-starter-maintenance"
+      },
+      {
+        "question": "How do I maintain a stiff sourdough starter between bakes?",
+        "url": "https://loafy.ai/answers/stiff-starter-storage-between-bakes"
+      },
+      {
+        "question": "How do I make my first sourdough loaf if I don't have a starter?",
+        "url": "https://loafy.ai/answers/making-first-sourdough-starter"
+      },
+      {
+        "question": "How do I store sourdough starter in the fridge and revive it for baking?",
+        "url": "https://loafy.ai/answers/store-sourdough-starter-fridge-revive"
+      },
+      {
+        "question": "How do I store sourdough starter when not baking for a week?",
+        "url": "https://loafy.ai/answers/storing-sourdough-starter-week-break"
+      },
+      {
+        "question": "How do you calculate baker's percentages for salt and starter?",
+        "url": "https://loafy.ai/answers/calculate-bakers-percentages-salt-starter"
+      },
+      {
+        "question": "How do you capture wild yeast for a sourdough starter?",
+        "url": "https://loafy.ai/answers/capture-wild-yeast-sourdough-starter"
+      },
+      {
+        "question": "How do you make a sourdough starter from scratch?",
+        "url": "https://loafy.ai/answers/make-sourdough-starter-from-scratch"
+      },
+      {
+        "question": "How do you make sourdough starter from whole wheat flour?",
+        "url": "https://loafy.ai/answers/make-sourdough-starter-whole-wheat-flour"
+      },
+      {
+        "question": "How does baker's percentage work for scaling sourdough recipes?",
+        "url": "https://loafy.ai/answers/baker-percentage-scaling-sourdough-recipes"
+      },
+      {
+        "question": "How long does it take for a new sourdough starter to mature?",
+        "url": "https://loafy.ai/answers/new-sourdough-starter-maturation-time"
+      },
+      {
+        "question": "How long does it take to create an active sourdough starter and what signs show it's ready?",
+        "url": "https://loafy.ai/answers/active-sourdough-starter-timeline-signs"
+      },
       {
         "question": "Rye or wheat flour for a first sourdough starter?",
         "url": "https://loafy.ai/answers/rye-or-wheat-flour-for-a-sourdough-starter"
       },
       {
+        "question": "What can I do with leftover sourdough starter?",
+        "url": "https://loafy.ai/answers/leftover-sourdough-starter-uses"
+      },
+      {
+        "question": "What can I make with sourdough discard besides bread?",
+        "url": "https://loafy.ai/answers/sourdough-discard-recipes-pancakes-crackers"
+      },
+      {
         "question": "What do I do with sourdough starter discard?",
         "url": "https://loafy.ai/answers/what-to-do-with-sourdough-discard"
+      },
+      {
+        "question": "Why do you discard half the starter when feeding?",
+        "url": "https://loafy.ai/answers/why-discard-starter-when-feeding"
+      }
+    ],
+    "Nonwheatsourdough.html": [
+      {
+        "question": "Does sourdough need to come to room temperature before baking?",
+        "url": "https://loafy.ai/answers/sourdough-room-temperature-before-baking"
+      },
+      {
+        "question": "How do I bake with whole rye flour in sourdough bread?",
+        "url": "https://loafy.ai/answers/baking-with-rye-flour"
       }
     ],
     "Sourdoughstartertypes.html": [
+      {
+        "question": "Are stiff sourdough starters more or less acidic than liquid starters?",
+        "url": "https://loafy.ai/answers/stiff-starter-acidity-levels"
+      },
+      {
+        "question": "Can I make a stiff levain from a liquid starter?",
+        "url": "https://loafy.ai/answers/stiff-levain-from-liquid-starter"
+      },
+      {
+        "question": "Can I make sourdough bread with Indian wheat flour?",
+        "url": "https://loafy.ai/answers/sourdough-bread-indian-wheat-flour"
+      },
+      {
+        "question": "Can I use my regular starter to make a stiff starter?",
+        "url": "https://loafy.ai/answers/convert-regular-to-stiff-starter"
+      },
+      {
+        "question": "Can I use starter that has peaked and fallen back down?",
+        "url": "https://loafy.ai/answers/using-peaked-fallen-starter"
+      },
+      {
+        "question": "Does high-protein flour help maintain gluten structure in sourdough?",
+        "url": "https://loafy.ai/answers/high-protein-flour-gluten-structure"
+      },
+      {
+        "question": "How can I improve German Type 550 flour for sourdough baking?",
+        "url": "https://loafy.ai/answers/improving-german-type-550-flour"
+      },
+      {
+        "question": "How can I improve oven spring and ear formation with low gluten flour?",
+        "url": "https://loafy.ai/answers/oven-spring-low-gluten-flour"
+      },
+      {
+        "question": "How can I increase yeast activity in a stiff sourdough starter?",
+        "url": "https://loafy.ai/answers/increase-yeast-activity-stiff-starter"
+      },
+      {
+        "question": "How do I adjust poolish and yeast amounts for pizza dough in summer heat?",
+        "url": "https://loafy.ai/answers/adjust-poolish-yeast-summer-pizza"
+      },
+      {
+        "question": "How do I convert a liquid starter to a stiff starter?",
+        "url": "https://loafy.ai/answers/convert-liquid-starter-to-stiff-starter"
+      },
       {
         "question": "How do I convert my sourdough starter into a stiff starter?",
         "url": "https://loafy.ai/answers/convert-to-a-stiff-starter"
       },
       {
+        "question": "How do I fix a sourdough starter that has become too dry?",
+        "url": "https://loafy.ai/answers/fix-dry-sourdough-starter"
+      },
+      {
+        "question": "How do I know when liquid sourdough starter is ready to use if it doesn't double in size?",
+        "url": "https://loafy.ai/answers/liquid-starter-ready-without-doubling"
+      },
+      {
+        "question": "How do I make a sourdough starter with more yeast activity and less acidity using whole rye flour?",
+        "url": "https://loafy.ai/answers/stiff-starter-for-yeast-activity-rye"
+      },
+      {
+        "question": "How do I make sourdough with weak flour that can't handle high hydration?",
+        "url": "https://loafy.ai/answers/sourdough-with-weak-flour"
+      },
+      {
         "question": "How do I revive a sourdough starter that has been in the fridge?",
         "url": "https://loafy.ai/answers/revive-a-neglected-sourdough-starter"
+      },
+      {
+        "question": "How do you make sourdough bread with spelt flour?",
+        "url": "https://loafy.ai/answers/sourdough-bread-spelt-flour"
+      },
+      {
+        "question": "Should I use stiff starter or liquid starter for whole wheat sourdough?",
+        "url": "https://loafy.ai/answers/stiff-starter-whole-wheat-sourdough"
+      },
+      {
+        "question": "What is a basic single-loaf recipe using a stiff sourdough starter?",
+        "url": "https://loafy.ai/answers/single-loaf-stiff-starter-recipe"
       },
       {
         "question": "Which sourdough starter gives a less sour bread?",
@@ -39,12 +361,136 @@
     ],
     "Troubleshooting.html": [
       {
+        "question": "Are small pin pricks on the surface of rye bread normal?",
+        "url": "https://loafy.ai/answers/pin-pricks-rye-bread-surface"
+      },
+      {
+        "question": "Can I use a glass casserole dish instead of a Dutch oven for baking sourdough?",
+        "url": "https://loafy.ai/answers/glass-casserole-instead-dutch-oven-sourdough"
+      },
+      {
+        "question": "Can an overly sour starter cause loose dough even at lower hydration?",
+        "url": "https://loafy.ai/answers/overly-sour-starter-loose-dough"
+      },
+      {
+        "question": "Can chlorinated tap water be used for sourdough or is bottled water necessary?",
+        "url": "https://loafy.ai/answers/chlorinated-tap-water-sourdough"
+      },
+      {
+        "question": "Can high-protein flour cause hard and thick crumbs in sourdough bread?",
+        "url": "https://loafy.ai/answers/high-protein-flour-hard-thick-crumb"
+      },
+      {
+        "question": "Can you preheat an oven for too long before baking bread?",
+        "url": "https://loafy.ai/answers/preheat-oven-too-long-bread"
+      },
+      {
+        "question": "Does adding water to the oven lower the temperature during baking?",
+        "url": "https://loafy.ai/answers/adding-water-oven-temperature-steam"
+      },
+      {
+        "question": "Does starter hydration affect yeast and bacteria balance?",
+        "url": "https://loafy.ai/answers/starter-hydration-yeast-bacteria-balance"
+      },
+      {
+        "question": "Does using a regular Dutch oven instead of glass-topped cause over-baking?",
+        "url": "https://loafy.ai/answers/dutch-oven-over-baking-crust"
+      },
+      {
+        "question": "How can I fix flat sourdough with poor oven spring?",
+        "url": "https://loafy.ai/answers/fix-flat-sourdough-poor-oven-spring"
+      },
+      {
+        "question": "How can I fix overly wet soupy sourdough dough?",
+        "url": "https://loafy.ai/answers/fix-overly-wet-soupy-sourdough-dough"
+      },
+      {
+        "question": "How can I get airier sourdough in a cold climate?",
+        "url": "https://loafy.ai/answers/airier-sourdough-cold-climate"
+      },
+      {
+        "question": "How can I improve oven spring when baking multiple loaves on a stone?",
+        "url": "https://loafy.ai/answers/oven-spring-multiple-loaves-baking-stone"
+      },
+      {
+        "question": "How can I shape sourdough bread without counter space?",
+        "url": "https://loafy.ai/answers/shaping-sourdough-without-counter-space"
+      },
+      {
+        "question": "How can I tell if my sourdough has overfermented?",
+        "url": "https://loafy.ai/answers/tell-if-sourdough-overfermented"
+      },
+      {
+        "question": "How do I create steam in a pizza oven for sourdough baking?",
+        "url": "https://loafy.ai/answers/create-steam-pizza-oven-sourdough"
+      },
+      {
+        "question": "How do I fix sticky sourdough dough?",
+        "url": "https://loafy.ai/answers/fix-sticky-sourdough-dough"
+      },
+      {
+        "question": "How do I improve a weak sourdough starter when just starting out?",
+        "url": "https://loafy.ai/answers/improve-weak-young-sourdough-starter"
+      },
+      {
+        "question": "How do I know if my sourdough starter has gone bad and needs to be thrown out?",
+        "url": "https://loafy.ai/answers/sourdough-starter-gone-bad-mold"
+      },
+      {
         "question": "How do I know if my sourdough starter is too sour?",
         "url": "https://loafy.ai/answers/sourdough-starter-too-sour"
       },
       {
+        "question": "How do I know when my sourdough starter has reached peak and is ready to use?",
+        "url": "https://loafy.ai/answers/sourdough-starter-peak-readiness"
+      },
+      {
+        "question": "How do I know when rye and whole wheat dough is properly fermented?",
+        "url": "https://loafy.ai/answers/judging-rye-whole-wheat-fermentation"
+      },
+      {
+        "question": "How do I prevent my sourdough starter from becoming too sour?",
+        "url": "https://loafy.ai/answers/prevent-sourdough-starter-too-sour"
+      },
+      {
+        "question": "How do I scale up a stiff starter recipe to get the amount I need?",
+        "url": "https://loafy.ai/answers/scale-up-stiff-starter-recipe"
+      },
+      {
+        "question": "How do you achieve a thick crunchy crust on sourdough bread?",
+        "url": "https://loafy.ai/answers/thick-crunchy-sourdough-crust"
+      },
+      {
+        "question": "How do you shape very sticky sourdough?",
+        "url": "https://loafy.ai/answers/shape-sticky-sourdough-dough"
+      },
+      {
+        "question": "How do you tell if a starter is too acidic and how do you fix it?",
+        "url": "https://loafy.ai/answers/fix-overly-acidic-sourdough-starter"
+      },
+      {
+        "question": "How hot should a Dutch oven be for good oven spring in sourdough bread?",
+        "url": "https://loafy.ai/answers/dutch-oven-temperature-oven-spring"
+      },
+      {
+        "question": "How long should I continue feeding my new sourdough starter before using it?",
+        "url": "https://loafy.ai/answers/feeding-new-sourdough-starter-before-use"
+      },
+      {
+        "question": "How often should I feed my sourdough starter?",
+        "url": "https://loafy.ai/answers/sourdough-starter-feeding-frequency"
+      },
+      {
+        "question": "What temperature should I bake sourdough bread at?",
+        "url": "https://loafy.ai/answers/sourdough-baking-temperature"
+      },
+      {
         "question": "Why did my dough turn liquid after bulk fermentation?",
         "url": "https://loafy.ai/answers/dough-turned-liquid-after-bulk-fermentation"
+      },
+      {
+        "question": "Why is my sourdough starter not bubbling and has liquid on top?",
+        "url": "https://loafy.ai/answers/starter-hooch-liquid-on-top"
       }
     ],
     "Wheatsourdough.html": [
@@ -53,8 +499,192 @@
         "url": "https://loafy.ai/answers/bulk-ferment-sourdough-overnight"
       },
       {
+        "question": "Can I cold ferment sourdough dough?",
+        "url": "https://loafy.ai/answers/cold-ferment-sourdough-dough"
+      },
+      {
+        "question": "Can I place the aliquot jar inside the dough container?",
+        "url": "https://loafy.ai/answers/aliquot-jar-inside-dough-container"
+      },
+      {
+        "question": "Can I proof sourdough and maintain starter at 21C room temperature?",
+        "url": "https://loafy.ai/answers/proof-sourdough-21c-room-temperature"
+      },
+      {
+        "question": "Can I still bake sourdough dough that has become runny and overproofed?",
+        "url": "https://loafy.ai/answers/bake-runny-overproofed-sourdough-dough"
+      },
+      {
+        "question": "Can I still bake sourdough that was left out all day and over-proofed?",
+        "url": "https://loafy.ai/answers/bake-overproofed-sourdough-left-out"
+      },
+      {
+        "question": "Can I use all-purpose white flour for bread if my starter was made with wheat flour?",
+        "url": "https://loafy.ai/answers/wheat-starter-with-white-flour"
+      },
+      {
+        "question": "Can I use coil folds instead of rounding if I don't have a suitable countertop?",
+        "url": "https://loafy.ai/answers/coil-folds-instead-of-rounding"
+      },
+      {
+        "question": "Can I use half whole wheat flour in sourdough bread?",
+        "url": "https://loafy.ai/answers/half-whole-wheat-sourdough"
+      },
+      {
+        "question": "Can I use hard wheat flour instead of soft wheat flour for sourdough bread?",
+        "url": "https://loafy.ai/answers/hard-wheat-flour-sourdough-bread"
+      },
+      {
+        "question": "Can I use whole wheat flour to absorb excess moisture in sticky sweet sourdough dough?",
+        "url": "https://loafy.ai/answers/whole-wheat-flour-absorb-moisture-sticky-dough"
+      },
+      {
+        "question": "Can overproofed dough still rise without feeding?",
+        "url": "https://loafy.ai/answers/overproofed-dough-rise-without-feeding"
+      },
+      {
+        "question": "Can overproofed dough that has collapsed be saved or reshaped?",
+        "url": "https://loafy.ai/answers/saving-overproofed-collapsed-dough"
+      },
+      {
+        "question": "Can you over-knead sourdough dough with a stand mixer?",
+        "url": "https://loafy.ai/answers/over-knead-sourdough-stand-mixer"
+      },
+      {
+        "question": "Do I need a pH meter for making sourdough bread and pizza?",
+        "url": "https://loafy.ai/answers/ph-meter-necessary-sourdough-baking"
+      },
+      {
+        "question": "Does blade curve matter when scoring sourdough?",
+        "url": "https://loafy.ai/answers/blade-curve-scoring-sourdough"
+      },
+      {
+        "question": "Does machine kneading versus hand kneading affect sourdough results?",
+        "url": "https://loafy.ai/answers/machine-versus-hand-kneading-sourdough"
+      },
+      {
+        "question": "Does rainy season affect sourdough starter?",
+        "url": "https://loafy.ai/answers/rainy-season-affect-sourdough-starter"
+      },
+      {
+        "question": "Does room temperature affect a small dough sample differently than a large batch during bulk fermentation?",
+        "url": "https://loafy.ai/answers/small-sample-versus-large-batch-fermentation"
+      },
+      {
+        "question": "Does shaping sourdough with tension deflate the gas bubbles inside?",
+        "url": "https://loafy.ai/answers/shaping-tension-deflate-gas-bubbles"
+      },
+      {
+        "question": "Does starter feeding ratio affect the final bread?",
+        "url": "https://loafy.ai/answers/starter-feeding-ratio-affect-bread"
+      },
+      {
+        "question": "Does the 22°C temperature guideline for sourdough refer to kitchen or outdoor temperature?",
+        "url": "https://loafy.ai/answers/sourdough-temperature-kitchen-or-outdoor"
+      },
+      {
+        "question": "How can I get 80% hydration sourdough dough to hold its shape after removing from the banneton?",
+        "url": "https://loafy.ai/answers/high-hydration-dough-hold-shape-banneton"
+      },
+      {
+        "question": "How can I tell when bulk fermentation is done?",
+        "url": "https://loafy.ai/answers/when-is-bulk-fermentation-done"
+      },
+      {
+        "question": "How do I adjust sourdough ratios and process for whole wheat bread?",
+        "url": "https://loafy.ai/answers/whole-wheat-sourdough-adjustments"
+      },
+      {
+        "question": "How do I know when my starter is ready to convert to a stiff starter?",
+        "url": "https://loafy.ai/answers/convert-regular-to-stiff-starter-2"
+      },
+      {
+        "question": "How do I manage sourdough fermentation in hot summer temperatures above 30°C?",
+        "url": "https://loafy.ai/answers/sourdough-fermentation-hot-summer-temperatures"
+      },
+      {
+        "question": "How do I prevent dough from sticking to razor blade when scoring?",
+        "url": "https://loafy.ai/answers/prevent-dough-sticking-razor-scoring"
+      },
+      {
+        "question": "How do I test different hydration levels to find the right one for my flour?",
+        "url": "https://loafy.ai/answers/testing-flour-hydration-levels"
+      },
+      {
+        "question": "How do kitchen temperature and timing affect sourdough bread making?",
+        "url": "https://loafy.ai/answers/kitchen-temperature-timing-sourdough"
+      },
+      {
+        "question": "How do you fit sourdough baking into a busy schedule?",
+        "url": "https://loafy.ai/answers/fit-sourdough-baking-busy-schedule"
+      },
+      {
+        "question": "How do you hold a lame to create an ear when scoring?",
+        "url": "https://loafy.ai/answers/lame-angle-create-ear-scoring"
+      },
+      {
+        "question": "How do you incorporate a flour and water pre-soak into sourdough without uneven hydration?",
+        "url": "https://loafy.ai/answers/incorporate-flour-water-presoak-bassinage"
+      },
+      {
+        "question": "How do you make sourdough bread in a cold house around 15°C?",
+        "url": "https://loafy.ai/answers/sourdough-bread-cold-house-15c"
+      },
+      {
+        "question": "How do you shape a batard successfully?",
+        "url": "https://loafy.ai/answers/shape-batard-successfully"
+      },
+      {
+        "question": "How does a stand mixer simplify sourdough production?",
+        "url": "https://loafy.ai/answers/stand-mixer-sourdough-kneading-technique"
+      },
+      {
+        "question": "How does hydration vary between Caputo 00 flour, bread flour, and other flour types?",
+        "url": "https://loafy.ai/answers/windowpane-test-flour-hydration-capacity"
+      },
+      {
+        "question": "How does room temperature affect sourdough starter feeding schedule?",
+        "url": "https://loafy.ai/answers/room-temperature-sourdough-starter-feeding"
+      },
+      {
+        "question": "How flexible are sourdough fermentation times, and why do different recipes give different rising durations?",
+        "url": "https://loafy.ai/answers/sourdough-fermentation-time-flexibility"
+      },
+      {
+        "question": "How long can I refrigerate sourdough dough before baking?",
+        "url": "https://loafy.ai/answers/refrigerate-sourdough-dough-before-baking"
+      },
+      {
+        "question": "How long can sourdough rest in the refrigerator during cold proofing?",
+        "url": "https://loafy.ai/answers/cold-proofing-duration-refrigerator"
+      },
+      {
+        "question": "How long does it take to make sourdough bread from start to finish?",
+        "url": "https://loafy.ai/answers/sourdough-bread-total-time"
+      },
+      {
+        "question": "How long should dough rest after preshaping?",
+        "url": "https://loafy.ai/answers/dough-rest-time-after-preshaping"
+      },
+      {
         "question": "How much sourdough starter should I use at my kitchen temperature?",
         "url": "https://loafy.ai/answers/how-much-starter-at-my-kitchen-temperature"
+      },
+      {
+        "question": "How should I adjust sourdough baking for hot and humid climates?",
+        "url": "https://loafy.ai/answers/sourdough-baking-hot-humid-climates"
+      },
+      {
+        "question": "What feeding ratio should I use for sourdough starter?",
+        "url": "https://loafy.ai/answers/sourdough-starter-feeding-ratio"
+      },
+      {
+        "question": "What is the windowpane test for sourdough dough?",
+        "url": "https://loafy.ai/answers/windowpane-test-gluten-development"
+      },
+      {
+        "question": "What pH levels should I target for sourdough starter and dough?",
+        "url": "https://loafy.ai/answers/target-ph-levels-sourdough-starter-dough"
       }
     ]
   }
