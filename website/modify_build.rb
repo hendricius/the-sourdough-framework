@@ -1,5 +1,6 @@
 require 'pry'
 require 'nokogiri'
+require 'json'
 
 # This class goes through the generated default LaTeX HTML and performs
 # several optimisations on the HTML. Nokogiri is used to facilitate the
@@ -72,10 +73,59 @@ class ModifyBuild
     text = insert_mobile_header_graphic(text)
     text = fix_https_links(text)
     text = add_anchors_to_glossary_items(text) if is_glossary_page?(filename)
+    text = add_baker_questions(text, extract_file_from_path(filename))
     text = mark_menu_as_selected_if_on_page(text, extract_file_from_path(filename))
     text = fix_menus_list_figures_tables(text) if is_list_figures_tables?(filename)
     text = fix_list_of_figures_tables_display(text) if is_list_figures_tables?(filename)
     File.open(filename, "w:UTF-8") {|file| file.puts text }
+  end
+
+  # Every answer page on loafy.ai quotes a chapter of this book and links it.
+  # Nothing pointed back, so the authority this site has built flowed out to one
+  # generic link and stopped. This closes the loop: each chapter ends with the
+  # questions bakers actually asked about it, from The Bread Code's YouTube
+  # comments, each answered on a page that cites this chapter.
+  #
+  # The map is generated, not hand-kept: `rake answers:book_links` in the loafy
+  # repository writes website/loafy_answers.json. A hand-maintained list in a
+  # second repository drifts and nobody notices until a link 404s.
+  def add_baker_questions(text, filename)
+    questions = baker_questions[filename]
+    return text if questions.nil? || questions.empty?
+
+    doc = Nokogiri::HTML(text)
+    body = doc.at_css("body")
+    return text if body.nil?
+
+    section = Nokogiri::XML::Node.new("div", doc)
+    section["class"] = "baker-questions"
+    heading = Nokogiri::XML::Node.new("h3", doc)
+    heading.content = "Questions bakers asked about this chapter"
+    section.add_child(heading)
+
+    list = Nokogiri::XML::Node.new("ul", doc)
+    questions.each do |question|
+      item = Nokogiri::XML::Node.new("li", doc)
+      link = Nokogiri::XML::Node.new("a", doc)
+      link["href"] = question["url"]
+      link.content = question["question"]
+      item.add_child(link)
+      list.add_child(item)
+    end
+    section.add_child(list)
+
+    # Before the previous/next chapter links, so it reads as the end of the
+    # chapter rather than something bolted on after the navigation.
+    crosslinks = doc.at_css("nav.crosslinks-bottom")
+    crosslinks ? crosslinks.add_previous_sibling(section) : body.add_child(section)
+    doc.to_html
+  end
+
+  def baker_questions
+    @baker_questions ||= begin
+      path = File.join(File.dirname(__FILE__), "loafy_answers.json")
+      File.exist?(path) ? JSON.parse(File.read(path))["chapters"] : {}
+    end
   end
 
   def is_cover_page?(filename)

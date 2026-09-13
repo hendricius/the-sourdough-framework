@@ -1,0 +1,61 @@
+{
+  "generated_by": "rake answers:book_links in Allonsygmbh/loafy",
+  "chapters": {
+    "Flourtypes.html": [
+      {
+        "question": "What if my flour is not strong enough for high hydration?",
+        "url": "https://loafy.ai/answers/flour-not-strong-enough-for-high-hydration"
+      }
+    ],
+    "Makingasourdoughstarter.html": [
+      {
+        "question": "Rye or wheat flour for a first sourdough starter?",
+        "url": "https://loafy.ai/answers/rye-or-wheat-flour-for-a-sourdough-starter"
+      },
+      {
+        "question": "What do I do with sourdough starter discard?",
+        "url": "https://loafy.ai/answers/what-to-do-with-sourdough-discard"
+      }
+    ],
+    "Sourdoughstartertypes.html": [
+      {
+        "question": "How do I convert my sourdough starter into a stiff starter?",
+        "url": "https://loafy.ai/answers/convert-to-a-stiff-starter"
+      },
+      {
+        "question": "How do I revive a sourdough starter that has been in the fridge?",
+        "url": "https://loafy.ai/answers/revive-a-neglected-sourdough-starter"
+      },
+      {
+        "question": "Which sourdough starter gives a less sour bread?",
+        "url": "https://loafy.ai/answers/less-sour-sourdough-bread"
+      }
+    ],
+    "Storingbread.html": [
+      {
+        "question": "How should I store baked sourdough bread?",
+        "url": "https://loafy.ai/answers/store-baked-sourdough-bread"
+      }
+    ],
+    "Troubleshooting.html": [
+      {
+        "question": "How do I know if my sourdough starter is too sour?",
+        "url": "https://loafy.ai/answers/sourdough-starter-too-sour"
+      },
+      {
+        "question": "Why did my dough turn liquid after bulk fermentation?",
+        "url": "https://loafy.ai/answers/dough-turned-liquid-after-bulk-fermentation"
+      }
+    ],
+    "Wheatsourdough.html": [
+      {
+        "question": "Can I bulk ferment sourdough overnight at room temperature?",
+        "url": "https://loafy.ai/answers/bulk-ferment-sourdough-overnight"
+      },
+      {
+        "question": "How much sourdough starter should I use at my kitchen temperature?",
+        "url": "https://loafy.ai/answers/how-much-starter-at-my-kitchen-temperature"
+      }
+    ]
+  }
+}
