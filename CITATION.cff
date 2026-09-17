@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use or cite this book, please cite it as below."
+title: "The Sourdough Framework"
+authors:
+  - family-names: "Kleinwächter"
+    given-names: "Hendrik"
+    alias: "hendricius"
+license: CC-BY-SA-4.0
+repository-code: "https://github.com/hendricius/the-sourdough-framework"
+url: "https://www.the-sourdough-framework.com"
+abstract: "A free, open-source book on the science and craft of baking sourdough bread at home."
+keywords:
+  - sourdough
+  - bread
+  - baking
+  - fermentation
+  - open-source-book
+date-released: 2022-01-21
+preferred-citation:
+  type: book
+  title: "The Sourdough Framework"
+  authors:
+    - family-names: "Kleinwächter"
+      given-names: "Hendrik"
+      alias: "hendricius"
+  year: 2022
+  publisher:
+    name: "The Bread Code"
+  isbn: "978-3-00-077702-8"
+  url: "https://www.the-sourdough-framework.com"
+  license: CC-BY-SA-4.0
+  notes: "Free HTML, PDF and EPUB editions at the-sourdough-framework.com; hardcover edition ISBN 978-3-00-077702-8 (2023)."
