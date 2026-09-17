@@ -139,6 +139,14 @@ me to dedicate time to continuously update and improve this book.
 * [My YouTube channel](https://youtube.com/c/thebreadcode)
 * [Ask a question on Discord](https://breadco.de/discord)
 
+## Citation
+
+If you use or cite this book, please use the metadata in
+[CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button uses it).
+Plain text:
+
+Kleinwächter, H. (2022). The Sourdough Framework. The Bread Code. https://www.the-sourdough-framework.com
+
 ## License
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0
