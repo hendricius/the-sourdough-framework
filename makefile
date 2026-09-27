@@ -5,7 +5,7 @@ DOCKER_CMD := docker run --rm -it -v $(PWD):/opt/repo --platform linux/x86_64 $(
 
 .PHONY: build_docker_image push_docker_image
 .PHONY: print_os_version start_shell printvars show_tools_version mrproper
-.PHONY: ebook serif website bake
+.PHONY: ebook serif website bake pr
 
 # Dockers targets
 build_docker_image:
@@ -45,3 +45,11 @@ print_os_version:
 
 start_shell:
 	docker run -it -v $(PWD):/opt/repo $(DOCKER_IMAGE) /bin/bash
+
+# Push this branch and open a pull request against main, never a push to main:
+# make pr [TITLE="..." BODY=file.md]
+pr:
+	@branch=$$(git rev-parse --abbrev-ref HEAD); \
+	if [ "$$branch" = "main" ]; then echo "On main, which is not pushed to. Branch first: git switch -c <what-it-does>"; exit 1; fi; \
+	git push -u origin "$$branch" && (gh pr view --json url -q .url 2>/dev/null || \
+	  gh pr create --base main --head "$$branch" $(if $(TITLE),--title "$(TITLE)" --body-file "$(BODY)",--fill))
