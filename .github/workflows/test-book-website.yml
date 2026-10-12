@@ -48,7 +48,7 @@ jobs:
           path: |
             book/book_serif/book.log
             book/book_serif/book.pdf
-            book/book-epub/book.epub
+            book/epub/book.epub
       - name: Upload website artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:

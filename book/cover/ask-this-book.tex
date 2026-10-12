@@ -1,0 +1,32 @@
+% The book's last page: where to go with a question while baking. Loafy
+% answers from this book and names the section. The PDF shows the link and a QR
+% code for printed copies, the ebook the link. The website does not include
+% this page (see book.tex), it has Loafy on every page already. Each place has
+% its own via tag, so Loafy can count where readers came from.
+\ifdefined\HCode
+\chapter*{Questions while you bake?}
+Every kitchen is different. When your starter or your dough does not behave
+the way this book describes, ask the book itself: Loafy, its free companion,
+answers from The Sourdough Framework and names the section to read.
+
+\href{https://loafy.ai/loafy?via=tsf-epub-end}{https://loafy.ai}
+\else
+\clearpage
+\thispagestyle{empty}
+\vspace*{0.22\textheight}
+\begin{center}
+{\LARGE\bfseries Questions while you bake?}\par
+\bigskip
+\begin{minipage}{0.72\textwidth}
+\centering
+Every kitchen is different. When your starter or your dough does not behave
+the way this book describes, ask the book itself: Loafy, its free companion,
+answers from The Sourdough Framework and names the section to read.\par
+\medskip
+\href{https://loafy.ai/loafy?via=tsf-pdf-end}{\nolinkurl{https://loafy.ai}}
+\end{minipage}\par
+\bigskip\bigskip
+% Black, not link blue: a light QR code is hard to scan once printed.
+\qrcode[nolink,height=3cm]{https://loafy.ai/loafy?via=tsf-pdf-qr}
+\end{center}
+\fi
