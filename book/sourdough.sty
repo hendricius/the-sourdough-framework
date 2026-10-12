@@ -76,6 +76,12 @@
 % Clickable links in the table of contents
 \usepackage{hyperref}
 \usepackage{bookmark}
+
+% QR codes for the note on asking this book (title page and last page). Only
+% the PDF draws them; the ebook shows the link alone.
+\ifdefined\HCode\else
+\usepackage{qrcode}
+\fi
 \hypersetup{%
     linktoc=all,
     colorlinks = true,

@@ -26,8 +26,33 @@
 {\large\textit{Version: \today}}\\[4\baselineskip]
 {\Large\textsc{Hendrik Kleinwächter}} % Author name, lower case for consistent small caps
 
-% Whitespace between the title block and the copyright text
+% Whitespace between the title block and the copyright text. In the PDF and
+% the ebook it holds a note on asking this book: Loafy answers from it. The
+% website leaves it out, it has Loafy on every page already. Each place has
+% its own via tag, so Loafy can count where readers came from.
+\ifdefined\HCode
 \vspace{0.5\textheight}
+\ifdefined\sdfebook
+\textbf{Questions while you bake?} Ask this book. Loafy, its free companion,
+answers from these pages and names the section:
+\href{https://loafy.ai/loafy?via=tsf-epub-title}{https://loafy.ai}
+\fi
+\else
+\vspace{0.17\textheight}
+
+\noindent
+\begin{minipage}[c]{2.4cm}
+\qrcode[height=2.2cm]{https://loafy.ai/loafy?via=tsf-pdf-qr}
+\end{minipage}%
+\hspace{0.4cm}%
+\begin{minipage}[c]{\linewidth-2.8cm}
+\textbf{Questions while you bake?} Ask this book. Loafy, its free companion,
+answers from these pages and names the section:
+\href{https://loafy.ai/loafy?via=tsf-pdf-title}{\nolinkurl{https://loafy.ai}}
+\end{minipage}
+
+\vspace{0.17\textheight}
+\fi
 
 
 {\noindent

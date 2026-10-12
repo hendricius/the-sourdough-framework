@@ -58,4 +58,12 @@
 }
 \printbibliography
 
+% Where to go with a question while baking: in the PDF and the ebook, not on
+% the website (it has Loafy on every page already).
+\ifdefined\HCode
+\ifdefined\sdfebook\input{cover/ask-this-book}\fi
+\else
+\input{cover/ask-this-book}
+\fi
+
 \end{document}
