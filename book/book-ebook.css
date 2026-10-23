@@ -16,3 +16,7 @@
     object-fit: contain;
     width: auto;
 }
+/* Footnotes stand at the end of their chapter: keep the number off the text */
+div.footnotes span.footnote-mark {
+    margin-right: 0.3em;
+}
