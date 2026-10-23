@@ -78,6 +78,8 @@ jobs:
           #   TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
           #   TheBreadCode-The-Sourdough-Framework.epub
           #   TheBreadCode-The-Sourdough-Framework-black-and-white.epub
+          # plus TheBreadCode-The-Sourdough-Framework-kindle.epub, the copy
+          # for KDP, which the downloads repository does not publish.
           path: book/release
       - name: Upload website artifacts to GitHub
         uses: actions/upload-artifact@v4

@@ -177,6 +177,21 @@ low-res-book-epub/OEBPS/%.jpg: %.jpg
 epub/low_res_book.epub: copy_ebook_files_low_res $(low_res_images)
 	cd low-res-book-epub; zip -q0X ../epub/low_res_book.epub mimetype
 	cd low-res-book-epub; zip -q9XrD ../epub/low_res_book.epub ./
+
+# And the one for Kindle, which is the low res ebook with every SVG picture
+# as PNG: Kindle will not convert a book with SVG pictures any more (see
+# kindle-images.sh). Its links to Loafy get their own via tags, so that Kindle
+# readers are counted apart from EPUB downloads.
+.PHONY: copy_ebook_files_kindle
+copy_ebook_files_kindle: low_res_ebook
+	rsync -a --delete low-res-book-epub/ kindle-book-epub/
+
+epub/kindle_book.epub: copy_ebook_files_kindle kindle-images.sh
+	./kindle-images.sh kindle-book-epub
+	sed -i 's/via=tsf-epub-/via=tsf-kindle-/g' kindle-book-epub/OEBPS/*.html
+	rm -f $@
+	cd kindle-book-epub; zip -q0X ../epub/kindle_book.epub mimetype
+	cd kindle-book-epub; zip -q9XrD ../epub/kindle_book.epub ./
 # }}}
 
 # Website {{{
@@ -224,6 +239,7 @@ sans_serif: book_sans_serif/book_sans_serif.pdf
 ebook: epub/book.epub
 bw_ebook: epub/bw_book.epub
 low_res_ebook: epub/low_res_book.epub
+kindle_ebook: epub/kindle_book.epub
 # }}}
 
 # Top level releases rules {{{
@@ -233,15 +249,18 @@ bake: release_serif release_sans_serif website
 release:
 	mkdir -p release
 
-release_serif: serif ebook bw_ebook low_res_ebook | release
+release_serif: serif ebook bw_ebook low_res_ebook kindle_ebook | release
 	cp book_serif/book.pdf release/TheBreadCode-The-Sourdough-Framework.pdf
 	cp epub/bw_book.epub release/TheBreadCode-The-Sourdough-Framework-black-and-white.epub
 	cp epub/low_res_book.epub release/TheBreadCode-The-Sourdough-Framework.epub
+	cp epub/kindle_book.epub release/TheBreadCode-The-Sourdough-Framework-kindle.epub
 	# Kindle does not allow files larger than 50 MB... so let's check
-	@if [ `du -sb epub/low_res_book.epub | cut -f1` -gt 49500000 ]; then \
-		echo "ERROR: epub File too big"; \
-		exit 1; \
-	fi
+	@for f in epub/low_res_book.epub epub/kindle_book.epub; do \
+		if [ `du -sb $$f | cut -f1` -gt 49500000 ]; then \
+			echo "ERROR: epub File too big: $$f"; \
+			exit 1; \
+		fi; \
+	done
 
 release_sans_serif: sans_serif | release
 	cp book_sans_serif/book_sans_serif.pdf release/TheBreadCode-The-Sourdough-Framework-sans-serif.pdf
@@ -284,7 +303,7 @@ mrproper: clean
 	-rm figures/*.png
 	-rm -rf release/
 	-rm -rf book_serif/ book_sans_serif/
-	-rm -rf epub/ epub_build/ bw-book-epub/ low-res-book-epub/
+	-rm -rf epub/ epub_build/ bw-book-epub/ low-res-book-epub/ kindle-book-epub/
 	-rm -rf website_build/ $(website_dir)
 # }}}
 
@@ -313,6 +332,8 @@ help:
 	@echo "  ebook: builds only the colour ebook"
 	@echo "  low_res_ebook: builds the colour ebook in lower resolution"
 	@echo "  bw_ebook: builds the low res black & white ebook"
+	@echo "  kindle_ebook: builds the low res colour ebook for Kindle (KDP),"
+	@echo "     with PNG instead of SVG pictures"
 	@echo ""
 	@echo "Website:"
 	@echo "  website: build the static website from LaTeX sources and post-process it"
