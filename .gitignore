@@ -126,3 +126,11 @@ book/website_build/*
 !book/mix-ins/seeds-bread.pdf
 !book/mix-ins/apple-swirl.pdf
 !book/mix-ins/surface-seeds.pdf
+
+# The ebook's photos are JPEGs that book/makefile renders from the figure PDFs
+# above. A JPEG that is a source of its own needs a line here, like these.
+book/*/*.jpg
+book/*/*/*.jpg
+!book/cover/cover-page.jpg
+!book/troubleshooting/crumb-structures/baked-too-hot.jpg
+!book/troubleshooting/crumb-structures/cut-too-quickly.jpg

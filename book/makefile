@@ -62,13 +62,23 @@ images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.jpg))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*.png))
 images += $(foreach directory, $(chapters), $(wildcard $(directory)/*/*.png))
 
+# The hardcover figures carry each photo inside an SVG, and Kindle will not
+# convert such a book: "Base64 Embedded Images are not supported in Scalable
+# Vector Graphics (SVG)" is an error that blocks publishing. So the ebook gets a
+# JPEG of every figure with a photo in it, rendered from the figure's PDF. The
+# website keeps the SVG and the printed book the PDF.
+photo_svgs := $(wildcard images/*.svg images/*/*.svg)
+photo_svgs += $(foreach directory, $(chapters), $(wildcard $(directory)/*.svg $(directory)/*/*.svg))
+ebook_photos := $(patsubst %.svg, %.jpg, $(if $(photo_svgs), $(shell grep -l '<image' $(photo_svgs))))
+images := $(filter-out $(ebook_photos), $(images))
+
 # Black and White ebook, we will just re-zip directory after converting the
 # images to lower resolution and greyscale
-bw_images := $(addprefix bw-book-epub/OEBPS/, $(images))
+bw_images := $(addprefix bw-book-epub/OEBPS/, $(images) $(ebook_photos))
 
 # For lower resolution colour ebook (see below) we will not convert png as it
 # only get worst we will copy them instead... so remove them as a dependency.
-low_res_images := $(addprefix low-res-book-epub/OEBPS/, $(images))
+low_res_images := $(addprefix low-res-book-epub/OEBPS/, $(images) $(ebook_photos))
 low_res_images := $(filter-out %.png, $(low_res_images))
 # }}}
 
@@ -77,6 +87,7 @@ src_all := $(src_tex) $(src_figures) $(src_tables) $(images) $(src_plots)
 
 # Format specific configuration files
 ebook_src := $(src_all) tex4ebook.cfg book.mk4 book-ebook.css nameref.4ht
+ebook_src += $(ebook_photos)
 
 website_src := $(src_all) website.cfg style.css
 website_dir := static_website_html
@@ -98,6 +109,19 @@ ruby_pkg := ../website/Gemfile ../website/Gemfile.lock
 
 %.xbb: %.jpg
 	extractbb -x $<
+
+# Ghostscript leaves out an image whose /Interpolate is null, and the figure
+# PDFs have that (valid PDF: a null value counts as no entry). So blank it out
+# first, with as many spaces, which keeps every offset in the file right.
+$(ebook_photos): %.jpg: %.pdf
+	perl -0777 -pe 's{/Interpolate null}{" " x 17}ge' $< > $@.pdf
+	gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=jpeg -dJPEGQ=85 -r300 \
+		-dTextAlphaBits=4 -dGraphicsAlphaBits=4 -sOutputFile=$@ $@.pdf
+	rm $@.pdf
+
+# Those PDFs are sources. Without this, %.pdf: %.tex below would compile a
+# chapter file over a figure of the same name (sourdough-starter-types).
+$(ebook_photos:.jpg=.pdf): ;
 # }}}
 
 # Pdf {{{
@@ -241,6 +265,7 @@ clean_ebook_build:
 	-rm epub_build/{book.css,content.opf} epub_build/book-epub/mimetype
 	-rm epub_build/book*x.svg
 	-rm -rf epub_build/book-epub/META-INF epub_build/book-epub/OEBPS
+	-rm $(ebook_photos)
 
 clean_website_build:
 	-rm website_build/book*.{4ct,4tc,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,html}
@@ -353,7 +378,7 @@ spell-check: $(src_tex) spelling_exceptions.txt
 quick: # run latex only once no biber, no references etc...
 	$(LATEX) -e '$$max_repeat=1' -halt-on-error -output-directory=book_serif book.tex
 
-quick_ebook: cover/cover-page.xbb # run latex only once no biber, ref etc...
+quick_ebook: cover/cover-page.xbb $(ebook_photos) # run latex only once no biber, ref etc...
 	$(EBOOK) --mode draft book.tex
 
 show_tools_version: # Show version of tools used on the build machine {{{
