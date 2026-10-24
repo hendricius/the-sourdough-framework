@@ -42,6 +42,7 @@ book/book-epub/
 book/bw-book-epub/*
 book/release/*
 book/low-res-book-epub/*
+book/kindle-book-epub/*
 book/epub_build/*
 book/website_build/*
 

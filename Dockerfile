@@ -21,6 +21,8 @@ RUN apt-get update && \
     ruby3.3 \
     ruby-dev \
     imagemagick \
+    # rsvg-convert: the Kindle ebook gets its SVG pictures as PNG
+    librsvg2-bin \
     rsync \
     wget \
     perl \
