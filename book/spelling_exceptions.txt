@@ -296,7 +296,6 @@ alveogram
 alveograph
 amylases
 arabinoxylan
-archae
 archaea
 archaeon
 autodot
@@ -342,7 +341,6 @@ codeblack
 codeblue
 coeliac
 countertop
-crum
 defaultfontfeatures
 degF
 diastatic
@@ -450,7 +448,6 @@ nextline
 niger
 nobreakspace
 nordic
-nuklei
 numwidth
 ocgcolorlinks
 oddsidemargin
