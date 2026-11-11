@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby File.read('.ruby-version').strip
+ruby "~> #{File.read('.ruby-version').strip}"
 
 gem 'nokogiri'
 gem 'pry'
