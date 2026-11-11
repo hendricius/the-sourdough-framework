@@ -18,7 +18,6 @@
   \path [line] (add_water.north) -- node{} ++(0, 1.3) -| (too_dry.north);
   \path [line] (too_dry) -- node{No} (next_day);
   \path [line] (too_dry) -- node{Yes} (add_water);
-  \path [line] (ready_signs) -- node{Yes} (last_feed);
 
   \node [text width=5em, align=center] (repeat_text) at ($(feed_new_ratio)!0.5!(next_day)$) {Repeat 3~times};
   \draw [line] ($(repeat_text) +(0, 1 cm)$) arc (90:-210:1cm);
