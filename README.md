@@ -137,7 +137,7 @@ me to dedicate time to continuously update and improve this book.
 ## Links
 
 * [My YouTube channel](https://youtube.com/c/thebreadcode)
-* [Ask a question on Discord](https://breadco.de/discord)
+* [Ask a question in the community (WhatsApp or Discord)](https://www.the-bread-code.io/community)
 
 ## Citation
 
